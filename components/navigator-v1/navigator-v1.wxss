@@ -1,0 +1,17 @@
+.wrapper{
+    border-bottom: 1rpx solid #cdcdcd;
+    width: 100%;
+}
+.left{
+    color: black;
+    float: left;
+    margin-left: 18rpx;
+}
+.right{
+    color: #a7a7a7;
+    float: right;
+    margin-right: 37rpx;
+}
+.rightImage{
+
+}

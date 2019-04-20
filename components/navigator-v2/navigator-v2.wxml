@@ -1,0 +1,10 @@
+<view class='wrapper' style="{{ height ? 'height: ' + height : '' }}">
+      <view class='left' style="{{leftWidth ? 'width:' + leftWidth : ''}}">
+        <view class='title'>{{titleText}}</view>
+        <view class='inner'>{{innerText}}</view>
+        <view class='date'>{{nowDate}}</view>
+      </view>
+      <view class='right' style="{{rightWidth ? 'width:' + rightWidth : ''}}">
+          <image class="rightImage" src="{{imgUrl}}"></image>
+      </view>
+</view>

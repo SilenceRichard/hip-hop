@@ -1,0 +1,4 @@
+<view class="wrapper" style="{{ height ? 'height: ' + height : '' }};line-height:{{height}}">
+    <text class="left">{{innerText}}</text>
+    <text class="right">{{rightText}}></text>
+</view>

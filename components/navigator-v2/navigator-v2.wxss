@@ -1,0 +1,28 @@
+.wrapper{
+  width: 683rpx;
+  margin-left: 29rpx;
+  border-bottom:1px solid #cdcdcd
+}
+.left{
+  display: inline-block;
+}
+.right{
+  display: inline-block;
+}
+.rightImage{
+  height: 120rpx;
+  width: 162rpx;
+  border-radius: 5rpx;
+  /* 上右下左 */
+}
+.title{
+  font-size:26rpx;
+  margin:37rpx 0 0 15rpx;
+}
+.inner{
+  font-size:26rpx;
+  margin-bottom: 35rpx;
+}
+.date{
+  font-size: 17rpx;
+}
