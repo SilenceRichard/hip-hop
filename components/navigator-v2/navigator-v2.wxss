@@ -22,7 +22,9 @@
 .inner{
   font-size:26rpx;
   margin-bottom: 35rpx;
+  color: #a8a8a8;
 }
 .date{
   font-size: 17rpx;
+  color: #cdcdcd;
 }
