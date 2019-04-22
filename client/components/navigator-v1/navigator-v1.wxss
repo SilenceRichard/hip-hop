@@ -2,10 +2,22 @@
     border-bottom: 1rpx solid #cdcdcd;
     width: 100%;
 }
+.wrapper:active{
+    transition: .5s;
+    opacity: .7;
+    background: #cdcdcd;
+}
+/*容器被按下时的样式*/
 .left{
-    color: black;
+    color: #252525;
     float: left;
     margin-left: 18rpx;
+}
+.wrapper:active .left{
+    color: #4a4a4a;
+}
+.wrapper:active .right{
+    color: #b9b9b9;
 }
 .right{
     color: #a7a7a7;
