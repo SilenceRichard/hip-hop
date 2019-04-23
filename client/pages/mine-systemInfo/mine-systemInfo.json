@@ -3,6 +3,7 @@
     "abc": "/components/navbar/navbar",
     "navigateV1": "/components/navigator-v1/navigator-v1",
     "ss-icon": "/components/icon/icon",
-    "navigateV2": "/components/navigator-v2/navigator-v2"
+    "navigateV2": "/components/navigator-v2/navigator-v2",
+    "navigateV3": "/components/navigator-v3/navigator-v3"
   }
 }

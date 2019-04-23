@@ -13,7 +13,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.5",
-	"appid": "wx97862a48d9f616ba",
+	"appid": "wxe86ad6fa88fd7c83",
 	"projectname": "hip-hop",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -28,13 +28,32 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "mine",
+					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "mine-systemInfo",
+					"pathName": "pages/mine-systemInfo/mine-systemInfo",
+					"query": "",
+					"scene": null
+				}
+			]
 		}
 	}
 }

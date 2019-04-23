@@ -14,8 +14,8 @@
       互动消息
       </navigator>
 
-    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
-    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
-    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
-    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
+    <navigateV3 titleText="标题" innerText="副标题"></navigateV3>
+    <navigateV3 titleText="标题" innerText="副标题"></navigateV3>
+    <navigateV3 titleText="标题" innerText="副标题"></navigateV3>
+    <navigateV3 titleText="标题" innerText="副标题"></navigateV3>
 </view>

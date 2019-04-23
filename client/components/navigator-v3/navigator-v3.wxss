@@ -1,0 +1,25 @@
+.wrapper{
+  width: 883rpx;
+  margin-left: 29rpx;
+  border-bottom:1px solid #cdcdcd
+}
+.left{
+  display: inline-block;
+}
+.title{
+  font-size:26rpx;
+  margin:37rpx 0 0 15rpx;
+  background: #1a0dcf;
+}
+.inner{
+  font-size:26rpx;
+  margin-bottom: 50rpx;
+  color: #a8a8a8;
+  background: #1a0dcf;
+}
+.date{
+  font-size: 17rpx;
+  color: #cdcdcd;
+  justify-content: right;
+  background: #1a0dcf;
+}
