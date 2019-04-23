@@ -1,0 +1,21 @@
+<view class="outer">
+
+      <navigator url="/pages/index/index"
+      open-type="switchTab"
+      hover-class="navigator-hover"
+      class="topbar">
+      系统消息
+      </navigator>
+
+      <navigator url="/pages/inform/inform"
+      open-type="switchTab"
+      hover-class="navigator-hover"
+      class="topbar">
+      互动消息
+      </navigator>
+
+    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
+    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
+    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
+    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
+</view>

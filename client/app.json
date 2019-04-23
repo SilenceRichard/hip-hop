@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/mine-systemInfo/mine-systemInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,7 +17,6 @@
         "text": "首页",
         "iconPath": "static/home.png",
         "selectedIconPath": "static/home_active.png"
-
       },
       {
         "pagePath": "pages/mine/mine",
