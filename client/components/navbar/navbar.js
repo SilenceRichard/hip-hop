@@ -1,23 +1,27 @@
-Component({
-  /**
-   * 组件的属性列表
-   */
-  multipleSlots: true,  //可设置多个插槽，赋予name  <组件标签名 slot="name"></组件标签名>
-  properties: {
+var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
-  },
-
-  /**
-   * 组件的初始数据
-   */
-  data: {
-
-  },
-
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-
-  }
-})
+Page({
+    data: {
+        tabs: ["选项一", "选项二", "选项三"],
+        activeIndex: 1,
+        sliderOffset: 0,
+        sliderLeft: 0
+    },
+    onLoad: function () {
+        var that = this;
+        wx.getSystemInfo({
+            success: function(res) {
+                that.setData({
+                    sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+                    sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+                });
+            }
+        });
+    },
+    tabClick: function (e) {
+        this.setData({
+            sliderOffset: e.currentTarget.offsetLeft,
+            activeIndex: e.currentTarget.id
+        });
+    }
+});
