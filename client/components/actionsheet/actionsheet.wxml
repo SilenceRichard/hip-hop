@@ -1,0 +1,2 @@
+<button type="default" bindtap="open" data-list="{{list}}">{{name}}</button>
+

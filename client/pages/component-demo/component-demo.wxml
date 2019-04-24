@@ -1,0 +1,7 @@
+<view>
+    <text>本页面为组件示例，暂时开放,供测试用，大家可以不用维护这个页面，等组件提交时我会整合</text>
+    <view>actionsheet</view>
+    <view>在父组件中，bind:open 表示接收actionSheet组件名为'open'的自定义事件，然后触发方法</view>
+    <actionSheet name="这是一个弹出选项框" list="{{itemList_actionSheet}}" bind:open="test_actionsheet"></actionSheet>
+    <view>----------------------这是分割线-------------------</view>
+</view>

@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/mine/mine",
-    "pages/mine-systemInfo/mine-systemInfo"
+    "pages/mine-systemInfo/mine-systemInfo",
+    "pages/component-demo/component-demo"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -23,6 +24,10 @@
         "text": "我的",
         "iconPath": "static/USER.png",
         "selectedIconPath": "static/USER_ACTIVE.png"
+      },
+      {
+        "pagePath": "pages/component-demo/component-demo",
+        "text" : "组件示例"
       }
     ]
   },
