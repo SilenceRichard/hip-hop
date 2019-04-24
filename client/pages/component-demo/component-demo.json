@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+     "actionSheet": "../../components/actionsheet/actionsheet"
+  }
+}

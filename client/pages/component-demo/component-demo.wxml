@@ -1,0 +1,6 @@
+<view>
+    <text>本页面为组件示例，暂时开放,供测试用，大家可以不用维护这个页面，等组件提交时我会整合</text>
+    <view>actionsheet</view>
+    <actionSheet name="这是一个弹出选项框" list="{{itemList_actionSheet}}"></actionSheet>
+    <view>----------------------这是分割线-------------------</view>
+</view>
