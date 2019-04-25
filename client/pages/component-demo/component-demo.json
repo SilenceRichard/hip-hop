@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-     "actionSheet": "../../components/actionsheet/actionsheet"
+     "actionSheet": "../../components/actionsheet/actionsheet",
+     "badge": "../../components/badge/badge"
   }
 }
