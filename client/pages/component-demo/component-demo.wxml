@@ -18,4 +18,19 @@
     <view>哈哈哈<badge dot="0"></badge></view>
     <view>哈哈哈<badge num="100"></badge></view>
     <view>----------------------这是分割线-------------------</view>
+    <text>我发现button插件直接写原生的比较好使，不用封装组件0.0</text>
+    <button>默认按钮</button>
+    <button  type='primary'>页面主操作</button>
+    <button  type='primary' disabled='true'>页面主操作</button>
+    <button type='default'>页面次要操作</button>
+    <button type='warn'>警示类按钮</button>
+    <button type='warn' disabled='true'>警示类按钮(禁用状态)</button>
+    <button type="primary" plain="true">空心按钮</button>
+    <button type="primary" disabled="true" plain="true">空心按钮</button>
+    <button type="default" plain="true">空心按钮</button>
+    <button type="default" disabled="true" plain="true">空心按钮</button>
+    <button type="primary" size="mini">小按钮</button>
+    <button type="default" size="mini">小按钮</button>
+    <button type="warn" size="mini">小按钮</button>
+    <view>----------------------这是分割线-------------------</view>
 </view>
