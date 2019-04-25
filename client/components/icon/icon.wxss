@@ -9,6 +9,8 @@
   url('iconfont.woff?t=1555747205831') format('woff'),
   url('iconfont.ttf?t=1555747205831') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
   url('iconfont.svg?t=1555747205831#ss-font') format('svg'); /* iOS 4.1- */
+
+
 }
 
 .ss-font {

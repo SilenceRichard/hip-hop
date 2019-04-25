@@ -1,0 +1,20 @@
+<!--pages/mine/mine.wxml-->
+<view class = 'container'>
+  <view class = 'row1'>
+    <text> 王大可</text>
+  </view>
+  <view class="line">
+    <image src="../images/inform.png"  style = "width: 20px; height:20px; margin-top: 102px; margin-left: 87px;"> </image>
+   </view>
+  <view class = 'row2'>
+    <text> 我的约局</text>
+  </view>
+  <view class = 'row3'>
+    <image src="../images/message.png"  style = "width: 17px; height:17px; margin-top:0px;margin-left:0px;"> </image>
+  <text>系统通知</text>
+  </view>
+  <view class = 'row4'>
+    <image src="../images/user.png"  style = "width: 20px; height:20px; margin-top: 0px; margin-left:0px;"> </image>
+  <text>个人信息</text>
+  </view>
+</view>

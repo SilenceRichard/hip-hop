@@ -1,6 +1,6 @@
 2019.4.21
 
-完成“我的”导航栏下的四个静态页面
+完成“我的”导航栏下的四个静态页面C:\Users\intergalactic lover\Downloads\message.png
 希望大家能遵照以下命名方式（文件夹及文件名统一）
 mine-模块名
 比如个人信息页可以命名为 mine-info
