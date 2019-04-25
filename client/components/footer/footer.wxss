@@ -1,5 +1,5 @@
 /* 作为展示用的样式 */
-
+@import "../../style/weui.wxss";
 .weui-footer{
     margin-bottom: 50px;
 }
