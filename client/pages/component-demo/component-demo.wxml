@@ -4,4 +4,16 @@
     <view>在父组件中，bind:open 表示接收actionSheet组件名为'open'的自定义事件，然后触发方法</view>
     <actionSheet name="这是一个弹出选项框" list="{{itemList_actionSheet}}" bind:open="test_actionsheet"></actionSheet>
     <view>----------------------这是分割线-------------------</view>
+    <view>badge 徽标</view>
+    <text>带数字徽标</text>
+    <badge num="1" ></badge>
+    <text>带文本徽标</text>
+    <badge > 
+        <text>New</text>
+    </badge>
+    <text>数字大于99的徽标</text>
+     <badge num="100"></badge>
+    <text>点状徽标</text>
+    <badge dot="0"></badge>
+    <view>----------------------这是分割线-------------------</view>
 </view>

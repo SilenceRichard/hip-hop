@@ -1,1 +1,2 @@
 /* example/badge/badge.wxss */
+@import '../../style/weui.wxss';
