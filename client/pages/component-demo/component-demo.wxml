@@ -15,5 +15,7 @@
      <badge num="100"></badge>
     <text>点状徽标</text>
     <badge dot="0"></badge>
+    <view>哈哈哈<badge dot="0"></badge></view>
+    <view>哈哈哈<badge num="100"></badge></view>
     <view>----------------------这是分割线-------------------</view>
 </view>
