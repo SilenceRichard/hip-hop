@@ -1,7 +1,3 @@
-/**
- * 带图片的导航栏
- *
- * **/
 import {formatTime} from '../../utils/util.js'
 Component({
   options:{},

@@ -1,3 +1,4 @@
+@import '../../style/weui.wxss';
 .wrapper{
   width: 883rpx;
   margin-left: 29rpx;
@@ -9,17 +10,12 @@
 .title{
   font-size:26rpx;
   margin:37rpx 0 0 15rpx;
-  background: #1a0dcf;
-}
-.inner{
-  font-size:26rpx;
-  margin-bottom: 50rpx;
-  color: #a8a8a8;
-  background: #1a0dcf;
+  margin-bottom: 90rpx;
+  /*background: #1a0dcf;*/
 }
 .date{
   font-size: 17rpx;
-  color: #cdcdcd;
+  /*color: #cdcdcd;*/
   justify-content: right;
-  background: #1a0dcf;
+  margin-left: 500rpx;
 }
