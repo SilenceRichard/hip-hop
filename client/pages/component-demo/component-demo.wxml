@@ -8,7 +8,7 @@
     <text>带数字徽标</text>
     <badge num="1" ></badge>
     <text>带文本徽标</text>
-    <badge > 
+    <badge >
         <text>New</text>
     </badge>
     <text>数字大于99的徽标</text>
@@ -18,4 +18,40 @@
     <view>哈哈哈<badge dot="0"></badge></view>
     <view>哈哈哈<badge num="100"></badge></view>
     <view>----------------------这是分割线-------------------</view>
+    <text>我发现button插件直接写原生的比较好使，不用封装组件0.0</text>
+    <button>默认按钮</button>
+    <button  type='primary'>页面主操作</button>
+    <button  type='primary' disabled='true'>页面主操作</button>
+    <button type='default'>页面次要操作</button>
+    <button type='warn'>警示类按钮</button>
+    <button type='warn' disabled='true'>警示类按钮(禁用状态)</button>
+    <button type="primary" plain="true">空心按钮</button>
+    <button type="primary" disabled="true" plain="true">空心按钮</button>
+    <button type="default" plain="true">空心按钮</button>
+    <button type="default" disabled="true" plain="true">空心按钮</button>
+    <button type="primary" size="mini">小按钮</button>
+    <button type="default" size="mini">小按钮</button>
+    <button type="warn" size="mini">小按钮</button>
+    <view>----------------------这是分割线-------------------</view>
+    <button type="primary"  bindtap='test_showModal'>提示框</button>
+    <button type="warn"  bindtap='test_alert'>提示信息（不带按钮）</button>
+      <view>----------------------这是分割线-------------------</view>
+    <footer></footer>
+    <footer url="" type="normal"></footer>
+    <footer leftUrl="" rightUrl="" type="double"></footer>
+    <footer url="" type="fixed"></footer>
+    <view>----------------------这是分割线-------------------</view>
+      <icon type="success" size="93"></icon>
+     <icon type="info" size="93"></icon>
+     <icon type="warn" size="93" color="#FFBE00"></icon>
+     <icon type="waiting" size="93"></icon>
+       <icon type="warn" size="93"></icon>
+         <icon type="success" size="23"></icon>
+            <icon type="success_no_circle" size="23"></icon>
+            <icon type="circle" size="23"></icon>
+            <icon type="warn" size="23" color="#F43530"></icon>
+            <icon type="download" size="23"></icon>
+            <icon type="info_circle" size="23"></icon>
+            <icon type="cancel" size="23"></icon>
+            <icon type="search" size="20"></icon>
 </view>

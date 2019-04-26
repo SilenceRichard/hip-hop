@@ -1,6 +1,7 @@
 {
   "usingComponents": {
      "actionSheet": "../../components/actionsheet/actionsheet",
-     "badge": "../../components/badge/badge"
+     "badge": "../../components/badge/badge",
+     "footer":"../../components/footer/footer"
   }
 }
