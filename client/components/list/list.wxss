@@ -1,1 +1,2 @@
 /* example/list/list.wxss */
+@import "../../style/weui.wxss";
