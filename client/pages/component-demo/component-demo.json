@@ -2,6 +2,7 @@
   "usingComponents": {
      "actionSheet": "../../components/actionsheet/actionsheet",
      "badge": "../../components/badge/badge",
-     "footer":"../../components/footer/footer"
+     "footer":"../../components/footer/footer",
+     "list": "../../components/list/list"
   }
 }

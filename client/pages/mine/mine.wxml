@@ -1,20 +1,24 @@
 <!--pages/mine/mine.wxml-->
-<view class = 'container'>
-  <view class = 'row1'>
-    <text> 王大可</text>
+  <view class="header row">
+    <view class="col" style="height: 100%">
+      <view class="col-4">
+        <image id="head" src="{{userInfo.avatarUrl}}"></image>
+      </view>
+      <view class="col-8">
+         <view id="nickName">{{userInfo.nickName}}<image src="../../static/icon/edit.png"></image></view>
+         <view id="sex">
+           <image wx:if="{{userInfo.gender == 1}}" src="../../static/icon/boy.png"></image>
+           <text wx:if="{{userInfo.gender == 1}}">男生</text>
+           <image wx:if="{{userInfo.gender == 0}}" src="../../static/icon/girl.png"></image>
+           <text wx:if="{{userInfo.gender == 0}}">女生</text>
+         </view>
+         <view id="sign">{{sign}}</view>
+      </view>
+    </view>
   </view>
-  <view class="line">
-    <image src="../images/inform.png"  style = "width: 20px; height:20px; margin-top: 102px; margin-left: 87px;"> </image>
-   </view>
-  <view class = 'row2'>
-    <text> 我的约局</text>
+  <view style="width: 100%" class="row">
+    <list  title="我的约局" text="查看约局" icon="../../static/icon/spiderMan.png" url="../mine-yueju/mine-yueju">
+    </list>
+    <list  title="系统通知" text="查看通知" icon="../../static/icon/NickFury.png" url="../mine-yueju/mine-yueju">
+    </list>
   </view>
-  <view class = 'row3'>
-    <image src="../images/message.png"  style = "width: 17px; height:17px; margin-top:0px;margin-left:0px;"> </image>
-  <text>系统通知</text>
-  </view>
-  <view class = 'row4'>
-    <image src="../images/user.png"  style = "width: 20px; height:20px; margin-top: 0px; margin-left:0px;"> </image>
-  <text>个人信息</text>
-  </view>
-</view>

@@ -54,4 +54,22 @@
             <icon type="info_circle" size="23"></icon>
             <icon type="cancel" size="23"></icon>
             <icon type="search" size="20"></icon>
+    <view>----------------------这是分割线-------------------</view>
+        <view class="row">
+            <view class="col">
+                <view class="col-3" style="background: beige">12栅格布局</view>
+                <view class="col-9"style="background: aquamarine">12栅格布局</view>
+            </view>
+        </view>
+    <view>----------------------这是分割线-------------------</view>
+    <view class="weui-cells__title">带说明的列表项</view>
+    <list title="标题" text="内容"></list>
+    <view class="weui-cells__title">带图标、说明的列表项</view>
+    <list icon="../../static/icon/spiderMan.png"></list>
+    <view class="weui-cells__title">带跳转的列表项(注意navigator不能实现tabBar之间的跳转)</view>
+    <list url="../mine-systemInfo/mine-systemInfo" title="系统通知"></list>
+    <view class="weui-cells__title">带说明、跳转的列表项</view>
+    <list title="系统通知" text="跳转到系统通知页面" url="../mine-systemInfo/mine-systemInfo"></list>
+    <view class="weui-cells__title">带图标、说明、跳转的列表项</view>
+    <list title="系统通知" text="跳转到系统通知页面" url="../mine-systemInfo/mine-systemInfo" icon="../../static/icon/spiderMan.png"></list>
 </view>
