@@ -3,6 +3,8 @@
     "pages/index/index",
     "pages/mine/mine",
     "pages/mine-systemInfo/mine-systemInfo",
+    "pages/mine-yueju/mine-yueju",
+    "pages/mine-person/mine-person",
     "pages/component-demo/component-demo"
   ],
   "window": {
