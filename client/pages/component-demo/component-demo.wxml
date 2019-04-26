@@ -54,4 +54,12 @@
             <icon type="info_circle" size="23"></icon>
             <icon type="cancel" size="23"></icon>
             <icon type="search" size="20"></icon>
+    <view>----------------------这是分割线-------------------</view>
+        <view class="row">
+            <view class="col">
+                <view class="col-3" style="background: beige">12栅格布局</view>
+                <view class="col-9"style="background: aquamarine">12栅格布局</view>
+            </view>
+        </view>
+    <view>----------------------这是分割线-------------------</view>
 </view>
