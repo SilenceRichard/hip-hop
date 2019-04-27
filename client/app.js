@@ -1,6 +1,10 @@
 //app.js
 App({
   onLaunch: function () {
+    wx.cloud.init({
+      env:'hip-hop-sever-d20da1',
+      traceUser:true
+    }) //初始化云函数
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())

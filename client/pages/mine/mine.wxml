@@ -2,7 +2,7 @@
   <view class="header row">
     <view class="col" style="height: 100%">
       <view class="col-4">
-        <image id="head" src="{{userInfo.avatarUrl}}"></image>
+        <image id="head" src="{{userInfo.avatarUrl}}" bindtap="toMineInfo"></image>
       </view>
       <view class="col-8">
          <view id="nickName">{{userInfo.nickName}}<image src="../../static/icon/edit.png"></image></view>

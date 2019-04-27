@@ -13,12 +13,13 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.5",
-	"appid": "wxe86ad6fa88fd7c83",
+	"appid": "wx97862a48d9f616ba",
 	"projectname": "hip-hop",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
 	"isGameTourist": false,
+	"cloudfunctionRoot": "cloudfunctions/",
 	"condition": {
 		"search": {
 			"current": -1,
