@@ -71,5 +71,7 @@
     <view class="weui-cells__title">带说明、跳转的列表项</view>
     <list title="系统通知" text="跳转到系统通知页面" url="../mine-systemInfo/mine-systemInfo"></list>
     <view class="weui-cells__title">带图标、说明、跳转的列表项</view>
-    <list title="系统通知" text="跳转到系统通知页面" url="../mine-systemInfo/mine-systemInfo" icon="../../static/icon/spiderMan.png"></list>
+    <list title="系统通知" text="跳转到系统通知页面" url="../mine-systemInfo/mine-systemInfo" icon="../../static/icon/spiderMan.png">
+    </list>
+    <form></form>
 </view>

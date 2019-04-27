@@ -3,6 +3,7 @@
      "actionSheet": "../../components/actionsheet/actionsheet",
      "badge": "../../components/badge/badge",
      "footer":"../../components/footer/footer",
-     "list": "../../components/list/list"
+     "list": "../../components/list/list",
+     "form": "../../components/input/input"
   }
 }
