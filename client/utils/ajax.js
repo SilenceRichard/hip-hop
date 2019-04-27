@@ -80,4 +80,25 @@ service.add = function(params,collection){
     return p;
 }//新增一条数据
 
+service.remove = function(id,collection){
+    const tb = db.collection(collection);
+    var p = new Promise(function (resolve,reject) {
+       tb.doc(id).remove().then( res => { resolve(res)})
+                                .catch( err=> { reject(err)})
+    })
+    return p
+}//删除一条数据 //doc只接受_id ,前端删除某条时我们需要先获取到条目的_id
+service.update = function(id,data,collection){
+    const  tb = db.collection(collection);
+    var p =  new Promise(function (resolve,reject) {
+        const _ = db.command
+        db.collection(collection).doc(id)
+            .update({
+                data: data,
+            })
+            .then(console.log('更新成功！'))
+            .catch(console.error)
+    })
+}
+
 module.exports = service;
