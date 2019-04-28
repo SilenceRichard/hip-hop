@@ -3,10 +3,12 @@ import util from '../../utils/util'
 Page({
     data:{
       userInfo:{}, //用户信息
-      sign:'暂无签名TAT'
+      sign:'暂无签名TAT',
+      openid:'',//该用户字段在数据库中存储对应的openid
     },
     toMineInfo(){
-        wx.navigateTo({url:'../mine-person/mine-person'})
+        //跳转到个人信息详情页，携带参数id
+        wx.navigateTo({url:'../mine-person/mine-person?openid='+this.data.openid})
     },
     onLoad: function () {
       var that = this;
@@ -17,6 +19,10 @@ Page({
           }
       ).then(res => {
           console.log("获取到用户的openid：",res.result.openid);
+          //将openid字段保存
+           that.setData({
+               openid:res.result.openid
+           })
           //根据openid查询数据库的user表，判断用户有无在小程序进行过登录操作
            ajax.find_page({_openid:res.result.openid},1,10,'user').then(res2 =>{
                console.log("获取到数据库中user表的用户信息：",res2)
@@ -29,19 +35,18 @@ Page({
                          }
                else {
                    //已获取到用户信息，前端可以直接进行展示
-                    that.setData({userInfo:res2[0]}) //将获取到的用户信息传递给前端展示
+                   console.log("该用户已在小程序中登录，从数据库获取到用户信息：",res2[0])
+                    that.setData({
+                        userInfo:res2[0],
+                        id:res2[0]._id
+                    }) //将获取到的用户信息传递给前端展示
                }
            })
       })
-      // wx.getUserInfo({
-      //   success: function(res) {
-      //      console.log(res)
-      //      that.setData({
-      //         userInfo:res.userInfo
-      //      })
-      //     console.log('获取到个人信息！：',that.data.userInfo)
-      //   }
-      // })
 
-    } //页面加载时触发
+    }, //页面加载完成时触发
+    onShow: function () {
+
+    }
+
 })
