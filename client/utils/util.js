@@ -42,6 +42,9 @@ const wxPromisify = fn => {
 }
 const getLocationPromisified = wxPromisify(wx.getLocation);//获取经纬度
 const showModalPromisified = wxPromisify(wx.showModal);//弹窗
+const showToastPromisified = wxPromisify(wx.showToast);//提示窗
+const getUserInfoPromisified = wxPromisify(wx.getUserInfo); //获取用户信息
+
 const post = (url,data) => {
   var promise = new Promise((resolve, reject) => {
     //网络请求
@@ -96,8 +99,10 @@ const get = (url, data) => {
 module.exports = {
   formatTime: formatTime,
   formatNumber: formatNumber,
-  getLocationPromisified:getLocationPromisified, //获取经纬度
-  showModalPromisified:showModalPromisified,//弹窗
+  getLocation:getLocationPromisified, //获取经纬度 用promise的方式实现
+  showModal:showModalPromisified,//弹窗 用promise的方式实现
+  showToast:showToastPromisified,//提示窗 用promise的方式实现
+  getUserInfo:getUserInfoPromisified, //获取用户信息
   post:post,
   get:get
 }
