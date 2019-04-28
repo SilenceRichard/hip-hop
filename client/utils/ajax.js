@@ -99,6 +99,7 @@ service.update = function(id,data,collection){
             .then(console.log('更新成功！'))
             .catch(console.error)
     })
+    return p;
 }
 
 module.exports = service;

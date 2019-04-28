@@ -1,73 +1,37 @@
-.inputer{
- width:600rpx;
-  height:88rpx;
-  border-bottom:1rpx solid #dadada;
-  margin-left:15rpx;
+page{
+  padding: 20rpx;
 }
-
-.abc{
-  height:88rpx;
-  border-bottom:1rpx solid white;
-  margin-left:15rpx;
-}
-
-.Inputer{
-  width:686rpx;
-  height:100rpx;
-  border-bottom: 1rpx solid #dadada;
-  margin-left:20rpx;
-}
-
-
-.section{
-  width:692rpx;
-  height:400rpx;
-  border:1px solid #dadada;
-  margin-left: 4%;
-  margin-top: 20rpx;
-}
-
-.content{
-  display: flex ;
-  flex-direction: row;
-  text-align: justify;
-  line-height: 88rpx;
-}
-
-
-.save{
-  width:692rpx;
-  height:88rpx;
-  margin-left: 4%;
-  margin-top: 61rpx;
-  border: 1rpx solid #407592;
-  color:#407592;
-}
-.userinfo {
-  position: relative;
-  width: 750rpx;
-  height: 320rpx;
-  color: #fff;
+.head{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items:center;
+  justify-content:center;
+  background:#eeefee;
+  height: 300rpx;
 }
-
-.userinfo-avatar {
-  overflow:hidden;
-  display: block;
-  width: 160rpx;
-  height: 160rpx;
-  margin: 20rpx;
-  margin-top: 50rpx;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+.head image{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 20rpx;
 }
-
-.userinfo{
-  /* color: #fff; */
-  font-size: 14px;
-  background-color: #c0c0c0;
-  border-radius:40%;
+.form{
+  margin: 11rpx 0 0 0;
 }
+.label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.formItem{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  font-size: 27rpx;
+}
+input{
+  border-bottom:1px solid #ccc;
+  width:80%;
+}
+textarea{
+  border:1px solid #ccc;
+}
+/*对于该页面所有input标签*/

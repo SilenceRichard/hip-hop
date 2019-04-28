@@ -1,61 +1,167 @@
-<view class="userinfo">
-  <view class="userinfo-avatar">
-    <open-data  type="userAvatarUrl"></open-data>
-  </view>
-    <open-data type="userNickName"></open-data>
+<view class="row">
+    <view class="col head">
+        <image src="{{userInfo.avatarUrl}}"></image>
+    </view>
 </view>
-
-<view class="content">
- <view>
-  <view class="abc">昵称</view>
-  <view class="abc">性别</view>
-  <view class="abc">年龄</view>
-  <view class="abc">地区</view>
-  <view class="abc">身份</view>
-  <view class="abc">舞种</view>
-  <view class="abc">舞龄</view>
- </view>
-  <view>
-      <view>
-        <input placeholder="昵称" class="inputer"></input>
-      </view>
-      <view>
-        <input placeholder="性别" class="inputer"></input>
-      </view>
-      <view>
-        <input placeholder="年龄" class="inputer"></input>
-      </view>
-      <view>
-        <input placeholder="地区" class="inputer"></input>
-      </view>
-      <view>
-        <input placeholder="身份" class="inputer"></input>
-      </view>
-      <view>
-        <input placeholder="舞种" class="inputer"></input>
-      </view>
-      <view>
-        <input placeholder="舞龄" class="inputer"></input>
-      </view>
-  </view>
+<view wx:if="{{edit==true}}">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">昵称：</view>
+            <view class="col-9 formItem">
+                <input value="{{userInfo.nickName}}" bindinput="changeInputVal" data-type="nickName">
+                </input>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">性别：</view>
+            <view class="col-9 formItem">
+                <view wx:if="{{userInfo.gender == '1'}}">
+                    男生  <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
+                </view>
+                <view wx:else bindtap="changeSex">
+                    女生 <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">生日：</view>
+            <view class="col-9 formItem">
+                <picker mode="date"  value="{{userInfo.birthday}}" start="1970-01-01" bindchange="bindDateChange">
+                    <view class="weui-input" wx:if="{{userInfo.birthday}}">
+                        {{userInfo.birthday}} <text bindtap="bindDateChange" class="weui-cell_link">选择生日</text>
+                    </view>
+                    <view class="weui-input" wx:else>
+                        <text bindtap="bindDateChange" class="weui-cell_link">请选择您的生日</text>
+                    </view>
+                </picker>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">地区：</view>
+            <view class="col-9 formItem">
+                <input placeholder="请输入地区" value="{{userInfo.city}}" bindinput="changeInputVal" data-type="city">
+                </input>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">身份：</view>
+            <view class="col-9 formItem">
+                <input  placeholder="请定义您的身份" value="{{userInfo.role}}"bindinput="changeInputVal" data-type="role" >
+                </input>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">舞种：</view>
+            <view class="col-8 formItem">
+                <checkbox-group bindchange="chooseDanceType">
+                    <label class="checkbox" wx:for="{{danceType}}">
+                        <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
+                    </label>
+                </checkbox-group>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">舞龄：</view>
+            <view class="col-9 formItem">
+                <radio-group class="radio-group" bindchange="chooseDanceAge">
+                    <radio class="radio" wx:for-items="{{danceAge}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
+                        <text>{{item.value}}</text>
+                    </radio>
+                </radio-group>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">个人介绍：</view>
+            <view class="col-8 formItem">
+                <textarea placeholder="介绍一下你自己吧~" bindinput="changeInputVal" value="{{userInfo.introduction}}" data-type="introduction">
+                </textarea>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <button style="width:80%" class="weui-btn" type="primary" bindtap="saveUserInfo">确定</button>
+    </view>
 </view>
-
-
-<view>
-   <view style="margin-top:15rpx；margin-left=15rpx">签名</view>
-  <input placeholder="你的签名" class="Inputer"></input>
+<view wx:if="{{edit==false}}">
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">昵称：</view>
+            <view class="col-9">{{userInfo.nickName}}</view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">性别：</view>
+            <view class="col-9">
+                <text wx:if="{{userInfo.gender=='1'}}">男生</text>
+                <text wx:else>女生</text>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">生日：</view>
+            <view class="col-9">{{userInfo.birthday}}</view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">地区：</view>
+            <view class="col-9">{{userInfo.city}}</view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">身份：</view>
+            <view class="col-9">{{userInfo.role}}</view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">舞种：</view>
+            <view class="col-8">
+                <checkbox-group >
+                    <label class="checkbox" wx:for="{{userInfo.danceType}}">
+                        <checkbox value="{{item.name}}" checked="{{item.checked}}" disabled="true"/>{{item.name}}
+                    </label>
+                </checkbox-group>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">舞龄：</view>
+            <view class="col-9">
+                <text wx:if="{{userInfo.danceAge=='lessOne'}}">少于一年</text>
+                <text wx:elif="{{userInfo.danceAge=='oneToThree'}}">一至三年</text>
+                <text wx:else>三年以上</text>
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <view class="col">
+            <view class="col-3 label">个人介绍：</view>
+            <view class="col-9">
+                {{userInfo.introduction}}
+            </view>
+        </view>
+    </view>
+    <view class="row form">
+        <button style="width:80%" class="weui-btn" type="primary" bindtap="editUserInfo">编辑</button>
+    </view>
 </view>
-
-
-<view style="margin-top:15rpx；margin-left=15rpx">个人介绍</view>
-<view class="section">
-  <textarea placeholder="在这里写下你的个人介绍" auto-focus />
-</view>
-
-
-
-
-<view>
-   <button class="save"  disabled="{{disabled}}"  catchtap="updataInfo" data-nickname="{{username}}" >保存</button>
-</view>
-
