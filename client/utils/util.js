@@ -24,7 +24,7 @@ Promise.prototype.finally = function (callback) {
       reason => P.resolve(callback()).then(() => { throw reason })
   );
 };
-//封装异步api
+//封装回调式api
 const wxPromisify = fn => {
   return function (obj = {}) {
     return new Promise((resolve, reject) => {
@@ -40,6 +40,7 @@ const wxPromisify = fn => {
     })
   }
 }
+const chooseLocationPromisified = wxPromisify(wx.chooseLocation);//选择位置
 const getLocationPromisified = wxPromisify(wx.getLocation);//获取经纬度
 const showModalPromisified = wxPromisify(wx.showModal);//弹窗
 const showToastPromisified = wxPromisify(wx.showToast);//提示窗
@@ -100,6 +101,7 @@ const get = (url, data) => {
 module.exports = {
   formatTime: formatTime,
   formatNumber: formatNumber,
+  chooseLocation:chooseLocationPromisified,//获取当前位置
   getLocation:getLocationPromisified, //获取经纬度 用promise的方式实现
   showModal:showModalPromisified,//弹窗 用promise的方式实现
   showToast:showToastPromisified,//提示窗 用promise的方式实现
