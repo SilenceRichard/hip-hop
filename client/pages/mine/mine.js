@@ -12,6 +12,9 @@ Page({
     },
     onLoad: function () {
       var that = this;
+        wx.showLoading({
+            title: '加载中',
+        }) //显示加载中提示
       //1.调用login云函数，取到返回的openid
       wx.cloud.callFunction(
           {
@@ -30,7 +33,8 @@ Page({
                if (res2.length == 0){util.getUserInfo({}).then(info =>{
                               console.log("通过getUserInfo查询获取到用户信息：",info.userInfo)
                               ajax.add(info.userInfo,'user') //将用户信息存入数据库
-                              .then( that.setData({userInfo:info.userInfo})) //将获取到的用户信息传递给前端展示
+                              .then(that.setData({userInfo:info.userInfo})) //将获取到的用户信息传递给前端展示
+                              .then( wx.hideLoading() )
                             })
                          }
                else {
@@ -40,6 +44,7 @@ Page({
                         userInfo:res2[0],
                         id:res2[0]._id
                     }) //将获取到的用户信息传递给前端展示
+                   wx.hideLoading()
                }
            })
       })

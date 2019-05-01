@@ -40,6 +40,7 @@ const wxPromisify = fn => {
     })
   }
 }
+const chooseImagePromisified = wxPromisify(wx.chooseImage);//选择图片
 const chooseLocationPromisified = wxPromisify(wx.chooseLocation);//选择位置
 const getLocationPromisified = wxPromisify(wx.getLocation);//获取经纬度
 const showModalPromisified = wxPromisify(wx.showModal);//弹窗
@@ -101,12 +102,14 @@ const get = (url, data) => {
 module.exports = {
   formatTime: formatTime,
   formatNumber: formatNumber,
+  wxPromisify:wxPromisify,//将微信的API方法改为异步写法
   chooseLocation:chooseLocationPromisified,//获取当前位置
   getLocation:getLocationPromisified, //获取经纬度 用promise的方式实现
   showModal:showModalPromisified,//弹窗 用promise的方式实现
   showToast:showToastPromisified,//提示窗 用promise的方式实现
   getUserInfo:getUserInfoPromisified, //获取用户信息
   showActionSheet:showActionSheetPromisified,//选项窗
+  chooseImage:chooseImagePromisified,//选择图片
   post:post,
   get:get
 }

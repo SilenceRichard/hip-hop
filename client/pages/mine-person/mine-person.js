@@ -26,6 +26,19 @@ Page({
         openid:'',//操作用户的openid
         showTopTips:false //错误提示标志
     },
+    changeImage: function(){
+        util.chooseImage({count:1}).then(res =>{
+            let info = this.data.userInfo;
+            info.avatarUrl =res.tempFilePaths[0]
+            wx.previewImage({
+                current: res.tempFilePaths[0], // 当前显示图片的http链接
+                urls: [res.tempFilePaths[0]] // 需要预览的图片http链接列表
+            })
+            this.setData(
+               {userInfo:info}
+            )
+        })
+    },
     changeSex: function (e) {
        util.showActionSheet({itemList:['男生','女生']}).then(res =>{
           if (res.tapIndex == 0){

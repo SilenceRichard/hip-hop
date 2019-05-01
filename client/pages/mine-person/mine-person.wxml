@@ -1,6 +1,7 @@
 <view class="row">
     <view class="col head">
         <image src="{{userInfo.avatarUrl}}"></image>
+        <text bindtap="changeImage" class="weui-cell_link">选择图片</text>
     </view>
 </view>
 <view wx:if="{{edit==true}}">

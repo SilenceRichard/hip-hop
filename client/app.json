@@ -29,9 +29,10 @@
       },
       {
         "pagePath": "pages/component-demo/component-demo",
-        "text" : "组件示例"
+        "text": "组件示例"
       }
     ]
   },
-  "cloud": true
+  "cloud": true,
+  "sitemapLocation": "sitemap.json"
 }

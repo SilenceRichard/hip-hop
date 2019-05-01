@@ -4,6 +4,7 @@
      "badge": "../../components/badge/badge",
      "footer":"../../components/footer/footer",
      "list": "../../components/list/list",
-     "form": "../../components/input/input"
+     "form": "../../components/input/input",
+     "navbar": "../../components/navbar/navbar"
   }
 }

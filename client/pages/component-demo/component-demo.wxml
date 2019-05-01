@@ -74,4 +74,6 @@
     <list title="系统通知" text="跳转到系统通知页面" url="../mine-systemInfo/mine-systemInfo" icon="../../static/icon/spiderMan.png">
     </list>
     <form></form>
+    <text>navbar复用的页面比较少，可以写的时候使用其结构，不用单独封装组件</text>
+    <navbar></navbar>
 </view>
