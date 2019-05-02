@@ -1,10 +1,11 @@
 /*
  Created by Zhao on 2019/4/27 主要解决小程序增删改的基本请求操作
  */
+const app = getApp();
 var service = {};
 const db = wx.cloud.database({
     config: {
-        env: 'hip-hop-sever-d20da1', //云开发控制台的环境ID
+        env: app.data.env, //云开发控制台的环境ID
     }
 }); //云数据库配置
 

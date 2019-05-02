@@ -7,10 +7,12 @@
       <view class="col-8">
          <view id="nickName">{{userInfo.nickName}}<image src="../../static/icon/edit.png"></image></view>
          <view id="sex">
+           <image wx:if="{{userInfo.gender == 0}}" src="../../static/icon/girl.png"></image>
+           <text wx:if="{{userInfo.gender == 0}}">保密</text>
            <image wx:if="{{userInfo.gender == 1}}" src="../../static/icon/boy.png"></image>
            <text wx:if="{{userInfo.gender == 1}}">男生</text>
-           <image wx:if="{{userInfo.gender == 0}}" src="../../static/icon/girl.png"></image>
-           <text wx:if="{{userInfo.gender == 0}}">女生</text>
+           <image wx:if="{{userInfo.gender == 2}}" src="../../static/icon/girl.png"></image>
+           <text wx:if="{{userInfo.gender == 2}}">女生</text>
          </view>
          <view id="sign">{{sign}}</view>
       </view>

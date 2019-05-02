@@ -40,6 +40,8 @@ const wxPromisify = fn => {
     })
   }
 }
+const loginPromisified = wxPromisify(wx.login);//登录
+const showLoadingPromisified = wxPromisify(wx.showLoading); //加载状态Promise化
 const chooseImagePromisified = wxPromisify(wx.chooseImage);//选择图片
 const chooseLocationPromisified = wxPromisify(wx.chooseLocation);//选择位置
 const getLocationPromisified = wxPromisify(wx.getLocation);//获取经纬度
@@ -103,6 +105,7 @@ module.exports = {
   formatTime: formatTime,
   formatNumber: formatNumber,
   wxPromisify:wxPromisify,//将微信的API方法改为异步写法
+  login:loginPromisified,//微信登录方法
   chooseLocation:chooseLocationPromisified,//获取当前位置
   getLocation:getLocationPromisified, //获取经纬度 用promise的方式实现
   showModal:showModalPromisified,//弹窗 用promise的方式实现
@@ -110,6 +113,7 @@ module.exports = {
   getUserInfo:getUserInfoPromisified, //获取用户信息
   showActionSheet:showActionSheetPromisified,//选项窗
   chooseImage:chooseImagePromisified,//选择图片
+  showLoading:showLoadingPromisified,//加载中
   post:post,
   get:get
 }

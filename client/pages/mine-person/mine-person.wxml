@@ -1,7 +1,7 @@
 <view class="row">
     <view class="col head">
         <image src="{{userInfo.avatarUrl}}"></image>
-        <text bindtap="changeImage" class="weui-cell_link">选择图片</text>
+        <text wx:if="{{edit==true}}" bindtap="changeImage" class="weui-cell_link">选择图片</text>
     </view>
 </view>
 <view wx:if="{{edit==true}}">
@@ -19,10 +19,13 @@
         <view class="col">
             <view class="col-3 label">性别：</view>
             <view class="col-9 formItem">
+                <view wx:if="{{userInfo.gender == '0'}}">
+                    保密  <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
+                </view>
                 <view wx:if="{{userInfo.gender == '1'}}">
                     男生  <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
                 </view>
-                <view wx:else bindtap="changeSex">
+                <view wx:elif="{{userInfo.gender == '2'}}" bindtap="changeSex">
                     女生 <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
                 </view>
             </view>
@@ -110,7 +113,8 @@
             <view class="col-3 label">性别：</view>
             <view class="col-9">
                 <text wx:if="{{userInfo.gender=='1'}}">男生</text>
-                <text wx:else>女生</text>
+                <text wx:elif="{{userInfo.gender=='2'}}">女生</text>
+                <text wx:else>保密</text>
             </view>
         </view>
     </view>

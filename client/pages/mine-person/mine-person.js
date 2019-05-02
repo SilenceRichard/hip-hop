@@ -5,8 +5,9 @@ Page({
        userInfo:{}, //用户信息
        edit:false, //编辑标志
        gender:[
+           {name: '保密', value: '0'},
            {name: '男生', value: '1'},
-           {name: '女生', value: '0'}
+           {name: '女生', value: '2'}
        ],
         danceType:[
             {name:'Hiphop',checked: false},
@@ -30,27 +31,30 @@ Page({
         util.chooseImage({count:1}).then(res =>{
             let info = this.data.userInfo;
             info.avatarUrl =res.tempFilePaths[0]
-            wx.previewImage({
-                current: res.tempFilePaths[0], // 当前显示图片的http链接
-                urls: [res.tempFilePaths[0]] // 需要预览的图片http链接列表
-            })
             this.setData(
                {userInfo:info}
             )
         })
     },
     changeSex: function (e) {
-       util.showActionSheet({itemList:['男生','女生']}).then(res =>{
+       util.showActionSheet({itemList:['保密','男生','女生']}).then(res =>{
           if (res.tapIndex == 0){
+              let info = this.data.userInfo;
+              info.gender = '0';
+              this.setData({
+                  userInfo:info
+              })
+          }
+          else if(res.tapIndex == 1){
               let info = this.data.userInfo;
               info.gender = '1';
               this.setData({
                   userInfo:info
               })
           }
-          else{
+          else {
               let info = this.data.userInfo;
-              info.gender = '0';
+              info.gender = '2';
               this.setData({
                   userInfo:info
               })
