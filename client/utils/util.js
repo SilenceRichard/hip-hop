@@ -42,6 +42,7 @@ const wxPromisify = fn => {
 }
 const loginPromisified = wxPromisify(wx.login);//登录
 const showLoadingPromisified = wxPromisify(wx.showLoading); //加载状态Promise化
+const hideLoadingPromisified = wxPromisify(wx.hideLoading); //加载完成
 const chooseImagePromisified = wxPromisify(wx.chooseImage);//选择图片
 const chooseLocationPromisified = wxPromisify(wx.chooseLocation);//选择位置
 const getLocationPromisified = wxPromisify(wx.getLocation);//获取经纬度
@@ -114,6 +115,7 @@ module.exports = {
   showActionSheet:showActionSheetPromisified,//选项窗
   chooseImage:chooseImagePromisified,//选择图片
   showLoading:showLoadingPromisified,//加载中
+  hideLoading:hideLoadingPromisified,//加载完成
   post:post,
   get:get
 }
