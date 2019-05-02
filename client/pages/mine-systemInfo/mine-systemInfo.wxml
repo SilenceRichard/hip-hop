@@ -1,21 +1,11 @@
 <view class="outer">
-
-      <navigator url="/pages/index/index"
-      open-type="switchTab"
-      hover-class="navigator-hover"
-      class="topbar">
-      系统消息
-      </navigator>
-
-      <navigator url="/pages/inform/inform"
-      open-type="switchTab"
-      hover-class="navigator-hover"
-      class="topbar">
-      互动消息
-      </navigator>
-
-    <navigateV3 titleText="标题" innerText="副标题"></navigateV3>
-    <navigateV3 titleText="标题" innerText="副标题"></navigateV3>
-    <navigateV3 titleText="标题" innerText="副标题"></navigateV3>
-    <navigateV3 titleText="标题" innerText="副标题"></navigateV3>
+    <view class="row">
+        <view class="col">
+            <view class="col-6 xtxx">系统消息</view>
+            <view class="col-6 hdxx">互动消息</view>
+        </view>
+    </view>
 </view>
+<navigateV3 titleText="大可邀请你参加南丰路约局"></navigateV3>
+<navigateV3 titleText="小汤邀请你参加南丰路约局"></navigateV3>
+<navigateV3 titleText="小五邀请你参加南丰路约局"></navigateV3>
