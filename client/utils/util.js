@@ -50,6 +50,8 @@ const showModalPromisified = wxPromisify(wx.showModal);//弹窗
 const showToastPromisified = wxPromisify(wx.showToast);//提示窗
 const showActionSheetPromisified = wxPromisify(wx.showActionSheet);//选项窗
 const getUserInfoPromisified = wxPromisify(wx.getUserInfo); //获取用户信息
+const hideTabBarPromisified = wxPromisify(wx.hideTabBar); //隐藏底部导航栏
+const showTabBarPromisified = wxPromisify(wx.showTabBar); //展示底部导航栏
 
 const post = (url,data) => {
   var promise = new Promise((resolve, reject) => {
@@ -116,6 +118,8 @@ module.exports = {
   chooseImage:chooseImagePromisified,//选择图片
   showLoading:showLoadingPromisified,//加载中
   hideLoading:hideLoadingPromisified,//加载完成
+  hideTabBar:hideTabBarPromisified,//隐藏底部导航栏
+  showTabBar:showTabBarPromisified,//展示底部导航栏
   post:post,
   get:get
 }

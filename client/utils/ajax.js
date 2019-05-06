@@ -5,7 +5,7 @@ const app = getApp();
 var service = {};
 const db = wx.cloud.database({
     config: {
-        env: app.data.env, //云开发控制台的环境ID
+        env: app.globalData.env, //云开发控制台的环境ID
     }
 }); //云数据库配置
 

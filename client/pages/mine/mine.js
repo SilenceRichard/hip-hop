@@ -17,22 +17,14 @@ Page({
     },
     onReady: function () {
       var that = this;
-        util.showLoading({title: '加载中'}).then(
-            util.login().then(res=>{
-                util.get('https://api.weixin.qq.com/sns/jscode2session',
-                    {appid:app.data.appId,
-                        secret:app.data.appSecret,
-                        js_code:res.code,
-                        grant_type:'authorization_code'
-                    })
-                    .then(res =>{
-                    console.log("获取到用户的openid：",res.data.openid)
+        util.showLoading({title: '加载中'})
+            .then(()=>{
                     //将openid字段保存
                     that.setData({
-                        openid:res.data.openid
+                        openid:app.data.openid
                     })
                     //根据openid查询数据库的user表，判断用户有无在小程序进行过登录操作
-                    ajax.find_page({_openid:res.data.openid},1,10,'user')
+                    ajax.find_page({_openid:app.data.openid},1,10,'user')
                         .then(res2 =>{
                         console.log("获取到数据库中user表的用户信息：",res2)
                         //如果表中无该用户的信息，新增一条
@@ -54,8 +46,7 @@ Page({
                         }
                     })
                 })
-            })
-        ).then(util.hideLoading) //加载完成
+            .then(util.hideLoading) //加载完成
 
     }, //页面加载完成时触发
     onShow: function () {

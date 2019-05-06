@@ -1,4 +1,4 @@
-<view class="outer">
+<view class="outer" wx:if="{{!showWelcome}}">
     <view class="swiper">
         <swiper
                 indicator-dots="{{indicatorDots}}"
@@ -19,3 +19,4 @@
     <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
     <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
 </view>
+<view class="outer welcome dh" wx:if="{{showWelcome}}"></view>
