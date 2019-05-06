@@ -1,6 +1,8 @@
 //index.js
 //获取应用实例
 import util from '../../utils/util'
+import regeneratorRuntime from '../../utils/wxPromise.min.js' //引入async await语法糖
+
 Page({
   data: {
     imgUrls: [
@@ -12,8 +14,20 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 1000,
-    showWelcome:true //欢迎动画标志
+    showWelcome:true, //欢迎动画标志
+    flag:true, //淡入淡出动画加载标志
   },
+  enterMiniProgram:async function(){
+   this.setData({
+     flag:false
+   })
+   await setTimeout(()=>{
+     wx.pro.showTabBar().then(
+         this.setData({
+       showWelcome:false
+     }))
+   },1*1000);
+  }, //点击进入小程序首页
   onReady: function () {
     //注释这里使用了回调风格的写法
     // wx.hideTabBar({
@@ -29,13 +43,6 @@ Page({
     //     },2*1000)
     //   }
     // })
-    //以下是Promise风格的代码
-    setTimeout(()=> {
-      this.setData({
-        showWelcome:false
-      })
-      util.showTabBar() //显示app.js中隐藏的底部导航栏
-    },2*1000)
-
+    // 演示 wxPromise 的能力
   }
 })

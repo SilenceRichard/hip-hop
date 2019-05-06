@@ -6,7 +6,7 @@
                 interval="{{interval}}"
                 duration="{{duration}}"
         >
-            <block wx:for="{{imgUrls}}">
+            <block wx:for="{{imgUrls}}" wx:key="*this">
                 <swiper-item>
                     <image src="{{item}}" class="slide-image" style='width:100%' height="150" />
                 </swiper-item>
@@ -19,4 +19,4 @@
     <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
     <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
 </view>
-<view class="outer welcome dh" wx:if="{{showWelcome}}"></view>
+<view class="{{flag?'outer welcome dh':'outer welcome dh-out'}}" wx:if="{{showWelcome}}" bindtap="enterMiniProgram"></view>

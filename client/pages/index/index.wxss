@@ -16,6 +16,10 @@
 }
 /*动画效果，头部引入的animation库都阔以自己玩一下*/
 .dh{
-    animation-name: fadeInLeft,fadeOutRight;
-    animation-duration: 2s,3s;
+    /*animation-name: fadeInLeft,fadeOutRight;*/
+    /*animation-duration: 2s,3s;*/
+    animation: fadeInLeft 2s;
+}
+.dh-out{
+    animation: fadeOutRight 2s;
 }

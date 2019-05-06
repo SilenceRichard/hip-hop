@@ -69,7 +69,7 @@
             <view class="col-3 label">舞种：</view>
             <view class="col-8 formItem">
                 <checkbox-group bindchange="chooseDanceType">
-                    <label class="checkbox" wx:for="{{danceType}}">
+                    <label class="checkbox" wx:for="{{danceType}}" wx:key="*this">
                         <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
                     </label>
                 </checkbox-group>
