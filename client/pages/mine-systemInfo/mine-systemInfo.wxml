@@ -1,11 +1,20 @@
-<view class="outer">
+<!-- <view class="outer">
     <view class="row">
         <view class="col">
             <view class="col-6 xtxx">系统消息</view>
             <view class="col-6 hdxx">互动消息</view>
         </view>
     </view>
-</view>
+</view> -->
+
+<!-- <view class="outer">
+    <view class="row">
+        <view class="col"> -->
+            <view class="xtxx">系统消息</view>
+        <!-- </view>
+    </view>
+</view> -->
+
 <navigateV3 titleText="大可邀请你参加南丰路约局"></navigateV3>
 <navigateV3 titleText="小汤邀请你参加南丰路约局"></navigateV3>
 <navigateV3 titleText="小五邀请你参加南丰路约局"></navigateV3>

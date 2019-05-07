@@ -3,6 +3,7 @@
  */
 const app = getApp();
 var service = {};
+
 const db = wx.cloud.database({
     config: {
         env: app.globalData.env, //云开发控制台的环境ID

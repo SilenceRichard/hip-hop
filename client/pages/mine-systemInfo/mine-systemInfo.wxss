@@ -14,6 +14,6 @@
   justify-content: center;
   font-size: 50rpx;
 }
-.xtxx,.hdxx{
+.xtxx{
   text-align: center;
 }
