@@ -1,5 +1,7 @@
 import ajax from '../../utils/ajax'
 import util from '../../utils/util'
+import regeneratorRuntime from '../../utils/wxPromise.min.js' //引入async await语法糖
+const app = getApp();
 Page({
     data:{
        userInfo:{}, //用户信息
@@ -67,7 +69,6 @@ Page({
         this.setData({
             userInfo:info
         })
-        console.log(this.data.userInfo.birthday)
     }, //日期改变时的相关处理
     chooseDanceType:function (e) {
         let arr =  e.detail.value; //勾选事件传递的数组
@@ -106,29 +107,42 @@ Page({
         )
 
     }, //根据输入框的值改变userInfo
-    saveUserInfo: function(){
+    saveUserInfo:async function(){
         var that = this;
-        console.log(that.data.userInfo)
-        ajax.find_page({"_openid":that.data.openid},1,10,'user')
-            .then(res =>{
-                let id = res[0]._id;
-                delete that.data.userInfo._openid;
-                delete that.data.userInfo._id;
-                ajax.update(res[0]._id,that.data.userInfo,'user').then(
-                    util.showToast({
-                        title: '用户信息已更新!',
-                        icon: 'success',
-                        duration: 3000
-                    }).then(
-                        ()=>{
-                            that.setData({
-                                edit:false
+        console.log(this.data.userInfo)
+        await wx.cloud.callFunction({
+            name:'mine',
+            data:{
+                method:'updateMineInfo',
+                userInfo:this.data.userInfo
+            }
+        })
+        await   wx.showToast({
+                                title: '用户信息已更新!',
+                                icon: 'success',
+                                duration: 3000
                             })
-                        }
-
-                    )
-                )
-            })
+        this.setData({edit:false});
+        // ajax.find_page({"_openid":that.data.openid},1,10,'user')
+        //     .then(res =>{
+        //         let id = res[0]._id;
+        //         delete that.data.userInfo._openid;
+        //         delete that.data.userInfo._id;
+        //         ajax.update(res[0]._id,that.data.userInfo,'user').then(
+        //             util.showToast({
+        //                 title: '用户信息已更新!',
+        //                 icon: 'success',
+        //                 duration: 3000
+        //             }).then(
+        //                 ()=>{
+        //                     that.setData({
+        //                         edit:false
+        //                     })
+        //                 }
+        //
+        //             )
+        //         )
+        //     })
 
         //错误提示，暂不用此逻辑，后期需加上
         // this.setData({
@@ -147,7 +161,7 @@ Page({
           }
       )
     }, //启用编辑
-    onLoad:function (info) {
+    onLoad:async function (info) {
         //在页面加载时，根据传过来的id，查询数据库中的用户信息
         //小程序的路由传参 和get请求一样 ?后拼接参数进行传递
         //接受参数的形式为一对象
@@ -156,26 +170,35 @@ Page({
         that.setData({
             openid:info.openid
         })
-        ajax.find_page({"_openid":info.openid},1,10,'user').then(res => {
-                that.setData({
-                    userInfo:res[0],
-                })//查询结果为一数组 ，将查询结果赋予用于前端展示的userInfo
-                if (res[0].danceType){
-                    that.setData({
-                        danceType:res[0].danceType
-                    })//如果该用户之前填写过默认舞种 ，则做处理，默认勾选
-                }
-                if (res[0].danceAge){
-                    let arr = that.data.danceAge;
-                        arr.forEach(item =>{
-                        if (item.name == res[0].danceAge){
-                            item.checked = true
-                            }
-                        })//如果该用户之前填写过默认舞龄 ，则做处理，默认勾选
-                    that.setData({
-                        danceAge:arr
-                    })
-                }
+        let result = await wx.cloud.callFunction({
+            name:"mine",
+            // 传给云函数的请求参数，在云中为event.属性名
+            data: {
+                method:"getMineInfo",
+                openid:app.data.openid,
+                userInfo:{}
+            },
         })
+        this.setData({
+            userInfo:result.result.res
+        })
+        //如果该用户之前填写过默认舞种 ，则做处理，默认勾选
+        if (this.data.userInfo.danceType){
+            this.setData({
+                danceType:this.data.userInfo.danceType
+            })//如果该用户之前填写过默认舞种 ，则做处理，默认勾选
+        }
+        //如果该用户之前填写过默认舞龄 ，则做处理，默认勾选
+        if (this.data.userInfo.danceAge){
+            let arr = this.data.danceAge;
+            arr.forEach(item =>{
+                if (item.name == this.data.userInfo.danceAge){
+                    item.checked = true
+                }
+            })//如果该用户之前填写过默认舞龄 ，则做处理，默认勾选
+            that.setData({
+                danceAge:arr
+            })
+        }
     }
 })
