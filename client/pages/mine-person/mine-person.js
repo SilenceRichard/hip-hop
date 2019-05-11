@@ -31,6 +31,7 @@ Page({
     },
     changeImage: function(){
         util.chooseImage({count:1}).then(res =>{
+            console.log('程序进来啦-----',res)
             let info = this.data.userInfo;
             info.avatarUrl =res.tempFilePaths[0]
             this.setData(
@@ -110,6 +111,8 @@ Page({
     saveUserInfo:async function(){
         var that = this;
         console.log(this.data.userInfo)
+        this.data.userInfo.openid = app.data.openid
+        console.log('更新信息-----',this.data.userInfo)
         await wx.cloud.callFunction({
             name:'mine',
             data:{
@@ -176,20 +179,21 @@ Page({
             data: {
                 method:"getMineInfo",
                 openid:app.data.openid,
-                userInfo:{}
             },
         })
-        this.setData({
-            userInfo:result.result.res
-        })
+        if ( typeof result.result.res !='undefined'){
+          this.setData({
+            userInfo: result.result.res
+          })
+        }
         //如果该用户之前填写过默认舞种 ，则做处理，默认勾选
-        if (this.data.userInfo.danceType){
+        if ( typeof this.data.userInfo.danceType!= 'undefined'){
             this.setData({
                 danceType:this.data.userInfo.danceType
             })//如果该用户之前填写过默认舞种 ，则做处理，默认勾选
         }
         //如果该用户之前填写过默认舞龄 ，则做处理，默认勾选
-        if (this.data.userInfo.danceAge){
+        if ( typeof this.data.userInfo.danceAge != 'undefined'){
             let arr = this.data.danceAge;
             arr.forEach(item =>{
                 if (item.name == this.data.userInfo.danceAge){

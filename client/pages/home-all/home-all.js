@@ -5,8 +5,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-      list:[{name:'综合',flag:false},{name:'个人',flag:false},{name:'官方',flag:false}]
+      list:[{name:'综合',flag:false},{name:'个人',flag:false},{name:'官方',flag:false}],
+      info:[{
+              imgsrc:'../../static/home.png',
+              title:'标题',
+              innerText1:'popping',
+              innerText2:'cypher',
+              limit_now:'4',
+              limit:'10',
+              time:'2019-5-11 00:00:00',
+              location:'昌平'
+            },
+        {
+          imgsrc:'../../static/home.png',
+          title:'标题',
+          innerText1:'popping',
+          innerText2:'cypher',
+          limit_now:'4',
+          limit:'10',
+          time:'2019-5-11 00:00:00',
+          location:'昌平'
+        },
+        {
+          imgsrc:'../../static/home.png',
+          title:'标题',
+          innerText1:'popping',
+          innerText2:'cypher',
+          limit_now:'4',
+          limit:'10',
+          time:'2019-5-11 00:00:00',
+          location:'昌平'
+        },
+      ],
+      dropDownFlag:false
   },
+
   activeList(ev){
     // console.log(ev.currentTarget.dataset.item)
     // ev.currentTarget.dataset.item.flag = true;
@@ -18,14 +51,27 @@ Page({
       list:arr
     })
     for (var i = 0 ; i<arr.length; i++){
-      if (arr[i].name == ev.currentTarget.dataset.item.name){
+      if (arr[i].name == ev.currentTarget.dataset.item.name)
+      {
         arr[i].flag = true;
         this.setData({
             list:arr
-        })
+        }
+
+        )
       }
     }
+    if( ev.currentTarget.dataset.item.name == "综合"){
+        this.setData({
+            dropDownFlag:true
+        })
+    }else {
+        this.setData({
+            dropDownFlag:false
+        })
+    }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

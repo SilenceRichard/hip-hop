@@ -11,15 +11,13 @@ const wxContext = cloud.getWXContext()
 // 云函数入口函数
 exports.main = async (event, context) => {
   if (event.method  == 'getMineInfo'){
+    console.log("请求参数：",event)
     let checkResult= await runDB.main('get',{db:'user',condition:{"openid":event.openid}})
-
+    console.log("查询结果：",checkResult)
     if (checkResult.data.length == 0){ //新用户登录
-      let obj = event.userInfo;
-      obj.openid = event.openid; //记录操作者的openid
-      await runDB.main('insert',{db:'user',data:obj});
-      let res = event.userInfo;
+
       return{
-        res
+        status:'1' //更新用户信息标识
       }
     }else { //老用户登录
       let res = checkResult.data[0]

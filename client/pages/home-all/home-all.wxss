@@ -8,9 +8,49 @@
   text-align: center;
   height: 110rpx;
   line-height: 110rpx;
-  color: #ffffff;
+  color: #ffff;
+  position: relative;
   }
   .list-active{
+    text-align: center;
+    height: 110rpx;
+    line-height: 110rpx;
     border-bottom:4rpx solid #ffff8c;
     color:#ffffff;
+  }
+
+  .title{
+    font-size: 36rpx;
+    color:#cdcdcd;
+  }
+
+  .class1
+  {
+    font-size: 28rpx;
+    color:#808080;
+  }
+  .innerText{
+    font-size: 28rpx;
+    color:#3a3a3a;
+  }
+  .listImage{
+    width:100%;
+    height:100%
+  }
+  .outer{
+    color:#000000;
+    margin-bottom:60rpx
+  }
+  .dropDown{
+    position:absolute;
+    background: red;
+    width:100rpx;
+    height:100rpx;
+  }
+  .arrow{
+    position:absolute;
+    top: 32%;
+    left: 22%;
+    width:30rpx;
+    height: 30rpx;
   }
