@@ -4,9 +4,9 @@ import './utils/wxPromise.min.js'
 import regeneratorRuntime from './utils/wxPromise.min.js' //引入async await语法糖
 App({
   globalData: {
-    appId: 'wx97862a48d9f616ba',  //全局数据，存储appId和appSecret
-    appSecret: '59b0db984d8064dc55e290618c6c3915',
-    env: 'hip-hop-sever-d20da1' //云环境ID
+    appId: 'wx9e8ef0042efc3a09',  //全局数据，存储appId和appSecret
+    appSecret: '89ec0dddb75a4e9d347b0a94408b9efb',
+    env: 'ch-ae1ef0' //云环境ID
   },
   data:{
     openid:'' //当前用户的openid
@@ -17,7 +17,7 @@ App({
       env: that.globalData.env,
       traceUser: true
     }) //初始化云函数
-   await wx.hideTabBar();
+  //  await wx.hideTabBar();
    let res = await wx.cloud.callFunction({
        name:"login"
    })

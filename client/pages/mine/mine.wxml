@@ -18,6 +18,9 @@
       </view>
     </view>
   </view>
+ <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+  获取用户信息
+</button> -->
   <view style="width: 100%" class="row">
     <list  title="我的约局" text="查看约局" icon="../../static/icon/spiderMan.png" url="../mine-yueju/mine-yueju">
     </list>

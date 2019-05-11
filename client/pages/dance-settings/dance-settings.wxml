@@ -1,0 +1,99 @@
+<!--pages/dance-settings/dance-settings.wxml-->
+<view class="out" wx:if="{{step==0}}">
+    <view class="out-2">
+        <view class="publish" bindtap="setInfo" style="margin-right: 70rpx" data-identify="person">个人发布</view>
+        <view class="publish" bindtap="setInfo"  data-identify="official">官方发布</view>
+    </view>
+</view>
+<view class="out" wx:if="{{step==1}}">
+        <view class="inner_1">
+            <view class="publish" bindtap="setInfo" data-type="cypher">cypher</view>
+            <view class="publish" bindtap="setInfo" data-type="练习" style="margin-left:60rpx;">练习</view>
+        </view>
+        <view  class="inner_2">
+            <view class="publish" bindtap="setInfo" data-type="自由">自由</view>
+        </view>
+</view>
+<view class="out" wx:if="{{step==2}}">
+    <checkbox-group bindchange="checkboxChange" style="color:#ffffff">
+        <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+            <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
+
+            <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+        </label>
+    </checkbox-group>
+    <button class="nextStep" bindtap="setInfo">下一步</button>
+</view>
+<view class="out" wx:if="{{step==3}}" style="padding: 38rpx 0;">
+    <view class="upload-head">
+       <view class="uploadTips">上传约局照片</view>
+       <view class="row" style="margin: 46rpx 0 0 0">
+           <view class="col">
+               <view class="col-6 uploadbox">
+                   <view class="uploadImg">
+                       <view> <image class="upload" src="../../static/icon/plus.png"></image></view>
+                       <view>上传照片</view>
+                   </view>
+               </view>
+               <view class="col-6 uploadbox">
+                   <view class="uploadImg">
+                       <image id="forUpload" src="{{info.cover}}"></image>
+                   </view>
+               </view>
+           </view>
+       </view>
+       <view class="uploadTips_2">只支持jpg格式</view>
+    </view>
+    <view class="row" style="margin: 90rpx 0 0 0">
+        <view class="col">
+            <view class="col-3 form-title">活动标题</view>
+            <view class="col-9"><input class="form-input" placeholder="请填写活动标题"></input></view>
+        </view>
+    </view>
+    <view class="row">
+        <view class="col">
+            <view class="col-3 form-title">活动内容</view>
+        </view>
+    </view>
+    <view class="row">
+        <view class="col">
+            <view class="col-12">
+                <textarea class="form-textarea"></textarea>
+            </view>
+        </view>
+    </view>
+    <view class="row">
+        <view class="col">
+            <view class="col-3 form-title">活动时间</view>
+            <view class="col-9">
+                <view class="form-input">
+                    <picker mode="date"></picker>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="row">
+        <view class="col">
+            <view class="col-3 form-title">活动地点</view>
+            <view class="col-9"><view class="form-input">1</view></view>
+        </view>
+    </view>
+    <view class="row">
+        <view class="col">
+            <view class="col-3 form-title">人数限制</view>
+            <view class="col-9"><view class="form-input">1</view></view>
+        </view>
+    </view>
+    <view class="row">
+        <view class="col"></view>
+    </view>
+    <view class="row">
+        <view class="col"></view>
+    </view>
+    <!-- 加入要求 -->
+    <button class="nextStep" bindtap="setInfo">下一步</button>
+</view>
