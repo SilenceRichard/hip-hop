@@ -5,7 +5,8 @@
     "pages/mine-systemInfo/mine-systemInfo",
     "pages/mine-yueju/mine-yueju",
     "pages/mine-person/mine-person",
-    "pages/component-demo/component-demo"
+    "pages/component-demo/component-demo",
+    "pages/home-all/home-all"
   ],
   "window": {
     "backgroundTextStyle": "light",

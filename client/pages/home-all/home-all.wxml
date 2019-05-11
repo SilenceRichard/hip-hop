@@ -1,0 +1,23 @@
+<!--pages/home-all/home-all.wxml-->
+<view id="out">
+    <view class="row header">
+        <view class='col'>
+         <block wx:for='{{list}}' wx:key="item.name">
+             <view class="{{item.flag?'col-4 list list-active':'col-4 list'}}" bindtap="activeList" data-item="{{item}}">
+                 {{item.name}}</view>
+         </block>
+        </view>
+    </view>
+    <view class='row outer' >
+        <view class='col' style='height:100%'>
+            <view class='col-4'><image src="{{imgsrc}}"></image></view>
+            <view class='col-8'>
+                <text class="title">{{title}}</text>
+                <view class="innerText">副标题</view>
+                <view class="innerText">副标题</view>
+                <view class="innerText">副标题</view>
+            </view>
+        </view>
+    </view>
+</view>
+

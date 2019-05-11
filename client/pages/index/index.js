@@ -28,6 +28,11 @@ Page({
      }))
    },1*1000);
   }, //点击进入小程序首页
+  goToAll(){
+      wx.navigateTo({
+        url: '../home-all/home-all',
+      })
+  },
   onReady: function () {
     //注释这里使用了回调风格的写法
     // wx.hideTabBar({

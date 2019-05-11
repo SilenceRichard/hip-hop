@@ -18,7 +18,7 @@
 .dh{
     /*animation-name: fadeInLeft,fadeOutRight;*/
     /*animation-duration: 2s,3s;*/
-    animation: fadeInLeft 2s;
+    animation: bounce 2s;
 }
 .dh-out{
     animation: fadeOutRight 2s;
