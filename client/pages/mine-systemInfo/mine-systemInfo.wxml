@@ -1,20 +1,42 @@
-<!-- <view class="outer">
-    <view class="row">
-        <view class="col">
-            <view class="col-6 xtxx">系统消息</view>
-            <view class="col-6 hdxx">互动消息</view>
-        </view>
+<view id="out">
+  <view  class='row outer'bindtap="toAppointInfo" >
+    <view class='col' style='height:100%'>
+      <view class='col-3'><image src="{{imgsrc}}"></image></view>
+        <view class='col-9'>
+          <text class="title">{{title}}</text>
+            <view class="col outerText" style='color:#505050'>
+            <view class='col-11'>主标题</view>
+            <view class='col-1'>时间</view>
+            </view>
+            <view class="innerText" style='color:#505050'>副标题</view>
+      </view>
+    </view>       
+  </view>
+  <view class='row outer'bindtap="toAppointInfo" >
+    <view class='col' style='height:100%'>
+      <view class='col-3'><image src="{{imgsrc}}"></image></view>
+        <view class='col-9'>
+          <text class="title">{{title}}</text>
+            <view class="col outterText" style='color:#505050'>
+            <view class="col-11">主标题</view>
+            <view class="col-1">时间</view>
+            </view>
+            <view class="innerText" style='color:#505050'>副标题</view>
+      </view>
     </view>
-</view> -->
-
-<!-- <view class="outer">
-    <view class="row">
-        <view class="col"> -->
-            <view class="xtxx">系统消息</view>
-        <!-- </view>
+  </view>
+  <view class='row outer' bindtap="toAppointInfo">
+    <view class='col' style='height:100%'>
+      <view class='col-3'><image src="{{imgsrc}}"></image></view>
+        <view class='col-9'>
+          <text class="title">{{title}}</text>
+            <view class="col outterText" style='color:#505050'>
+            <view class="col-11">主标题</view>
+            <view class="col-1">时间</view>
+            </view>
+            <view class="innerText" style='color:#505050'>副标题</view>
+      </view>
     </view>
-</view> -->
+  </view>
+</view>       
 
-<navigateV3 titleText="大可邀请你参加南丰路约局"></navigateV3>
-<navigateV3 titleText="小汤邀请你参加南丰路约局"></navigateV3>
-<navigateV3 titleText="小五邀请你参加南丰路约局"></navigateV3>

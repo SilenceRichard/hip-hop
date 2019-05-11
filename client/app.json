@@ -6,7 +6,9 @@
     "pages/mine-yueju/mine-yueju",
     "pages/mine-person/mine-person",
     "pages/component-demo/component-demo",
-    "pages/home-all/home-all"
+    "pages/home-all/home-all",
+    "pages/appointInfo/appointInfo",
+    "pages/applyInfo/applyInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

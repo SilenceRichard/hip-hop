@@ -1,4 +1,4 @@
-<!--pages/mine/mine.wxml-->
+<view id="out">
   <view class="header row">
     <view class="col" style="height: 100%">
       <view class="col-4">
@@ -7,11 +7,11 @@
       <view class="col-8">
          <view id="nickName">{{userInfo.nickName}}<image src="../../static/icon/edit.png"></image></view>
          <view id="sex">
-           <image wx:if="{{userInfo.gender == 0}}" src="../../static/icon/girl.png"></image>
+           <image wx:if="{{userInfo.gender == 0}}" src="../../static/icon/girl2.png"></image>
            <text wx:if="{{userInfo.gender == 0}}">保密</text>
-           <image wx:if="{{userInfo.gender == 1}}" src="../../static/icon/boy.png"></image>
+           <image wx:if="{{userInfo.gender == 1}}" src="../../static/icon/boy2.png"></image>
            <text wx:if="{{userInfo.gender == 1}}">男生</text>
-           <image wx:if="{{userInfo.gender == 2}}" src="../../static/icon/girl.png"></image>
+           <image wx:if="{{userInfo.gender == 2}}" src="../../static/icon/girl2.png"></image>
            <text wx:if="{{userInfo.gender == 2}}">女生</text>
          </view>
          <view id="sign">{{sign}}</view>
@@ -21,6 +21,10 @@
   <view style="width: 100%" class="row">
     <list  title="我的约局" text="查看约局" icon="../../static/icon/spiderMan.png" url="../mine-yueju/mine-yueju">
     </list>
-    <list  title="系统通知" text="查看通知" icon="../../static/icon/NickFury.png" url="../mine-yueju/mine-yueju">
+    <list  title="系统通知" text="查看通知" icon="../../static/icon/NickFury.png" url="../mine-systemInfo/mine-systemInfo">
+    </list>
+    <list title="意见反馈" text="查看反馈" icon="../../static/icon/fuchouzhelianmeng-yiren.png"
+    url="../mine-systemInfo/mine-systemInfo">
     </list>
   </view>
+</view>

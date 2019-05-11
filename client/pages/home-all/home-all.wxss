@@ -8,7 +8,7 @@
   text-align: center;
   height: 110rpx;
   line-height: 110rpx;
-  color: #ffff
+  color: #ffffff;
   }
   .list-active{
     border-bottom:4rpx solid #ffff8c;
