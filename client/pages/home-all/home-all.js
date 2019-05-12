@@ -47,9 +47,10 @@ Page({
                 name:"home",
                 data:{
                     method:"getInfo",
-                    type:time
+                    type:"time"
                 },
                 success:function(res){
+                    console.log(res)
                     that.setData({
                         Info:res.result.checkResult
                     })

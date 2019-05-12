@@ -1,5 +1,20 @@
 <!--pages/home-all/home-all.wxml-->
+
+
 <view id="out">
+   <view class="searchbar-box">
+      <view class="row searchbar">
+          <view class="col">
+              <view class="col-1 " style="padding:15rpx 0 0 5rpx">
+                  <image class="search-img"  src="../../static/icon/search.png"></image>
+              </view>
+              <view class="col-11 ">
+                  <input class="search-input">搜索关键字</input>
+              </view>
+          </view>
+      </view>
+</view>
+
     <view class="row header">
         <view class='col'  style="position: relative">
             <image class="arrow"  src="../../static/icon/arrow-down.png"></image>
@@ -10,7 +25,8 @@
          </block>
         </view>
         <view class="dropDown" wx:if="{{dropDownFlag}}" >
-
+            <view class="title" bindtap="activeDropDown1">按时间 ↑</view>
+            <view class="title" bindtap="activeDropDown2">按距离 ↑</view>
         </view>
     </view>
 
