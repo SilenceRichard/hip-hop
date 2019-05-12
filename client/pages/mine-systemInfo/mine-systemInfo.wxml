@@ -1,42 +1,17 @@
 <view id="out">
-  <view  class='row outer'bindtap="toAppointInfo" >
-    <view class='col' style='height:100%'>
-      <view class='col-3'><image src="{{imgsrc}}"></image></view>
-        <view class='col-9'>
-          <text class="title">{{title}}</text>
-            <view class="col outerText" style='color:#505050'>
-            <view class='col-11'>主标题</view>
-            <view class='col-1'>时间</view>
-            </view>
-            <view class="innerText" style='color:#505050'>副标题</view>
-      </view>
-    </view>       
-  </view>
-  <view class='row outer'bindtap="toAppointInfo" >
-    <view class='col' style='height:100%'>
-      <view class='col-3'><image src="{{imgsrc}}"></image></view>
-        <view class='col-9'>
-          <text class="title">{{title}}</text>
-            <view class="col outterText" style='color:#505050'>
-            <view class="col-11">主标题</view>
-            <view class="col-1">时间</view>
-            </view>
-            <view class="innerText" style='color:#505050'>副标题</view>
-      </view>
+  <block wx:for="{{info}}">
+    <view  class='row outer'bindtap="toAppointInfo" >
+      <view class='col' style='height:100%'>
+        <view class='col-3'><image src="{{item.imgsrc}}"></image></view>
+          <view class='col-9'>
+            <text class="title">{{title}}</text>
+              <view class="col outerText" style='color:#505050'>
+              <view class='col-11'>{{item.innerText1}}</view>
+              <view class='col-1'>{{item.time}}</view>
+              </view>
+              <view class="innerText" style='color:#505050'>{{item.innerText2}}</view>
+        </view>
+      </view>       
     </view>
-  </view>
-  <view class='row outer' bindtap="toAppointInfo">
-    <view class='col' style='height:100%'>
-      <view class='col-3'><image src="{{imgsrc}}"></image></view>
-        <view class='col-9'>
-          <text class="title">{{title}}</text>
-            <view class="col outterText" style='color:#505050'>
-            <view class="col-11">主标题</view>
-            <view class="col-1">时间</view>
-            </view>
-            <view class="innerText" style='color:#505050'>副标题</view>
-      </view>
-    </view>
-  </view>
-</view>       
-
+  </block>
+</view>

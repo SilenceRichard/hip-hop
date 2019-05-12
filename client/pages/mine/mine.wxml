@@ -27,7 +27,7 @@
     <list  title="系统通知" text="查看通知" icon="../../static/icon/NickFury.png" url="../mine-systemInfo/mine-systemInfo">
     </list>
     <list title="意见反馈" text="查看反馈" icon="../../static/icon/fuchouzhelianmeng-yiren.png"
-    url="../mine-systemInfo/mine-systemInfo">
+    url="../feedback/feedback">
     </list>
   </view>
 </view>

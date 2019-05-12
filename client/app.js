@@ -6,7 +6,7 @@ App({
   globalData: {
     appId: 'wx9e8ef0042efc3a09',  //全局数据，存储appId和appSecret
     appSecret: '89ec0dddb75a4e9d347b0a94408b9efb',
-    env: 'ch-ae1ef0' //云环境ID
+    env: 'suki-749826' //云环境ID
   },
   data:{
     openid:'' //当前用户的openid
