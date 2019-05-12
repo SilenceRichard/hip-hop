@@ -149,4 +149,27 @@
     <!-- 加入要求 -->
     <button class="nextStep" bindtap="setInfo">下一步</button>
 </view>
-
+<view class="out" wx:if="{{step==4}}">
+    <view class="uploadTips" style="padding: 38rpx 0;">
+        希望给报名者的联系方式
+    </view>
+    <view class="row">
+        <view class="col">
+            <block wx:for="{{contactItems}}" wx:key="*this">
+                <view class="{{item.flag?'col-4 itemList itemActive':'col-4 itemList'}}" style="text-align: center;">
+                    <text data-name="{{item.name}}" bindtap="changeContact" >{{item.name}}</text>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view style="display:flex;justify-content:center;">
+        <view class="uploadImg" bindtap="chooseImageQR" wx:if="{{contactName!='手机号'}}">
+            <view> <image class="upload" src="../../static/icon/plus.png"></image></view>
+            <view>上传二维码</view>
+        </view>
+        <view wx:if="{{contactName == '手机号'}}" style="width:100%;">
+            <input class="inputer" value="{{info.phone}}" bindinput="changePhoneNumber"></input>
+        </view>
+    </view>
+    <button class="nextStep" bindtap="setInfo">发起约舞</button>
+</view>

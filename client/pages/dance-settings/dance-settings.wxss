@@ -95,3 +95,14 @@
     width: 30rpx;
     height: 30rpx;
 }
+.itemList{
+
+}
+.itemActive{
+    background: #a6a6a6;
+}
+.inputer{
+    background: #ffffff;
+    width: 90%;
+    margin:0 0 0 5%;
+}
