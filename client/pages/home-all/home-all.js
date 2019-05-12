@@ -40,6 +40,40 @@ Page({
       dropDownFlag:false
   },
 
+  activeDropDown1(){
+      var that = this;
+      wx.cloud.callFunction(
+            {
+                name:"home",
+                data:{
+                    method:"getInfo",
+                    type:time
+                },
+                success:function(res){
+                    that.setData({
+                        Info:res.result.checkResult
+                    })
+                }
+            }
+            )
+  },
+    activeDropDown2(){
+    wx.cloud.callFunction(
+        {
+            name:"home",
+            data:{
+                method:"getInfo",
+                type:'location'
+            },
+            success:function(res){
+                that.setData({
+                    Info:res.result.checkResult
+                })
+            }
+        }
+    )
+},
+
   activeList(ev){
     // console.log(ev.currentTarget.dataset.item)
     // ev.currentTarget.dataset.item.flag = true;
@@ -65,9 +99,39 @@ Page({
         this.setData({
             dropDownFlag:true
         })
-    }else {
+    }
+    else if(ev.currentTarget.dataset.item.name == "个人"){
         this.setData({
             dropDownFlag:false
+        });
+        wx.cloud.callFunction({
+            name:"home",
+            data:{
+                method : 'getInfo',
+                type : 'getByIndividual'
+            },
+            success:function(res){
+                that.setData({
+                    Info :res.result.checkResult
+                })
+            }
+        })
+    }
+    else{
+        this.setData({
+            dropDownFlag:false
+        });
+        wx.cloud.callFunction({
+            name:"home",
+            data:{
+                method : 'getInfo',
+                type : 'getByOfficial'
+            },
+            success:function(res){
+                that.setData({
+                    Info :res.result.checkResult
+                })
+            }
         })
     }
   },
@@ -83,7 +147,34 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+     var that = this;
+    wx.cloud.callFunction(
+        {
+            name:'home',
+            data:{
+                method:'getInfo',//获取全部约局资讯
+                type:'All'
+            },
+            success:function(res){
+                //后台规定参数返回形式
+                //return{
+                     //checkResult: [{},{},{}]
+                // }
+                 that.setData({
+                     info:res.result.checkResult
+                 })
+                // let obj = that.data.info;
+                // obj.imgsrc = res.imgsrc;
+                // obj.title  = res.title ;
+                // obj.innerText1 = res.innerText1;
+                // obj.innerText2 = res.innerText2;
+                // obj.limit_now  = res.limit_now;
+                // obj.limit      = res.limit;
+                // obj.time      = res.time;
+                // obj.location      = res.location;
+            }
 
+        })
   },
 
   /**
