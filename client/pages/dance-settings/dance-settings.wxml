@@ -34,7 +34,7 @@
        <view class="row" style="margin: 46rpx 0 0 0">
            <view class="col">
                <view class="col-6 uploadbox">
-                   <view class="uploadImg">
+                   <view class="uploadImg" bindtap="chooseImage">
                        <view> <image class="upload" src="../../static/icon/plus.png"></image></view>
                        <view>上传照片</view>
                    </view>
@@ -51,7 +51,9 @@
     <view class="row" style="margin: 90rpx 0 0 0">
         <view class="col">
             <view class="col-3 form-title">活动标题</view>
-            <view class="col-9"><input class="form-input" placeholder="请填写活动标题"></input></view>
+            <view class="col-9">
+                <input class="form-input" value="{{info.title}}" bindinput="changeTitle" placeholder="请填写活动标题"></input>
+            </view>
         </view>
     </view>
     <view class="row">
@@ -62,7 +64,7 @@
     <view class="row">
         <view class="col">
             <view class="col-12">
-                <textarea class="form-textarea"></textarea>
+                <textarea value="{{info.content}}" bindinput="changeContent" class="form-textarea"></textarea>
             </view>
         </view>
     </view>
@@ -71,7 +73,20 @@
             <view class="col-3 form-title">活动时间</view>
             <view class="col-9">
                 <view class="form-input">
-                    <picker mode="date"></picker>
+                    <view class="row" style="height: 66rpx;line-height: 66rpx">
+                        <view class="col">
+                            <view class="col-4">
+                                <picker mode="date" data-type="date" value="{{timestamp.date}}" bindchange="bindDateChange">
+                                    <text>{{timestamp.date}}</text>
+                                </picker>
+                            </view>
+                            <view class="col-6">
+                                <picker mode="time" data-type="time" value="{{timestamp.time}}" bindchange="bindDateChange">
+                                    <text>{{timestamp.time}}</text>
+                                </picker>
+                            </view>
+                        </view>
+                    </view>
                 </view>
             </view>
         </view>
@@ -79,20 +94,57 @@
     <view class="row">
         <view class="col">
             <view class="col-3 form-title">活动地点</view>
-            <view class="col-9"><view class="form-input">1</view></view>
+            <view class="col-9">
+                <view class="form-input">
+                    <view class="row" style="height:100%;padding-top:10rpx">
+                        <view class="col">
+                            <view class="col-1">
+                                <image bindtap="chooseLocation" class="location-icon" src="../../static/icon/icon-location.png"></image>
+                            </view>
+                            <view class="col-8">
+                                <text wx:if="{{info.location.name==''}}">选择位置</text>
+                                <text wx:else>{{info.location.name}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
     <view class="row">
         <view class="col">
             <view class="col-3 form-title">人数限制</view>
-            <view class="col-9"><view class="form-input">1</view></view>
+                <view class="col-9">
+                    <view class="form-input row">
+                        <view class="col" style="height:66rpx;line-height:66rpx;">
+                            <view class="col-1">
+                                <image bindtap="addNumber" class="plus" src="../../static/icon/plus.png"></image>
+                            </view>
+                            <view class="col-3">
+                                <input style="text-align: center" type="number" value='{{info.limit}}'></input>
+                            </view>
+                            <view class="col-1">
+                                <image bindtap="minusNumber" class="plus" src="../../static/icon/minus.png"></image>
+                            </view>
+                            <view class="col-1">
+                                人
+                            </view>
+                        </view>
+                    </view>
+                </view>
         </view>
     </view>
     <view class="row">
-        <view class="col"></view>
+        <view class="col">
+            <view class="col-3 form-title">加入要求</view>
+        </view>
     </view>
     <view class="row">
-        <view class="col"></view>
+        <view class="col">
+            <view class="col-12">
+                <textarea  value="{{info.condition}}" bindinput="changeCondition" class="form-textarea"></textarea>
+            </view>
+        </view>
     </view>
     <!-- 加入要求 -->
     <button class="nextStep" bindtap="setInfo">下一步</button>

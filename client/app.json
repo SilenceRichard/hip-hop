@@ -8,7 +8,8 @@
     "pages/component-demo/component-demo",
     "pages/home-all/home-all",
     "pages/appointInfo/appointInfo",
-    "pages/applyInfo/applyInfo"
+    "pages/applyInfo/applyInfo",
+    "pages/dance-settings/dance-settings"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,7 +32,7 @@
         "selectedIconPath": "static/USER_ACTIVE.png"
       },
       {
-        "pagePath": "pages/mine/mine",
+        "pagePath": "pages/dance-settings/dance-settings",
         "text": "发起约舞",
         "iconPath": "static/USER.png",
         "selectedIconPath": "static/USER_ACTIVE.png"

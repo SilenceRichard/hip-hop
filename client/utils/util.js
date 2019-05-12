@@ -6,7 +6,14 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+
+const formatDate = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return [year, month, day].map(formatNumber).join('-')
 }
 
 const formatNumber = n => {
@@ -120,6 +127,7 @@ module.exports = {
   hideLoading:hideLoadingPromisified,//加载完成
   hideTabBar:hideTabBarPromisified,//隐藏底部导航栏
   showTabBar:showTabBarPromisified,//展示底部导航栏
+  formatDate:formatDate,
   post:post,
   get:get
 }
