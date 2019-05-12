@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
     let checkResult= await runDB.main('get',{db:'user',condition:{"openid":event.openid}})
     console.log("查询结果：",checkResult)
     if (checkResult.data.length == 0){ //新用户登录
-
+      await runDB.main('insert',{db:'user',data:{openid:event.openid}})  //
       return{
         status:'1' //更新用户信息标识
       }

@@ -1,5 +1,6 @@
 // pages/dance-settings/dance-settings.js
 import util from '../../utils/util'
+const app = getApp();
 Page({
   data: {
     step:0, //记录填报表单的步骤数
@@ -50,7 +51,17 @@ Page({
       obj.time = `${this.data.timestamp.date} ${this.data.timestamp.time}`//一系列信息
     }
     if (this.data.step == 4){//如果是第五步
-
+       wx.cloud.callFunction({
+           name:"dance",
+           data:{
+               method:'danceSettings',
+               info:this.data.info,
+               openid:app.data.openid
+           },
+           success(res) {
+               console.log(res)
+           }
+       })
     }//上传至云端
     this.setData({
       info:obj,//由中间量导入数据到info
