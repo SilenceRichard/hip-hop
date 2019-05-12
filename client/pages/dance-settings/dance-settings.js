@@ -1,8 +1,17 @@
 // pages/dance-settings/dance-settings.js
+import util from '../../utils/util'
 Page({
   data: {
     step:0, //记录填报表单的步骤数
-    info:{},//存入数据库的约局信息对象
+    info:{
+      limit:1,
+      location:{
+        name:'',
+        address:'',
+        latitude:'',
+        longitude:''
+      }
+    },//存入数据库的约局信息对象
     checkboxItems: [
       {name: 'Hiphop', value: 'Hiphop', checked: true},
       {name: 'Popping', value: 'Popping'},
@@ -16,7 +25,27 @@ Page({
       {name: 'Reggae', value: 'Reggae'},
       {name: '不限', value: '不限'},
     ],//记录舞种信息
+    timestamp:{
+      date:util.formatDate(new Date()),
+      time:"00:00"
+    }//时间戳
   },
+  bindDateChange(ev){
+    console.log(ev);
+    if (ev.currentTarget.dataset.type == 'date'){
+      let timeobj= this.data.timestamp;
+      timeobj.date = ev.detail.value;
+      this.setData({
+        timestamp:timeobj  //日期选择
+      })
+    }else {
+      let timeobj= this.data.timestamp;
+      timeobj.time = ev.detail.value;
+      this.setData({
+        timestamp:timeobj //时间选择
+      })
+    }
+  }, //日期选择(这里的触发事件是bindchange)
   setInfo(ev){//点击事件
     console.log(ev)
     let obj = this.data.info;//中间量
@@ -32,7 +61,7 @@ Page({
       obj.dance_type = this.data.checkboxItems;//舞种
     }
     if (this.data.step == 3) {
-      
+      obj.time = `${this.data.timestamp.date} ${this.data.timestamp.time}`
     }
     this.setData({
       info:obj,
@@ -42,7 +71,34 @@ Page({
     console.log(this.data.info,'----------',this.data.step)
   },
   chooseImage() {//上传图片点击事件
-  
+      let  that = this;
+      let obj = this.data.info;
+      wx.chooseImage({
+        count:1,
+        success:function(res){
+          obj.cover = res.tempFilePaths[0] //保存图片路径
+          that.setData({
+             info:obj
+          })
+        }
+      })
+  },
+  chooseLocation() {
+    let that = this;
+    let obj = this.data.info;
+    wx.chooseLocation({
+      success(res){
+          obj.location = {
+            name:res.name,
+            address:res.address,
+            latitude:res.latitude,
+            longitude:res.longitude
+          }
+          that.setData({
+            info:obj
+          })
+      }
+    })
   },
   checkboxChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value);
@@ -65,8 +121,50 @@ Page({
       checkboxItems: checkboxItems
     });
   },//记录舞种信息
-
-
+  addNumber(){
+    let obj = this.data.info;
+    if (obj.limit == '无限制'){
+      obj.limit = 1;
+    } else {
+      obj.limit++;
+    }
+    this.setData({
+      info:obj
+    })
+  },//加人数
+  minusNumber(){
+    let obj = this.data.info;
+    if (obj.limit-1 == '0'){
+      obj.limit = '无限制'
+    }
+    else {
+      obj.limit--;
+    }
+    this.setData({
+      info:obj
+    })
+  }, //减人数
+  changeTitle(e){
+    let obj = this.data.info;
+    obj.title = e.detail.value;
+    this.setData({
+      info:obj
+    })
+  },//改变标题触发事件
+  changeContent(e){
+    let obj = this.data.info;
+    obj.content = e.detail.value;
+    this.setData({
+      info:obj
+    })
+  },//
+  changeCondition(e){
+    let obj = this.data.info;
+    obj.condition = e.detail.value;
+    this.setData({
+      info:obj
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
