@@ -149,3 +149,4 @@
     <!-- 加入要求 -->
     <button class="nextStep" bindtap="setInfo">下一步</button>
 </view>
+
