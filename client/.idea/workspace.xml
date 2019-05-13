@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="987ad018-8740-49a9-95e1-962fcde5a470" name="Default Changelist" comment="提交了Mine">
-      <change afterPath="$PROJECT_DIR$/static/icon/blackpathen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icon/cap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icon/hulk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icon/ironman.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icon/strange.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/icon/vision.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/appointInfo/appointInfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/appointInfo/appointInfo.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/appointInfo/appointInfo.wxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/appointInfo/appointInfo.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/home-all/home-all.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/home-all/home-all.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/mine/mine.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/mine/mine.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -30,26 +21,53 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/static/icon/ironman.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/icon/fuchouzhelianmeng-yiren.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/icon/hulk.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/icon/strange.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/static/icon/blackpathen.png">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="3" column="181" selection-start-line="3" selection-start-column="181" selection-end-line="3" selection-end-column="181" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
+            <state relative-caret-position="190">
               <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
             </state>
           </provider>
@@ -58,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/mine/mine.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-101">
+            <state relative-caret-position="6631">
               <caret line="4" column="1" selection-end-line="4" selection-end-column="1" />
             </state>
           </provider>
@@ -162,6 +180,12 @@
               <item name="client" type="b2602c69:ProjectViewProjectNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="appointInfo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="dance-settings" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -254,7 +278,8 @@
       <workItem from="1556101789013" duration="3253000" />
       <workItem from="1556194212369" duration="2400000" />
       <workItem from="1557557158612" duration="4104000" />
-      <workItem from="1557584023592" duration="7311000" />
+      <workItem from="1557584023592" duration="7470000" />
+      <workItem from="1557721870618" duration="537000" />
     </task>
     <task id="LOCAL-00001" summary="修改了时间与副标题的颜色">
       <created>1555810386461</created>
@@ -284,11 +309,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557638430245</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="提交了Mine">
+      <created>1557669566277</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1557669566277</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64351000" />
+    <option name="totallyTimeSpent" value="65047000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -301,7 +333,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -315,8 +346,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3295082" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49925596" visible="true" weight="0.1852459" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50074404" side_tool="true" weight="0.04918033" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4985119" visible="true" weight="0.18360655" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5014881" side_tool="true" weight="0.18360655" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32242227" />
       <window_info anchor="bottom" id="Thumbnails" order="11" visible="true" weight="0.32888147" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -372,6 +403,20 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修改了时间与副标题的颜色" />
@@ -379,46 +424,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="提交了Mine" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/index/index.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/icon/icon.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="56" lean-forward="true" selection-start-line="2" selection-start-column="56" selection-end-line="2" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/icon/step-logo.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/icon/icon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/icon/icon.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/home.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/home_active.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/USER.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -583,23 +588,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/mine/mine.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-101">
-          <caret line="4" column="1" selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
+        <state relative-caret-position="1026">
           <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -609,6 +600,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/icon/blackpathen.png">
       <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/icon/ironman.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/icon/fuchouzhelianmeng-yiren.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/icon/hulk.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/mine/mine.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6631">
+          <caret line="4" column="1" selection-end-line="4" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/icon/strange.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="3" column="181" selection-start-line="3" selection-start-column="181" selection-end-line="3" selection-end-column="181" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
