@@ -117,7 +117,8 @@ Page({
             name:'mine',
             data:{
                 method:'updateMineInfo',
-                userInfo:this.data.userInfo
+                userInfo:this.data.userInfo,
+                openid:app.data.openid
             }
         })
         await   wx.showToast({
@@ -204,5 +205,5 @@ Page({
                 danceAge:arr
             })
         }
-    }
+    },
 })

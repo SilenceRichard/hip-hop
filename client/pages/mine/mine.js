@@ -16,7 +16,7 @@ Page({
       wx.getUserInfo({
         "open-type":'getUserInfo',
         success:function(res){
-          console.log(res) 
+          console.log(res)
         },
         complete:function(res){
           console.log(res)
@@ -76,6 +76,25 @@ Page({
     }, //页面加载完成时触发
     onShow: async function () {
         //页面出现时不断地更新数据,因为onShow周期会在onReady周期前执行一次，所以加一层判断
-
+        let result = await wx.cloud.callFunction({
+            name:"mine",
+            //传给云函数的请求参数，在云中为event.属性名
+            data: {
+                method:"getMineInfo",
+                openid:app.data.openid,
+            },
+        })//将用户数据传到云函数
+        console.log(result)//打印
+        if (result.result.status == '1'){
+            wx.showToast({
+                title:'请更新用户信息！',
+                duration:1000
+            })
+        }
+        else {
+            this.setData({
+                userInfo:result.result.res
+            })
+        }
     }
 })

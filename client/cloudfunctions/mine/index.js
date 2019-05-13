@@ -3,6 +3,8 @@ const cloud = require('wx-server-sdk')
 const runDB = require('./database')
 cloud.init()
 
+const db = cloud.database();
+const _ = db.command;
 // getMineInfo = function(){
 //   return "hhh"
 // }
@@ -28,9 +30,10 @@ exports.main = async (event, context) => {
   }
   //更新数据库
   if (event.method == 'updateMineInfo'){
-      let indexKey = event.userInfo._id;
-      delete event.userInfo._id
-      await runDB.main('update',{db:'user',indexKey:indexKey,data: event.userInfo})
+       const targetDB = db.collection('user');
+       console.log(event.userInfo)
+        delete  event.userInfo._id
+       await targetDB.where({openid:_.eq(event.openid)}).update({data:event.userInfo}) //根据查询到的_id更新
       //通过集合上的 doc 方法来获取集合中一个指定 ID 的记录的引用
       return{
         status:'0' //返回状态0 表示更新成功！
