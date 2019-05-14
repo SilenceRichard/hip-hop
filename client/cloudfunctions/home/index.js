@@ -49,5 +49,23 @@ exports.main = async (event, context) => {
         checkResult:result.data
       }
     }
+      if (event.type == 'location'){
+          let result = await runDB.main('get',{db:'dance-info',condition:{}});//获取所有
+
+      }
+      if (event.type == 'getByIndividual'){
+          let result = await db.collection('dance-info').where({identify:_.eq('person')}).get();
+          console.log(result)
+          return{
+              checkResult:result.data
+          }
+      }
+      if (event.type == 'getByOfficial'){
+          let result = await db.collection('dance-info').where({identify:_.eq('official')}).get();
+          console.log(result)
+          return{
+              checkResult:result.data
+          }
+      }
   }
 }
