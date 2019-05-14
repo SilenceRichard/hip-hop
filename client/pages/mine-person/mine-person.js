@@ -113,14 +113,15 @@ Page({
         console.log(this.data.userInfo)
         this.data.userInfo.openid = app.data.openid
         console.log('更新信息-----',this.data.userInfo)
-        await wx.cloud.callFunction({
+       let result = await wx.cloud.callFunction({
             name:'mine',
             data:{
                 method:'updateMineInfo',
-                userInfo:this.data.userInfo,
+                info:this.data.userInfo,
                 openid:app.data.openid
             }
         })
+        console.log('更新返回值---',result)
         await   wx.showToast({
                                 title: '用户信息已更新!',
                                 icon: 'success',

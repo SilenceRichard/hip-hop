@@ -1,5 +1,5 @@
 <view id="out">
-  <view class="header row">
+  <view class="header bg-gradual-blue row">
     <view class="col" style="height: 100%">
       <view class="col-4">
         <image id="head" src="{{userInfo.avatarUrl}}" bindtap="toMineInfo"></image>
