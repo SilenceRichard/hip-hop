@@ -1,22 +1,28 @@
 <view class="outer" wx:if="{{!showWelcome}}">
-    <view class="swiper">
-        <swiper
-                indicator-dots="{{indicatorDots}}"
-                autoplay="{{autoplay}}"
-                interval="{{interval}}"
-                duration="{{duration}}"
-        >
-            <block wx:for="{{imgUrls}}" wx:key="*this">
-                <swiper-item>
-                    <image src="{{item}}" class="slide-image" style='width:100%' height="150" />
-                </swiper-item>
-            </block>
-        </swiper>
-    </view>
+    <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+        <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+            <view class="swiper-item">
+                <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+                <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+            </view>
+        </swiper-item>
+    </swiper>
     <navigateV1 innerText="推荐约局" rightText="查看全部" bindtap="goToAll"></navigateV1>
-    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
-    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
-    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
-    <navigateV2 titleText="标题" innerText="副标题"></navigateV2>
+    <block wx:for="{{info}}">
+        <view class='row out1' >
+            <view class='col' style='height:100%'>
+                <view class='col-4'><image class="listImage" src="{{item.cover}}"></image></view>
+                <view class='col-8'>
+                    <text class="title" >{{item.title}}</text>
+                    <view class="col class1"  >
+                        <view class='col-10' >{{item.str}}·{{item.type}}</view>
+                        <view class='col-2' >{{item.limit}}</view>
+                    </view>
+                    <view class="innerText" style="color:#808080">{{item.time}}</view>
+                    <view class="innerText" style="color:#808080">{{item.location}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
 </view>
 <view class="{{flag?'outer welcome dh':'outer welcome dh-out'}}" wx:if="{{showWelcome}}" bindtap="enterMiniProgram"></view>

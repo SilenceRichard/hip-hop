@@ -5,135 +5,219 @@ Page({
    * 页面的初始数据
    */
   data: {
-      list:[{name:'综合',flag:false},{name:'个人',flag:false},{name:'官方',flag:false}],
-      info:[{
-              imgsrc:'../../static/home.png',
-              title:'标题',
-              innerText1:'popping',
-              innerText2:'cypher',
-              limit_now:'4',
-              limit:'10',
-              time:'2019-5-11 00:00:00',
-              location:'昌平'
-            },
-        {
-          imgsrc:'../../static/home.png',
-          title:'标题',
-          innerText1:'popping',
-          innerText2:'cypher',
-          limit_now:'4',
-          limit:'10',
-          time:'2019-5-11 00:00:00',
-          location:'昌平'
-        },
-        {
-          imgsrc:'../../static/home.png',
-          title:'标题',
-          innerText1:'popping',
-          innerText2:'cypher',
-          limit_now:'4',
-          limit:'10',
-          time:'2019-5-11 00:00:00',
-          location:'昌平'
-        },
-      ],
-      dropDownFlag:false
+    list: [{ name: '综合', flag: false }, { name: '个人', flag: false }, { name: '官方', flag: false }],
+    info: [{
+      cover: '../../static/home.png',
+      title: '标题',
+      dance_type: 'popping',
+      type: 'cypher',
+      limit: '4/10',
+      time: '2019-5-11 00:00:00',
+      location: '昌平',
+      str: ''
+    },
+    {
+      cover: '../../static/home.png',
+      title: '标题',
+      dance_type: 'popping',
+      type: 'cypher',
+      limit: '4/10',
+      time: '2019-5-11 00:00:00',
+      location: '昌平',
+      str: ''
+    },
+    {
+      cover: '../../static/home.png',
+      title: '标题',
+      dance_type: 'popping',
+      type: 'cypher',
+      limit: '4/10',
+      time: '2019-5-11 00:00:00',
+      location: '昌平',
+      str: ''
+    },
+    ],
+    dropDownFlag: false
   },
 
-  activeDropDown1(){
-      var that = this;
+
+  activeDropDown1() {
+    var that = this;
+    // console.log("程序进来啦-----")
+    that.setData({
+      dropDownFlag: false
+    }),
       wx.cloud.callFunction(
-            {
-                name:"home",
-                data:{
-                    method:"getInfo",
-                    type:"time"
-                },
-                success:function(res){
-                    console.log(res)
-                    that.setData({
-                        Info:res.result.checkResult
-                    })
-                }
-            }
-            )
-  },
-    activeDropDown2(){
-    wx.cloud.callFunction(
         {
-            name:"home",
-            data:{
-                method:"getInfo",
-                type:'location'
-            },
-            success:function(res){
-                that.setData({
-                    Info:res.result.checkResult
-                })
-            }
-        }
-    )
-},
+          name: "home",
+          data: {
+            method: "getInfo",
+            type: "time"
+          },
+          success: function (res) {
+            //后台规定参数返回形式
+            //return{
+            //checkResult: [{},{},{}]
+            // }
+            res.result.checkResult.forEach(item => {
+              item.str = ''
+              item.dance_type.forEach(val => {
+                // var a=0;
+                // if (val.checked == true && a == 0){
+                //     item.str= val.name;
+                //     a++;
+                // }
+                // else if(val.checked == true){
+                //     item.str=item.str+ ','+ val.name;
+                //     a++;
+                // }
+                if (val.checked == true) {
+                  item.str = item.str + val.name + ',';
+                }
+              })
+            })
+            res.result.checkResult.forEach(item => {
+              item.str = item.str.slice(0, -1)
+            }),
 
-  activeList(ev){
+              // this,that,傻傻分不清楚
+              that.setData({
+                info: res.result.checkResult
+              })
+            console.log(res)
+            // let obj = that.data.info;
+            // obj.imgsrc = res.imgsrc;
+            // obj.title  = res.title ;
+            // obj.innerText1 = res.innerText1;
+            // obj.innerText2 = res.innerText2;
+            // obj.limit_now  = res.limit_now;
+            // obj.limit      = res.limit;
+            // obj.time      = res.time;
+            // obj.location      = res.location;
+          }
+        }
+      )
+  },
+  activeDropDown2() {
+    var that = this;
+      console.log("程序进来啦-----")
+    that.setData({
+      dropDownFlag: false
+    })
+    wx.cloud.callFunction(
+      {
+        name: "home",
+        data: {
+          method: "getInfo",
+          type: 'location'
+        },
+        success: function (res) {
+          res.result.checkResult.forEach(item => {
+            item.str = ''
+            item.dance_type.forEach(val => {
+              if (val.checked == true) {
+                item.str = item.str + val.name + ',';
+              }
+            })
+          })
+          res.result.checkResult.forEach(item => {
+            item.str = item.str.slice(0, -1)
+          }),
+
+            that.setData({
+              info: res.result.checkResult
+            })
+          console.log(res)
+        }
+      }
+    )
+  },
+
+  activeList(ev) {
     // console.log(ev.currentTarget.dataset.item)
     // ev.currentTarget.dataset.item.flag = true;
     let arr = this.data.list;
+    var that = this;
     for (var j = 0; j < arr.length; j++) {
-       arr[j].flag = false;
+      arr[j].flag = false;
     }
     this.setData({
-      list:arr
+      list: arr
     })
-    for (var i = 0 ; i<arr.length; i++){
-      if (arr[i].name == ev.currentTarget.dataset.item.name)
-      {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].name == ev.currentTarget.dataset.item.name) {
         arr[i].flag = true;
-        this.setData({
-            list:arr
+        that.setData({
+          list: arr
         }
 
         )
       }
     }
-    if( ev.currentTarget.dataset.item.name == "综合"){
-        this.setData({
-            dropDownFlag:true
-        })
+    if (ev.currentTarget.dataset.item.name == "综合") {
+      that.setData({
+        dropDownFlag: true
+      })
     }
-    else if(ev.currentTarget.dataset.item.name == "个人"){
-        this.setData({
-            dropDownFlag:false
-        });
-        wx.cloud.callFunction({
-            name:"home",
-            data:{
-                method : 'getInfo',
-                type : 'getByIndividual'
-            },
-            success:function(res){
-                that.setData({
-                    Info :res.result.checkResult
-                })
-            }
-        })
+    else if (ev.currentTarget.dataset.item.name == "个人") {
+      that.setData({
+        dropDownFlag: false
+      });
+      wx.cloud.callFunction({
+        name: "home",
+        data: {
+          method: 'getInfo',
+          type: 'getByIndividual'
+        },
+        success: function (res) {
+          res.result.checkResult.forEach(item => {
+            item.str = ''
+            item.dance_type.forEach(val => {
+              if (val.checked == true) {
+                item.str = item.str + val.name + ',';
+              }
+            })
+          })
+          res.result.checkResult.forEach(item => {
+            item.str = item.str.slice(0, -1)
+          }),
+
+            that.setData({
+              info: res.result.checkResult
+            })
+          console.log(res)
+        }
+      })
     }
-    else{
-        this.setData({
-            dropDownFlag:false
-        });
-        wx.cloud.callFunction({
-            name:"home",
-            data:{
-                method : 'getInfo',
-                type : 'getByOfficial'
-            },
-            success:function(res){
-                that.setData({
-                    Info :res.result.checkResult
-                })
-            }
-        })
+    else {
+      that.setData({
+        dropDownFlag: false
+      });
+      wx.cloud.callFunction({
+        name: "home",
+        data: {
+          method: 'getInfo',
+          type: 'getByOfficial'
+        },
+        success: function (res) {
+          res.result.checkResult.forEach(item => {
+            item.str = ''
+            item.dance_type.forEach(val => {
+              if (val.checked == true) {
+                item.str = item.str + val.name + ',';
+              }
+            })
+          })
+          res.result.checkResult.forEach(item => {
+            item.str = item.str.slice(0, -1)
+          }),
+
+            that.setData({
+              info: res.result.checkResult
+            })
+          console.log(res)
+        }
+      })
     }
   },
 
@@ -148,34 +232,57 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-     var that = this;
+    var that = this;
     wx.cloud.callFunction(
-        {
-            name:'home',
-            data:{
-                method:'getInfo',//获取全部约局资讯
-                type:'All'
-            },
-            success:function(res){
-                //后台规定参数返回形式
-                //return{
-                     //checkResult: [{},{},{}]
-                // }
-                 that.setData({
-                     info:res.result.checkResult
-                 })
-                // let obj = that.data.info;
-                // obj.imgsrc = res.imgsrc;
-                // obj.title  = res.title ;
-                // obj.innerText1 = res.innerText1;
-                // obj.innerText2 = res.innerText2;
-                // obj.limit_now  = res.limit_now;
-                // obj.limit      = res.limit;
-                // obj.time      = res.time;
-                // obj.location      = res.location;
-            }
+      {
+        name: 'home',
+        data: {
+          method: 'getInfo',//获取全部约局资讯
+          type: 'All'
+        },
+        success: function (res) {
+          //后台规定参数返回形式
+          //return{
+          //checkResult: [{},{},{}]
+          // }
+          res.result.checkResult.forEach(item => {
+            item.str = ''
+            item.dance_type.forEach(val => {
+              // var a=0;
+              // if (val.checked == true && a == 0){
+              //     item.str= val.name;
+              //     a++;
+              // }
+              // else if(val.checked == true){
+              //     item.str=item.str+ ','+ val.name;
+              //     a++;
+              // }
+              if (val.checked == true) {
+                item.str = item.str + val.name + ',';
+              }
+            })
+          })
+          res.result.checkResult.forEach(item => {
+            item.str = item.str.slice(0, -1)
+          }),
 
-        })
+            // this,that,傻傻分不清楚
+            that.setData({
+              info: res.result.checkResult
+            })
+          console.log(res)
+          // let obj = that.data.info;
+          // obj.imgsrc = res.imgsrc;
+          // obj.title  = res.title ;
+          // obj.innerText1 = res.innerText1;
+          // obj.innerText2 = res.innerText2;
+          // obj.limit_now  = res.limit_now;
+          // obj.limit      = res.limit;
+          // obj.time      = res.time;
+          // obj.location      = res.location;
+        }
+
+      })
   },
 
   /**
@@ -220,3 +327,6 @@ Page({
 
   }
 })
+
+
+
