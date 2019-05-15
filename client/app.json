@@ -7,8 +7,8 @@
     "pages/mine-person/mine-person",
     "pages/component-demo/component-demo",
     "pages/home-all/home-all",
-    "pages/appointInfo/appointInfo",
-    "pages/applyInfo/applyInfo",
+    "pages/home-appointInfo/appointInfo",
+    "pages/home-applyInfo/applyInfo",
     "pages/dance-settings/dance-settings",
     "pages/feedback/feedback"
   ],

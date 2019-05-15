@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "list": "../../components/list/list"
-  },
-  "navigationBarTitleText": "约局详情"
-}
