@@ -1,5 +1,5 @@
-<view class="row">
-    <view class="col head">
+<view class="row bg-gradual-black">
+    <view class="col head" style="background-image: var(--gradualBlack)">
         <image src="{{userInfo.avatarUrl}}"></image>
         <text wx:if="{{edit==true}}" bindtap="changeImage" class="weui-cell_link">选择图片</text>
     </view>
@@ -102,71 +102,74 @@
     </view>
 </view>
 <view wx:if="{{edit==false}}">
-    <view class="row form">
-        <view class="col">
-            <view class="col-3 label">昵称：</view>
-            <view class="col-9">{{userInfo.nickName}}</view>
+    <view class="cu-list bg-gradual-black menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
+        <view class="cu-item bg-gradual-black">
+            <view class="content">
+                <text class=" cuIcon-friend lg text-blue"></text>
+                <text class="text-grey">昵称：</text>
+                <text>{{userInfo.nickName}}</text>
+            </view>
         </view>
-    </view>
-    <view class="row form">
-        <view class="col">
-            <view class="col-3 label">性别：</view>
-            <view class="col-9">
+        <view class="cu-item bg-gradual-black">
+            <view class="content">
+                <text class=" cuIcon-friend lg text-blue"></text>
+                <text class="text-grey">身份：</text>
+                <text>{{userInfo.role}}</text>
+            </view>
+        </view>
+        <view class="cu-item bg-gradual-black">
+            <view class="content">
+                <text class=" cuIcon-friend text-pink"></text>
+                <text class="text-grey">性别：</text>
                 <text wx:if="{{userInfo.gender=='1'}}">男生</text>
                 <text wx:elif="{{userInfo.gender=='2'}}">女生</text>
                 <text wx:else>保密</text>
             </view>
         </view>
-    </view>
-    <view class="row form">
-        <view class="col">
-            <view class="col-3 label">生日：</view>
-            <view class="col-9">{{userInfo.birthday}}</view>
+        <view class="cu-item bg-gradual-black">
+            <view class="content">
+                <text class=" cuIcon-circlefill text-grey"></text>
+                <text class="text-grey">地区：</text>
+                <text>{{userInfo.city}}</text>
+            </view>
         </view>
-    </view>
-    <view class="row form">
-        <view class="col">
-            <view class="col-3 label">地区：</view>
-            <view class="col-9">{{userInfo.city}}</view>
+        <view style="opacity: 1" class="cu-item bg-gradual-black">
+            <view class="content">
+                <text class="cuIcon-tagfill text-green"></text>
+                <text class="text-grey">舞种：</text>
+                <block wx:for="{{userInfo.danceType}}">
+                    <view wx:if="{{item.checked==true}}" class="{{item.class}}"role=""aria-label="">
+                        {{item.name}}
+                    </view>
+                </block>
+            </view>
         </view>
-    </view>
-    <view class="row form">
-        <view class="col">
-            <view class="col-3 label">身份：</view>
-            <view class="col-9">{{userInfo.role}}</view>
+        <view style="opacity: 1" class="cu-item bg-gradual-black">
+            <view class="content">
+                <text class="cuIcon-rank text-red"></text>
+                <text class="text-grey">舞龄：</text>
+                <view wx:if="{{userInfo.danceAge=='lessOne'}}" class="cu-tag round bg-green light"role=""aria-label="">
+                    少于一年
+                </view>
+                <view wx:elif="{{userInfo.danceAge=='oneToThree'}}" class="cu-tag round bg-green light"role=""aria-label="">
+                    一至三年
+                </view>
+                <view wx:else class="cu-tag round bg-green light"role=""aria-label="">
+                    三年以上
+                </view>
+            </view>
         </view>
-    </view>
-    <view class="row form">
-        <view class="col">
-            <view class="col-3 label">舞种：</view>
-            <view class="col-8">
-                <checkbox-group >
-                    <label class="checkbox" wx:for="{{userInfo.danceType}}">
-                        <checkbox value="{{item.name}}" checked="{{item.checked}}" disabled="true"/>{{item.name}}
-                    </label>
-                </checkbox-group>
+        <view class="cu-item bg-gradual-black">
+            <view class="content">
+                <text class=" cuIcon-circlefill text-grey"></text>
+                <text class="text-grey">签名：</text>
+                <text>{{userInfo.introduction}}</text>
             </view>
         </view>
     </view>
     <view class="row form">
-        <view class="col">
-            <view class="col-3 label">舞龄：</view>
-            <view class="col-9">
-                <text wx:if="{{userInfo.danceAge=='lessOne'}}">少于一年</text>
-                <text wx:elif="{{userInfo.danceAge=='oneToThree'}}">一至三年</text>
-                <text wx:else>三年以上</text>
-            </view>
-        </view>
-    </view>
-    <view class="row form">
-        <view class="col">
-            <view class="col-3 label">个人介绍：</view>
-            <view class="col-9">
-                {{userInfo.introduction}}
-            </view>
-        </view>
-    </view>
-    <view class="row form">
-        <button style="width:80%" class="weui-btn" type="primary" bindtap="editUserInfo">编辑</button>
+        <button  bindtap="editUserInfo" style="width:80%;margin: 0 0 0 10%" class="cu-btn block bg-yellow margin-tb-sm lg button-hover"role="button"aria-label=""aria-disabled="false">
+            编辑
+        </button>
     </view>
 </view>

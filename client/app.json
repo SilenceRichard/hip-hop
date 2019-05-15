@@ -19,24 +19,27 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
+    "color": "#fff",
+    "backgroundColor": "#000000",
+    "selectedColor": "#f4ea2a",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "static/home.png",
-        "selectedIconPath": "static/home_active.png"
-      },
-      {
-        "pagePath": "pages/mine/mine",
-        "text": "我的",
-        "iconPath": "static/USER.png",
-        "selectedIconPath": "static/USER_ACTIVE.png"
+        "iconPath": "static/home2_unactive.png",
+        "selectedIconPath": "static/home2.png"
       },
       {
         "pagePath": "pages/dance-settings/dance-settings",
         "text": "发起约舞",
-        "iconPath": "static/USER.png",
-        "selectedIconPath": "static/USER_ACTIVE.png"
+        "iconPath": "static/publish.png",
+        "selectedIconPath": "static/publish_active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "static/mine.png",
+        "selectedIconPath": "static/mine_active.png"
       },
       {
         "pagePath": "pages/component-demo/component-demo",

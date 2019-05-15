@@ -12,14 +12,14 @@ Page({
            {name: '女生', value: '2'}
        ],
         danceType:[
-            {name:'Hiphop',checked: false},
-            {name:'Breaking',checked: false},
-            {name:'Popping',checked: false},
-            {name:'Locking',checked: false},
-            {name:'Jazz',checked: false},
-            {name:'Weacking',checked: false},
-            {name:'Urban',checked: false},
-            {name:'其他',checked: false}
+            {name:'Hiphop',checked: false,class:'cu-tag round bg-orange light'},
+            {name:'Breaking',checked: false,class:'cu-tag round bg-olive light'},
+            {name:'Popping',checked: false,class:'cu-tag round bg-blue light'},
+            {name:'Locking',checked: false,class:'cu-tag round bg-white light'},
+            {name:'Jazz',checked: false,class:'cu-tag round  bg-yellow light'},
+            {name:'Weacking',checked: false,class:'cu-tag round bg-green light'},
+            {name:'Urban',checked: false,class:'cu-tag round bg-cyan light'},
+            {name:'其他',checked: false,class:'cu-tag round bg-purple light'}
             ], //舞种
         danceAge:[
             {name:"lessOne",value:"一年以下",checked:false},
@@ -73,6 +73,7 @@ Page({
     }, //日期改变时的相关处理
     chooseDanceType:function (e) {
         let arr =  e.detail.value; //勾选事件传递的数组
+        console.log(this.data.danceType)
         let type =  this.data.danceType; //用type记录data中的舞种
         type.forEach(item =>{
             item.checked = false;
@@ -86,6 +87,7 @@ Page({
         })
         let info = this.data.userInfo;
         info.danceType = type;
+        console.log(type)
         this.setData({
             userInfo:info,
             danceType:type
