@@ -5,6 +5,10 @@
 }
 .outterText{
   font-size:35rpx;
+ 
+}
+.innerText1{
+   margin-top: 35rpx;
 }
 .innerText{
   font-size:23rpx;
@@ -15,8 +19,9 @@
   margin: 0 0 10rpx 0;
 }
 image{
-  width:100%;
-  height:100%;
+  width:75rpx;
+  height:75rpx;
+  margin: 40rpx 36rpx 58rpx 44rpx;
 }
 .col-1{
   font-size:23rpx;

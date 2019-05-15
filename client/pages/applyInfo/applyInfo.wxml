@@ -9,6 +9,6 @@
     </view>
   </view>
 
-<textarea placeholder="输入报名申请" style='color:#b7b7b7'> </textarea>
- <button style="width:80%" class="weui-btn" type="primary">发送</button>
+<textarea placeholder="输入报名申请" style='color:#b7b7b7' value="{{info.apply}}" bindinput="changeInfo " > </textarea>
+ <button style="width:80%" class="weui-btn" type="primary"  bindtap='sendApply' >发送</button>
 </view>
