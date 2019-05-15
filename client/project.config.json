@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
@@ -53,41 +53,6 @@
 					"id": -1,
 					"name": "mine-systemInfo",
 					"pathName": "pages/mine-systemInfo/mine-systemInfo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "mine-system",
-					"pathName": "pages/mine-systemInfo/mine-systemInfo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "mine-system",
-					"pathName": "pages/applyInfo/applyInfo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "mine-system",
-					"pathName": "pages/appointInfo/appointInfo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "mine-system",
-					"pathName": "pages/applyInfo/applyInfo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "mine-system",
-					"pathName": "pages/applyInfo/applyInfo",
 					"query": "",
 					"scene": null
 				},
@@ -107,15 +72,16 @@
 				},
 				{
 					"id": -1,
-					"name": "applyInfo",
-					"pathName": "pages/applyInfo/applyInfo",
+					"name": "home-all",
+					"pathName": "pages/home-all/home-all",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "applyInfo",
-					"pathName": "pages/applyInfo/applyInfo",
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": "",
 					"scene": null
 				}
 			]
