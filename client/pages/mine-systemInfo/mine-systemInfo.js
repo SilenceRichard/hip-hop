@@ -1,8 +1,9 @@
 //index.js
 //获取应用实例
+const app = getApp();
 Page({
     toAppointInfo() {
-      wx.navigateTo({ url: '../appointInfo/appointInfo' })
+      wx.navigateTo({ url: '../home-appointInfo/appointInfo' })
     },
     data: {
       info: [{
@@ -34,11 +35,12 @@ Page({
     },
 
     onReady: function() {
-      var that = this;
+      var that = this; 
       wx.cloud.callFunction({
         name: 'mine',
         data: {
-          methed: "getSystemInfo"//获取系统通知
+          methed: "getSystemInfo",//获取系统通知
+          openid: app.data.openid,
         },
         success: function(res) {
           //后台规定参数返回形式
