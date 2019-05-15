@@ -1,33 +1,53 @@
 <view id="out">
-  <view class="header bg-gradual-blue row">
+  <view class="header row">
     <view class="col" style="height: 100%">
-      <view class="col-4">
-        <image id="head" src="{{userInfo.avatarUrl}}" bindtap="toMineInfo"></image>
+      <view class="col-3">
+        <view class="cu-avatar round lg margin-left" bindtap="toMineInfo" wx:key style="background-image:url({{userInfo.avatarUrl}})">
+          <view wx:if="{{userInfo.gender==2}}" class="cu-tag badge cuIcon-female bg-pink"></view>
+          <view wx:if="{{userInfo.gender==1}}" class="cu-tag badge cuIcon-male bg-blue"></view>
+        </view>
+        <!--<image id="head" src="{{userInfo.avatarUrl}}" bindtap="toMineInfo"></image>-->
       </view>
       <view class="col-8">
-         <view id="nickName">{{userInfo.nickName}}<image src="../../static/icon/edit.png"></image></view>
-         <view id="sex">
-           <image wx:if="{{userInfo.gender == 0}}" src="../../static/icon/girl2.png"></image>
-           <text wx:if="{{userInfo.gender == 0}}">保密</text>
-           <image wx:if="{{userInfo.gender == 1}}" src="../../static/icon/boy2.png"></image>
-           <text wx:if="{{userInfo.gender == 1}}">男生</text>
-           <image wx:if="{{userInfo.gender == 2}}" src="../../static/icon/girl2.png"></image>
-           <text wx:if="{{userInfo.gender == 2}}">女生</text>
-         </view>
-         <view id="sign">{{sign}}</view>
+         <view id="nickName" class="text-gray">{{userInfo.nickName}}</view>
+         <!--<view id="sex">-->
+           <!--<image wx:if="{{userInfo.gender == 0}}" src="../../static/icon/girl2.png"></image>-->
+           <!--<text wx:if="{{userInfo.gender == 0}}">保密</text>-->
+           <!--<image wx:if="{{userInfo.gender == 1}}" src="../../static/icon/boy2.png"></image>-->
+           <!--<text wx:if="{{userInfo.gender == 1}}">男生</text>-->
+           <!--<image wx:if="{{userInfo.gender == 2}}" src="../../static/icon/girl2.png"></image>-->
+           <!--<text wx:if="{{userInfo.gender == 2}}">女生</text>-->
+         <!--</view>-->
+         <view id="sign" class="text-gray">{{userInfo.introduction}}</view>
       </view>
     </view>
   </view>
  <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
   获取用户信息
 </button> -->
-  <view style="width: 100%" class="row">
-    <list  title="我的约局" text="查看约局" icon="../../static/icon/spiderMan.png" url="../mine-yueju/mine-yueju">
-    </list>
-    <list  title="系统通知" text="查看通知" icon="../../static/icon/NickFury.png" url="../mine-systemInfo/mine-systemInfo">
-    </list>
-    <list title="意见反馈" text="查看反馈" icon="../../static/icon/fuchouzhelianmeng-yiren.png"
-    url="../feedback/feedback">
-    </list>
+  <view style="width: 100%" class="cu-list menu row">
+    <view class="cu-item bg-gradual-black arrow">
+      <navigator class="content" hover-class="none" url="../mine-yueju/mine-yueju">
+        <text class="cuIcon-discoverfill text-green"></text>
+        <text class="text-grey">我的约局</text>
+      </navigator>
+    </view>
+    <view class="cu-item bg-gradual-black arrow">
+      <navigator class="content" hover-class="none" url="../mine-systemInfo/mine-systemInfo">
+        <text class="cuIcon-messagefill lg text-orange"></text>
+        <text class="text-grey">系统通知</text>
+      </navigator>
+    </view>
+    <view class="cu-item bg-gradual-black arrow">
+      <navigator class="content" hover-class="none" url="../feedback/feedback">
+        <text class="cuIcon-favorfill lg text-yellow"></text>
+        <text class="text-grey">意见反馈</text>
+      </navigator>
+    </view>
   </view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadingFlag}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
 </view>

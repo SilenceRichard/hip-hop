@@ -9,7 +9,8 @@ Page({
           gender:'',
           avatarUrl:''
       }, //用户信息
-      sign:'暂无签名TAT',
+        sign:'暂无签名TAT',
+        loadingFlag:false
       // openid:'',//该用户字段在数据库中存储对应的openid
     },
     getUSER(){
@@ -30,6 +31,9 @@ Page({
     onReady:async function () {
       //关于数据库的操作，使用云函数
       //   let info =  await util.getUserInfo({});//获取用户数据
+        this.setData({
+            loadingFlag:true
+        })
         let result = await wx.cloud.callFunction({
             name:"mine",
             //传给云函数的请求参数，在云中为event.属性名
@@ -38,6 +42,9 @@ Page({
                 openid:app.data.openid,
             },
         })//将用户数据传到云函数
+        this.setData({
+            loadingFlag:false
+        })
         console.log(result)//打印
         if (result.result.status == '1'){
             wx.showToast({
