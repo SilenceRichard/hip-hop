@@ -1,5 +1,5 @@
 page{
-  padding: 20rpx;
+  color: #ffffff;
 }
 .head{
   display: flex;

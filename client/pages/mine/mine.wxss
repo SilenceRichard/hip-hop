@@ -14,7 +14,6 @@
 #nickName{
   font-size: 30rpx;
   font-weight: bold;
-  color: #ffffff;
 }
 #nickName image{
   width: 30rpx;
@@ -35,7 +34,7 @@
 }
 #sign{
   font-size: 20rpx;
-  color: #ffffff;
+  margin: 20rpx 0 0 0;
 }
 /*头部信息*/
 list{

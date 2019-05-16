@@ -14,6 +14,7 @@ Page({
             time:'2019-5-11 00:00:00',
             location:'昌平',
             str:'',
+            _id:'123'
         },
             {
                 cover:'../../static/home.png',
@@ -97,50 +98,15 @@ Page({
             url: '../home-all/home-all',
         })
     },
-    onReady: function () {
-        var that = this;
-        wx.cloud.callFunction(
-            {
-                name:'home',
-                data:{
-                    method:'getNewsInfo',//获取点击率最高的五条资讯
-                },
-                success: function (res) {
-                    console.log(res)
-                    res.result.checkResult.forEach(item => {
-                        item.str = '';
-                        item.dance_type.forEach(val => {
-                            if (val.checked == true) {
-                                item.str = item.str + val.name + ',';
-                            }
-                        })
-                    })
-                    res.result.checkResult.forEach(item => {
-                        item.str = item.str.slice(0, -1)
-                    }),
+    gotoDetail(ev){
+        console.log(ev)
+      wx.navigateTo({ url: '../appointInfo/appointInfo?id='+ev.currentTarget.dataset.item._id })
+    },
 
-                        // this,that,傻傻分不清楚
-                        that.setData({
-                            info: res.result.checkResult
-                        })
-                    console.log(res)
-                }
-
-            })
-        // 注释这里使用了回调风格的写法
-        // wx.hideTabBar({
-        //   complete(res) {
-        //     setTimeout(function () {
-        //       that.setData({
-        //         showWelcome:false
-        //       })
-        //       wx.showTabBar({
-        //         complete(res) {
-        //         }
-        //       }) //显示底部导航
-        //     },2*1000)
-        //   }
-        // })
-        // 演示 wxPromise 的能力
+    onReady: async function () {
+        let result1 = await wx.cloud.callFunction({name:'home',data:{method:'getAdvertise'}});
+            this.setData({swiperList : ressult1.result.checkResult});
+        let result2 = await wx.cloud.callFunction({name:'home',data:{method:'getNewsInfo'}});
+            this.setData({info : result2.result.checkResult})
     }
 })

@@ -232,6 +232,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log("页面进来啦-------")
     var that = this;
     wx.cloud.callFunction(
       {
