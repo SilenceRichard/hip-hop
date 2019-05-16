@@ -14,7 +14,7 @@ function _next(){
     }, 20);
 }
 
-Page({
+Component({
     data: {
         progress: 0,
         disabled: false
