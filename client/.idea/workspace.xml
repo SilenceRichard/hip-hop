@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="987ad018-8740-49a9-95e1-962fcde5a470" name="Default Changelist" comment="资讯详情">
+    <list default="true" id="987ad018-8740-49a9-95e1-962fcde5a470" name="Default Changelist" comment="functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/appointInfo/appointInfo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/appointInfo/appointInfo.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/appointInfo/appointInfo.wxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/appointInfo/appointInfo.wxss" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,7 +19,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/index/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
+            <state relative-caret-position="722">
               <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -39,16 +35,14 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-342" />
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/applyInfo.wxml">
+        <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="123">
+              <caret line="33" column="8" lean-forward="true" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -129,11 +123,12 @@
         <option value="$PROJECT_DIR$/pages/applyInfo/applyInfo.js" />
         <option value="$PROJECT_DIR$/pages/home-applyInfo/applyInfo.wxml" />
         <option value="$PROJECT_DIR$/pages/home-applyInfo/applyInfo.wxss" />
+        <option value="$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="5" />
+    <option name="x" value="7" />
     <option name="y" value="10" />
     <option name="width" value="1366" />
     <option name="height" value="706" />
@@ -144,7 +139,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -190,6 +184,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -260,6 +255,8 @@
       <workItem from="1557846241558" duration="582000" />
       <workItem from="1557906016847" duration="209000" />
       <workItem from="1557911610524" duration="1801000" />
+      <workItem from="1557915759908" duration="707000" />
+      <workItem from="1558002263498" duration="391000" />
     </task>
     <task id="LOCAL-00001" summary="修改了时间与副标题的颜色">
       <created>1555810386461</created>
@@ -317,11 +314,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557846723662</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="functions">
+      <created>1557915828911</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1557915828911</updated>
+    </task>
+    <task id="LOCAL-00010" summary="functions">
+      <created>1558002650633</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1558002650633</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74715000" />
+    <option name="totallyTimeSpent" value="75813000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -333,14 +344,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="5" y="10" width="1366" height="706" extended-state="0" />
+    <frame x="7" y="10" width="1366" height="706" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18975903" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.34536082" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3444056" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -424,12 +435,10 @@
     <MESSAGE value="修改了时间与副标题的颜色" />
     <MESSAGE value="提交了Mine" />
     <MESSAGE value="资讯详情" />
-    <option name="LAST_COMMIT_MESSAGE" value="资讯详情" />
+    <MESSAGE value="functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="functions" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pages/mine-person/mine-person.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/images/icon_footer.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -559,20 +568,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/applyInfo/applyInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.js" />
+    <entry file="file://$PROJECT_DIR$/pages/applyInfo/applyInfo.js" />
     <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.wxss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6707">
@@ -587,56 +584,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="181" selection-start-line="3" selection-start-column="181" selection-end-line="3" selection-end-column="181" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/mine/mine.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="1" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/index/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.json" />
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxml" />
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxss" />
     <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/applyInfo.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/applyInfo.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#40#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/index/index.wxml">
@@ -653,15 +607,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.json">
+    <entry file="file://$PROJECT_DIR$/pages/index/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342" />
+        <state relative-caret-position="722">
+          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/mine/mine.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="1" selection-end-line="3" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/applyInfo.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
+        <state relative-caret-position="95">
+          <caret line="5" column="53" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="33" column="8" lean-forward="true" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
         </state>
       </provider>
     </entry>

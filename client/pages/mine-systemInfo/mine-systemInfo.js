@@ -37,6 +37,7 @@ Page({
     onReady: function() {
       var that = this; 
       wx.cloud.callFunction({
+        
         name: 'mine',
         data: {
           methed: "getSystemInfo",//获取系统通知
