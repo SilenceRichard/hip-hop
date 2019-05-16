@@ -1,4 +1,4 @@
-Page({
+Component({
     openSuccess: function () {
         wx.navigateTo({
             url: 'msg_success'

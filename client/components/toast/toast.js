@@ -1,4 +1,4 @@
-Page({
+Component({
     openToast: function () {
         wx.showToast({
             title: '已完成',

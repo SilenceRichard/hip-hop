@@ -1,4 +1,4 @@
-Page({
+Component({
     openConfirm: function () {
         wx.showModal({
             title: '弹窗标题',
