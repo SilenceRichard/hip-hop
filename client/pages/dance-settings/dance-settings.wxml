@@ -174,8 +174,8 @@
     <button class="nextStep" bindtap="setInfo">发起约舞</button>
 </view>
 
-<view class="cu-bar bg-white solid-bottom margin-top">
-    <view class="action">
+<view class="cu-bar bg-white solid-bottom margin-top">ffasddfas
+    <view class="action">aasdfasdfasdfasddfasdasdfasdsdfasd
         <text class="cuIcon-title text-orange"></text> 多级显示
     </view>
     <view class="action">
