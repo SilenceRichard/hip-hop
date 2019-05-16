@@ -100,13 +100,13 @@ Page({
     },
     gotoDetail(ev){
         console.log(ev)
-      wx.navigateTo({ url: '../appointInfo/appointInfo?id='+ev.currentTarget.dataset.item._id })
+      wx.navigateTo({ url: '../home-appointInfo/home-appointInfo?id='+ev.currentTarget.dataset.item._id })
     },
 
     onReady: async function () {
-        let result1 = await wx.cloud.callFunction({name:'home',data:{method:'getAdvertise'}});
-            this.setData({swiperList : ressult1.result.checkResult});
-        let result2 = await wx.cloud.callFunction({name:'home',data:{method:'getNewsInfo'}});
+        // let result1 = await wx.cloud.callFunction({name:'home',data:{method:'getAdvertise'}});console.log("result1:----", result1)
+            this.setData({swiperList : result1.result.checkResult});
+        // let result2 = await wx.cloud.callFunction({name: 'home', data: { method: 'getNewsInfo' }}); console.log("result2:----", result2)
             this.setData({info : result2.result.checkResult})
     }
 })
