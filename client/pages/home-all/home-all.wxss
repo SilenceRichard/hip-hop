@@ -1,5 +1,5 @@
 /* pages/home-all/home-all.wxss */
-,out{
+.out{
   width:100%;
   height:100%;
 }
