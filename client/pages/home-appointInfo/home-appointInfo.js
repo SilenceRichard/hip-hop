@@ -1,5 +1,8 @@
 // pages/appointInfo/appointInfo.js
 Page({
+  toApplyInfo() {
+    wx.navigateTo({ url: '../home-applyInfo/home-applyInfo' })
+  },
   data: {
     info: {
       imgsrc: '../../static/icon/hulk.png',
