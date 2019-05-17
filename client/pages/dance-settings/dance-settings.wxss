@@ -19,6 +19,9 @@
   background: red;
   display: inline-block;
 }
+ .choose{
+    background: green;
+ }
 .inner_1{
   position: absolute;
     top:280rpx;
