@@ -33,7 +33,7 @@ Page({
       name: 'home',
       data: {
         methed: "getAppointInfo",
-        info: id
+        info:id
       },
       success: function (res) {
         console.log("传回来的是--------", res)
