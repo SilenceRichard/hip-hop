@@ -104,33 +104,39 @@ Page({
     that.setData({
       dropDownFlag: false
     })
-    wx.cloud.callFunction(
-      {
-        name: "home",
-        data: {
-          method: "getInfo",
-          type: 'location'
-        },
-        success: function (res) {
-          res.result.checkResult.forEach(item => {
-            item.str = ''
-            item.dance_type.forEach(val => {
-              if (val.checked == true) {
-                item.str = item.str + val.name + ',';
-              }
-            })
-          })
-          res.result.checkResult.forEach(item => {
-            item.str = item.str.slice(0, -1)
-          }),
+    wx.getLocation({
+      success(res) {
+        console.log("获取用户纬度经度：",res.latitude,res.longitude);
+        wx.cloud.callFunction(//调用云函数
+          {
+            name: "home",
+            data: {
+              method: "getInfo",
+              type: 'location',
+              userLocation: res
+            },
+            success: function (res) {
+              res.result.checkResult.forEach(item => {
+                item.str = ''
+                item.dance_type.forEach(val => {
+                  if (val.checked == true) {
+                    item.str = item.str + val.name + ',';
+                  }
+                })
+              })
+              res.result.checkResult.forEach(item => {
+                item.str = item.str.slice(0, -1)
+              }),
 
-            that.setData({
-              info: res.result.checkResult
-            })
-          console.log(res)
-        }
+                that.setData({
+                  info: res.result.checkResult
+                })
+              console.log(res)
+            }
+          }
+        )
       }
-    )
+    })
   },
 
   activeList(ev) {
