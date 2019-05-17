@@ -3,12 +3,16 @@
   <view class="row tip"  style='color:#505050'>
     <view class="col">
       <view class='col-10 tip1'>个人信息完善度为90%（完善信息可提高报名成功率）</view>
-      <view class='col-2 tip2' bindtap='toMineInfo'> 
+      <view class='col-2 tip2' bindtap='toMineInfo'>
         <image class='edit' src="../../static/icon/pencil.png"> </image>
       </view>
     </view>
   </view>
 
-<textarea placeholder="输入报名申请" style='color:#b7b7b7' value="{{info.apply}}" bindinput="changeInfo " > </textarea>
+
+<view class='suggest_box'>
+    <textarea class='suggest_text' bindinput="changeInfo" bindinput="bindText" maxlength='200' placeholder='输入报名申请' style='color:#b7b7b7' placeholder-class='sug_p' value="{{info.apply}}" ></textarea>
+    <text>{{t_length}}/200</text> 
+  </view>
  <button style="width:80%" class="weui-btn" type="primary"  bindtap='sendApply' >发送</button>
 </view>

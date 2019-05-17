@@ -1,66 +1,46 @@
-// pages/home-appointInfo/home-appointInfo.js
+// pages/appointInfo/appointInfo.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
+  toApplyInfo() {
+    wx.navigateTo({ url: '../home-applyInfo/home-applyInfo' })
+  },
   data: {
-
+    info: {
+      imgsrc: '../../static/icon/hulk.png',
+      title: '标题',
+      innerText1: 'popping',
+      innerText2: 'battle',
+      time: '2019 5 12',
+      limit_now: '4',
+      limit: '10',
+      activeInfo: '我要好好跳舞',
+      joinInfo: '你能好好跳舞吗',
+      activeTime: '2019 5 12',
+      activeLocation: '北京邮电高中',
+      head: '../../static/icon/strange.png',
+      name: '我叫王大可',
+      id: ''
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad(info) {
+    console.log("参数传进来了------", info)
+    this.setData({
+      id: info.id
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    var that = this;
+    wx.cloud.callFunction({
+      name: 'home',
+      data: {
+        methed: "getAppointInfo",
+        info:id
+      },
+      success: function (res) {
+        console.log("传回来的是--------", res)
+        that.setData({
+          info: res.result.checkResult
+        })
+      }
+    })
   }
 })
