@@ -6,8 +6,9 @@ cloud.init()
 const db = cloud.database();
 const _ = db.command;
 
-
 exports.main = async (event, context) => {
+
+  //时间参数
   const date = new Date();
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -15,6 +16,7 @@ exports.main = async (event, context) => {
   const hour = date.getHours()
   const minute = date.getMinutes()
   const second = date.getSeconds()
+
     if(event.method=="getInfo") {
         if (event.type == 'All'){
             let result = await runDB.main('get',{db:'dance-info',condition:{}});
@@ -73,6 +75,45 @@ exports.main = async (event, context) => {
                 checkResult:result.data
             }
         }
+        if (event.type =='getAdvertise'){
+          let result = await runDB.main('get', { db: 'advertise', condition: {} });
+          return {
+            checkResult: result.data
+          }
+        }//获取广告
+        if (event.type == 'getNewsInfo') {
+          let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
+          return {
+            checkResult: result.data
+          }
+        }//查找到的最热的五条（未完成）
+        if (event.type == 'keyword') {
+          let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
+          return {
+            checkResult: result.data
+          }
+      }//根据keyword查找到的全部资讯（未完成）
+        if (event.type == 'searchId') {
+          let result = await db.collection('dance-info').where({_id: _.eq(event.info) }).get();
+          console.log(result);
+          return {
+            checkResult: result.data
+          }
+      }//根据_id查找到的约局详情
+        if (event.type == 'hot') {
+          let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
+          return {
+            checkResult: result.data
+          }
+      }//热门搜索标签（未完成）
+        if (event.type == 'history') {
+          let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
+          return {
+            checkResult: result.data
+          }
+      }//该用户的历史搜索记录标签（未完成）
+
+
     }
 
 // 云函数入口函数
