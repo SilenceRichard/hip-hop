@@ -17,6 +17,28 @@ exports.main = async (event, context) => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
+    if(event.method=="sendInfo"){
+        {
+            var targetDB = db.collection('dance-apply')
+            let obj = {
+                _openid: event.openid,
+                info: event.info,
+                dance_id: event.info.id,
+                state: '1' //‘0’通过 ‘1’审核中 ，‘2’未通过
+            }
+            let res = await targetDB.add(
+                {data: obj}
+            )
+             targetDB =db.collection('dance-info');
+             await  targetDB.doc(event.info.id).update(
+                 {data:{userOpenID:_.push(event.openid)}}
+                 );
+            return {
+                status: res2
+            }
+        }
+    }
+
     if(event.method=="getInfo") {
         if (event.type == 'All'){
             let result = await runDB.main('get',{db:'dance-info',condition:{}});
