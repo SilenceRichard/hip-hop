@@ -3,7 +3,7 @@
 const app = getApp();
 Page({
     toAppointInfo() {
-      wx.navigateTo({ url: '../home-appointInfo/appointInfo' })
+      wx.navigateTo({ url: '../home-appointInfo/home-appointInfo' })
     },
     data: {
       info: [{

@@ -1,5 +1,8 @@
 // pages/appointInfo/appointInfo.js
 Page({
+  toApplyInfo() {
+    wx.navigateTo({ url: '../home-applyInfo/home-applyInfo' })
+  },
   data: {
     info: {
       imgsrc: '../../static/icon/hulk.png',
@@ -30,7 +33,7 @@ Page({
       name: 'home',
       data: {
         methed: "getAppointInfo",
-        info: id
+        info:id
       },
       success: function (res) {
         console.log("传回来的是--------", res)
