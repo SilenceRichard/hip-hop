@@ -60,7 +60,7 @@ exports.main = async (event, context) => {
           return {
             checkResult: result.data
           }
-        }//（未完成)
+        }//（未完成，有BUG)
         if (event.type == 'getByIndividual'){
             let result = await db.collection('dance-info').where({identify:_.eq('person')}).get();
             console.log(result)
@@ -89,15 +89,62 @@ exports.main = async (event, context) => {
           }
         }//查找到的最热的五条
         if (event.type == 'keyword') {
-          let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
+
+          db.collection('user').doc(event.openid).update({
+            data: {
+              history: _.push([event.info])
+            }
+          })//存储用户的搜索历史
+
+          let searchInfo = event.info.toLowerCase();
+          let result = await db.collection('dance-info').where({}).get();//获取
+          let a =result.data.map(item=>{
+              item.dance_type_search = [];
+              item.dance_type.forEach(val =>{
+                if (val.checked){
+                   item.dance_type_search.push(val.name.toLowerCase()) 
+                }
+              })
+              item.location_search = item.location.name.toLowerCase();
+              return item
+          })
+          let result0=[];
+          a.forEach(item=>{
+             for (i in item)
+             {
+               if (i ==='dance_type_search'||i==='location_search'){
+                 if (JSON.stringify(item[i]).indexOf(searchInfo)!=-1){
+                    result0.push(item)
+                 }
+               }
+             }
+          })
+          // let result1 = [];
+          // result0.forEach(item=>{
+          //   if (item.flag==true) result1.push(item)
+          // })
           return {
-            checkResult: result.data
+            checkResult:result0
           }
-        }//根据keyword查找到的全部资讯（未完成)
+        }//搜索
         if (event.type == 'hot') {
-          let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
+          let result = await runDB.main('get', { db: 'user', condition: {} });//获取全部
+          let worddata = [];
+          for (var i = 0; i <= result.data.length-1;i++){
+            for (var j = 0; j <= result.data[i].history.length - 1; j++) {
+              for (var k = 0, flag = 0; k <= worddata.length - 1; k++){
+                if (worddata[k] == result.data[i].history[j]){
+                  flag=1;
+                  worddata[k].times ++;
+                }
+              }
+              if (flag == 0){
+                worddata.push = {word:result.data[i].history[j], times: 0 };
+              }
+            }
+          }
           return {
-            checkResult: result.data
+            checkResult: worddata
           }
         }//热门搜索标签（未完成）
         if (event.type == 'history') {
