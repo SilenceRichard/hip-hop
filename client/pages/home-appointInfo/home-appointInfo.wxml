@@ -42,7 +42,7 @@
             <view class="col-7" style='color:#ffffff'>{{info.name}}</view>
         </view>
     </view>
-    <button style="width:80%" class="weui-btn" bindtap='toApplyInfo'>报名</button>
+    <button style="width:80%" class="weui-btn">报名</button>
 
 
 </view>
