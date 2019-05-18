@@ -21,7 +21,7 @@ Page({
     onLoad(info){
         console.log("参数传进来了------",info)
         this.setData({
-            id:info._id
+            id:info.id
         })
     },
     onReady: function () {
