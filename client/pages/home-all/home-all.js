@@ -1,4 +1,5 @@
 // pages/home-all/home-all.js
+const app = getApp();
 Page({
 
   /**
@@ -167,7 +168,8 @@ Page({
         name: "home",
         data: {
           method: 'getInfo',
-          type: 'getByIndividual'
+          type: 'individual',
+          location: app.data.location
         },
         success: function (res) {
           res.result.checkResult.forEach(item => {
@@ -197,7 +199,7 @@ Page({
         name: "home",
         data: {
           method: 'getInfo',
-          type: 'getByOfficial'
+          type: 'official'
         },
         success: function (res) {
           res.result.checkResult.forEach(item => {
@@ -219,6 +221,11 @@ Page({
         }
       })
     }
+  },
+
+  goToDetail(ev){
+    console.log("这是ev---------",ev)
+    wx.navigateTo({url:"../home-appointInfo/home-appointInfo?_id="+ev.currentTarget.dataset.item._id})
   },
 
   /**

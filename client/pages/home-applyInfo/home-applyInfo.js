@@ -1,4 +1,4 @@
-
+const app = getApp();
 Page({
   toMineInfo() {
     wx.navigateTo({ url: '../mine-person/mine-person' })
