@@ -1,12 +1,59 @@
 <!--pages/home-all/home-all.wxml-->
 
+<!--pages/home-searchInfo/home-searchInfo.wxml-->
+<view class="out" wx:if="{{searchFlag==true}}">
+    <view class="box">
 
-<view class="out">
+        <view class="cu-bar search bg-gradualblack">
+            <text class="cuIcon-back lg text-gray" bindtap="Back"></text>
+            <view class="search-form round">
+                <text class="cuIcon-search"></text>
+                <input type="text" placeholder="搜索标题、舞种、地点、发起人" bindinput="inputKeyword" value="{{keyword}}"></input>
+            </view>
+            <view class="action">
+                <button class="cu-btn bg-yellow shadow-blur round" bindtap="search">搜索</button>
+            </view>
+        </view>
+        </view>
+
+    <view class="action">
+        <text class="cuIcon-title text-blue"></text>热门搜索
+    </view>
+
+
+        <view class="padding solid-bottom"  bindtap="clickTag">
+            <block wx:for="{{hotList}}">
+            <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
+            </block>
+        </view>
+
+
+
+    <view class="action">
+        <text class="cuIcon-title text-blue"></text>历史搜索
+    </view>
+
+<!--    循环写在block里-->
+
+        <view class="padding solid-bottom" >
+            <block wx:for="{{historyList}}">
+            <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
+            </block>
+        </view>
+
+
+
+</view>
+
+
+
+
+<view class="out" wx:if="{{searchFlag == false}}">
     <view class="box" >
         <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">
             <view class="search-form round">
                 <text class="cuIcon-search"></text>
-                <input type="text" placeholder="搜索关键字" confirm-type="search" bindtap="../home-searchInfo"></input>
+                <input type="text" placeholder="搜索关键字" bindtap="activeSearch"></input>
             </view>
             <view class="action">
                 <text>广州</text>
@@ -44,7 +91,7 @@
                         <view class='col-2' >{{item.limit}}</view>
                     </view>
                     <view class="innerText" style="color:#808080">{{item.time}}</view>
-                    <view class="innerText" style="color:#808080">{{item.location}}</view>
+                    <view class="innerText" style="color:#808080">{{item.location.name}}</view>
                 </view>
             </view>
         </view>

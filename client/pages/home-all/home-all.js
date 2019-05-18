@@ -1,4 +1,6 @@
 // pages/home-all/home-all.js
+import util from '../../utils/util'
+import regeneratorRuntime from '../../utils/wxPromise.min.js'
 const app = getApp();
 Page({
 
@@ -14,7 +16,7 @@ Page({
       type: 'cypher',
       limit: '4/10',
       time: '2019-5-11 00:00:00',
-      location: '昌平',
+      location:'',
       str: ''
     },
     {
@@ -38,9 +40,63 @@ Page({
       str: ''
     },
     ],
-    dropDownFlag: false
+    hotList:['111','222','333','111111','111111'],
+    historyList:['111','222','333','111111','111111'],
+    keyward:'',
+    dropDownFlag: false,
+    searchFlag:false
+  },
+  Back(){
+    this.setData({
+      searchFlag : false
+    })
   },
 
+  clickTag(ev){
+    console.log("-------------",ev)
+    this.setData({
+      keyword : ev.currentTarget.dataset.item
+    })
+    console.log("此时搜索的keyword------",this.data.keyword)
+  },
+
+  inputKeyword(ev){
+    console.log(ev)
+    this.setData({
+      keyword : ev.detail.value
+    })
+    console.log(this.data.keyword)
+  },
+
+  search() {
+    this.setData({
+      searchFlag: false
+    })
+    wx.cloud.callFunction({
+      name:"home",
+      data:{
+        method:"getInfo",
+        type:"keyword",
+        info:this.data.keyword,
+        openid:app.data.openid
+      },
+      success(res){
+        console.log("搜索关键字返回的页面-----",res)
+      }
+    })
+  },
+
+  activeSearch:async function(){
+    this.setData({
+      searchFlag : true
+    })
+    let res1 = wx.cloud.callFunction({name:"home", data:{method:"SearchTag", type:"hot"},openid:app.data.openid});
+    console.log("返回热门搜索-------------",res1);
+    this.setData({hotList : res1.result.checkResult});
+    let res2 = wx.cloud.callFunction({name:"home", data:{method:"SearchTag", type:"history"},openid:app.data.openid});
+    console.log("返回历史搜索-------------",res2);
+    this.setData({historyList : res2.result.checkResult});
+  },
 
   activeDropDown1() {
     var that = this;
@@ -85,7 +141,7 @@ Page({
               that.setData({
                 info: res.result.checkResult
               })
-            console.log(res)
+
             // let obj = that.data.info;
             // obj.imgsrc = res.imgsrc;
             // obj.title  = res.title ;
@@ -100,8 +156,8 @@ Page({
       )
   },
   activeDropDown2() {
+    //console.log("程序进来了");
     var that = this;
-      console.log("程序进来啦-----")
     that.setData({
       dropDownFlag: false
     })
@@ -113,6 +169,7 @@ Page({
           type: 'location'
         },
         success: function (res) {
+          console.log("按距离排序成功-》",res)
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
@@ -225,7 +282,7 @@ Page({
 
   goToDetail(ev){
     console.log("这是ev---------",ev)
-    wx.navigateTo({url:"../home-appointInfo/home-appointInfo?_id="+ev.currentTarget.dataset.item._id})
+    wx.navigateTo({url:"../home-appointInfo/home-appointInfo?id="+ev.currentTarget.dataset.item._id})
   },
 
   /**
