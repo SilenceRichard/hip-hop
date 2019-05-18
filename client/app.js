@@ -9,7 +9,8 @@ App({
     env: 'suki-749826' //云环境ID
   },
   data:{
-    openid:'' //当前用户的openid
+    openid:'' ,//当前用户的openid
+    location:''
   },
   onLaunch: async function () {
     var that = this
@@ -38,5 +39,31 @@ App({
       // })
       that.data.openid = res.result.openid;
 
+         wx.getSetting({
+             success(res){
+                 if (!res.authSetting['scope.userLocation']) {
+                     wx.authorize({
+                         scope: 'scope.userLocation',
+                         success() {
+                             // 用户已经同意小程序获取位置，后续调用 wx.getLocation 接口不会弹窗询问
+                             wx.getLocation({
+                                 success(res1){
+                                     // console.log("这是res1--------",res1)
+                                     // location = res1.data.location;
+                                     that.data.location = res1
+                                     console.log("这是res1--------",res1)
+                                     console.log("本地的数据是-----",that.data.location)
+                                 }
+                             })
+                         }
+                     })
+                 }
+             }
+         })
+
+
+
+
+      // that.data.location = res.result
   }
 })
