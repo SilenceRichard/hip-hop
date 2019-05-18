@@ -35,7 +35,7 @@ image{
     width:100%;
     border-bottom: 2rpx solid  #999999;
     font-size: 30rpx;
-    margin-left:15rpx;
+    margin-left:20rpx;
 }
 .join{
   font-size: 40rpx;
@@ -44,7 +44,7 @@ image{
     height:150rpx;
     width:100%;
     font-size: 30rpx;
-    margin-left: 15rpx;
+    margin-left: 20rpx;
 }
 .picture{
     border: 1rpx solid #ffc300;
@@ -53,11 +53,12 @@ image{
     align-items: center;
     margin-left: 35rpx;
 }
-.head{
-    border-radius: 50%;
-}
 .name{
-    margin-top: 40rpx;
+    margin-top: 30rpx;
+    margin-left: 20rpx;
+}
+.head{
+    margin-top:20rpx;
 }
 button{
     background:#ffc300;

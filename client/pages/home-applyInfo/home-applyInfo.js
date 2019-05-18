@@ -28,9 +28,11 @@ Page({
       }
     })
   },
-  changeInfo(){
+  changeInfo(e){
+    let obj = this.data.info;
+    obj.apply = e.detail.value;
     this.setData({
-      info: apply
+      info: obj
     })
   },
   bindText: function (e) {
