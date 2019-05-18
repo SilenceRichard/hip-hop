@@ -29,9 +29,9 @@ exports.main = async (event, context) => {
             n = n.toString()
             return n[1] ? n : '0' + n
           }
-          let now = [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+          let now = [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');//获取时间
           const targetDB = db.collection('dance-info');
-          let result = await await targetDB.orderBy('time', 'asc').get();//获取
+          let result = await targetDB.orderBy('time', 'asc').get();//获取
           for (var i = 0; i < result.data.length-1; i++) {//去掉过时的
             if(result.data[i].time<now){
               result.data.splice(i,1); 
@@ -56,11 +56,11 @@ exports.main = async (event, context) => {
                   }
                 }
               }
-          console.log(result);
+          console.log("结果：",result);
           return {
             checkResult: result.data
           }
-        }
+        }//（未完成)
         if (event.type == 'getByIndividual'){
             let result = await db.collection('dance-info').where({identify:_.eq('person')}).get();
             console.log(result)
@@ -82,40 +82,42 @@ exports.main = async (event, context) => {
           }
         }//获取广告
         if (event.type == 'getNewsInfo') {
-          let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
+          const targetDB = db.collection('dance-info');
+          let result = await targetDB.orderBy('clicktime', 'desc').get();//获取
           return {
             checkResult: result.data
           }
-        }//查找到的最热的五条（未完成）
+        }//查找到的最热的五条
         if (event.type == 'keyword') {
           let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
           return {
             checkResult: result.data
           }
-      }//根据keyword查找到的全部资讯（未完成）
-        if (event.type == 'searchId') {
-          let result = await db.collection('dance-info').where({_id: _.eq(event.info) }).get();
-          console.log(result);
-          return {
-            checkResult: result.data
-          }
-      }//根据_id查找到的约局详情
+        }//根据keyword查找到的全部资讯（未完成)
         if (event.type == 'hot') {
           let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
           return {
             checkResult: result.data
           }
-      }//热门搜索标签（未完成）
+        }//热门搜索标签（未完成）
         if (event.type == 'history') {
-          let result = await runDB.main('get', { db: 'dance-info', condition: {} });//获取全部
+          let result = await db.collection('user').where({ _openid: event.openid}).get();
+          console.log(result.data[0].history);
           return {
-            checkResult: result.data
+            checkResult: result.data[0].history
           }
-      }//该用户的历史搜索记录标签（未完成）
-
-
+        }//该用户的历史搜索记录标签
     }
-
-// 云函数入口函数
-
+    if (event.method == "getAppointInfo") {
+      let result = await db.collection('dance-info').where({ _id: _.eq(event.info) }).get();
+      db.collection('dance-info').doc(event.info).update({
+        data: {
+          clicktime: _.inc(1)
+        }
+      })
+      console.log(result);
+      return {
+        checkResult: result.data
+      }
+    }//根据_id查找到的约局详情
 }
