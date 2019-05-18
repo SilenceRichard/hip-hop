@@ -10,7 +10,6 @@
     "pages/home-appointInfo/home-appointInfo",
     "pages/home-applyInfo/home-applyInfo",
     "pages/dance-settings/dance-settings",
-    "pages/feedback/feedback",
     "pages/home-searchInfo/home-searchInfo"
   ],
   "window": {
