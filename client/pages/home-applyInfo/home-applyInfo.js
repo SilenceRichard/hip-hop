@@ -5,7 +5,14 @@ Page({
   },
   data: {
     t_length: 0,
-    info:{}
+    info:{},
+    id:''
+  },
+  onLoad(info){
+      console.log("传过来-----",info)
+      this.setData({
+        id:info.id
+      })
   },
 
   sendApply(){
@@ -21,9 +28,11 @@ Page({
       }
     })
   },
-  changeInfo(){
+  changeInfo(e){
+    let obj = this.data.info;
+    obj.apply = e.detail.value;
     this.setData({
-      info: apply
+      info: obj
     })
   },
   bindText: function (e) {

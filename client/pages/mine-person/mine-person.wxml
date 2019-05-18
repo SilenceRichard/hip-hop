@@ -1,4 +1,4 @@
-<view class="row bg-gradual-black">
+  <view class="row bg-gradual-black">
     <view class="col head" style="background-image: var(--gradualBlack)">
         <image src="{{userInfo.avatarUrl}}"></image>
         <text wx:if="{{edit==true}}" bindtap="changeImage" class="weui-cell_link">选择图片</text>
