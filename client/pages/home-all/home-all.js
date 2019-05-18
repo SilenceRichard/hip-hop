@@ -225,7 +225,7 @@ Page({
 
   goToDetail(ev){
     console.log("这是ev---------",ev)
-    wx.navigateTo({url:"../home-appointInfo/home-appointInfo?_id="+ev.currentTarget.dataset.item._id})
+    wx.navigateTo({url:"../home-appointInfo/home-appointInfo?id="+ev.currentTarget.dataset.item._id})
   },
 
   /**
