@@ -1,11 +1,13 @@
-// pages/appointInfo/appointInfo.js
+
 Page({
     data: {
         info: {
             imgsrc: '../../static/icon/hulk.png',
             title: '标题',
             innerText1: 'popping',
-            innerText2: 'battle',
+            innerText2: '个人',
+            innerText12:"popping",
+            innerText13:"cypher",
             time: '2019 5 12',
             limit_now: '4',
             limit: '10',
@@ -18,12 +20,20 @@ Page({
             id:''
         }
     },
+
     onLoad(info){
         console.log("参数传进来了------",info)
         this.setData({
-            id:info._id
+          "info.id":info.id
         })
+      //  已解决 console.log("data.info------",this.data.info)
     },
+
+    toApplyInfo(){
+      let obj = this.data.info.id;
+      wx.navigateTo({ url: '../home-applyInfo/home-applyInfo?id='+obj})
+    },
+
     onReady: function () {
         var that = this;
         wx.cloud.callFunction({

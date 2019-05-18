@@ -2,35 +2,32 @@
 <view class="out">
     <view  class='row outer'>
         <view class='col' style='height:100%'>
-            <view class='col-5'><image src="{{info.imgsrc}}"></image></view>
+            <view class='col-5'><image class="front" src="{{info.imgsrc}}"></image></view>
             <view class='col-7'>
                 <text class="title">{{title}}</text>
                 <view class="outerText" style='color:#ffffff'>{{info.innerText1}}</view>
-                <view class="innerText1" style='color:#ffffff'>{{info.innerText2}}</view>
-                <view class="innerText2" style='color:#ffffff'>{{info.time}}</view>
-                <view class="innerText3" style='color:#ffffff'>{{info.limit_now}}/{{info.limit}}</view>
+                <view class="innerText1" style='color:#ffffff'>{{info.innerText2}}|{{info.innerText12}}|{{info.innerText13}}</view>
+                <view class="innerText2" style='color:#ffffff'>发布时间：{{info.time}}</view>
+                <view class="innerText3" style='color:#ffffff'>人数限制：{{info.limit_now}}/{{info.limit}}</view>
             </view>
         </view>
     </view>
-    <view class="col active">
-        <view class="col-1"><image src="../../static/icon/spiderMan.png"></image></view>
-        <view class="col-11" style='color:#ffffff'>活动内容</view>
-    </view>
-    <view class="activeInfo" style='color:#ffffff'>{{info.activeInfo}}</view>
+
+    <view class="activeInfo" style='color:#a6a6a6'>{{info.activeInfo}}</view>
     <view class="col join">
         <view class="col-1"><image src="../../static/icon/blackpathen.png"></image></view>
         <view class="col-11" style='color:#ffffff'>加入要求</view>
     </view>
-    <view class="joinInfo" style='color:#ffffff'>{{info.joinInfo}}</view>
+    <view class="joinInfo" style='color:#a6a6a6'>{{info.joinInfo}}</view>
     <view class="col time">
         <view class="col-1"><image src="../../static/icon/ironman.png"></image></view>
         <view class="col-4" style='color:#ffffff'>活动时间</view>
-        <view class="col-7" style='color:#ffffff'>{{info.activeTime}}</view>
+        <view class="col-7" style='color:#a6a6a6'>{{info.activeDate}}|{{info.activeTime}}</view>
     </view>
     <view class="col location">
         <view class="col-1"><image src="../../static/icon/cap.png"></image></view>
         <view class="col-4" style='color:#ffffff'>活动地点</view>
-        <view class="col-7" style='color:#fffffff'>{{info.activeLocation}}</view>
+        <view class="col-7" style='color:#a6a6a6'>{{info.activeLocation}}</view>
     </view>
     <view class="col indivdual">
         <view class="col-1"><image src="../../static/icon/vision.png"></image></view>
@@ -38,11 +35,11 @@
     </view>
     <view class="row picture">
         <view class="col" style='height:100%'>
-            <view class="col-5"><image src="{{info.head}}"style="height: 220rpx;width: 220rpx;"></image></view>
-            <view class="col-7" style='color:#ffffff'>{{info.name}}</view>
+            <view class="col-3 head"><image src="{{info.head}}"style="height: 170rpx;width: 170rpx;"></image></view>
+            <view class="col-9 name" style='color:#ffffff'>{{info.name}}</view>
         </view>
     </view>
-    <button style="width:80%" class="weui-btn">报名</button>
+    <button style="width:80%" class="weui-btn" bindtap='toApplyInfo' >报名</button>
 
 
 </view>

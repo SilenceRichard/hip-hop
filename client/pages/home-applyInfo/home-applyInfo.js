@@ -5,7 +5,14 @@ Page({
   },
   data: {
     t_length: 0,
-    info:{}
+    info:{},
+    id:''
+  },
+  onLoad(info){
+      console.log("传过来-----",info)
+      this.setData({
+        id:info.id
+      })
   },
 
   sendApply(){

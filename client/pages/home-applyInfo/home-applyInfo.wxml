@@ -14,5 +14,5 @@
     <textarea class='suggest_text' bindinput="changeInfo" bindinput="bindText" maxlength='200' placeholder='输入报名申请' style='color:#b7b7b7' placeholder-class='sug_p' value="{{info.apply}}" ></textarea>
     <text>{{t_length}}/200</text> 
   </view>
- <button style="width:80%" class="weui-btn" type="primary"  bindtap='sendApply' >发送</button>
+ <button style="width:80%" class="weui-btn" bindtap='sendApply' >发送</button>
 </view>
