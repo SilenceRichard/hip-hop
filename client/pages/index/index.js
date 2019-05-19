@@ -41,23 +41,23 @@ Page({
         swiperList: [{
             id: 0,
             type: 'image',
-            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
+            //url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
         }, {
             id: 1,
             type: 'image',
-            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
+            //url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg',
         }, {
             id: 2,
             type: 'image',
-            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
+            //url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg'
         }, {
             id: 3,
             type: 'image',
-            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
+            //url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg'
         }, {
             id: 4,
             type: 'image',
-            url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
+            //url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg'
         }
         ],
         indicatorDots: true,
@@ -104,9 +104,21 @@ Page({
     },
 
     onReady: async function () {
-        let result1 = await wx.cloud.callFunction({name:'home',data:{method:'getAdvertise'}});console.log("result1:----", result1)
-            this.setData({swiperList : result1.result.checkResult});
-        let result2 = await wx.cloud.callFunction({name: 'home', data: { method: 'getNewsInfo' }}); console.log("result2:----", result2)
-            this.setData({info : result2.result.checkResult})
+        console.log("进入onReady");
+        let that =this;
+      let result1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise'}});             
+      //console.log("result1.result.checkResult[0].image:", result1.result.checkResult[0].image);
+      //console.log("this.data.swiperList[0].url:", this.data.swiperList[0].url);
+      that.setData({
+         'swiperList[0].url': result1.result.checkResult[0].image,
+         'swiperList[1].url': result1.result.checkResult[1].image,
+         'swiperList[2].url': result1.result.checkResult[2].image,
+         'swiperList[3].url': result1.result.checkResult[3].image,
+         'swiperList[4].url': result1.result.checkResult[4].image,
+      });
+
+      let result2 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type:'getNewsInfo'}});
+      console.log("result2:----", result2);
+      this.setData({info : result2.result.checkResult});
     }
 })

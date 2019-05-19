@@ -12,6 +12,7 @@ Page({
         longtitude:'',
         contact:'',
       },
+      clicktime:0,
       identify:'',
       type:'',
       cover:'',

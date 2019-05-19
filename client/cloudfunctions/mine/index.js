@@ -42,6 +42,19 @@ exports.main = async (event, context) => {
       }
     }
   }
+  if (event.method == 'getUserInfo') {
+    console.log("请求参数：", event)
+    let checkResult = await targetDB.where({ _openid: _.eq(event.openid) }).get();
+    console.log("查询结果：", checkResult)
+    if (checkResult.data.length == 0) {
+      console.log("查找不到约舞发起者账户");
+    } else {
+      let res = checkResult.data[0]
+      return {
+        res
+      }
+    }
+  }
   //更新数据库
   if (event.method == 'updateMineInfo'){
        const targetDB = db.collection('user');

@@ -27,6 +27,9 @@ page{
   justify-content:flex-start;
   font-size: 27rpx;
 }
+button{
+  background:#ffc300;
+}
 input{
   border-bottom:1px solid #ccc;
   width:80%;
