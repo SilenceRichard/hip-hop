@@ -79,12 +79,14 @@ exports.main = async (event, context) => {
       }
   }
   if(event.method == 'exam'){
+      console.log("参数",event)
       const targetDB = db.collection('dance-info');
       let  allMy = await  targetDB.doc(event.id).get();
-           let a = allMy.data[0].applicant.forEach(item =>{
+          let a=allMy.data.applicant.map(item =>{
                if (item._openid === event.checkedId){
                    item.state = event.state
                }
+               return item
            })
            await  targetDB.doc(event.id).update({data:{
                     applicant:a
@@ -101,42 +103,45 @@ exports.main = async (event, context) => {
         var checkedApply = [];
         var checkedApply2 = [];
         var date0 = new Date()
-        var time0 = formatTime(date0)
+        var time0 = formatTime(date0)//当前时间
         let Apply = await targetDB.where()
             .get()
-        console.log(Apply.data)
         Apply.data.forEach((item)=>{
-            if(item.openid == event.openid){
-                console.log(item.time)
-                if(item.applicant.length==item.limit&&time0>item.time) {
-                    myTeamedDance.push(item);
+            if(item.openid == event.openid) {
+                    let t = 0;
+                    item.applicant.forEach(val => {
+                        if (val.state == '0') t++
+                    })
+                    if (t == item.limit && time0<item.time) {
+                        myTeamedDance.push(item);
                     }
-                item.applicant.forEach(val=>{
-                    if(val.time<=time0&&item.applicant.data.length<=item.limit){
-                        myUpTimeDance.push(item)
-                    }
-                    if(val.state == '1'){
-                        uncheckedApply.push(val)
+                    item.applicant.forEach(val => {
+                        if (item.time <= time0 && t<= item.limit) {
+                            myUpTimeDance.push(item)
+                        }
+                        if (val.state == '1'&&time0<=item.time) {
+                            uncheckedApply.push(val)
+                        }
+                    })
+                }
+                item.applicant.forEach((val) => {
+                    if (val._openid == event.openid){
+                        if (val.state == "0") {
+                            checkedApply.push(item)
+                        }
+                        if (val.state == "2") {
+                            checkedApply2.push(item)
+                        }
                     }
                 })
-                }
-            item.applicant.forEach((val)=> {
-                if (val._openid == event.openid){
-                    if(val.state == "0"){
-                        checkedApply.push(item)
-                    }
-                    if(val.state == "2"){
-                        checkedApply2.push(item)
-                    }
-                }
-            })
+
         })
         return {
-            myTeamedDance:myTeamedDance,//我发起的组队成功的约舞
-            myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞
-            uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息
-            checkedApply:checkedApply,//我参加已通过的
-            checkedApply2:checkedApply2//未通过的
+            myTeamedDance:myTeamedDance,//我发起的组队成功的约舞 xt
+            myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
+            uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
+            checkedApply:checkedApply,//我参加已通过的 hd
+            checkedApply2:checkedApply2//未通过的 hd
         }
     }
   }
