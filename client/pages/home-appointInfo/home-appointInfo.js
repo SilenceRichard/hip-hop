@@ -65,7 +65,7 @@ Page({
   hideModal(e) {
     this.setData({
       showModalFlag:false
-    })
+      })
   },
   ChooseCheckbox(e) {
     let items = this.data.checkbox;
@@ -88,7 +88,6 @@ Page({
             name: 'home',
             data: {
                 method: "getAppointInfo",
-                method:"getFounderInfo",
                 info:id
             },
             success: function (res) {
