@@ -6,7 +6,8 @@ Page({
   data: {
     t_length: 0,
     info:{},
-    id:''
+    id:'',
+    showModalFlag:false
   },
   onLoad(info){
       console.log("传过来-----",info)
@@ -27,6 +28,20 @@ Page({
         console.log(res)
       }
     })
+   
+  },
+  showModal(e) {
+    console.log(11111)
+    this.setData({
+      showModalFlag: true
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      showModalFlag: false
+    })
+    wx.navigateBack();
+      
   },
   changeInfo(e){
     let obj = this.data.info;
