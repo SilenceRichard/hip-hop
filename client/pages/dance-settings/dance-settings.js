@@ -10,6 +10,7 @@ Page({
         address:'',
         latitude:'',
         longitude:'',
+        contact:'',
       },
       identify:'',
       type:'',
@@ -17,7 +18,8 @@ Page({
       title:'',
       content:'',
       limit:1,
-      condition:''
+      condition:'',
+      QR_code:''
     },//存入数据库的约局信息对象
     checkboxItems: [
       {name: 'Hiphop', value: 'Hiphop', checked: false},
@@ -72,7 +74,7 @@ Page({
       {step:1,tips:"(#`O′)你还没选活动形式！"},
       {step:2,tips:"(#`O′)至少选择一个舞种哟！"},
       {step:3,tips:"(#`O′)这个表单都是必填项哟！请选择地图上有名字的约局地点"},
-      {step:4,tips:""}
+      {step:4,tips:"(#`O′)请选择一种联络方式并留下信息~~"}
     ],
     touch:{
       x:'',
@@ -150,17 +152,26 @@ Page({
       }
     }
     else if (this.data.step == 4){//如果是第五步
-       wx.cloud.callFunction({
-           name:"dance",
-           data:{
-               method:'danceSettings',
-               info:this.data.info,
-               openid:app.data.openid
-           },
-           success(res) {
-               console.log(res)
-           }
-       })
+       if(this.data.info.contact ===''||this.data.info.QR_code===''){
+           this.setData({
+               topTip:true
+           })
+       }else{
+           this.setData({
+               topTip:false
+           })
+           wx.cloud.callFunction({
+               name:"dance",
+               data:{
+                   method:'danceSettings',
+                   info:this.data.info,
+                   openid:app.data.openid
+               },
+               success(res) {
+                   console.log(res)
+               }
+           })
+       }
     }//上传至云端
   },
   bindDateChange(ev){
@@ -370,6 +381,7 @@ Page({
                      topTip:true
                    })
                  }
+                 break;
           case 3: let formFlag = true
             for (let i in  this.data.info)
               {
@@ -398,6 +410,7 @@ Page({
                   topTip:false
                 })
               }
+              break;
         }
       }
     }
