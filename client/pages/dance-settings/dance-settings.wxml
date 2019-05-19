@@ -102,8 +102,8 @@
                                 <image bindtap="chooseLocation" class="location-icon" src="../../static/icon/icon-location.png"></image>
                             </view>
                             <view class="col-8">
-                                <text wx:if="{{info.location.name==''}}">选择位置</text>
-                                <text wx:else>{{info.location.name}}</text>
+                                <text bindtap="chooseLocation" wx:if="{{info.location.name==''}}">选择位置</text>
+                                <text bindtap="chooseLocation" wx:else>{{info.location.name}}</text>
                             </view>
                         </view>
                     </view>
@@ -149,7 +149,7 @@
     <!-- 加入要求 -->
     <button class="nextStep" bindtap="setInfo">下一步</button>
 </view>
-<view class="out" wx:if="{{step==4}}">
+<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==4}}">
     <view class="uploadTips" style="padding: 38rpx 0;">
         希望给报名者的联系方式
     </view>
@@ -163,13 +163,15 @@
         </view>
     </view>
     <view style="display:flex;justify-content:center;">
-        <view class="uploadImg" bindtap="chooseImageQR" wx:if="{{contactName!='手机号'}}">
+        <view style="margin: 70rpx 0 0 0 " class="uploadImg" bindtap="chooseImageQR" wx:if="{{contactName=='微信'||contactName=='微信群聊'}}">
             <view> <image class="upload" src="../../static/icon/plus.png"></image></view>
             <view>上传二维码</view>
         </view>
-        <view wx:if="{{contactName == '手机号'}}" style="width:100%;">
+        <view  wx:if="{{contactName == '手机号'}}" style="width:100%;margin: 70rpx 0 0 0 ">
             <input class="inputer" value="{{info.phone}}" bindinput="changePhoneNumber"></input>
         </view>
     </view>
     <button class="nextStep" bindtap="setInfo">发起约舞</button>
 </view>
+<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==5}}">约舞成功！</view>
+

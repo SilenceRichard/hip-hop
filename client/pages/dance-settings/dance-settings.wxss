@@ -15,10 +15,14 @@
   width:296rpx;
   height: 296rpx;
   line-height: 296rpx;
+  border-radius: 10rpx;
   text-align: center;
-  background: red;
+  background: var(--grey);
   display: inline-block;
 }
+ .choose{
+    background: var(--yellow);
+ }
 .inner_1{
   position: absolute;
     top:280rpx;

@@ -26,20 +26,25 @@ exports.main = async (event, context) => {
                 dance_id: event.info.id,
                 state: '1' //‘0’通过 ‘1’审核中 ，‘2’未通过
             };
-            let temp = await targetDB.where({
-                _id: event.info.id
-            }).get();
-            temp.applicant.forEach((item)=>{
-                if(item.openid == event.openid)visit=1;
+            let temp = await targetDB.doc(event.info.id).get();
+            // console.log("查询结果：",temp.data)
+            // console.log('applicant',temp.data.applicant)
+            temp.data.applicant.forEach((item)=>{
+                if(item._openid == event.openid)visit=1;
                 }
             );
             if(visit == 0){
                 let res = await targetDB.update(
-                {data: {applicant:_.push(obj)}}
-            );
-            return {
-                status: res
+                {data: {applicant:_.push(obj)}})
+                return {
+                    status: res
+                }
             }
+            else {
+                return {
+                    status:'1',
+                    msg:'已报名，无需更新'
+                }
             }
     }
     if(event.method=="getFunderInfo"){
@@ -189,7 +194,7 @@ exports.main = async (event, context) => {
           }
         }//该用户的历史搜索记录标签
     }
-    if (event.method == "getAppointInfo") {
+    if(event.method == "getAppointInfo"){
       let result = await db.collection('dance-info').where({ _id: _.eq(event.info) }).get();
       db.collection('dance-info').doc(event.info).update({
         data: {
