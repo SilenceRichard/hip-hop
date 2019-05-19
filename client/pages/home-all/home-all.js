@@ -283,6 +283,7 @@ Page({
   goToDetail(ev){
     console.log("这是ev---------",ev)
     wx.navigateTo({url:"../home-appointInfo/home-appointInfo?id="+ev.currentTarget.dataset.item._id})
+    console.log("传过去的-----", ev.currentTarget.dataset.item._id)
   },
 
   /**

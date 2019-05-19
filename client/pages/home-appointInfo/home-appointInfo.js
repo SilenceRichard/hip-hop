@@ -34,13 +34,16 @@ Page({
     onLoad(info){
         console.log("参数传进来了------",info)
         this.setData({
-          "info.id":info.id
+          "info.id":info
         })
-      //  已解决 console.log("data.info------",this.data.info)
+      //  console.log("data.info------",this.data.info)
     },
     toApplyInfo() {
+      console.log("本地的----", this.data.info.id )
+
     let obj = this.data.info.id;
-    wx.navigateTo({ url: '../home-applyInfo/home-applyInfo?id=' + obj })
+    console.log("打印obj",obj)
+      wx.navigateTo({ url: '../home-applyInfo/home-applyInfo?id='+obj.id})
   },
 
   
@@ -107,7 +110,7 @@ Page({
                     info: res.result.checkResult[0]
                 })
 
-                //console.log("下面查询openid：", res.result.checkResult[0].openid);
+                console.log("下面查询openid：", res.result.checkResult[0].openid);
                 //再次调用云函数
                 wx.cloud.callFunction({
                   name: 'mine',
@@ -116,7 +119,7 @@ Page({
                     openid: res.result.checkResult[0].openid
                   },
                   success: function (e) {
-                    //console.log("第二次调用成功e:",e)
+                    console.log("第二次调用成功e:",e)
 
                     //处理舞种信息
                     var dance_type_ = [];
