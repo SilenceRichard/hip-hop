@@ -10,7 +10,7 @@ Page({
         name:'',
         address:'',
         latitude:'',
-        longitude:''
+        longtitude:''
       }
     },//存入数据库的约局信息对象
     checkboxItems: [
@@ -118,7 +118,7 @@ Page({
             name:res.name,
             address:res.address,
             latitude:res.latitude,
-            longitude:res.longitude
+            longtitude:res.longtitude
           }
           that.setData({
             info:obj
