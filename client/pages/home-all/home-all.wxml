@@ -1,6 +1,3 @@
-<!--pages/home-all/home-all.wxml-->
-
-
 <view class="out">
     <view class="box" >
         <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">

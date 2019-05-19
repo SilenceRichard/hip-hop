@@ -48,6 +48,19 @@ Page({
     this.setData({
       showModalFlag:true
     })
+    wx.cloud.callFunction({
+      name: 'home',
+      data: {
+        method: "getFounderInfo",
+        info: id
+      },
+      success: function (res) {
+        console.log("传回来的是--------", res)
+        that.setData({
+          info: res.result.checkResult
+        })
+      }
+    })
   },
   hideModal(e) {
     this.setData({
@@ -75,6 +88,7 @@ Page({
             name: 'home',
             data: {
                 method: "getAppointInfo",
+                method:"getFounderInfo",
                 info:id
             },
             success: function (res) {
