@@ -98,7 +98,7 @@
         </view>
     </view>
     <view class="row form">
-        <button style="width:80%" class="weui-btn" type="primary" bindtap="saveUserInfo">确定</button>
+        <button style="width:80%" class="weui-btn" bindtap="saveUserInfo">确定</button>
     </view>
 </view>
 <view wx:if="{{edit==false}}">
