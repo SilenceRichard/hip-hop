@@ -4,7 +4,7 @@
 <view class="bg-gradulblack">
     <view class="cu-steps">
         <view class="cu-item {{index>basics?'':'text-orange'}}" wx:for="{{basicsList}}" wx:key>
-            <text class="cuIcon-{{index>basics?'title':item.icon}}"></text> {{item.name}}
+            <text class="cuIcon-{{index>basics?'infofill':item.icon}}"></text> {{item.name}}
         </view>
     </view>
 </view>
@@ -176,11 +176,11 @@
         </view>
     </view>
     <view style="display:flex;justify-content:center;">
-        <view class="uploadImg" bindtap="chooseImageQR" wx:if="{{contactName!='手机号'}}">
+        <view style="margin: 70rpx 0 0 0 " class="uploadImg" bindtap="chooseImageQR" wx:if="{{contactName=='微信'||contactName=='微信群聊'}}">
             <view> <image class="upload" src="../../static/icon/plus.png"></image></view>
             <view>上传二维码</view>
         </view>
-        <view wx:if="{{contactName == '手机号'}}" style="width:100%;">
+        <view  wx:if="{{contactName == '手机号'}}" style="width:100%;margin: 70rpx 0 0 0 ">
             <input class="inputer" value="{{info.phone}}" bindinput="changePhoneNumber"></input>
         </view>
     </view>

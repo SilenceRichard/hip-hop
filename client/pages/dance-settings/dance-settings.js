@@ -19,7 +19,9 @@ Page({
       content:'',
       limit:1,
       condition:'',
-      QR_code:''
+      contact:'',
+      QR_code:'',
+      phone:''
     },//存入数据库的约局信息对象
     checkboxItems: [
       {name: 'Hiphop', value: 'Hiphop', checked: false},
@@ -40,34 +42,28 @@ Page({
       time:"00:00"
     },//时间戳
     contactName:'', //当前选择联系方式项
-    basicsList: [{
-      icon: 'usefullfill',
-      name: '开始'
-    }, {
-      icon: 'radioboxfill',
-      name: '等待'
-    }, {
-      icon: 'roundclosefill',
-      name: '错误'
-    }, {
-      icon: 'roundcheckfill',
-      name: '完成'
-    }, {
-      icon: 'roundcheckfill',
-      name: '完成'
-    }],
+    basicsList: [
+        {
+          icon: 'emoji',
+          name: '活动类型'
+        },
+        {
+          icon: 'emoji',
+          name: '活动形式'
+        },
+        {
+        icon: 'emoji',
+        name: '舞种'
+        },
+        {
+        icon: 'emoji',
+        name: '详情'
+        },
+        {
+        icon: 'emoji',
+        name: '联系方式'
+        }],
     basics: 0, //步骤数
-    numList: [{
-      name: '开始'
-    }, {
-      name: '等待'
-    }, {
-      name: '错误'
-    }, {
-      name: '完成'
-    },{
-      name: '完成'
-    }],
     topTip:false,
     tips:[
       {step:0,tips:"(#`O′)你还没选活动形式！"},
@@ -123,6 +119,7 @@ Page({
     }//舞种
     else if (this.data.step == 3) {//如果是第四步
       let formFlag = true
+
       for (let i in  this.data.info)
         {
           if (i==='location'){
@@ -132,7 +129,7 @@ Page({
               })
               formFlag = false
             }
-          }else {
+          }else if (i!='contact'&&i!='QR_code'&&i!='phone') {
             if (this.data.info[i]=== '') {
               this.setData({
                 topTip:true
@@ -152,12 +149,15 @@ Page({
       }
     }
     else if (this.data.step == 4){//如果是第五步
-       if(this.data.info.contact ===''||this.data.info.QR_code===''){
+       if(this.data.info.contact ===''&&this.data.info.QR_code===''&&this.data.info.phone===''){
            this.setData({
                topTip:true
            })
        }else{
            this.setData({
+               info:obj,//由中间量导入数据到info
+               step:this.data.step+1,//更新step
+               basics:this.data.basics+1,
                topTip:false
            })
            wx.cloud.callFunction({
@@ -392,7 +392,7 @@ Page({
                     })
                     formFlag = false
                   }
-                }else {
+                }else if (i!='contact'&&i!='QR_code'&&i!='phone') {
                   if (this.data.info[i]=== '') {
                     this.setData({
                       topTip:true
@@ -415,10 +415,11 @@ Page({
       }
     }
     if (option === 'right'){
-      if (this.data.step -1>=0){
+      if (this.data.step -1>=0&&this.data.step!=5){
         this.setData({
           step:this.data.step-1,
-          basics:this.data.basics-1
+          basics:this.data.basics-1,
+          topTip:false
         })
       }
     }

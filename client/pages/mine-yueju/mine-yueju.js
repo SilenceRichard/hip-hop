@@ -6,6 +6,10 @@ Page({
         mySetted:[]
     },
     onReady:async function () {
+        console.log("请求参数:",{
+            method:"getMyAppoint",
+            openid:app.data.openid
+        })
       let res =await wx.cloud.callFunction({
           name:"mine",
           data:{
@@ -13,6 +17,18 @@ Page({
               openid:app.data.openid
           }
       })
-      console.log(res)
+      res.result.joinedDance.map(item =>{
+           let a =[]; //处理舞种
+          item.dance_type.map(val=>{
+             if (val.checked){
+                 a.push(val.name)
+             }
+          })
+          item.dance_type_show = a;
+          return item
+      })
+      this.setData({
+          myJoined:res.result.joinedDance
+      })
     }
 })
