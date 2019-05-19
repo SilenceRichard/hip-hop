@@ -18,7 +18,6 @@ exports.main = async (event, context) => {
   const second = date.getSeconds();
 
     if(event.method=="sendInfo"){
-        {
             var targetDB = db.collection('dance-info');
             var visit = 0;
             let obj = {

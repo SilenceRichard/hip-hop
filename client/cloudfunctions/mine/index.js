@@ -46,18 +46,38 @@ exports.main = async (event, context) => {
   }
   if(event.method == 'getMyAppoint'){
       const targetDB = db.collection('dance-info');
-      let  sentDance = await targetDB.where({
-          _openid:event.openid})
+      var  joinedDance = [];
+      var  sentDance = [];
+      let Apply = await targetDB.where()
           .get()
-      let joinedDance = await targetDB.where({
-          applicant:event.openid,
-          state:"0"})
-          .get()
+      Apply.data.forEach((item)=>{
+          if(item._openid == event.openid){
+              sentDance.push(item);
+          }
+          item.applicant.forEach((val)=> {
+              if (val._openid == event.openid&&val.state == '0'){
+                  joinedDance.push(item)
+              }
+          })
+      })
       return {
           sentDance:sentDance,
           joinedDance:joinedDance
       }
   }
+  // if(event.method == 'exam'){
+  //     const targetDB = db.collection('dance-info');
+  //     let  res = await  targetDB.where({
+  //         _openid:event.openid,
+  //     }).update(allMy.data.forEach((item)=>
+  //         item.applicant.forEach((val)=>
+  //     if(val._openid == event.checkedId){
+  //         val.state = event.state
+  //     }))
+  //
+  //     )
+  //     return
+  // }
   if(event.method == 'getSystemInfo'){
         const targetDB = db.collection('dance-info');
         var myApply = [];
