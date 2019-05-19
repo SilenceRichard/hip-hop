@@ -126,7 +126,7 @@ exports.main = async (event, context) => {
           return {
             checkResult: result.data
           }
-        }//查找到的最热的五条
+        }//查找到的最热的五条约舞
         if (event.type == 'keyword') {
 
           db.collection('user').doc(event.openid).update({
@@ -168,20 +168,41 @@ exports.main = async (event, context) => {
         }//搜索
         if (event.type == 'hot') {
           let result = await runDB.main('get', { db: 'user', condition: {} });//获取全部
-          let worddata = [];
+          var worddata = [];
+
+          //获取所有关键字及相应的搜索数
           for (var i = 0; i <= result.data.length-1;i++){
             for (var j = 0; j <= result.data[i].history.length - 1; j++) {
               for (var k = 0, flag = 0; k <= worddata.length - 1; k++){
-                if (worddata[k] == result.data[i].history[j]){
+                if (worddata[k].word == result.data[i].history[j]){
                   flag=1;
                   worddata[k].times ++;
                 }
-              }
+              }//遍历worddata数组，若没有查到则以 flag == 0 退出
               if (flag == 0){
-                worddata.push = {word:result.data[i].history[j], times: 0 };
+                worddata.push({word:result.data[i].history[j], times: 1 });
               }
             }
           }
+
+          //根据搜索数排序
+          for (var j = worddata.length - 2; j >= 0; j--) {//冒泡排序
+            for (var i = 0; i <= j; i++) {
+              if (worddata[i].times < worddata[i+1].times){
+                //交换
+                let temp = worddata[i];
+                worddata[i] = worddata[i+1];
+                worddata[i + 1] = temp;
+              }
+            }
+          }
+          
+          var words = [];//词汇数组
+          for (var i = 0; i <= worddata.length - 1; i++) {
+            words.push(worddata[i].word);
+          }
+        
+          console.log("worddata：", worddata);
           return {
             checkResult: worddata
           }
@@ -201,7 +222,7 @@ exports.main = async (event, context) => {
           clicktime: _.inc(1)
         }
       })
-      console.log(result);
+      console.log("result.data",result.data);
       return {
         checkResult: result.data
       }
