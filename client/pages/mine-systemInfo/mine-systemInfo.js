@@ -1,58 +1,137 @@
-//index.js
-//获取应用实例
 const app = getApp();
 Page({
-    toAppointInfo() {
-      wx.navigateTo({ url: '../home-appointInfo/home-appointInfo' })
-    },
-    data: {
-      info: [{
-        imgsrc: '../../static/icon/ironman.png',
-        title: '标题',
-        innerText1: '你已经加入了钢铁侠的约局',
-        innerText2: '钢铁侠同意了你的报名申请',
-        time: '2019-5-11 00:00:00',
-        location: '昌平'
+  data: {
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    // 下面是系统通知页列表
+    infoList:[
+      {
+        title:'',
+        content:'这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容',
+        time:'5/15 23:00',
+        checkNum:'',
+        infoTitle:'标题啊'
       },
-        {
-          imgsrc: '../../static/icon/cap.png',
-          title: '标题',
-          innerText1: '美国队长想要加入你的约局',
-          innerText2: '哇！美国队长对你的约局感兴趣',
-          time: '2019-5-11 00:00:00',
-          location: '昌平'
-        },
-        {
-          imgsrc: '../../static/icon/blackpathen.png',
-          title: '标题',
-          innerText1: '复仇者联盟已经组队成功',
-          innerText2: '恭喜！您的约局复仇者联盟已经组队成功',
-          time: '2019-5-11 00:00:00',
-          location: '昌平'
-        },
-      ],
-      
-    },
+      {
+        title:'',
+        content:'',
+        time:'',
+        checkNum:'',
+        infoTitle:'标题啊'
+      },
+      {
+        title:'',
+        content:'',
+        time:'',
+        checkNum:'',
+        infoTitle:'标题啊'
+      },
+      {
+        title:'',
+        content:'',
+        time:'',
+        checkNum:'',
+        infoTitle:'标题啊'
+      }
+    ],
+    showModalFlag : false
+  },
+  showModal(ev) {
+    console.log("ev------------",ev)
+    this.setData({
+      showModalFlag:true
+    })
+  },
+  hideModal() {
+    this.setData({
+      showModalFlag:false
+    })
+  },
 
-    onReady: function() {
-      var that = this; 
-      wx.cloud.callFunction({
-        
-        name: 'mine',
-        data: {
-          methed: "getSystemInfo",//获取系统通知
-          openid: app.data.openid,
-        },
-        success: function(res) {
-          //后台规定参数返回形式
-          //return{
-          //checkResult: [{},{},{}]
-          // }
-          that.setData({
-            info: res.result.checkResult
-          })
-        }
+  // ListTouch触摸开始√
+  ListTouchStart(e) {
+    this.setData({
+      ListTouchStart: e.touches[0].pageX
+    })
+  },
+
+  // ListTouch计算方向√
+  ListTouchMove(e) {
+    this.setData({
+      ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
+    })
+  },
+
+  // ListTouch计算滚动√
+  ListTouchEnd(e) {
+    if (this.data.ListTouchDirection =='left'){
+      this.setData({
+        modalName: e.currentTarget.dataset.target
+      })
+    } else {
+      this.setData({
+        modalName: null
       })
     }
+    this.setData({
+      ListTouchDirection: null
+    })
+  },
+  onReady(){
+    console.log("嘻嘻嘻嘻嘻嘻进来了",app.data.openid)
+
+    wx.cloud.callFunction({
+      name : "mine",
+      data:{
+        method:'getSystemInfo',
+        openid : 'wx34139989263b3718'
+      },
+      success(res){
+        console.log("返回来的是-------------",res)
+
+        // res.result中返回了三个数组，分别遍历三个数组，给数组里每一个对象增加一个标志
+        res.result.myApply.forEach((item)=>{
+           item.applyFlag = true;
+        })
+        res.result.checkedApply.forEach((item)=>{
+          item.resultFlag = true;
+        })
+        res.result.checkedApply2.forEach((item)=>{
+          item.resultFlag = true;
+        })
+        let arr = res.result.myApply.concat(res.result.checkedApply).concat(res.result.checkedApply2);//拼接数组
+        arr.forEach((item)=>{                    //遍历该大数组，给本地info.title赋值
+          if(applyFlag == true)
+          {
+            this.setData({
+              'infoList.title': '你收到一个报名申请'
+            })
+            if(resultFlag == true){
+              this.setData({
+                'infoList.title' : '报名结果通知'
+              })
+            }
+          }
+        })
+      }
+    })
+    // for(var i=0;i<res.result.length;i++)
+    // {
+    //   if(res.result == myApply)
+    //   {
+    //     var applyFlag = true;
+    //   }
+    //   if(res.result == checkedApply || res.result == checkedApply2)
+    //   {
+    //     var resultFlag = true;
+    //   }
+    //   let arr = a.concat(b).concat(c);
+    //   arr.forEach(
+    //       {
+    //         if(applyFLag == true)
+    //       }
+    //   )
+    // }
   }
-)
+
+})

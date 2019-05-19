@@ -3,7 +3,6 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    color: #ffffff!important;
 }
 .out-2{
     width: 100%;
@@ -16,14 +15,10 @@
   width:296rpx;
   height: 296rpx;
   line-height: 296rpx;
-  border-radius: 10rpx;
   text-align: center;
-  background: var(--grey);
+  background: red;
   display: inline-block;
 }
- .choose{
-    background: var(--yellow);
- }
 .inner_1{
   position: absolute;
     top:280rpx;

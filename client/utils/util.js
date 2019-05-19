@@ -20,19 +20,6 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-/***
- * 判断用户滑动
- * 左滑还是右滑
- */
-const getTouchData = (endX, endY, startX, startY)=> {
-  let turn = "";
-  if (endX - startX > 50 && Math.abs(endY - startY) < 50) {      //右滑
-    turn = "right";
-  } else if (endX - startX < -50 && Math.abs(endY - startY) < 50) {   //左滑
-    turn = "left";
-  }
-  return turn;
-}
 /**
  *将微信小程序中的回调封装成Promise的形式，避免回调地狱
  * **/
@@ -142,6 +129,5 @@ module.exports = {
   showTabBar:showTabBarPromisified,//展示底部导航栏
   formatDate:formatDate,
   post:post,
-  get:get,
-  getTouchData:getTouchData //判断左滑右滑
+  get:get
 }
