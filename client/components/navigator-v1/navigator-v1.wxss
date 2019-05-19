@@ -9,7 +9,7 @@
 }
 /*容器被按下时的样式*/
 .left{
-    color: #252525;
+    color: #ffffff;
     float: left;
     margin-left: 18rpx;
 }

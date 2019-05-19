@@ -39,10 +39,11 @@
             <view class="col-9 name" style='color:#ffffff'>{{info.name}}</view>
         </view>
     </view>
-    <button style="width:80%" class="weui-btn" bindtap='toApplyInfo' >报名</button>
+    <button style="width:80%" class="weui-btn" bindtap='toApplyInfo'>报名</button>
     <view class="cu-modal show" wx:if="{{showModalFlag}}">
       <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
+          <view class="content">发起人咨询</view>
           <view class="action" bindtap="hideModal">
             <text class="cuIcon-close text-red" bindtap='hideModal'></text>
           </view>
@@ -54,9 +55,6 @@
            <view>舞种：{{info.danceType}}</view>
            <view>舞龄：{{info.danceAge}}</view>
            <view>签名：{{info.sigh}}</view>
-
-
-
         </view>
   </view>
 </view>

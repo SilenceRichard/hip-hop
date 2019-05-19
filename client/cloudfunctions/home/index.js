@@ -1,8 +1,8 @@
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
-const runDB = require('./database')
+const cloud = require('wx-server-sdk');
+const runDB = require('./database');
 
-cloud.init()
+cloud.init();
 const db = cloud.database();
 const _ = db.command;
 
@@ -10,13 +10,47 @@ exports.main = async (event, context) => {
 
   //时间参数
   const date = new Date();
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  const second = date.getSeconds();
 
+    if(event.method=="sendInfo"){
+            var targetDB = db.collection('dance-info');
+            var visit = 0;
+            let obj = {
+                _openid: event.openid,
+                info: event.info,
+                dance_id: event.info.id,
+                state: '1' //‘0’通过 ‘1’审核中 ，‘2’未通过
+            };
+            let temp = await targetDB.where({
+                _id: event.info.id
+            }).get();
+            temp.applicant.forEach((item)=>{
+                if(item.openid == event.openid)visit=1;
+                }
+            );
+            if(visit == 0){
+                let res = await targetDB.update(
+                {data: {applicant:_.push(obj)}}
+            );
+            return {
+                status: res
+            }
+            }
+    }
+    if(event.method=="getFunderInfo"){
+        const targetDB = db.collection('user');
+        let res = await targetDB.where({
+            _id:event.id
+        }).get();
+        return {
+            res:res
+        }
+    }
     if(event.method=="getInfo") {
         if (event.type == 'All'){
             let result = await runDB.main('get',{db:'dance-info',condition:{}});
