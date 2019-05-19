@@ -5,6 +5,15 @@ cloud.init();
 
 const db = cloud.database();
 const _ = db.command;
+const formatTime = date => {
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const hour = date.getHours()
+    const minute = date.getMinutes()
+    const second = date.getSeconds()
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
 // getMineInfo = function(){
 //   return "hhh"
 // }
@@ -82,16 +91,30 @@ exports.main = async (event, context) => {
   }
   if(event.method == 'getSystemInfo'){
         const targetDB = db.collection('dance-info');
-        var myApply = [];
+        var myTeamedDance = [];
+        var myUpTimeDance = [];
+        var uncheckedApply = [];
         var checkedApply = [];
         var checkedApply2 = [];
+        var date0 = new Date().toLocaleDateString
+        var time0 = formatTime(date0)
         let Apply = await targetDB.where()
             .get()
         Apply.data.forEach((item)=>{
             if(item._openid == event.openid){
-                myApply.push(item);
-            }
-            item.applicant.forEach((val)=> {
+                if(item.applicant.data.length==item.limit&&item.time0>time0) {
+                    myTeamedDance.push(item);
+                    }
+                item.applicant.data.forEach(val=>{
+                    if(val.time<=time0&&item.applicant.data.length<=item.limit){
+                        myUpTimeDance.push(item)
+                    }
+                    if(val.state == '1'){
+                        uncheckedApply.push(val)
+                    }
+                })
+                }
+            item.applicant.data.forEach((val)=> {
                 if (val._openid == event.openid){
                     if(val.state == "0"){
                         checkedApply.push(item)
@@ -103,8 +126,10 @@ exports.main = async (event, context) => {
             })
         })
         return {
-            myApply:myApply,//我发起的
-            checkedApply:checkedApply,//已通过的
+            myTeamedDance:myTeamedDance,//我发起的组队成功的约舞
+            myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞
+            uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息
+            checkedApply:checkedApply,//我参加已通过的
             checkedApply2:checkedApply2//未通过的
         }
     }
