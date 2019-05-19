@@ -10,6 +10,8 @@ exports.main = async (event, context) => {
      let obj = event.info;
      obj.openid = event.openid;
      obj._openid = event.openid;
+     obj.applicant = [];
+     obj.clicktime = 0;
      await runDB.main('insert',{db:'dance-info',data:obj});
      return {
        status:'0'  //新增信息成功！

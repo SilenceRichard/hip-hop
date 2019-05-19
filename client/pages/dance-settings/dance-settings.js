@@ -9,7 +9,7 @@ Page({
         name:'',
         address:'',
         latitude:'',
-        longitude:'',
+        longtitude:'',
         contact:'',
       },
       identify:'',
@@ -224,7 +224,7 @@ Page({
             name:res.name,
             address:res.address,
             latitude:res.latitude,
-            longitude:res.longitude
+            longtitude:res.longtitude
           }
           that.setData({
             info:obj
@@ -252,7 +252,6 @@ Page({
     this.setData({
       checkboxItems: checkboxItems
     });
-    console.log(this.data.checkboxItems)
   },//记录舞种信息
   addNumber(){
     let obj = this.data.info;

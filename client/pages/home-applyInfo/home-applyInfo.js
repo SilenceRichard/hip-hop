@@ -1,22 +1,25 @@
-
+const app = getApp();
 Page({
   toMineInfo() {
     wx.navigateTo({ url: '../mine-person/mine-person' })
   },
   data: {
     t_length: 0,
-    info:{},
-    id:'',
+    info:{
+      id:'',
+    },
+    // id:'',
     showModalFlag:false
   },
   onLoad(info){
       console.log("传过来-----",info)
       this.setData({
-        id:info.id
+        "info.id":info.id
       })
   },
 
   sendApply(){
+    console.log("请求参数:",this.data.info);
     wx.cloud.callFunction({
       name:"home",
       data:{
@@ -26,15 +29,15 @@ Page({
       },
       success(res){
         console.log(res)
+        this.setData({
+          showModalFlag: true
+        })
+      },
+      fail(err){
+        console.log("云函数写错啦--",err)
       }
     })
    
-  },
-  showModal(e) {
-    console.log(11111)
-    this.setData({
-      showModalFlag: true
-    })
   },
   hideModal(e) {
     this.setData({
@@ -46,14 +49,10 @@ Page({
   changeInfo(e){
     let obj = this.data.info;
     obj.apply = e.detail.value;
-    this.setData({
-      info: obj
-    })
-  },
-  bindText: function (e) {
     var t_text = e.detail.value.length;
     // console.log(t_text)
     this.setData({
+      info: obj,
       t_length: t_text
     })
   }

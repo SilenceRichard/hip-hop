@@ -26,20 +26,25 @@ exports.main = async (event, context) => {
                 dance_id: event.info.id,
                 state: '1' //‘0’通过 ‘1’审核中 ，‘2’未通过
             };
-            let temp = await targetDB.where({
-                _id: event.info.id
-            }).get();
-            temp.applicant.forEach((item)=>{
-                if(item.openid == event.openid)visit=1;
+            let temp = await targetDB.doc(event.info.id).get();
+            // console.log("查询结果：",temp.data)
+            // console.log('applicant',temp.data.applicant)
+            temp.data.applicant.forEach((item)=>{
+                if(item._openid == event.openid)visit=1;
                 }
             );
             if(visit == 0){
                 let res = await targetDB.update(
-                {data: {applicant:_.push(obj)}}
-            );
-            return {
-                status: res
+                {data: {applicant:_.push(obj)}})
+                return {
+                    status: res
+                }
             }
+            else {
+                return {
+                    status:'1',
+                    msg:'已报名，无需更新'
+                }
             }
     }
     if(event.method=="getFunderInfo"){
@@ -78,15 +83,15 @@ exports.main = async (event, context) => {
         }
         if (event.type == 'location'){
             let result = await runDB.main('get',{db:'dance-info',condition:{}});//获取所有
-            console.log("获取所有：", result);
+
               for (var j = result.data.length - 2; j >= 0; j--) {//冒泡排序
                 for (var i = 0; i <= j; i++) {
-                  if (Math.sqrt((result.data[i].location.latitude - event.userLocation.latitude) * (result.data[i].location.latitude - event.userLocation.latitude) + (result.data[i].location.longitude - event.userLocation.longitude) * (result.data[i].location.longitude - event.userLocation.longitude)) > Math.sqrt((result.data[i + 1].location.latitude - event.userLocation.latitude) * (result.data[i + 1].location.latitude - event.userLocation.latitude) + (result.data[i + 1].location.longitude - event.userLocation.longitude) * (result.data[i + 1].location.longitude - event.userLocation.longitude))) //若前一个大于后一个
+                  if ((result.data[i].location.latitude - event.userLocation.latitude) * (result.data[i].location.latitude - event.userLocation.latitude) + (result.data[i].location.longtitude - event.userLocation.longtitude) * (result.data[i].location.longtitude - event.userLocation.longtitude) > (result.data[i + 1].location.latitude - event.userLocation.latitude) * (result.data[i + 1].location.latitude - event.userLocation.latitude) + (result.data[i + 1].location.longtitude - event.userLocation.longtitude) * (result.data[i + 1].location.longtitude - event.userLocation.longtitude)) //若前一个大于后一个
                   {//交换
                      let temp = result.data[i];
                      result.data[i] = result.data[i + 1];
                      result.data[i + 1] = temp;
-                     console.log("交换了一次");
+                     console.log("交换了",i,i+1);
                   }
                 }
               }
@@ -94,7 +99,7 @@ exports.main = async (event, context) => {
           return {
             checkResult: result.data
           }
-        }//（未完成，有BUG)
+        }//按距离查询
         if (event.type == 'getByIndividual'){
             let result = await db.collection('dance-info').where({identify:_.eq('person')}).get();
             console.log(result)
@@ -121,7 +126,7 @@ exports.main = async (event, context) => {
           return {
             checkResult: result.data
           }
-        }//查找到的最热的五条
+        }//查找到的最热的五条约舞
         if (event.type == 'keyword') {
 
           db.collection('user').doc(event.openid).update({
@@ -163,20 +168,41 @@ exports.main = async (event, context) => {
         }//搜索
         if (event.type == 'hot') {
           let result = await runDB.main('get', { db: 'user', condition: {} });//获取全部
-          let worddata = [];
+          var worddata = [];
+
+          //获取所有关键字及相应的搜索数
           for (var i = 0; i <= result.data.length-1;i++){
             for (var j = 0; j <= result.data[i].history.length - 1; j++) {
               for (var k = 0, flag = 0; k <= worddata.length - 1; k++){
-                if (worddata[k] == result.data[i].history[j]){
+                if (worddata[k].word == result.data[i].history[j]){
                   flag=1;
                   worddata[k].times ++;
                 }
-              }
+              }//遍历worddata数组，若没有查到则以 flag == 0 退出
               if (flag == 0){
-                worddata.push = {word:result.data[i].history[j], times: 0 };
+                worddata.push({word:result.data[i].history[j], times: 1 });
               }
             }
           }
+
+          //根据搜索数排序
+          for (var j = worddata.length - 2; j >= 0; j--) {//冒泡排序
+            for (var i = 0; i <= j; i++) {
+              if (worddata[i].times < worddata[i+1].times){
+                //交换
+                let temp = worddata[i];
+                worddata[i] = worddata[i+1];
+                worddata[i + 1] = temp;
+              }
+            }
+          }
+          
+          var words = [];//词汇数组
+          for (var i = 0; i <= worddata.length - 1; i++) {
+            words.push(worddata[i].word);
+          }
+        
+          console.log("worddata：", worddata);
           return {
             checkResult: worddata
           }
@@ -189,14 +215,14 @@ exports.main = async (event, context) => {
           }
         }//该用户的历史搜索记录标签
     }
-    if (event.method == "getAppointInfo") {
+    if(event.method == "getAppointInfo"){
       let result = await db.collection('dance-info').where({ _id: _.eq(event.info) }).get();
       db.collection('dance-info').doc(event.info).update({
         data: {
           clicktime: _.inc(1)
         }
       })
-      console.log(result);
+      console.log("result.data",result.data);
       return {
         checkResult: result.data
       }

@@ -1,17 +1,59 @@
-<view id="out">
-  <block wx:for="{{info}}">
-    <view  class='row outer'bindtap="toAppointInfo" >
-      <view class='col' style='height:100%'>
-        <view class='col-3'><image src="{{item.imgsrc}}" ></image></view>
-          <view class='col-9'>
-            <text class="title">{{title}}</text>
-              <view class="col outerText" style='color:#505050'>
-              <view class='col-11 innerText1'>{{item.innerText1}}</view>
-              <view class='col-1'>{{item.time}}</view>
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+
+  <block wx:for="{{infoList}}">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item" bindtap="showModal" data-item="{{item}}">
+          <view class="cu-avatar  " style="background-image:url(../../static/icon/notice.png);"></view>
+          <view class="content">
+              <view class="text-grey">{{item.title}}</view>
+              <view class="text-gray text-sm flex">
+                <text class="text-cut">{{item.content}}</text>
               </view>
-              <view class="innerText" style='color:#505050'>{{item.innerText2}}</view>
-        </view>
-      </view>       
+          </view>
+          <view class="action">
+              <view class="text-grey text-xs">{{item.time}}</view>
+          </view>
     </view>
+    </view>
+
+    <view class="cu-modal show" wx:if="{{showModalFlag}}">
+      <view class="cu-dialog">
+
+        <view class="cu-bar bg-white justify-end">
+          <view class="content">{{item.infoTitle}}</view>
+          <view class="action" bindtap="hideModal">
+            <text class="cuIcon-close text-red" bindtap='hideModal'></text>
+          </view>
+        </view>
+
+        <view class="padding-xl">
+          <view >                   <!--如果是发起者收到的报名申请 -->
+            <view style="text-align: left">申请内容</view>
+            <textarea>--------------{{item.content}}</textarea>
+            <view style="text-align: left">用户信息</view>
+            <view style="text-align: left">约局详情</view>
+         </view>
+
+          <view class="row">
+            <view class="col">
+              <view class="col-6">
+                <button class="button1" bindtap="sendInfo">同意</button>
+              </view>
+              <view class='col-6'>
+                <button class="button1" bindtap="sendInfo">拒绝</button>
+              </view>
+            </view>
+          </view>
+
+      </view>
+      </view>
+
+
+
+    </view>
+
+
   </block>
-</view>
+
+
+</scroll-view>
