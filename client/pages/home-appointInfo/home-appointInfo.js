@@ -2,31 +2,32 @@
 Page({
     data: {
         info: {
-            imgsrc: '../../static/icon/hulk.png',
-            title: '标题',
-            innerText1: 'popping',
-            innerText2: '个人',
-            innerText12:"popping",
-            innerText13:"cypher",
+            cover: '../../static/icon/hulk.png',
+            title: 'popping',
+            identify: '个人',
+            dance_type:"popping",
+            type:"cypher",
             time: '2019 5 12',
-            limit_now: '4',
-            limit: '10',
-            activeInfo: '我要好好跳舞',
-            joinInfo:'你能好好跳舞吗',
+            limit: '4',
+            limit_set: '10',
+            content: '我要好好跳舞',
+            condition:'你能好好跳舞吗',
             activeDate:'2019 5 12',
-            activeTime: '12:00',
-            activeLocation:'北京邮电高中',
-            head:'../../static/icon/strange.png',
+            time: '12:00',
+            location:'北京邮电高中',
+            avatarUrl:'../../static/icon/strange.png',
             name:'我叫王大可',
             id:'',
             nickName: '王大可',
-            indentity: '沙雕',
+            role: '沙雕',
             sex: '男的一匹',
-            location: '北京邮电幼儿园',
+            city: '北京邮电幼儿园',
             danceType: 'jazz',
             danceAge: '6年',
-            sigh: '肉松小贝里有肉松'
+            introduction: '肉松小贝里有肉松'
         },
+        info_:{},
+        //info_,
         showModalFlag:false
     },
 
@@ -83,17 +84,54 @@ Page({
 
    
     onReady: function () {
+      // console.log("id是-----",this.data.info.id)
         var that = this;
         wx.cloud.callFunction({
             name: 'home',
             data: {
                 method: "getAppointInfo",
-                info:id
+                info: this.data.info.id
             },
             success: function (res) {
                 console.log("传回来的是--------",res)
+
+                //处理舞种信息
+                var dance_type_ =[];
+                res.result.checkResult.data[0].dance_type.forEach(function (element) {
+                  if (element.checked == true){
+                    dance_type_.push(element.name);
+                  }
+                });
+                res.result.checkResult.data[0].dance_type = dance_type_;
+
                 that.setData({
-                    info: res.result.checkResult
+                    info: res.result.checkResult.data[0]
+                })
+
+                //console.log("下面查询openid：", res.result.checkResult.data[0].openid);
+                //再次调用云函数
+                wx.cloud.callFunction({
+                  name: 'mine',
+                  data: {
+                    method: "getUserInfo",
+                    openid: res.result.checkResult.data[0].openid
+                  },
+                  success: function (e) {
+                    console.log("第二次传回来的res--------",e)
+
+                    //处理舞种信息
+                    var dance_type_ = [];
+                    e.result.res.danceType.forEach(function (element) {
+                      if (element.checked == true) {
+                        dance_type_.push(element.name);
+                      }
+                    });
+                    e.result.res.danceType = dance_type_;
+
+                    that.setData({
+                      info_: e.result.res
+                    })
+                  }
                 })
             }
         })
