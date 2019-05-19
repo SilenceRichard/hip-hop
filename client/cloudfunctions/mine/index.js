@@ -46,7 +46,7 @@ exports.main = async (event, context) => {
   }
   if(event.method == 'getMyAppoint'){
       const targetDB = db.collection('dance-info');
-      var  joinedDance = [];
+      var  Dance = [];
       var  sentDance = [];
       let Apply = await targetDB.where()
           .get()
@@ -55,14 +55,14 @@ exports.main = async (event, context) => {
               sentDance.push(item);
           }
           item.applicant.forEach((val)=> {
-              if (val._openid == event.openid&&val.state == '0'){
-                  joinedDance.push(item)
+              if (val._openid == event.openid){
+                  Dance.push(item)
               }
           })
       })
       return {
           sentDance:sentDance,
-          joinedDance:joinedDance
+          Dance:Dance
       }
   }
   if(event.method == 'exam'){
