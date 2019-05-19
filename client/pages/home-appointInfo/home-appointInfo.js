@@ -97,24 +97,24 @@ Page({
 
                 //处理舞种信息
                 var dance_type_ =[];
-                res.result.checkResult.data[0].dance_type.forEach(function (element) {
+                res.result.checkResult[0].dance_type.forEach(function (element) {
                   if (element.checked == true){
                     dance_type_.push(element.name);
                   }
                 });
-                res.result.checkResult.data[0].dance_type = dance_type_;
+                res.result.checkResult[0].dance_type = dance_type_;
 
                 that.setData({
-                    info: res.result.checkResult.data[0]
+                    info: res.result.checkResult[0]
                 })
 
-                //console.log("下面查询openid：", res.result.checkResult.data[0].openid);
+                //console.log("下面查询openid：", res.result.checkResult[0].openid);
                 //再次调用云函数
                 wx.cloud.callFunction({
                   name: 'mine',
                   data: {
                     method: "getUserInfo",
-                    openid: res.result.checkResult.data[0].openid
+                    openid: res.result.checkResult[0].openid
                   },
                   success: function (e) {
                     console.log("第二次传回来的res--------",e)
