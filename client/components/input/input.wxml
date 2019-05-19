@@ -4,7 +4,6 @@
         <view class="page__desc">表单输入</view>
     </view>
     <view class="page__bd">
-        <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
 
         <view class="weui-cells__title">单选列表项</view>
         <view class="weui-cells weui-cells_after-title">

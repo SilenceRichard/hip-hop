@@ -1341,7 +1341,7 @@ button.icon.lg {
 	display: flex;
 	padding: 0 30rpx;
 	min-height: 100rpx;
-	background-color: var(--white);
+	background-color: var(--gradualBlack)!important;
 	justify-content: space-between;
 	align-items: center
 }

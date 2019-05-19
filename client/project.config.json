@@ -41,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -145,6 +145,13 @@
 					"id": -1,
 					"name": "home-all",
 					"pathName": "pages/home-all/home-all",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "mine-yueju",
+					"pathName": "pages/mine-yueju/mine-yueju",
 					"scene": null
 				}
 			]
