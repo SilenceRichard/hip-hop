@@ -46,7 +46,7 @@ exports.main = async (event, context) => {
   }
   if(event.method == 'getMyAppoint'){
       const targetDB = db.collection('dance-info');
-      var  joinedDance = [];
+      var  Dance = [];
       var  sentDance = [];
       let Apply = await targetDB.where()
           .get()
@@ -55,29 +55,31 @@ exports.main = async (event, context) => {
               sentDance.push(item);
           }
           item.applicant.forEach((val)=> {
-              if (val._openid == event.openid&&val.state == '0'){
-                  joinedDance.push(item)
+              if (val._openid == event.openid){
+                  Dance.push(item)
               }
           })
       })
       return {
           sentDance:sentDance,
-          joinedDance:joinedDance
+          Dance:Dance
       }
   }
-  // if(event.method == 'exam'){
-  //     const targetDB = db.collection('dance-info');
-  //     let  res = await  targetDB.where({
-  //         _openid:event.openid,
-  //     }).update(allMy.data.forEach((item)=>
-  //         item.applicant.forEach((val)=>
-  //     if(val._openid == event.checkedId){
-  //         val.state = event.state
-  //     }))
-  //
-  //     )
-  //     return
-  // }
+  if(event.method == 'exam'){
+      const targetDB = db.collection('dance-info');
+      let  allMy = await  targetDB.doc(event.id).get();
+           let a = allMy.data[0].applicant.forEach(item =>{
+               if (item._openid === event.checkedId){
+                   item.state = event.state
+               }
+           })
+           await  targetDB.doc(event.id).update({data:{
+                    applicant:a
+               }})
+      return{
+               status:a
+      }
+  }
   if(event.method == 'getSystemInfo'){
         const targetDB = db.collection('dance-info');
         var myApply = [];
@@ -91,12 +93,12 @@ exports.main = async (event, context) => {
             }
             item.applicant.forEach((val)=> {
                 if (val._openid == event.openid){
-                   if(val.state == "0"){
-                       checkedApply.push(item)
-                   }
-                   if(val.state == "2"){
-                       checkedApply2.push(item)
-                   }
+                    if(val.state == "0"){
+                        checkedApply.push(item)
+                    }
+                    if(val.state == "2"){
+                        checkedApply2.push(item)
+                    }
                 }
             })
         })
@@ -106,4 +108,6 @@ exports.main = async (event, context) => {
             checkedApply2:checkedApply2//未通过的
         }
     }
-}
+  }
+
+

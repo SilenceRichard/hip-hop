@@ -42,7 +42,15 @@ exports.main = async (event, context) => {
             }
             }
     }
-
+    if(event.method=="getFunderInfo"){
+        const targetDB = db.collection('user');
+        let res = await targetDB.where({
+            _id:event.id
+        }).get();
+        return {
+            res:res
+        }
+    }
     if(event.method=="getInfo") {
         if (event.type == 'All'){
             let result = await runDB.main('get',{db:'dance-info',condition:{}});
