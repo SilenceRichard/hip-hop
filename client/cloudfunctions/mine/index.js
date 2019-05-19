@@ -88,11 +88,11 @@ exports.main = async (event, context) => {
         let Apply = await targetDB.where()
             .get()
         Apply.data.forEach((item)=>{
-            if(item._openid == event.openid){
+            if(item.openid == event.openid){
                 myApply.push(item);
             }
             item.applicant.forEach((val)=> {
-                if (val._openid == event.openid){
+                if (val.openid == event.openid){
                     if(val.state == "0"){
                         checkedApply.push(item)
                     }
