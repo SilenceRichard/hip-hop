@@ -9,7 +9,7 @@ Page({
         name:'',
         address:'',
         latitude:'',
-        longitude:'',
+        longtitude:'',
         contact:'',
       },
       identify:'',
@@ -224,7 +224,7 @@ Page({
             name:res.name,
             address:res.address,
             latitude:res.latitude,
-            longitude:res.longitude
+            longtitude:res.longtitude
           }
           that.setData({
             info:obj

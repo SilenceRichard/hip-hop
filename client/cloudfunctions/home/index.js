@@ -78,15 +78,15 @@ exports.main = async (event, context) => {
         }
         if (event.type == 'location'){
             let result = await runDB.main('get',{db:'dance-info',condition:{}});//获取所有
-            console.log("获取所有：", result);
+
               for (var j = result.data.length - 2; j >= 0; j--) {//冒泡排序
                 for (var i = 0; i <= j; i++) {
-                  if (Math.sqrt((result.data[i].location.latitude - event.userLocation.latitude) * (result.data[i].location.latitude - event.userLocation.latitude) + (result.data[i].location.longitude - event.userLocation.longitude) * (result.data[i].location.longitude - event.userLocation.longitude)) > Math.sqrt((result.data[i + 1].location.latitude - event.userLocation.latitude) * (result.data[i + 1].location.latitude - event.userLocation.latitude) + (result.data[i + 1].location.longitude - event.userLocation.longitude) * (result.data[i + 1].location.longitude - event.userLocation.longitude))) //若前一个大于后一个
+                  if ((result.data[i].location.latitude - event.userLocation.latitude) * (result.data[i].location.latitude - event.userLocation.latitude) + (result.data[i].location.longtitude - event.userLocation.longtitude) * (result.data[i].location.longtitude - event.userLocation.longtitude) > (result.data[i + 1].location.latitude - event.userLocation.latitude) * (result.data[i + 1].location.latitude - event.userLocation.latitude) + (result.data[i + 1].location.longtitude - event.userLocation.longtitude) * (result.data[i + 1].location.longtitude - event.userLocation.longtitude)) //若前一个大于后一个
                   {//交换
                      let temp = result.data[i];
                      result.data[i] = result.data[i + 1];
                      result.data[i + 1] = temp;
-                     console.log("交换了一次");
+                     console.log("交换了",i,i+1);
                   }
                 }
               }
@@ -94,7 +94,7 @@ exports.main = async (event, context) => {
           return {
             checkResult: result.data
           }
-        }//（未完成，有BUG)
+        }//按距离查询
         if (event.type == 'getByIndividual'){
             let result = await db.collection('dance-info').where({identify:_.eq('person')}).get();
             console.log(result)
