@@ -1,20 +1,33 @@
-<!--pages/dance-settings/dance-settings.wxml-->
-<view class="out" wx:if="{{step==0}}">
-    <view class="out-2">
-        <view class="publish" bindtap="setInfo" style="margin-right: 70rpx" data-identify="person">个人发布</view>
-        <view class="publish" bindtap="setInfo"  data-identify="official">官方发布</view>
+<block wx:key wx:for="{{tips}}">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{topTip&&item.step==step}}">{{item.tips}}</view>
+</block>
+<view class="bg-gradulblack">
+    <view class="cu-steps">
+        <view class="cu-item {{index>basics?'':'text-orange'}}" wx:for="{{basicsList}}" wx:key>
+            <text class="cuIcon-{{index>basics?'infofill':item.icon}}"></text> {{item.name}}
+        </view>
     </view>
 </view>
-<view class="out" wx:if="{{step==1}}">
+<view bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==0}}">
+    <view class="out-2">
+        <view class="{{info.identify=='person'?'publish choose':'publish'}}" catchtap="setInfo" style="margin-right: 70rpx" data-identify="person">
+            个人发布
+        </view>
+        <view class="{{info.identify=='official'?'publish choose':'publish'}}" catchtap="setInfo"  data-identify="official">
+            官方发布
+        </view>
+    </view>
+</view>
+<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==1}}">
         <view class="inner_1">
-            <view class="publish" bindtap="setInfo" data-type="cypher">cypher</view>
-            <view class="publish" bindtap="setInfo" data-type="练习" style="margin-left:60rpx;">练习</view>
+            <view class="{{info.type=='cypher'?'publish choose':'publish'}}" catchtap="setInfo" data-type="cypher">cypher</view>
+            <view class="{{info.type=='练习'?'publish choose':'publish'}}" catchtap="setInfo" data-type="练习" style="margin-left:60rpx;">练习</view>
         </view>
         <view  class="inner_2">
-            <view class="publish" bindtap="setInfo" data-type="自由">自由</view>
+            <view class="{{info.type=='自由'?'publish choose':'publish'}}" catchtap="setInfo" data-type="自由">自由</view>
         </view>
 </view>
-<view class="out" wx:if="{{step==2}}">
+<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==2}}">
     <checkbox-group bindchange="checkboxChange" style="color:#ffffff">
         <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
             <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
@@ -28,7 +41,7 @@
     </checkbox-group>
     <button class="nextStep" bindtap="setInfo">下一步</button>
 </view>
-<view class="out" wx:if="{{step==3}}" style="padding: 38rpx 0;">
+<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==3}}" style="padding: 38rpx 0;">
     <view class="upload-head">
        <view class="uploadTips">上传约局照片</view>
        <view class="row" style="margin: 46rpx 0 0 0">
