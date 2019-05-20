@@ -129,11 +129,14 @@ exports.main = async (event, context) => {
         }//查找到的最热的五条约舞
         if (event.type == 'keyword') {
 
-          db.collection('user').doc(event.openid).update({
+          //存储用户的搜索历史
+          let result_ = await db.collection('user').where({_openid:event.openid}).get();
+          result_.data[0].history.push(event.info);
+          db.collection('user').where({ _openid: event.openid }).update({
             data: {
-              history: _.push([event.info])
+              history: result_.data[0].history
             }
-          })//存储用户的搜索历史
+          })
 
           let searchInfo = event.info.toLowerCase();
           let result = await db.collection('dance-info').where({}).get();//获取
@@ -147,6 +150,7 @@ exports.main = async (event, context) => {
               item.location_search = item.location.name.toLowerCase();
               return item
           })
+
           let result0=[];
           a.forEach(item=>{
              for (i in item)
@@ -204,9 +208,9 @@ exports.main = async (event, context) => {
         
           console.log("worddata：", worddata);
           return {
-            checkResult: worddata
+            checkResult: words
           }
-        }//热门搜索标签（未完成）
+        }//热门搜索标签
         if (event.type == 'history') {
           let result = await db.collection('user').where({ _openid: event.openid}).get();
           console.log(result.data[0].history);

@@ -53,15 +53,15 @@ Page({
   },
 
   clickTag(ev){
-    console.log("-------------",ev)
+    console.log("进入clickTag",ev)
     this.setData({
-      keyword : ev.currentTarget.dataset.item
+      keyword: ev.target.dataset.item
     })
     console.log("此时搜索的keyword------",this.data.keyword)
   },
 
   inputKeyword(ev){
-    console.log(ev)
+    console.log("进入inputKeyword",ev)
     this.setData({
       keyword : ev.detail.value
     })
@@ -69,6 +69,7 @@ Page({
   },
 
   search() {
+    console.log("进入search,传入的是", this.data.keyword);
     this.setData({
       searchFlag: false
     })
@@ -81,7 +82,11 @@ Page({
         openid:app.data.openid
       },
       success(res){
-        console.log("搜索关键字返回的页面-----",res)
+        //console.log("传入的是", this.data.keyword)
+        console.log("返回搜索",res)
+        that.setData({
+          info: res.result.checkResult
+        })
       }
     })
   },
@@ -90,11 +95,12 @@ Page({
     this.setData({
       searchFlag : true
     })
-    let res1 = wx.cloud.callFunction({name:"home", data:{method:"SearchTag", type:"hot"},openid:app.data.openid});
-    console.log("返回热门搜索-------------",res1);
+    let res1 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"hot"},openid:app.data.openid});
+    console.log("返回热门搜索-------------", res1);
     this.setData({hotList : res1.result.checkResult});
-    let res2 = wx.cloud.callFunction({name:"home", data:{method:"SearchTag", type:"history"},openid:app.data.openid});
-    console.log("返回历史搜索-------------",res2);
+    console.log("hotList :", this.data.hotList);
+    let res2 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"history"},openid:app.data.openid});
+    console.log("返回历史搜索-------------", res2);
     this.setData({historyList : res2.result.checkResult});
   },
 
@@ -169,7 +175,7 @@ Page({
           type: 'location'
         },
         success: function (res) {
-          console.log("按距离排序成功-》",res)
+          console.log("按距离排序成功->",res)
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
