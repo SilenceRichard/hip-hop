@@ -1,44 +1,13 @@
+import  util from '../../utils/util'
 const app = getApp();
 Page({
   data: {
-    StatusBar: app.globalData.StatusBar,
-    CustomBar: app.globalData.CustomBar,
+    TabCur:0,
+    tabList:[{name:"系统消息",type:"xt"},{name:"互动消息",type:"hd"}],
     // 下面是系统通知页列表
-    systemList:[
-      // {
-      //   title:'标题',
-      //   content:'这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容这是申请内容',
-      //   time:'5/15 23:00',
-      //   checkNum:'',
-      //   infoTitle:'标题啊'
-      // },
-      // {
-      //   title:'',
-      //   content:'',
-      //   time:'',
-      //   checkNum:'',
-      //   infoTitle:'标题啊'
-      // },
-      // {
-      //   title:'',
-      //   content:'',
-      //   time:'',
-      //   checkNum:'',
-      //   infoTitle:'标题啊'
-      // },
-      // {
-      //   title:'',
-      //   content:'',
-      //   time:'',
-      //   checkNum:'',
-      //   infoTitle:'标题啊'
-      // }
-    ],//系统消息
-    hdList:[
-
-    ], //互动消息
-
-    flag:false,
+    systemList:[],//系统消息
+    hdList:[], //互动消息
+    flag:true, //系统消息或互动消息的标志
     showModalFlag : false,
     userList:{},
   },
@@ -46,28 +15,34 @@ Page({
     console.log(ev)
     if (ev.currentTarget.dataset.type=="xt"){
       this.setData({
+        TabCur:ev.currentTarget.dataset.id,
         flag:true
       })
     }
     else if(ev.currentTarget.dataset.type=="hd"){
       this.setData({
+        TabCur:ev.currentTarget.dataset.id,
         flag:false
       })
     }
   },
   showModal(ev) {
     let that = this;
+    console.log("对getMineInfo发起了调用,请求参数",ev.currentTarget.dataset.item._openid)
     wx.cloud.callFunction({
       name:'mine',
       data:{
         method:'getMineInfo',
-        // openid:ev.currentTarget.dataset.item._openid
-       openid:'ou_D15XyMRJKnubkiii49_hLdxS0'
+        openid:ev.currentTarget.dataset.item._openid
       },
       success(res) {
+       console.log(res)
         that.setData({
           userList:res.result.res
         })
+      },
+      fail(err){
+        console.log(err)
       }
     })
     this.setData({
@@ -80,12 +55,7 @@ Page({
     })
   },
   sendInfo(ev){
-    console.log(ev)
-    console.log(
-        {  checkedId:ev.currentTarget.dataset.item._openid,
-          state:ev.currentTarget.dataset.state,
-          id:ev.currentTarget.dataset.item.dance_id}
-    )
+    let that = this;
     wx.cloud.callFunction({
       name:'mine',
       data:{
@@ -93,6 +63,11 @@ Page({
         checkedId:ev.currentTarget.dataset.item._openid,
         state:ev.currentTarget.dataset.state,
         id:ev.currentTarget.dataset.item.dance_id
+      },
+      success(){
+        that.setData({
+          showModalFlag:false
+        })
       }
     })
   },
@@ -133,7 +108,7 @@ Page({
       name : "mine",
       data:{
         method:'getSystemInfo',
-        openid : 'ou_D15cSRuMZmXUuXOIb1wRQy5Rw'
+        openid : app.data.openid
       },
       success(res){
         console.log("返回来的是-------------",res.result)
@@ -144,7 +119,17 @@ Page({
           item.overtimeFlag = true
         })
         let a=that.data.systemList.concat(res.result.myTeamedDance)
-                                                 .concat(res.result.myUpTimeDance)
+                                  .concat(res.result.myUpTimeDance)
+        a.map(item=>{
+          if (item.teamedFlag){
+            item.titleShow = `您的${item.title}约局已成功组队`
+            return item
+          }
+          if (item.overtimeFlag){
+            item.titleShow = `您的${item.title}约局已过期`
+            return item
+          }
+        })
         that.setData({
           systemList:a
         })
@@ -208,23 +193,6 @@ Page({
         console.log("走不走？",err)
     }
     })
-    // for(var i=0;i<res.result.length;i++)
-    // {
-    //   if(res.result == myApply)
-    //   {
-    //     var applyFlag = true;
-    //   }
-    //   if(res.result == checkedApply || res.result == checkedApply2)
-    //   {
-    //     var resultFlag = true;
-    //   }
-    //   let arr = a.concat(b).concat(c);
-    //   arr.forEach(
-    //       {
-    //         if(applyFLag == true)
-    //       }
-    //   )
-    // }
   }
 
 })

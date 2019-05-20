@@ -1,17 +1,18 @@
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
-  <view class="row">
-      <view class="col">
-          <view bindtap="goTo" data-type="hd" class="col-6">互动消息</view>
-          <view bindtap="goTo" data-type="xt" class="col-6">系统消息</view>
-      </view>
-  </view>
+    <scroll-view scroll-x class="bg-grey nav text-center">
+        <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
+            {{item.name}}
+        </view>
+    </scroll-view>
   <block wx:for="{{systemList}}">
     <!--      系统消息-->
       <view wx:if="{{flag==true}}" class="cu-list menu-avatar">
-      <view class="cu-item" bindtap="showModal" data-item="{{item}}">
-          <view class="cu-avatar  " style="background-image:url(../../static/icon/notice.png);"></view>
+      <view class="cu-item" data-item="{{item}}">
+          <view class="cu-avatar bg-transparent">
+              <text class="cuIcon-noticefill lg text-orange"></text>
+          </view>
           <view class="content">
-              <view class="text-grey">{{item.title}}</view>
+              <view class="text-grey">{{item.titleShow}}</view>
               <view class="text-gray text-sm flex">
                 <text class="text-cut">{{item.content}}</text>
               </view>
@@ -20,41 +21,6 @@
               <view class="text-grey text-xs">{{item.time}}</view>
           </view>
     </view>
-    </view>
-      <view class="cu-modal show" wx:if="{{showModalFlag}}">
-      <view class="cu-dialog">
-
-        <view class="cu-bar bg-white justify-end">
-          <view class="content">{{item.infoTitle}}</view>
-          <view class="action" bindtap="hideModal">
-            <text class="cuIcon-close text-red" bindtap='hideModal'></text>
-          </view>
-        </view>
-
-        <view class="padding-xl">
-          <view >                   <!--如果是发起者收到的报名申请 -->
-            <view style="text-align: left">申请内容</view>
-            <textarea>--------------{{item.content}}</textarea>
-            <view style="text-align: left">用户信息</view>
-            <view style="text-align: left">约局详情</view>
-         </view>
-
-          <view class="row">
-            <view class="col">
-              <view class="col-6">
-                <button class="button1" bindtap="sendInfo" data-state="0">同意</button>
-              </view>
-              <view class='col-6'>
-                <button class="button1" bindtap="sendInfo" data-state="2">拒绝</button>
-              </view>
-            </view>
-          </view>
-
-      </view>
-      </view>
-
-
-
     </view>
   </block>
     <block wx:for="{{hdList}}">
@@ -75,7 +41,6 @@
         </view>
         <view class="cu-modal show" wx:if="{{showModalFlag}}">
             <view class="cu-dialog">
-
                 <view class="cu-bar bg-white justify-end">
                     <view class="content">{{item.infoTitle}}</view>
                     <view class="action" bindtap="hideModal">
