@@ -81,14 +81,14 @@ exports.main = async (event, context) => {
               sentDance.push(item);
           }
           item.applicant.forEach((val)=> {
-              if (val._openid == event.openid){
+              if (val._openid == event.openid&&val.state=='0'){
                   Dance.push(item)
               }
           })
       })
       return {
-          sentDance:sentDance,
-          Dance:Dance
+          sentDance:sentDance, //我发起的
+          Dance:Dance //我加入的
       }
   }
   if(event.method == 'exam'){

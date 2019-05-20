@@ -67,7 +67,7 @@ page {
 	--greyShadow: rgba(114, 130, 138, 0.2);
 	--grayShadow: rgba(114, 130, 138, 0.2);
 	--blackShadow: rgba(26, 26, 26, 0.2);
-
+	--transparent: transparent;
 	background-color: var(--gradualOrange);
 	font-size: 28rpx;
 	color: var(--grey);
@@ -3432,7 +3432,9 @@ scroll-view.cu-steps .cu-item {
 .lines-white::after {
 	border-color: var(--white);
 }
-
+.bg-transparent{
+	background: var(--transparent);
+}
 .bg-red {
 	background-color: var(--red);
 	color: var(--white);
