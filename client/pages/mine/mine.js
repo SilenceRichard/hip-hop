@@ -10,7 +10,8 @@ Page({
           avatarUrl:''
       }, //用户信息
         sign:'暂无签名TAT',
-        loadingFlag:false
+        loadingFlag:false,
+        showModalFlag:false,
       // openid:'',//该用户字段在数据库中存储对应的openid
     },
     getUSER(){
@@ -27,6 +28,20 @@ Page({
     toMineInfo(){
         //跳转到个人信息详情页，携带参数id
         wx.navigateTo({url:'../mine-person/mine-person?openid='+app.data.openid})
+    },
+    hideModal(ev){
+        console.log(ev.currentTarget.dataset.state)
+        if (ev.currentTarget.dataset.state == '0'){  //选择是
+            wx.navigateTo({url:'../mine-person/mine-person?openid='+app.data.openid})
+            this.setData({
+                showModalFlag:false
+            })
+        }
+        if (ev.currentTarget.dataset.state == '1'){
+            this.setData({
+                showModalFlag:false
+            })
+        }
     },
     onReady:async function () {
       //关于数据库的操作，使用云函数
@@ -47,9 +62,8 @@ Page({
         })
         console.log(result)//打印
         if (result.result.status == '1'){
-            wx.showToast({
-                title:'请更新用户信息！',
-                duration:1000
+            this.setData({
+                showModalFlag:true
             })
         }
         else {

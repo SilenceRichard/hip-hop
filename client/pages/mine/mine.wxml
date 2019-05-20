@@ -46,6 +46,26 @@
     </view>
   </view>
 </view>
+<view class="cu-modal show" wx:if="{{showModalFlag}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-gray justify-end">
+      <view class="content">完善个人信息</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl bg-grey">
+        您首次登录，发起与报名约舞需要完善个人信息，是否现在完善？
+    </view>
+    <view class="cu-bar bg-grey justify-end">
+      <view class="action">
+        <button class="cu-btn bg-orange" bindtap="hideModal" data-state="1">否</button>
+        <button class="cu-btn bg-green margin-left" bindtap="hideModal" data-state="0">是</button>
+
+      </view>
+    </view>
+  </view>
+</view>
 <view class='cu-load load-modal' wx:if="{{loadingFlag}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
   <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>
