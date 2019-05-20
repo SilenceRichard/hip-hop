@@ -18,6 +18,7 @@ exports.main = async (event, context) => {
   const second = date.getSeconds();
 
     if(event.method=="sendInfo"){
+        {
             var targetDB = db.collection('dance-info');
             var visit = 0;
             let obj = {
@@ -47,15 +48,7 @@ exports.main = async (event, context) => {
                 }
             }
     }
-    if(event.method=="getFunderInfo"){
-        const targetDB = db.collection('user');
-        let res = await targetDB.where({
-            _id:event.id
-        }).get();
-        return {
-            res:res
-        }
-    }
+
     if(event.method=="getInfo") {
         if (event.type == 'All'){
             let result = await runDB.main('get',{db:'dance-info',condition:{}});
@@ -217,7 +210,7 @@ exports.main = async (event, context) => {
     }
     if(event.method == "getAppointInfo"){
       let result = await db.collection('dance-info').where({ _id: _.eq(event.info) }).get();
-      db.collection('dance-info').doc(event.info).update({
+      db.coll ection('dance-info').doc(event.info).update({
         data: {
           clicktime: _.inc(1)
         }
