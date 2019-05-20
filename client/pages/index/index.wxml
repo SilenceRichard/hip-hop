@@ -19,7 +19,7 @@
                         <view class='col-2' >{{item.limit}}</view>
                     </view>
                     <view class="innerText" style="color:#808080">{{item.time}}</view>
-                    <view class="innerText" style="color:#808080">{{item.location}}</view>
+                    <view class="innerText" style="color:#808080">{{item.location.name}}</view>
                 </view>
             </view>
         </view>
