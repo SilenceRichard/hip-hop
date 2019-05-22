@@ -162,39 +162,45 @@ Page({
       )
   },
   activeDropDown2() {
-    //console.log("程序进来了");
+    console.log("程序进来了，按距离排序");
     var that = this;
     that.setData({
       dropDownFlag: false
     })
-    wx.cloud.callFunction(
-      {
-        name: "home",
-        data: {
-          method: "getInfo",
-          type: 'location'
-        },
-        success: function (res) {
-          console.log("按距离排序成功->",res)
-          res.result.checkResult.forEach(item => {
-            item.str = ''
-            item.dance_type.forEach(val => {
-              if (val.checked == true) {
-                item.str = item.str + val.name + ',';
-              }
-            })
-          })
-          res.result.checkResult.forEach(item => {
-            item.str = item.str.slice(0, -1)
-          }),
+    wx.getLocation({
+      success(res) {
+        console.log("获取用户纬度经度：", res.latitude, res.longitude);
+        wx.cloud.callFunction(
+          {
+            name: "home",
+            data: {
+              method: "getInfo",
+              type: 'location',
+              userLocation: { latitude: Number(res.latitude), longtitude: Number(res.longitude)}
+            },
+            success: function (res_) {
+              console.log("按距离排序返回res_", res_)
+              res_.result.checkResult.forEach(item => {
+                item.str = ''
+                item.dance_type.forEach(val => {
+                  if (val.checked == true) {
+                    item.str = item.str + val.name + ',';
+                  }
+                })
+              })
+              res_.result.checkResult.forEach(item => {
+                item.str = item.str.slice(0, -1)
+              }),
 
-            that.setData({
-              info: res.result.checkResult
-            })
-          console.log(res)
-        }
+                that.setData({
+                info: res_.result.checkResult
+                })
+              console.log(res_)
+            }
+          }
+        )
       }
-    )
+    })
   },
 
   activeList(ev) {
@@ -231,10 +237,11 @@ Page({
         name: "home",
         data: {
           method: 'getInfo',
-          type: 'individual',
+          type: 'getByIndividual',
           location: app.data.location
         },
-        success: function (res) {
+        success(res) {
+          console.log("按个人查询返回res",res);
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
@@ -262,9 +269,10 @@ Page({
         name: "home",
         data: {
           method: 'getInfo',
-          type: 'official'
+          type: 'getByOfficial'
         },
-        success: function (res) {
+        success(res) {
+          console.log("按官方查询返回res", res);
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
