@@ -15,34 +15,23 @@
             </view>
         </view>
         </view>
-
     <view class="action">
         <text class="cuIcon-title text-blue"></text>热门搜索
     </view>
-
-
-        <view class="padding solid-bottom"  bindtap="clickTag">
+    <view class="padding solid-bottom"  bindtap="clickTag">
             <block wx:for="{{hotList}}">
             <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
             </block>
         </view>
-
-
-
     <view class="action">
         <text class="cuIcon-title text-blue"></text>历史搜索
     </view>
-
-<!--    循环写在block里-->
-
-        <view class="padding solid-bottom" >
+    <!--    循环写在block里-->
+    <view class="padding solid-bottom" >
             <block wx:for="{{historyList}}">
             <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
             </block>
         </view>
-
-
-
 </view>
 
 

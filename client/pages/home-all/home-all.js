@@ -69,10 +69,11 @@ Page({
   },
 
   search() {
+    let that = this;
     console.log("进入search,传入的是", this.data.keyword);
-    this.setData({
-      searchFlag: false
-    })
+    // this.setData({
+    //   searchFlag: false
+    // })
     wx.cloud.callFunction({
       name:"home",
       data:{
@@ -87,6 +88,9 @@ Page({
         that.setData({
           info: res.result.checkResult
         })
+      },
+      fail(err){
+        console.log(`getInfo错误：${err}`)
       }
     })
   },
@@ -95,11 +99,12 @@ Page({
     this.setData({
       searchFlag : true
     })
-    let res1 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"hot"},openid:app.data.openid});
+    let res1 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"hot",openid:app.data.openid}});
     console.log("返回热门搜索-------------", res1);
     this.setData({hotList : res1.result.checkResult});
     console.log("hotList :", this.data.hotList);
-    let res2 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"history"},openid:app.data.openid});
+    console.log("发送的参数：",app.data.openid)
+    let res2 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"history",openid:app.data.openid}});
     console.log("返回历史搜索-------------", res2);
     this.setData({historyList : res2.result.checkResult});
   },
@@ -241,7 +246,7 @@ Page({
           location: app.data.location
         },
         success(res) {
-          console.log("按个人查询返回res",res);
+          // console.log("按个人查询返回res",res);
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
@@ -272,7 +277,7 @@ Page({
           type: 'getByOfficial'
         },
         success(res) {
-          console.log("按官方查询返回res", res);
+          // console.log("按官方查询返回res", res);
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
@@ -295,7 +300,7 @@ Page({
   },
 
   goToDetail(ev){
-    console.log("这是ev---------",ev)
+    // console.log("这是ev---------",ev)
     wx.navigateTo({url:"../home-appointInfo/home-appointInfo?id="+ev.currentTarget.dataset.item._id})
   },
 
@@ -327,15 +332,6 @@ Page({
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
-              // var a=0;
-              // if (val.checked == true && a == 0){
-              //     item.str= val.name;
-              //     a++;
-              // }
-              // else if(val.checked == true){
-              //     item.str=item.str+ ','+ val.name;
-              //     a++;
-              // }
               if (val.checked == true) {
                 item.str = item.str + val.name + ',';
               }

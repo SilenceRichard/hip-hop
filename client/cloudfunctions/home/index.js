@@ -131,7 +131,6 @@ exports.main = async (event, context) => {
 
           //存储用户的搜索历史
           let result_ = await db.collection('user').where({_openid:event.openid}).get();
-          result_.data[0].history = [];
           result_.data[0].history.push(event.info);
           db.collection('user').where({ _openid: event.openid }).update({
             data: {
@@ -172,51 +171,95 @@ exports.main = async (event, context) => {
           }
         }//搜索
         if (event.type == 'hot') {
-          let result = await runDB.main('get', { db: 'user', condition: {} });//获取全部
-          var worddata = [];
-
-          //获取所有关键字及相应的搜索数
-          for (var i = 0; i <= result.data.length-1;i++){
-            for (var j = 0; j <= result.data[i].history.length - 1; j++) {
-              for (var k = 0, flag = 0; k <= worddata.length - 1; k++){
-                if (worddata[k].word == result.data[i].history[j]){
-                  flag=1;
-                  worddata[k].times ++;
-                }
-              }//遍历worddata数组，若没有查到则以 flag == 0 退出
-              if (flag == 0){
-                worddata.push({word:result.data[i].history[j], times: 1 });
-              }
-            }
-          }
-
-          //根据搜索数排序
-          for (var j = worddata.length - 2; j >= 0; j--) {//冒泡排序
-            for (var i = 0; i <= j; i++) {
-              if (worddata[i].times < worddata[i+1].times){
-                //交换
-                let temp = worddata[i];
-                worddata[i] = worddata[i+1];
-                worddata[i + 1] = temp;
-              }
-            }
-          }
-
-          var words = [];//词汇数组
-          for (var i = 0; i <= worddata.length - 1; i++) {
-            words.push(worddata[i].word);
-          }
-
-          console.log("worddata：", worddata);
+          let result = await db.collection('user').get();//获取全部
+          let  worddata = [];
+          result.data.forEach((item)=>{
+            if(item.history!=undefined){
+                worddata = worddata.concat(item.history)
+            } //合并热搜数组 ['词汇1'，'词汇2'...]
+          });
+          let resultArr = worddata.map((item)=>{
+              let obj = {name:item,time:0};
+              worddata.forEach(val =>{
+                  if (val===item){
+                      obj.time++;
+                  }
+              })
+              return obj;
+          })
+            console.log("resultArr:",resultArr)
+            //去重
+           let  resultArr2 = [];
+           resultArr.forEach((item,idx)=>{
+               //如果当前数组的第i项在当前数组中第一次出现的位置是i，才存入数组；否则代表是重复的
+               if (worddata.indexOf(item.name) == idx) {
+                   resultArr2.push(item);
+               }
+           })
+           console.log("去重：",resultArr2)
+           //排序
+           const sortArr = function(a,b){
+              if (a.time > b.time) return -1;
+              if (a.time < b.time) return 1;
+           }
+           let max = resultArr2.sort(sortArr).slice(0,9);  //选取10条
+           let checkResult = max.map(item =>{
+               return item.name
+           })
+          // worddata.map((item,idx,arr) =>{
+          //     let obj = {};
+          //     arr.forEach(val =>{
+          //         if (item === val)
+          //     })
+          // })
+          //todo 这下面是小辉写的
+          // //获取所有关键字及相应的搜索数
+          // for (var i = 0; i <= result.data.length-1;i++){
+          //   for (var j = 0; j <= result.data[i].history.length - 1; j++) {
+          //     for (var k = 0, flag = 0; k <= worddata.length - 1; k++){
+          //       if (worddata[k].word == result.data[i].history[j]){
+          //         flag=1;
+          //         worddata[k].times ++;
+          //       }
+          //     }//遍历worddata数组，若没有查到则以 flag == 0 退出
+          //     if (flag == 0){
+          //       worddata.push({word:result.data[i].history[j], times: 1 });
+          //     }
+          //   }
+          // }
+          //
+          // //根据搜索数排序
+          // for (var j = worddata.length - 2; j >= 0; j--) {//冒泡排序
+          //   for (var i = 0; i <= j; i++) {
+          //     if (worddata[i].times < worddata[i+1].times){
+          //       //交换
+          //       let temp = worddata[i];
+          //       worddata[i] = worddata[i+1];
+          //       worddata[i + 1] = temp;
+          //     }
+          //   }
+          // }
+          //
+          // var words = [];//词汇数组
+          // for (var i = 0; i <= worddata.length - 1; i++) {
+          //   words.push(worddata[i].word);
+          // }
           return {
-            checkResult: words
+            checkResult: checkResult
           }
         }//热门搜索标签
         if (event.type == 'history') {
-          let result = await db.collection('user').where({ _openid: event.openid}).get();
-          console.log(result.data[0].history);
+          let result = await db.collection('user').where({_openid:event.openid}).get();
+            let resultArr = [];
+            result.data[0].history.forEach((item,idx) =>{
+                if (result.data[0].history.indexOf(item) == idx){
+                    resultArr.push(item)
+                }
+            })
+            resultArr = resultArr.slice(0,9);
+          //筛选去重  选取历史前10条
           return {
-            checkResult: result.data[0].history
+            checkResult: resultArr
           }
         }//该用户的历史搜索记录标签
     }

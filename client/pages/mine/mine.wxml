@@ -2,11 +2,16 @@
   <view class="header row">
     <view class="col" style="height: 100%">
       <view class="col-3">
-        <view class="cu-avatar round lg margin-left" bindtap="toMineInfo" wx:key style="background-image:url({{userInfo.avatarUrl}})">
-          <view wx:if="{{userInfo.gender==2}}" class="cu-tag badge cuIcon-female bg-pink"></view>
-          <view wx:if="{{userInfo.gender==1}}" class="cu-tag badge cuIcon-male bg-blue"></view>
-        </view>
-        <!--<image id="head" src="{{userInfo.avatarUrl}}" bindtap="toMineInfo"></image>-->
+        <!--<view class="cu-avatar round lg margin-left" bindtap="toMineInfo" wx:key style="background-image:url({{userInfo.avatarUrl}}">-->
+          <!--<view wx:if="{{userInfo.gender==2}}" class="cu-tag badge cuIcon-female bg-pink"></view>-->
+          <!--<view wx:if="{{userInfo.gender==1}}" class="cu-tag badge cuIcon-male bg-blue"></view>-->
+        <!--</view>-->
+        <image style="position:relative" id="head" src="{{userInfo.avatarUrl}}" bindtap="toMineInfo">
+          <view  wx:if="{{userInfo.gender==2}}"class="cu-tag badge cuIcon-female bg-pink" style="top: 0;right: 0"></view>
+          <view  wx:elif="{{userInfo.gender==1}}"class="cu-tag badge cuIcon-male bg-blue" style="top: 0;right: 0"></view>
+          <view  wx:else class="cu-tag badge cuIcon-female bg-pink" style="top: 0;right: 0"></view>
+        </image>
+
       </view>
       <view class="col-8">
          <view id="nickName" class="text-gray">{{userInfo.nickName}}</view>
