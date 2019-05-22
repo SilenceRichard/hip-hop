@@ -69,6 +69,7 @@ exports.main = async (event, context) => {
             return n[1] ? n : '0' + n
           }
           let now = [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');//获取时间
+          console.log("now", now);
           const targetDB = db.collection('dance-info');
           let result = await targetDB.orderBy('time', 'asc').get();//获取
           for (var i = 0; i < result.data.length-1; i++) {//去掉过时的
@@ -123,6 +124,8 @@ exports.main = async (event, context) => {
         if (event.type == 'getNewsInfo') {
           const targetDB = db.collection('dance-info');
           let result = await targetDB.orderBy('clicktime', 'desc').get();//获取
+          //console.log("result.data.checkResult", result.data.checkResult);
+          result.data.checkResult.splice(5, result.data.checkResult.length-5);
           return {
             checkResult: result.data
           }
