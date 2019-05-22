@@ -194,14 +194,21 @@ Page({
   chooseImage() {//上传图片点击事件
       let that = this;
       let obj = this.data.info;
+      
       wx.chooseImage({
-        count:1,
-        success:function(res){
-          obj.cover = res.tempFilePaths[0] //保存图片路径
-          that.setData({
-             info:obj
+        count: 1,
+        success(chooseResult){
+          wx.cloud.uploadFile({
+            cloudPath: 'my-photo.png',
+            filePath: chooseResult.tempFilePaths[0],
+            success: res => {
+              console.log('上传成功', res);
+              that_.setData({
+                info: res.fileID,//云存储图片路径
+              });
+            },
           })
-        }
+        },
       })
   },
   chooseImageQR(){
