@@ -73,7 +73,7 @@ exports.main = async (event, context) => {
           let result = await targetDB.orderBy('time', 'asc').get();//获取
           for (var i = 0; i < result.data.length-1; i++) {//去掉过时的
             if(result.data[i].time<now){
-              result.data.splice(i,1); 
+              result.data.splice(i,1);
             }
           }
           console.log(result);
@@ -131,6 +131,7 @@ exports.main = async (event, context) => {
 
           //存储用户的搜索历史
           let result_ = await db.collection('user').where({_openid:event.openid}).get();
+          result_.data[0].history = [];
           result_.data[0].history.push(event.info);
           db.collection('user').where({ _openid: event.openid }).update({
             data: {
@@ -144,7 +145,7 @@ exports.main = async (event, context) => {
               item.dance_type_search = [];
               item.dance_type.forEach(val =>{
                 if (val.checked){
-                   item.dance_type_search.push(val.name.toLowerCase()) 
+                   item.dance_type_search.push(val.name.toLowerCase())
                 }
               })
               item.location_search = item.location.name.toLowerCase();
@@ -155,7 +156,7 @@ exports.main = async (event, context) => {
           a.forEach(item=>{
              for (i in item)
              {
-               if (i ==='dance_type_search'||i==='location_search'){
+               if (i ==='dance_type_search'||i==='location_search'||i==='title'||i==='authorName'){
                  if (JSON.stringify(item[i]).indexOf(searchInfo)!=-1){
                     result0.push(item)
                  }
@@ -200,12 +201,12 @@ exports.main = async (event, context) => {
               }
             }
           }
-          
+
           var words = [];//词汇数组
           for (var i = 0; i <= worddata.length - 1; i++) {
             words.push(worddata[i].word);
           }
-        
+
           console.log("worddata：", worddata);
           return {
             checkResult: words
