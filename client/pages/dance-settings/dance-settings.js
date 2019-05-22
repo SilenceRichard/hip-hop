@@ -199,7 +199,7 @@ Page({
         count: 1,
         success(chooseResult){
           wx.cloud.uploadFile({
-            cloudPath: 'my-photo.png',
+            cloudPath: Math.random() * 1000000+'my-photo.png',
             filePath: chooseResult.tempFilePaths[0],
             success: res => {
               console.log('上传成功', res);
