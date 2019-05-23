@@ -5,18 +5,22 @@ const runDB = require('./database');
 cloud.init();
 const db = cloud.database();
 const _ = db.command;
+//时间参数
+const formatNumber = n => {
+    n = n.toString()
+    return n[1] ? n : '0' + n
+}
+const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth() + 1;
+const day = date.getDate();
+const hour = date.getHours();
+const minute = date.getMinutes();
+const second = date.getSeconds();
+const now = [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');//获取时间
+
 
 exports.main = async (event, context) => {
-
-  //时间参数
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-  const second = date.getSeconds();
-
     if(event.method=="sendInfo"){
             var targetDB = db.collection('dance-info');
             var visit = 0;
@@ -58,18 +62,14 @@ exports.main = async (event, context) => {
     }
     if(event.method=="getInfo") {
         if (event.type == 'All'){
-            let result = await runDB.main('get',{db:'dance-info',condition:{}});
+            let result = await db.collection('dance-info').where({time:_.gte(now)}).orderBy('clicktime','desc').get();
+            console.log("---查到的结果- - ",result)
+            result.data.splice(5);
             return{
                 checkResult:result.data
             }
-        }
+        }//全部约局
         if (event.type == 'time') {
-          const formatNumber = n => {
-            n = n.toString()
-            return n[1] ? n : '0' + n
-          }
-          let now = [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');//获取时间
-          console.log("now", now);
           const targetDB = db.collection('dance-info');
           let result = await targetDB.orderBy('time', 'asc').get();//获取
           for (var i = 0; i < result.data.length-1; i++) {//去掉过时的
@@ -83,7 +83,7 @@ exports.main = async (event, context) => {
           }
         }
         if (event.type == 'location'){
-            let result = await runDB.main('get',{db:'dance-info',condition:{}});//获取所有
+            let result =await db.collection('dance-info').where({time:_.gte(now)}).get();//获取所有
 
               for (var j = result.data.length - 2; j >= 0; j--) {//冒泡排序
                 for (var i = 0; i <= j; i++) {
@@ -102,14 +102,14 @@ exports.main = async (event, context) => {
           }
         }//按距离查询
         if (event.type == 'getByIndividual'){
-            let result = await db.collection('dance-info').where({identify:_.eq('person')}).get();
+            let result = await db.collection('dance-info').where({identify:_.eq('person'),time:_.gte(now)}).get();
             console.log(result)
             return{
                 checkResult:result.data
             }
         }
         if (event.type == 'getByOfficial'){
-            let result = await db.collection('dance-info').where({identify:_.eq('official')}).get();
+            let result = await db.collection('dance-info').where({identify:_.eq('official'),time:_.gte(now)}).get();
             console.log(result)
             return{
                 checkResult:result.data
@@ -123,9 +123,10 @@ exports.main = async (event, context) => {
         }//获取广告
         if (event.type == 'getNewsInfo') {
           const targetDB = db.collection('dance-info');
-          let result = await targetDB.orderBy('clicktime', 'desc').get();//获取
+          let result = await targetDB.where({time:_.gte(now)}).orderBy('clicktime', 'desc').get();//获取
+          console.log("查询结果：",result.data);
           //console.log("result.data.checkResult", result.data.checkResult);
-          result.data.checkResult.splice(5, result.data.checkResult.length-5);
+          result.data.splice(5);
           return {
             checkResult: result.data
           }
@@ -259,16 +260,28 @@ exports.main = async (event, context) => {
         if (event.type == 'history') {
           let result = await db.collection('user').where({_openid:event.openid}).get();
             let resultArr = [];
-            result.data[0].history.forEach((item,idx) =>{
-                if (result.data[0].history.indexOf(item) == idx){
-                    resultArr.push(item)
+            if (result.data[0].history!=undefined){
+                result.data[0].history.forEach((item,idx) =>{
+                    if (result.data[0].history.indexOf(item) == idx){
+                        resultArr.push(item)
+                    }
+                })
+                resultArr = resultArr.slice(0,9);
+                //筛选去重  选取历史前10条
+                return {
+                    checkResult: resultArr
                 }
-            })
-            resultArr = resultArr.slice(0,9);
-          //筛选去重  选取历史前10条
-          return {
-            checkResult: resultArr
-          }
+            }else {
+                let obj = result.data[0];
+                obj.history = []; //为对象增加history属性
+                delete obj._id;
+                await db.collection('user').where({_openid:event.openid}).update({data:obj});
+                return {
+                    checkResult:[]
+                }
+            }
+
+
         }//该用户的历史搜索记录标签
     }
     if(event.method == "getAppointInfo"){
