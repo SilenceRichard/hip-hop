@@ -100,6 +100,13 @@ cancel(){
     searchFlag:false,
     searchKeyFlag:false
   })
+  wx.cloud.callFunction({
+    name: "home",
+    data: {
+      method: "getInfo",
+      type: "All"
+    }
+  })
 },
 
 activeSearch:async function(){

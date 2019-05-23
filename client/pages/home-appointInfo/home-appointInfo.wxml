@@ -43,7 +43,7 @@
     <view class="cu-modal show" wx:if="{{showModalFlag}}">
       <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
-          <view class="content">发起人咨询</view>
+          <view class="content">发起人信息</view>
           <view class="action" bindtap="hideModal">
             <text class="cuIcon-close text-red" bindtap='hideModal'></text>
           </view>
