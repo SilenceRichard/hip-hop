@@ -102,14 +102,14 @@ exports.main = async (event, context) => {
           }
         }//按距离查询
         if (event.type == 'getByIndividual'){
-            let result = await db.collection('dance-info').where({identify:_.eq('person')}).get();
+            let result = await db.collection('dance-info').where({identify:_.eq('person'),time:_.gte(now)}).get();
             console.log(result)
             return{
                 checkResult:result.data
             }
         }
         if (event.type == 'getByOfficial'){
-            let result = await db.collection('dance-info').where({identify:_.eq('official')}).get();
+            let result = await db.collection('dance-info').where({identify:_.eq('official'),time:_.gte(now)}).get();
             console.log(result)
             return{
                 checkResult:result.data
