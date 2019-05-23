@@ -134,10 +134,15 @@ exports.main = async (event, context) => {
 
           //存储用户的搜索历史
           let result_ = await db.collection('user').where({_openid:event.openid}).get();
-          result_.data[0].history.push(event.info);
+          let thehistory = result_.data[0].history;
+          if (thehistory.length == 0)
+          {
+            let thehistory = [];
+          }
+          thehistory.push(event.info);
           db.collection('user').where({ _openid: event.openid }).update({
             data: {
-              history: result_.data[0].history
+              history: thehistory
             }
           })
 
