@@ -1,90 +1,134 @@
 <!--pages/home-all/home-all.wxml-->
 
 <!--pages/home-searchInfo/home-searchInfo.wxml-->
-<view class="out" wx:if="{{searchFlag==true}}">
-    <view class="box">
+<view class="out">
+    <view  wx:if="{{searchFlag==true && searchKeyFlag==false}}">
+        <view class="box">
 
-        <view class="cu-bar search bg-gradualblack">
-            <text class="cuIcon-back lg text-gray" bindtap="Back"></text>
-            <view class="search-form round">
-                <text class="cuIcon-search"></text>
-                <input type="text" placeholder="搜索标题、舞种、地点、发起人" bindinput="inputKeyword" value="{{keyword}}"></input>
-            </view>
-            <view class="action">
-                <button class="cu-btn bg-yellow shadow-blur round" bindtap="search">搜索</button>
+            <view class="cu-bar search bg-gradualblack">
+                <text class="cuIcon-back lg text-gray" bindtap="Back"></text>
+                <view class="search-form round">
+                    <text class="cuIcon-search"></text>
+                    <input type="text" placeholder="搜索标题、舞种、地点、发起人" bindinput="inputKeyword" value="{{keyword}}"></input>
+                </view>
+                <view class="action">
+                    <button class="cu-btn bg-yellow shadow-blur round" bindtap="search">搜索</button>
+                </view>
             </view>
         </view>
+
+        <view class="action">
+            <text class="cuIcon-title text-blue"></text>热门搜索
         </view>
-    <view class="action">
-        <text class="cuIcon-title text-blue"></text>热门搜索
-    </view>
-    <view class="padding solid-bottom"  bindtap="clickTag">
+
+
+        <view class="padding solid-bottom"  bindtap="clickTag">
             <block wx:for="{{hotList}}">
-            <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
+                <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
             </block>
         </view>
-    <view class="action">
-        <text class="cuIcon-title text-blue"></text>历史搜索
-    </view>
-    <!--    循环写在block里-->
-    <view class="padding solid-bottom" >
+
+
+
+        <view class="action">
+            <text class="cuIcon-title text-blue"></text>历史搜索
+        </view>
+
+        <!--    循环写在block里-->
+
+        <view class="padding solid-bottom" >
             <block wx:for="{{historyList}}">
-            <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
+                <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
             </block>
         </view>
-</view>
 
 
 
-
-<view class="out" wx:if="{{searchFlag == false}}">
-    <view class="box" >
-        <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">
-            <view class="search-form round">
-                <text class="cuIcon-search"></text>
-                <input type="text" placeholder="搜索关键字" bindtap="activeSearch"></input>
-            </view>
-            <view class="action">
-                <text>广州</text>
-                <text class="cuIcon-triangledownfill"></text>
-            </view>
-        </view>
     </view>
 
 
-    <view class="row header">
-        <view class='col'  style="position: relative">
-            <image class="{{dropDownFlag?'activeArrow':'arrow'}}"  src="../../static/icon/arrow-right.svg"></image>
-            <block wx:for='{{list}}' wx:key="item.name">
-                <view class="{{item.flag?'col-4 list list-active':'col-4 list'}}" bindtap="activeList" data-item="{{item}}">
-                    {{item.name}}
+    <view  wx:if="{{searchFlag == false && searchKeyFlag==false}}">
+        <view class="box" >
+            <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">
+                <view class="search-form round">
+                    <text class="cuIcon-search"></text>
+                    <input type="text" placeholder="搜索关键字" bindtap="activeSearch"></input>
                 </view>
-            </block>
+                <view class="action">
+                    <text>广州</text>
+                    <text class="cuIcon-triangledownfill"></text>
+                </view>
+            </view>
         </view>
-      <!--        层级不够，要把dropdown层级置于page上面-->
-        <view class="dropDown"  wx:if="{{dropDownFlag}}"style="z-index:9999" >
-            <view class="title" bindtap="activeDropDown1">按时间 ↑</view>
-            <view class="title" bindtap="activeDropDown2">按距离 ↑</view>
-        </view>
-    </view>
 
 
-    <block wx:for="{{info}}">
-        <view class='row outer' bindtap="goToDetail" data-item="{{item}}" >
-            <view class='col' style='height:100%'>
-                <view class='col-4'><image class="listImage" src="{{item.cover}}"></image></view>
-                <view class='col-8'>
-                    <text class="title" >{{item.title}}</text>
-                    <view class="col class1"  >
-                        <view class='col-10' >{{item.str}}·{{item.type}}</view>
-                        <view class='col-2' >{{item.limit}}</view>
+        <view class="row header">
+            <view class='col'  style="position: relative">
+                <image class="{{dropDownFlag?'activeArrow':'arrow'}}"  src="../../static/icon/arrow-right.svg"></image>
+                <block wx:for='{{list}}' wx:key="item.name">
+                    <view class="{{item.flag?'col-4 list list-active':'col-4 list'}}" bindtap="activeList" data-item="{{item}}">
+                        {{item.name}}
                     </view>
-                    <view class="innerText" style="color:#808080">{{item.time}}</view>
-                    <view class="innerText" style="color:#808080">{{item.location.name}}</view>
+                </block>
+            </view>
+            <!--        层级不够，要把dropdown层级置于page上面-->
+            <view class="dropDown"  wx:if="{{dropDownFlag}}"style="z-index:9999" >
+                <view class="title" bindtap="activeDropDown1">按时间 ↑</view>
+                <view class="title" bindtap="activeDropDown2">按距离 ↑</view>
+            </view>
+        </view>
+
+
+        <block wx:for="{{info}}">
+            <view class='row outer' bindtap="goToDetail" data-item="{{item}}" >
+                <view class='col' style='height:100%'>
+                    <view class='col-4'><image class="listImage" src="{{item.cover}}"></image></view>
+                    <view class='col-8'>
+                        <text class="title" >{{item.title}}</text>
+                        <view class="col class1"  >
+                            <view class='col-10' >{{item.str}}·{{item.type}}</view>
+                            <view class='col-2' >{{item.limit}}</view>
+                        </view>
+                        <view class="innerText" style="color:#808080">{{item.time}}</view>
+                        <view class="innerText" style="color:#808080">{{item.location.name}}</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+
+
+    <view  wx:if="{{searchKeyFlag==true && searchFlag==false}}">
+        <view class="box" >
+            <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">
+                <view class="search-form round">
+                    <text class="cuIcon-search"></text>
+                    <input type="text" placeholder="{{keyword}}" bindinput="inputKeyword" value="{{keyword}}"></input>
+                </view>
+                <view class="action">
+                    <text bindtap="cancel">取消</text>
+                    <text class="cuIcon-triangledownfill"></text>
                 </view>
             </view>
         </view>
-    </block>
+
+        <block wx:for="{{info}}">
+            <view class='row outer' bindtap="goToDetail" data-item="{{item}}" >
+                <view class='col' style='height:100%'>
+                    <view class='col-4'><image class="listImage" src="{{item.cover}}"></image></view>
+                    <view class='col-8'>
+                        <text class="title" >{{item.title}}</text>
+                        <view class="col class1"  >
+                            <view class='col-10' >{{item.str}}·{{item.type}}</view>
+                            <view class='col-2' >{{item.limit}}</view>
+                        </view>
+                        <view class="innerText" style="color:#808080">{{item.time}}</view>
+                        <view class="innerText" style="color:#808080">{{item.location.name}}</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
 </view>
 
 
