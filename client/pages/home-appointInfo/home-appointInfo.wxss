@@ -63,3 +63,8 @@ image{
 button{
     background:#ffc300;
 }
+.gender{
+    top:18rpx;
+    left:0;
+    position:absolute;
+}

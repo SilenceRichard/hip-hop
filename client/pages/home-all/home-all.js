@@ -49,7 +49,37 @@ Page({
     theFlag:false
   },
 
-
+  Back() {
+        var that = this;
+        this.setData({
+            searchFlag: false,
+            searchKeyFlag: false
+        })
+        wx.cloud.callFunction({
+            name: "home",
+            data: {
+                method: "getInfo",
+                type: "All"
+            },
+            success: function (res) {
+                res.result.checkResult.forEach(item => {
+                    item.str = ''
+                    item.dance_type.forEach(val => {
+                        if (val.checked == true) {
+                            item.str = item.str + val.name + ',';
+                        }
+                    })
+                })
+                res.result.checkResult.forEach(item => {
+                    item.str = item.str.slice(0, -1)
+                }),
+                    that.setData({
+                        info: res.result.checkResult
+                    })
+                console.log("这是返回的全部约局资讯------", res)
+            }
+        })
+    },
 
 clickTag(ev){
   console.log("进入clickTag",ev)
