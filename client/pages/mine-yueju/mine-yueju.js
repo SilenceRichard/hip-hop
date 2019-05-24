@@ -6,7 +6,7 @@ Page({
         mySetted:[],
         flag:'fq',  //导航标志，我发起的/我加入的
         tabList:[{name:'我发起的',type:'fq'},{name:'我加入的',type:'jr'}],
-        TabCur:0
+        TabCur:0,
     },
     goTo(ev){
         console.log(ev)

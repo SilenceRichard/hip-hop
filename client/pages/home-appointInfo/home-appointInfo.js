@@ -19,7 +19,7 @@ Page({
             time: '12:00',
             location:'北京邮电高中',
             avatarUrl:'../../static/icon/strange.png',
-            name:'我叫王大可',
+            authorName:'我叫王大可',
             _id:'',
             nickName: '王大可',
             role: '沙雕',
@@ -90,9 +90,8 @@ Page({
     },
 
 
-    onReady: async function () {
+    onReady: function () {
         let that = this;
-
          wx.cloud.callFunction({
             name: 'home',
             data: {
