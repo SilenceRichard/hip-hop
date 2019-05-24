@@ -83,20 +83,39 @@ exports.main = async (event, context) => {
           }
         }
         if (event.type == 'location'){
-            let result =await db.collection('dance-info').where({time:_.gte(now)}).get();//获取所有
+          let result =await db.collection('dance-info').where({time:_.gte(now)}).get();//获取所有约舞信息
+          function sortNumber(a, b) {
+            let a_latitude_Dvalue = a.location.latitude - event.userLocation.latitude;//前一个点的纬度差值
+            let a_longitude_Dvalue = a.location.longitude - event.userLocation.longitude;//前一个点的经度差值
+            let b_latitude_Dvalue = b.location.latitude - event.userLocation.latitude;//前一个点的纬度差值
+            let b_longitude_Dvalue = b.location.longitude - event.userLocation.longitude;//前一个点的经度差值
 
-              for (var j = result.data.length - 2; j >= 0; j--) {//冒泡排序
-                for (var i = 0; i <= j; i++) {
-                  if ((result.data[i].location.latitude - event.userLocation.latitude) * (result.data[i].location.latitude - event.userLocation.latitude) + (result.data[i].location.longtitude - event.userLocation.longtitude) * (result.data[i].location.longtitude - event.userLocation.longtitude) > (result.data[i + 1].location.latitude - event.userLocation.latitude) * (result.data[i + 1].location.latitude - event.userLocation.latitude) + (result.data[i + 1].location.longtitude - event.userLocation.longtitude) * (result.data[i + 1].location.longtitude - event.userLocation.longtitude)) //若前一个大于后一个
-                  {//交换
-                     let temp = result.data[i];
-                     result.data[i] = result.data[i + 1];
-                     result.data[i + 1] = temp;
-                     console.log("交换了",i,i+1);
-                  }
-                }
-              }
-          console.log("结果：",result);
+            let a_distance_square = Math.pow(a_latitude_Dvalue, 2) + Math.pow(a_longitude_Dvalue, 2);//前一个点的距离平方
+            let b_distance_square = Math.pow(b_latitude_Dvalue, 2) + Math.pow(b_longitude_Dvalue, 2);//后一个点的距离平方
+
+            return a_distance_square - b_distance_square
+          }
+          result.data = result.data.sort(sortNumber);
+
+          // for (var j = result.data.length - 2; j >= 0; j--) {//冒泡排序法
+          //   for (var i = 0; i <= j; i++) {
+          //     let a_latitude_Dvalue = result.data[i].location.latitude - event.userLocation.latitude;//前一个点的纬度差值
+          //     let a_longitude_Dvalue = result.data[i].location.longitude - event.userLocation.longitude;//前一个点的经度差值
+          //     let b_latitude_Dvalue = result.data[i + 1].location.latitude - event.userLocation.latitude;//前一个点的纬度差值
+          //     let b_longitude_Dvalue = result.data[i + 1].location.longitude - event.userLocation.longitude;//前一个点的经度差值
+          //     let a_distance_square = Math.pow(a_latitude_Dvalue, 2) + Math.pow(a_longitude_Dvalue, 2);//前一个点的距离平方
+          //     let b_distance_square = Math.pow(b_latitude_Dvalue, 2) + Math.pow(b_longitude_Dvalue, 2);//后一个点的距离平方
+          //     if (a_distance_square > b_distance_square) //若前一个距离的平方大于后一个则交换
+          //     {
+          //         let temp = result.data[i];
+          //         result.data[i] = result.data[i + 1];
+          //         result.data[i + 1] = temp;
+          //         console.log("交换了一次",i,i+1);
+          //     }
+          //   }
+          // }
+
+          console.log("按距离查询结果：", result.data);
           return {
             checkResult: result.data
           }

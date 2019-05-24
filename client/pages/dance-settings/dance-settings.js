@@ -10,7 +10,7 @@ Page({
         name:'',
         address:'',
         latitude:'',
-        longtitude:'',
+        longitude:'',
         contact:'',
       },
       clicktime:0,
@@ -78,9 +78,9 @@ Page({
       x:'',
       y:''
     },
-  }
-  ,
+  },
   async setInfo(ev){//点击事件
+    console.log("已点击");
     let obj = this.data.info;//信息中间量
     if (this.data.step == 0){//如果是第一步
       obj.identify = ev.target.dataset.identify; //身份
@@ -165,6 +165,7 @@ Page({
                basics:this.data.basics+1,
                topTip:false
            })
+         console.log("传入云端数据：",this.data.info);
            await wx.cloud.callFunction({
                name:"dance",
                data:{
@@ -233,8 +234,9 @@ Page({
             name:res.name,
             address:res.address,
             latitude:res.latitude,
-            longtitude:res.longtitude
+            longitude:res.longitude,
           }
+        console.log("res", res);
           that.setData({
             info:obj
           })
@@ -254,7 +256,6 @@ Page({
         }
       }
     }
-
     this.setData({
       checkboxItems: checkboxItems
     });

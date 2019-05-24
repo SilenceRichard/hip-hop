@@ -11,15 +11,15 @@ Page({
             dance_type:"popping",
             type:"cypher",
             date: '2019 5 12',
-            limit: '4',
-            limit_set: '10',
+            now: '',
+            limit: '10',
             content: '我要好好跳舞',
             condition:'你能好好跳舞吗',
             activeDate:'2019 5 12',
             time: '12:00',
             location:'北京邮电高中',
             avatarUrl:'../../static/icon/strange.png',
-            name:'我叫王大可',
+            authorName:'我叫王大可',
             _id:'',
             nickName: '王大可',
             role: '沙雕',
@@ -90,9 +90,8 @@ Page({
     },
 
 
-    onReady: async function () {
+    onReady: function () {
         let that = this;
-
          wx.cloud.callFunction({
             name: 'home',
             data: {
@@ -102,7 +101,6 @@ Page({
           success: function (res) {
               console.log("第一次调用成功res:", res)
            console.log("下面查询openid：", res.result.checkResult[0]._openid)//发现_openid和openid查询结果一样
-              //处理舞种信息
               var dance_type_ =[];
                  res.result.checkResult[0].dance_type.forEach(function (element) {
                   if (element.checked == true){
@@ -110,10 +108,12 @@ Page({
                    }
                  });
                  res.result.checkResult[0].dance_type = dance_type_;
-                console.log("处理舞种信息得到--------", res) //已解决
+                // console.log("处理舞种信息得到--------", res) //已解决
+              // console.log("res.result.checkResult[0].applicant.length---",res.result.checkResult[0].applicant.length)
 
                that.setData({
-                     info: res.result.checkResult[0]
+                     info: res.result.checkResult[0] ,
+                   "info.now" :res.result.checkResult[0].applicant.length
                  })
                  console.log("本地的openid",that.data.info._openid)
 
