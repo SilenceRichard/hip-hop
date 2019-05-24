@@ -8,7 +8,7 @@
                 <view class="outerText" style='color:#ffffff'>{{info.title}}</view>
                 <view class="innerText1" style='color:#ffffff'>{{info.identify}}|{{info.dance_type}}|{{info.type}}</view>
                 <view class="innerText2" style='color:#ffffff'>发布时间：{{info.time}}</view>
-                <view class="innerText3" style='color:#ffffff'>人数限制：{{info.limit}}/{{info.limit_set}}</view>
+                <view class="innerText3" style='color:#ffffff'>人数限制：{{info.now}}/{{info.limit}}</view>
             </view>
         </view>
     </view>
