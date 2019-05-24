@@ -36,7 +36,17 @@ Page({
           }
       })
       console.log("RES:",res)
-        res.result.Dance.map(item =>{
+        res.result.overDance.map(item=>{
+            item.overFlag = true; //过期标志
+            return item
+        })
+        res.result.sentOverDance.map(item =>{
+            item.overFlag = true;
+            return item;
+        })
+        let danceArr = res.result.Dance.concat(res.result.overDance);
+        let sentArr = res.result.sentDance.concat(res.result.sentOverDance);
+        danceArr.map(item =>{
             let a =[]; //处理舞种
             item.dance_type.map(val=>{
                 if (val.checked){
@@ -46,7 +56,7 @@ Page({
             item.dance_type_show = a;
             return item
         })
-        res.result.sentDance.map(item =>{
+        sentArr.map(item =>{
             let a =[]; //处理舞种
             item.dance_type.map(val=>{
                 if (val.checked){
@@ -57,8 +67,8 @@ Page({
             return item
         })
       this.setData({
-          myJoined:res.result.Dance,
-          mySetted:res.result.sentDance
+          myJoined:danceArr,
+          mySetted:sentArr
       })
     }
 })

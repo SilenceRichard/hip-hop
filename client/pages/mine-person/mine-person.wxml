@@ -1,6 +1,6 @@
   <view class="row bg-gradual-black">
     <view class="col head" style="background-image: var(--gradualBlack)">
-        <image src="{{userInfo.avatarUrl}}"></image>
+        <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/user status.png'}}"></image>
         <text wx:if="{{edit==true}}" bindtap="changeImage" class="weui-cell_link">选择图片</text>
     </view>
 </view>
@@ -19,14 +19,14 @@
         <view class="col">
             <view class="col-3 label">性别：</view>
             <view class="col-9 formItem">
-                <view wx:if="{{userInfo.gender == '0'}}">
-                    保密  <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
-                </view>
                 <view wx:if="{{userInfo.gender == '1'}}">
                     男生  <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
                 </view>
                 <view wx:elif="{{userInfo.gender == '2'}}" bindtap="changeSex">
                     女生 <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
+                </view>
+                <view wx:else bindtap="changeSex">
+                    保密  <text bindtap="changeSex" class="weui-cell_link">选择性别</text>
                 </view>
             </view>
         </view>

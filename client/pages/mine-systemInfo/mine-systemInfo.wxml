@@ -16,9 +16,10 @@
               <view class="text-gray text-sm flex">
                 <text class="text-cut">{{item.content}}</text>
               </view>
+              <view class="text-grey text-xs">{{item.time}}</view>
           </view>
           <view class="action">
-              <view class="text-grey text-xs">{{item.time}}</view>
+
           </view>
     </view>
     </view>
@@ -33,9 +34,9 @@
                     <view class="text-gray text-sm flex">
                         <text class="text-cut">{{item.content}}</text>
                     </view>
+                    <view class="text-grey text-xs">{{item.time}}</view>
                 </view>
                 <view class="action">
-                    <view class="text-grey text-xs">{{item.time}}</view>
                 </view>
             </view>
         </view>
