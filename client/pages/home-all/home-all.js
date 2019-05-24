@@ -252,7 +252,7 @@ activeDropDown2() {
             data: {
               method: "getInfo",
               type: 'location',
-              userLocation: { latitude: Number(res.latitude), longtitude: Number(res.longitude)}
+              userLocation: { latitude: Number(res.latitude), longitude: Number(res.longitude)}
             },
             success: function (res_) {
               console.log("按距离排序返回res_", res_)

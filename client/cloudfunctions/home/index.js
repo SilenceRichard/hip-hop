@@ -86,12 +86,12 @@ exports.main = async (event, context) => {
           let result =await db.collection('dance-info').where({time:_.gte(now)}).get();//获取所有约舞信息
           function sortNumber(a, b) {
             let a_latitude_Dvalue = a.location.latitude - event.userLocation.latitude;//前一个点的纬度差值
-            let a_longtitude_Dvalue = a.location.longtitude - event.userLocation.longtitude;//前一个点的经度差值
+            let a_longitude_Dvalue = a.location.longitude - event.userLocation.longitude;//前一个点的经度差值
             let b_latitude_Dvalue = b.location.latitude - event.userLocation.latitude;//前一个点的纬度差值
-            let b_longtitude_Dvalue = b.location.longtitude - event.userLocation.longtitude;//前一个点的经度差值
+            let b_longitude_Dvalue = b.location.longitude - event.userLocation.longitude;//前一个点的经度差值
 
-            let a_distance_square = Math.pow(a_latitude_Dvalue, 2) + Math.pow(a_longtitude_Dvalue, 2);//前一个点的距离平方
-            let b_distance_square = Math.pow(b_latitude_Dvalue, 2) + Math.pow(b_longtitude_Dvalue, 2);//后一个点的距离平方
+            let a_distance_square = Math.pow(a_latitude_Dvalue, 2) + Math.pow(a_longitude_Dvalue, 2);//前一个点的距离平方
+            let b_distance_square = Math.pow(b_latitude_Dvalue, 2) + Math.pow(b_longitude_Dvalue, 2);//后一个点的距离平方
 
             return a_distance_square - b_distance_square
           }
@@ -100,11 +100,11 @@ exports.main = async (event, context) => {
           // for (var j = result.data.length - 2; j >= 0; j--) {//冒泡排序法
           //   for (var i = 0; i <= j; i++) {
           //     let a_latitude_Dvalue = result.data[i].location.latitude - event.userLocation.latitude;//前一个点的纬度差值
-          //     let a_longtitude_Dvalue = result.data[i].location.longtitude - event.userLocation.longtitude;//前一个点的经度差值
+          //     let a_longitude_Dvalue = result.data[i].location.longitude - event.userLocation.longitude;//前一个点的经度差值
           //     let b_latitude_Dvalue = result.data[i + 1].location.latitude - event.userLocation.latitude;//前一个点的纬度差值
-          //     let b_longtitude_Dvalue = result.data[i + 1].location.longtitude - event.userLocation.longtitude;//前一个点的经度差值
-          //     let a_distance_square = Math.pow(a_latitude_Dvalue, 2) + Math.pow(a_longtitude_Dvalue, 2);//前一个点的距离平方
-          //     let b_distance_square = Math.pow(b_latitude_Dvalue, 2) + Math.pow(b_longtitude_Dvalue, 2);//后一个点的距离平方
+          //     let b_longitude_Dvalue = result.data[i + 1].location.longitude - event.userLocation.longitude;//前一个点的经度差值
+          //     let a_distance_square = Math.pow(a_latitude_Dvalue, 2) + Math.pow(a_longitude_Dvalue, 2);//前一个点的距离平方
+          //     let b_distance_square = Math.pow(b_latitude_Dvalue, 2) + Math.pow(b_longitude_Dvalue, 2);//后一个点的距离平方
           //     if (a_distance_square > b_distance_square) //若前一个距离的平方大于后一个则交换
           //     {
           //         let temp = result.data[i];
