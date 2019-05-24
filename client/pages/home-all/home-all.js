@@ -45,7 +45,8 @@ Page({
     keyword:'',
     dropDownFlag: false,
     searchFlag:false,
-    searchKeyFlag:false
+    searchKeyFlag:false,
+    theFlag:false
   },
 
 
@@ -59,10 +60,17 @@ clickTag(ev){
 },
 
 inputKeyword(ev){
+    var that = this;
   console.log("进入inputKeyword",ev)
   this.setData({
     keyword : ev.detail.value
   })
+  // if(searchKeyFlag==true)
+  // {
+  //   that.setData({
+  //     theFlag : true
+  //   })
+  // }
   console.log(this.data.keyword)
 },
 
@@ -95,16 +103,34 @@ search() {
   })
 },
 
-cancel(){
+cancel() {
+    var that = this;
   this.setData({
-    searchFlag:false,
-    searchKeyFlag:false
+    searchFlag: false,
+    searchKeyFlag: false
   })
   wx.cloud.callFunction({
     name: "home",
     data: {
       method: "getInfo",
       type: "All"
+    },
+    success: function (res) {
+      res.result.checkResult.forEach(item => {
+        item.str = ''
+        item.dance_type.forEach(val => {
+          if (val.checked == true) {
+            item.str = item.str + val.name + ',';
+          }
+        })
+      })
+      res.result.checkResult.forEach(item => {
+        item.str = item.str.slice(0, -1)
+      }),
+          that.setData({
+            info: res.result.checkResult
+          })
+      console.log("这是返回的全部约局资讯------", res)
     }
   })
 },
@@ -180,6 +206,7 @@ activeDropDown1() {
           }
       )
 },
+
 activeDropDown2() {
   console.log("程序进来了，按距离排序");
   var that = this;
@@ -339,10 +366,6 @@ onReady: function () {
           type: 'All'
         },
         success: function (res) {
-          //后台规定参数返回形式
-          //return{
-          //checkResult: [{},{},{}]
-          // }
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
@@ -354,21 +377,10 @@ onReady: function () {
           res.result.checkResult.forEach(item => {
             item.str = item.str.slice(0, -1)
           }),
-
-              // this,that,傻傻分不清楚
               that.setData({
                 info: res.result.checkResult
               })
           console.log("这是返回的全部约局资讯------",res)
-          // let obj = that.data.info;
-          // obj.imgsrc = res.imgsrc;
-          // obj.title  = res.title ;
-          // obj.innerText1 = res.innerText1;
-          // obj.innerText2 = res.innerText2;
-          // obj.limit_now  = res.limit_now;
-          // obj.limit      = res.limit;
-          // obj.time      = res.time;
-          // obj.location      = res.location;
         }
 
       })

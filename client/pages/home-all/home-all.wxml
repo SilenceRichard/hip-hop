@@ -2,6 +2,7 @@
 
 <!--pages/home-searchInfo/home-searchInfo.wxml-->
 <view class="out">
+<!--    搜索页-->
     <view  wx:if="{{searchFlag==true && searchKeyFlag==false}}">
         <view class="box">
 
@@ -46,7 +47,7 @@
 
     </view>
 
-
+<!--home-all-->
     <view  wx:if="{{searchFlag == false && searchKeyFlag==false}}">
         <view class="box" >
             <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">
@@ -97,13 +98,13 @@
         </block>
     </view>
 
-
+<!--    点击“搜索”展示的界面-->
     <view  wx:if="{{searchKeyFlag==true && searchFlag==false}}">
         <view class="box" >
             <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">
                 <view class="search-form round">
                     <text class="cuIcon-search"></text>
-                    <input type="text" placeholder="{{keyword}}" bindinput="inputKeyword" value="{{keyword}}"></input>
+                    <input type="text" placeholder="{{keyword}}" bindconfirm="search" bindinput="inputKeyword" value="{{keyword}}"></input>
                 </view>
                 <view class="action">
                     <text bindtap="cancel">取消</text>
