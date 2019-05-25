@@ -35,14 +35,17 @@
     </view>
     <view class="row picture" bindtap="showModal">
         <view class="col head" style='height:100%'>
-            <view class="col-3 cu-avatar xl round margin-left"><image src="{{info_.avatarUrl}}"style="height: 170rpx;width: 170rpx;"></image></view>
+           <view class="col-3  margin-left" style="position: relative;overflow: visible">
+           <image src="{{info_.avatarUrl}}"style="height: 130rpx;width: 130rpx;border-radius: 50%"></image>
+           <view  style="position: absolute;top: 0;left: 0" class="cu-tag badge {{info.gender%2==0?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
+
+            </view>
             <view class="col-9 name" >
                 <view class="col" >
-                    <view class="col-3 style='color:#ffffff'"> {{info.authorName}}</view>
-                    <view class="col-9" style="position:relative">
-                    <view  wx:if="{{info.gender==2}}" class="cu-tag badge cuIcon-female bg-pink gender" ></view>
-                    <view  wx:elif="{{info.gender==1}}" class="cu-tag badge cuIcon-male bg-blue gender" ></view>
-                    <view  wx:else class="col-9 cu-tag badge cuIcon-female bg-pink gender" ></view>
+                    <view class="col-9 style='color:#ffffff'"> {{info.authorName}}</view>
+                    <view class="col-3" style="position:relative">
+                    
+                    
                     </view>
                 </view>
             </view>
