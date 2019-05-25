@@ -3,11 +3,10 @@ import util from '../../utils/util'
 import regeneratorRuntime from '../../utils/wxPromise.min.js'
 const app = getApp();
 Page({
-
+    loadingFlag: false,
   /**
    * 页面的初始数据
    */
-  loadingFlag: false,
   data: {
     list: [{ name: '综合', flag: false }, { name: '个人', flag: false }, { name: '官方', flag: false }],
     info: [{
@@ -15,10 +14,11 @@ Page({
       title: '标题',
       dance_type: 'popping',
       type: 'cypher',
-      limit: '4/10',
+      limit: '',
       time: '2019-5-11 00:00:00',
       location:'',
-      str: ''
+      str: '',
+      now:''
     },
       {
         cover: '../../static/home.png',
@@ -46,8 +46,7 @@ Page({
     keyword:'',
     dropDownFlag: false,
     searchFlag:false,
-    searchKeyFlag:false,
-    theFlag:false
+    searchKeyFlag:false
   },
 
   Back() {
@@ -63,6 +62,16 @@ Page({
                 type: "All"
             },
             success: function (res) {
+                //处理人数限制
+                res.result.checkResult= res.result.checkResult.map((item)=>{
+                    let arr = item.applicant.filter((val)=>{
+                        if(val.state==0)
+                            return val
+                    })
+                    item.now = arr.length
+                    return item
+                })
+                //处理舞种信息
                 res.result.checkResult.forEach(item => {
                     item.str = ''
                     item.dance_type.forEach(val => {
@@ -73,11 +82,13 @@ Page({
                 })
                 res.result.checkResult.forEach(item => {
                     item.str = item.str.slice(0, -1)
-                }),
-                    that.setData({
-                        info: res.result.checkResult
-                    })
-                console.log("这是返回的全部约局资讯------", res)
+                })
+
+                that.setData({
+                    info: res.result.checkResult
+                })
+                console.log("这是返回的全部约局资讯------",res)
+                console.log("info",that.data.info)
             }
         })
     },
@@ -121,12 +132,34 @@ search() {
       openid:app.data.openid
     },
 
-    success(res){
-      //console.log("传入的是", this.data.keyword)
-      console.log("返回搜索",res)
-      that.setData({
-        info: res.result.checkResult
-      })
+    ssuccess: function (res) {
+        //处理人数限制
+        res.result.checkResult= res.result.checkResult.map((item)=>{
+            let arr = item.applicant.filter((val)=>{
+                if(val.state==0)
+                    return val
+            })
+            item.now = arr.length
+            return item
+        })
+        //处理舞种信息
+        res.result.checkResult.forEach(item => {
+            item.str = ''
+            item.dance_type.forEach(val => {
+                if (val.checked == true) {
+                    item.str = item.str + val.name + ',';
+                }
+            })
+        })
+        res.result.checkResult.forEach(item => {
+            item.str = item.str.slice(0, -1)
+        })
+
+        that.setData({
+            info: res.result.checkResult
+        })
+        console.log("这是返回的全部约局资讯------",res)
+        console.log("info",that.data.info)
     },
     fail(err){
       console.log(`getInfo错误：${err}`)
@@ -146,23 +179,35 @@ cancel() {
       method: "getInfo",
       type: "All"
     },
-    success: function (res) {
-      res.result.checkResult.forEach(item => {
-        item.str = ''
-        item.dance_type.forEach(val => {
-          if (val.checked == true) {
-            item.str = item.str + val.name + ',';
-          }
-        })
-      })
-      res.result.checkResult.forEach(item => {
-        item.str = item.str.slice(0, -1)
-      }),
-          that.setData({
-            info: res.result.checkResult
+      success: function (res) {
+          //处理人数限制
+          res.result.checkResult= res.result.checkResult.map((item)=>{
+              let arr = item.applicant.filter((val)=>{
+                  if(val.state==0)
+                      return val
+              })
+              item.now = arr.length
+              return item
           })
-      console.log("这是返回的全部约局资讯------", res)
-    }
+          //处理舞种信息
+          res.result.checkResult.forEach(item => {
+              item.str = ''
+              item.dance_type.forEach(val => {
+                  if (val.checked == true) {
+                      item.str = item.str + val.name + ',';
+                  }
+              })
+          })
+          res.result.checkResult.forEach(item => {
+              item.str = item.str.slice(0, -1)
+          })
+
+          that.setData({
+              info: res.result.checkResult
+          })
+          console.log("这是返回的全部约局资讯------",res)
+          console.log("info",that.data.info)
+      }
   })
 },
 
@@ -193,47 +238,35 @@ activeDropDown1() {
               method: "getInfo",
               type: "time"
             },
-            success: function (res) {
-              //后台规定参数返回形式
-              //return{
-              //checkResult: [{},{},{}]
-              // }
-              res.result.checkResult.forEach(item => {
-                item.str = ''
-                item.dance_type.forEach(val => {
-                  // var a=0;
-                  // if (val.checked == true && a == 0){
-                  //     item.str= val.name;
-                  //     a++;
-                  // }
-                  // else if(val.checked == true){
-                  //     item.str=item.str+ ','+ val.name;
-                  //     a++;
-                  // }
-                  if (val.checked == true) {
-                    item.str = item.str + val.name + ',';
-                  }
-                })
-              })
-              res.result.checkResult.forEach(item => {
-                item.str = item.str.slice(0, -1)
-              }),
-
-                  // this,that,傻傻分不清楚
-                  that.setData({
-                    info: res.result.checkResult
+              success: function (res) {
+                  //处理人数限制
+                  res.result.checkResult= res.result.checkResult.map((item)=>{
+                      let arr = item.applicant.filter((val)=>{
+                          if(val.state==0)
+                              return val
+                      })
+                      item.now = arr.length
+                      return item
+                  })
+                  //处理舞种信息
+                  res.result.checkResult.forEach(item => {
+                      item.str = ''
+                      item.dance_type.forEach(val => {
+                          if (val.checked == true) {
+                              item.str = item.str + val.name + ',';
+                          }
+                      })
+                  })
+                  res.result.checkResult.forEach(item => {
+                      item.str = item.str.slice(0, -1)
                   })
 
-              // let obj = that.data.info;
-              // obj.imgsrc = res.imgsrc;
-              // obj.title  = res.title ;
-              // obj.innerText1 = res.innerText1;
-              // obj.innerText2 = res.innerText2;
-              // obj.limit_now  = res.limit_now;
-              // obj.limit      = res.limit;
-              // obj.time      = res.time;
-              // obj.location      = res.location;
-            }
+                  that.setData({
+                      info: res.result.checkResult
+                  })
+                  console.log("这是返回的全部约局资讯------",res)
+                  console.log("info",that.data.info)
+              }
           }
       )
 },
@@ -255,25 +288,35 @@ activeDropDown2() {
               type: 'location',
               userLocation: { latitude: Number(res.latitude), longitude: Number(res.longitude)}
             },
-            success: function (res_) {
-              console.log("按距离排序返回res_", res_)
-              res_.result.checkResult.forEach(item => {
-                item.str = ''
-                item.dance_type.forEach(val => {
-                  if (val.checked == true) {
-                    item.str = item.str + val.name + ',';
-                  }
-                })
-              })
-              res_.result.checkResult.forEach(item => {
-                item.str = item.str.slice(0, -1)
-              }),
+              success: function (res) {
+                  //处理人数限制
+                  res.result.checkResult= res.result.checkResult.map((item)=>{
+                      let arr = item.applicant.filter((val)=>{
+                          if(val.state==0)
+                              return val
+                      })
+                      item.now = arr.length
+                      return item
+                  })
+                  //处理舞种信息
+                  res.result.checkResult.forEach(item => {
+                      item.str = ''
+                      item.dance_type.forEach(val => {
+                          if (val.checked == true) {
+                              item.str = item.str + val.name + ',';
+                          }
+                      })
+                  })
+                  res.result.checkResult.forEach(item => {
+                      item.str = item.str.slice(0, -1)
+                  })
 
                   that.setData({
-                    info: res_.result.checkResult
+                      info: res.result.checkResult
                   })
-              console.log(res_)
-            }
+                  console.log("这是返回的全部约局资讯------",res)
+                  console.log("info",that.data.info)
+              }
           }
       )
     }
@@ -317,25 +360,35 @@ activeList(ev) {
         type: 'getByIndividual',
         location: app.data.location
       },
-      success(res) {
-        // console.log("按个人查询返回res",res);
-        res.result.checkResult.forEach(item => {
-          item.str = ''
-          item.dance_type.forEach(val => {
-            if (val.checked == true) {
-              item.str = item.str + val.name + ',';
-            }
-          })
-        })
-        res.result.checkResult.forEach(item => {
-          item.str = item.str.slice(0, -1)
-        }),
+        success: function (res) {
+            //处理人数限制
+            res.result.checkResult= res.result.checkResult.map((item)=>{
+                let arr = item.applicant.filter((val)=>{
+                    if(val.state==0)
+                        return val
+                })
+                item.now = arr.length
+                return item
+            })
+            //处理舞种信息
+            res.result.checkResult.forEach(item => {
+                item.str = ''
+                item.dance_type.forEach(val => {
+                    if (val.checked == true) {
+                        item.str = item.str + val.name + ',';
+                    }
+                })
+            })
+            res.result.checkResult.forEach(item => {
+                item.str = item.str.slice(0, -1)
+            })
 
             that.setData({
-              info: res.result.checkResult
+                info: res.result.checkResult
             })
-        console.log(res)
-      }
+            console.log("这是返回的全部约局资讯------",res)
+            console.log("info",that.data.info)
+        }
     })
   }
   else {
@@ -348,25 +401,35 @@ activeList(ev) {
         method: 'getInfo',
         type: 'getByOfficial'
       },
-      success(res) {
-        // console.log("按官方查询返回res", res);
-        res.result.checkResult.forEach(item => {
-          item.str = ''
-          item.dance_type.forEach(val => {
-            if (val.checked == true) {
-              item.str = item.str + val.name + ',';
-            }
-          })
-        })
-        res.result.checkResult.forEach(item => {
-          item.str = item.str.slice(0, -1)
-        }),
+        success: function (res) {
+            //处理人数限制
+            res.result.checkResult= res.result.checkResult.map((item)=>{
+                let arr = item.applicant.filter((val)=>{
+                    if(val.state==0)
+                        return val
+                })
+                item.now = arr.length
+                return item
+            })
+            //处理舞种信息
+            res.result.checkResult.forEach(item => {
+                item.str = ''
+                item.dance_type.forEach(val => {
+                    if (val.checked == true) {
+                        item.str = item.str + val.name + ',';
+                    }
+                })
+            })
+            res.result.checkResult.forEach(item => {
+                item.str = item.str.slice(0, -1)
+            })
 
             that.setData({
-              info: res.result.checkResult
+                info: res.result.checkResult
             })
-        console.log(res)
-      }
+            console.log("这是返回的全部约局资讯------",res)
+            console.log("info",that.data.info)
+        }
     })
   }
 },
@@ -376,30 +439,81 @@ goToDetail(ev){
   wx.navigateTo({url:"../home-appointInfo/home-appointInfo?id="+ev.currentTarget.dataset.item._id})
 },
 
-/**
- * 生命周期函数--监听页面加载
- */
-onLoad: function (options) {
-  
+onPullDownRefresh(){
+  var that = this;
+  console.log("下拉刷新----")
+  wx.cloud.callFunction({
+      name: 'home',
+      data: {
+          method: 'getInfo',//获取全部约局资讯
+          type: 'All'
+      },
+      success: function (res) {
+          console.log("下拉刷新成功了",res)
+          //处理人数限制
+          res.result.checkResult= res.result.checkResult.map((item)=>{
+              let arr = item.applicant.filter((val)=>{
+                  if(val.state==0)
+                      return val
+              })
+              item.now = arr.length
+              return item
+          })
+          //处理舞种信息
+          res.result.checkResult.forEach(item => {
+              item.str = ''
+              item.dance_type.forEach(val => {
+                  if (val.checked == true) {
+                      item.str = item.str + val.name + ',';
+                  }
+              })
+          })
+          res.result.checkResult.forEach(item => {
+              item.str = item.str.slice(0, -1)
+          })
+
+          that.setData({
+              info: res.result.checkResult,
+              dropDownFlag: false,
+              searchFlag:false,
+              searchKeyFlag:false
+          })
+          let array = this.data.list;
+          var that = this;
+          for (var j = 0; j < array.length; j++) {
+              array[j].flag = false;
+          }
+          wx.stopPullDownRefresh()
+      }
+  })
 },
 
-/**
- * 生命周期函数--监听页面初次渲染完成
- */
+
+
 onReady: function () {
   // console.log("页面进来啦-------") 没问题
   var that = this;
     this.setData({
-      loadingFlag: true
+        loadingFlag: true
     })
-    wx.cloud.callFunction(
-    {
-      name: 'home',
-      data: {
-        method: 'getInfo',//获取全部约局资讯
-        type: 'All'
-      },
-      success: function (res) {
+  wx.cloud.callFunction(
+      {
+        name: 'home',
+        data: {
+          method: 'getInfo',//获取全部约局资讯
+          type: 'All'
+        },
+        success: function (res) {
+            //处理人数限制
+            res.result.checkResult= res.result.checkResult.map((item)=>{
+                let arr = item.applicant.filter((val)=>{
+                    if(val.state==0)
+                        return val
+                })
+                item.now = arr.length
+                return item
+            })
+            //处理舞种信息
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
@@ -410,27 +524,27 @@ onReady: function () {
           })
           res.result.checkResult.forEach(item => {
             item.str = item.str.slice(0, -1)
-          }),
-              that.setData({
+          })
+            that.setData({
                 info: res.result.checkResult,
-                loadingFlag: false 
+                loadingFlag: false
+            })
+              that.setData({
+                info: res.result.checkResult
               })
           console.log("这是返回的全部约局资讯------",res)
+            console.log("info",that.data.info)
         }
 
       })
 },
 
-/**
- * 生命周期函数--监听页面显示
- */
+
 onShow: function () {
 
 },
 
-/**
- * 生命周期函数--监听页面隐藏
- */
+
 onHide: function () {
 
 },
@@ -445,41 +559,6 @@ onUnload: function () {
 /**
  * 页面相关事件处理函数--监听用户下拉动作
  */
-  onPullDownRefresh() {
-    var that = this;
-    console.log("下拉刷新----")
-    wx.cloud.callFunction({
-      name: 'home',
-      data: {
-        method: 'getInfo',//获取全部约局资讯
-        type: 'All'
-      },
-      success: function (res) {
-        console.log("下拉刷新成功了", res)
-        res.result.checkResult.forEach(item => {
-          item.str = ''
-          item.dance_type.forEach(val => {
-            if (val.checked == true) {
-              item.str = item.str + val.name + ',';
-            }
-          })
-        })
-        res.result.checkResult.forEach(item => {
-          item.str = item.str.slice(0, -1)
-        }),
-          that.setData({
-            info: res.result.checkResult,
-            dropDownFlag: false,
-            searchFlag: false,
-            searchKeyFlag: false,
-            theFlag: false,
-            "list.item.flag": false
-          }),
-          wx.stopPullDownRefresh()
-      }
-    })
-  },
-
 /**
  * 页面上拉触底事件的处理函数
  */
