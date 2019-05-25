@@ -118,53 +118,99 @@ inputKeyword(ev){
 
 search() {
   let that = this;
-  this.setData({
-    searchFlag:false,
-    searchKeyFlag:true
-  })
-  console.log("进入search,传入的是", this.data.keyword);
-  wx.cloud.callFunction({
-    name:"home",
-    data:{
-      method:"getInfo",
-      type:"keyword",
-      info:this.data.keyword,
-      openid:app.data.openid
-    },
+    this.setData({
+        searchFlag:false,
+        searchKeyFlag:true
+    })
+  if(this.data.keyword != '')
+  {
+      console.log("进入search,传入的是", this.data.keyword);
+      wx.cloud.callFunction({
+          name:"home",
+          data:{
+              method:"getInfo",
+              type:"keyword",
+              info:this.data.keyword,
+              openid:app.data.openid
+          },
 
-    ssuccess: function (res) {
-        //处理人数限制
-        res.result.checkResult= res.result.checkResult.map((item)=>{
-            let arr = item.applicant.filter((val)=>{
-                if(val.state==0)
-                    return val
-            })
-            item.now = arr.length
-            return item
-        })
-        //处理舞种信息
-        res.result.checkResult.forEach(item => {
-            item.str = ''
-            item.dance_type.forEach(val => {
-                if (val.checked == true) {
-                    item.str = item.str + val.name + ',';
-                }
-            })
-        })
-        res.result.checkResult.forEach(item => {
-            item.str = item.str.slice(0, -1)
-        })
+          success: function (res) {
+              //处理人数限制
+              res.result.checkResult= res.result.checkResult.map((item)=>{
+                  let arr = item.applicant.filter((val)=>{
+                      if(val.state==0)
+                          return val
+                  })
+                  item.now = arr.length
+                  return item
+              })
+              //处理舞种信息
+              res.result.checkResult.forEach(item => {
+                  item.str = ''
+                  item.dance_type.forEach(val => {
+                      if (val.checked == true) {
+                          item.str = item.str + val.name + ',';
+                      }
+                  })
+              })
+              res.result.checkResult.forEach(item => {
+                  item.str = item.str.slice(0, -1)
+              })
 
-        that.setData({
-            info: res.result.checkResult
-        })
-        console.log("这是返回的全部约局资讯------",res)
-        console.log("info",that.data.info)
-    },
-    fail(err){
-      console.log(`getInfo错误：${err}`)
-    }
-  })
+              that.setData({
+                  info: res.result.checkResult
+              })
+              console.log("这是返回的全部约局资讯------",res)
+              console.log("info",that.data.info)
+          },
+          fail(err){
+              console.log(`getInfo错误：${err}`)
+          }
+      })
+  }
+  else{
+      this.setData({
+          searchFlag: false,
+          searchKeyFlag: false
+      })
+      wx.cloud.callFunction({
+          name: "home",
+          data: {
+              method: "getInfo",
+              type: "All"
+          },
+          success: function (res) {
+              //处理人数限制
+              res.result.checkResult= res.result.checkResult.map((item)=>{
+                  let arr = item.applicant.filter((val)=>{
+                      if(val.state==0)
+                          return val
+                  })
+                  item.now = arr.length
+                  return item
+              })
+              //处理舞种信息
+              res.result.checkResult.forEach(item => {
+                  item.str = ''
+                  item.dance_type.forEach(val => {
+                      if (val.checked == true) {
+                          item.str = item.str + val.name + ',';
+                      }
+                  })
+              })
+              res.result.checkResult.forEach(item => {
+                  item.str = item.str.slice(0, -1)
+              })
+
+              that.setData({
+                  info: res.result.checkResult
+              })
+              console.log("这是返回的全部约局资讯------",res)
+              console.log("info",that.data.info)
+          }
+      })
+  }
+
 },
 
 cancel() {
@@ -440,7 +486,7 @@ goToDetail(ev){
 },
 
 onPullDownRefresh(){
-  var that = this;
+  let that = this;
   console.log("下拉刷新----")
   wx.cloud.callFunction({
       name: 'home',
@@ -478,11 +524,12 @@ onPullDownRefresh(){
               searchFlag:false,
               searchKeyFlag:false
           })
-          let array = this.data.list;
-          var that = this;
-          for (var j = 0; j < array.length; j++) {
-              array[j].flag = false;
-          }
+          that.data.list.forEach((item)=>{
+              item.flag = false
+          })
+          that.setData({
+              list:that.data.list
+          })
           wx.stopPullDownRefresh()
       }
   })
