@@ -20,6 +20,7 @@
   width: 30rpx;
   height: 30rpx;
   opacity: .7;
+  
 }
 #sex{
   display: flex;

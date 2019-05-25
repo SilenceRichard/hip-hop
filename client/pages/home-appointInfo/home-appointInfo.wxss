@@ -3,6 +3,7 @@
     width:100%;
     height:100%;
 }
+
 .outerText{
     font-size: 50rpx;
     margin: 25rpx 0 20rpx 0;

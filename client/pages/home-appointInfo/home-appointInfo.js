@@ -30,7 +30,11 @@ Page({
       introduction: '肉松小贝里有肉松',
       _openid:''
     },
-    info_:{},
+    info_:{
+      sex:'保密',
+      location:'保密',
+      sigh:'尚未填写',
+    },
     //info_,
     showModalFlag:false
   },
@@ -52,26 +56,29 @@ Page({
 
 
   showModal(e) {
+    var that = this;
     console.log("showModal的返回值-----",e)
-    this.setData({
+    that.setData({
       showModalFlag:true
     })
-    wx.cloud.callFunction({
-      name: 'home',
-      data: {
-        method: "getFounderInfo",
-        info: id
-      },
-      success: function (res) {
-        console.log("传回来的是--------", res)
-        that.setData({
-          info: res.result.checkResult
-        })
-      }
-    })
+    // wx.cloud.callFunction({
+    //   name: 'home',
+    //   data: {
+    //     method: "getFounderInfo",
+    //     info: id
+    //   },
+    //   success: function (res) {
+    //     console.log("id------", id)
+    //     console.log("传回来的是--------", res)
+    //     that.setData({
+    //       info: res.result
+    //     })
+    //   }
+    // })
   },
   hideModal(e) {
-    this.setData({
+    var that = this
+    that.setData({
       showModalFlag:false
     })
   },
