@@ -14,10 +14,11 @@ Page({
       title: '标题',
       dance_type: 'popping',
       type: 'cypher',
-      limit: '4/10',
+      limit: '',
       time: '2019-5-11 00:00:00',
       location:'',
-      str: ''
+      str: '',
+      now:''
     },
       {
         cover: '../../static/home.png',
@@ -122,9 +123,25 @@ search() {
 
     success(res){
       //console.log("传入的是", this.data.keyword)
+        let arr = res.result.checkResult[0].applicant.filter((item)=>{
+            if(item.state==0)
+                return item
+        })
+        res.result.checkResult.forEach(item => {
+            item.str = ''
+            item.dance_type.forEach(val => {
+                if (val.checked == true) {
+                    item.str = item.str + val.name + ',';
+                }
+            })
+        })
+        res.result.checkResult.forEach(item => {
+            item.str = item.str.slice(0, -1)
+        }),
       console.log("返回搜索",res)
       that.setData({
-        info: res.result.checkResult
+        info: res.result.checkResult,
+          "info.now":arr.length
       })
     },
     fail(err){
@@ -146,6 +163,10 @@ cancel() {
       type: "All"
     },
     success: function (res) {
+        let arr = res.result.checkResult[0].applicant.filter((item)=>{
+            if(item.state==0)
+                return item
+        })
       res.result.checkResult.forEach(item => {
         item.str = ''
         item.dance_type.forEach(val => {
@@ -158,7 +179,8 @@ cancel() {
         item.str = item.str.slice(0, -1)
       }),
           that.setData({
-            info: res.result.checkResult
+            info: res.result.checkResult,
+              "info.now":arr.length
           })
       console.log("这是返回的全部约局资讯------", res)
     }
@@ -197,6 +219,10 @@ activeDropDown1() {
               //return{
               //checkResult: [{},{},{}]
               // }
+                let arr = res.result.checkResult[0].applicant.filter((item)=>{
+                    if(item.state==0)
+                        return item
+                })
               res.result.checkResult.forEach(item => {
                 item.str = ''
                 item.dance_type.forEach(val => {
@@ -218,9 +244,9 @@ activeDropDown1() {
                 item.str = item.str.slice(0, -1)
               }),
 
-                  // this,that,傻傻分不清楚
                   that.setData({
-                    info: res.result.checkResult
+                    info: res.result.checkResult,
+                      "info.now":arr.length
                   })
 
               // let obj = that.data.info;
@@ -256,6 +282,10 @@ activeDropDown2() {
             },
             success: function (res_) {
               console.log("按距离排序返回res_", res_)
+                let arr = res.result.checkResult[0].applicant.filter((item)=>{
+                    if(item.state==0)
+                        return item
+                })
               res_.result.checkResult.forEach(item => {
                 item.str = ''
                 item.dance_type.forEach(val => {
@@ -269,7 +299,8 @@ activeDropDown2() {
               }),
 
                   that.setData({
-                    info: res_.result.checkResult
+                    info: res_.result.checkResult,
+                      "info,now":arr.length
                   })
               console.log(res_)
             }
@@ -318,6 +349,12 @@ activeList(ev) {
       },
       success(res) {
         // console.log("按个人查询返回res",res);
+          //处理人数限制
+        let arr = res.result.checkResult[0].applicant.filter((item)=>{
+              if(item.state==0)
+                  return item
+        })
+          //处理舞种信息
         res.result.checkResult.forEach(item => {
           item.str = ''
           item.dance_type.forEach(val => {
@@ -331,7 +368,8 @@ activeList(ev) {
         }),
 
             that.setData({
-              info: res.result.checkResult
+              info: res.result.checkResult,
+              "info.now" : arr.length
             })
         console.log(res)
       }
@@ -349,6 +387,10 @@ activeList(ev) {
       },
       success(res) {
         // console.log("按官方查询返回res", res);
+          let arr = res.result.checkResult[0].applicant.filter((item)=>{
+              if(item.state==0)
+                  return item
+          })
         res.result.checkResult.forEach(item => {
           item.str = ''
           item.dance_type.forEach(val => {
@@ -362,7 +404,8 @@ activeList(ev) {
         }),
 
             that.setData({
-              info: res.result.checkResult
+              info: res.result.checkResult,
+              "info.now":arr.length
             })
         console.log(res)
       }
@@ -374,6 +417,42 @@ goToDetail(ev){
   console.log("这是ev---------",ev)
   wx.navigateTo({url:"../home-appointInfo/home-appointInfo?id="+ev.currentTarget.dataset.item._id})
 },
+onPullDownRefresh(){
+  var that = this;
+  console.log("下拉刷新----")
+  wx.cloud.callFunction({
+      name: 'home',
+      data: {
+          method: 'getInfo',//获取全部约局资讯
+          type: 'All'
+      },
+      success: function (res) {
+          console.log("下拉刷新成功了",res)
+          res.result.checkResult.forEach(item => {
+              item.str = ''
+              item.dance_type.forEach(val => {
+                  if (val.checked == true) {
+                      item.str = item.str + val.name + ',';
+                  }
+              })
+          })
+          res.result.checkResult.forEach(item => {
+              item.str = item.str.slice(0, -1)
+          }),
+          that.setData({
+              info: res.result.checkResult,
+              dropDownFlag: false,
+              searchFlag:false,
+              searchKeyFlag:false,
+              theFlag:false,
+              "list.item.flag":false
+          }),
+          wx.stopPullDownRefresh()
+      }
+  })
+},
+
+
 
 /**
  * 生命周期函数--监听页面加载
@@ -396,6 +475,12 @@ onReady: function () {
           type: 'All'
         },
         success: function (res) {
+            //处理人数限制
+            let arr = res.result.checkResult[0].applicant.filter((item)=>{
+                if(item.state==0)
+                    return item
+            })
+            //处理舞种信息
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
@@ -408,7 +493,8 @@ onReady: function () {
             item.str = item.str.slice(0, -1)
           }),
               that.setData({
-                info: res.result.checkResult
+                info: res.result.checkResult,
+                "info.now":arr.length
               })
           console.log("这是返回的全部约局资讯------",res)
         }
@@ -440,10 +526,6 @@ onUnload: function () {
 /**
  * 页面相关事件处理函数--监听用户下拉动作
  */
-onPullDownRefresh: function () {
-
-},
-
 /**
  * 页面上拉触底事件的处理函数
  */

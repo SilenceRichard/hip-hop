@@ -88,7 +88,7 @@
                         <text class="title" >{{item.title}}</text>
                         <view class="col class1"  >
                             <view class='col-10' >{{item.str}}·{{item.type}}</view>
-                            <view class='col-2' >{{item.limit}}</view>
+                            <view class='col-2' >{{item.now}}/{{item.limit}}</view>
                         </view>
                         <view class="innerText" style="color:#808080">{{item.time}}</view>
                         <view class="innerText" style="color:#808080">{{item.location.name}}</view>
