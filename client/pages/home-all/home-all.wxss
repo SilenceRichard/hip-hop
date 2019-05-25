@@ -38,9 +38,9 @@
   width:100%;
   height:100%
 }
-.outer{
+.out2{
   color:#000000;
-  margin-bottom:60rpx
+  margin-bottom: 60rpx;
 }
 .dropDown{
   position:absolute;
@@ -63,4 +63,10 @@
   width:30rpx;
   height: 30rpx;
   transform: rotate(90deg);
+}
+.col-8{
+  margin-left:15rpx;
+}
+text{
+  margin-left:10rpx;
 }
