@@ -7,6 +7,7 @@ Page({
   /**
    * 页面的初始数据
    */
+  loadingFlag: false,
   data: {
     list: [{ name: '综合', flag: false }, { name: '个人', flag: false }, { name: '官方', flag: false }],
     info: [{
@@ -388,14 +389,17 @@ onLoad: function (options) {
 onReady: function () {
   // console.log("页面进来啦-------") 没问题
   var that = this;
-  wx.cloud.callFunction(
-      {
-        name: 'home',
-        data: {
-          method: 'getInfo',//获取全部约局资讯
-          type: 'All'
-        },
-        success: function (res) {
+    this.setData({
+      loadingFlag: true
+    })
+    wx.cloud.callFunction(
+    {
+      name: 'home',
+      data: {
+        method: 'getInfo',//获取全部约局资讯
+        type: 'All'
+      },
+      success: function (res) {
           res.result.checkResult.forEach(item => {
             item.str = ''
             item.dance_type.forEach(val => {
@@ -408,7 +412,8 @@ onReady: function () {
             item.str = item.str.slice(0, -1)
           }),
               that.setData({
-                info: res.result.checkResult
+                info: res.result.checkResult,
+                loadingFlag: false 
               })
           console.log("这是返回的全部约局资讯------",res)
         }
