@@ -25,7 +25,7 @@
 }
 .out1{
     color:#000000;
-    margin-bottom:60rpx
+    margin-bottom:60rpx;
 }
 
 /*.title{*/
