@@ -71,12 +71,12 @@ exports.main = async (event, context) => {
         }//全部约局
         if (event.type == 'time') {
           const targetDB = db.collection('dance-info');
-          let result = await targetDB.orderBy('time', 'asc').get();//获取
-          for (var i = 0; i < result.data.length-1; i++) {//去掉过时的
-            if(result.data[i].time<now){
-              result.data.splice(i,1);
-            }
-          }
+          let result = await targetDB.where({time:_.gte(now)}).orderBy('time', 'asc').get();//获取
+          // for (var i = 0; i < result.data.length-1; i++) {//去掉过时的
+          //   if(result.data[i].time<now){
+          //     result.data.splice(i,1);
+          //   }
+          // }
           console.log(result);
           return {
             checkResult: result.data
