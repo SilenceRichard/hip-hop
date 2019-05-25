@@ -46,8 +46,7 @@ Page({
     keyword:'',
     dropDownFlag: false,
     searchFlag:false,
-    searchKeyFlag:false,
-    theFlag:false
+    searchKeyFlag:false
   },
 
   Back() {
@@ -477,8 +476,7 @@ onPullDownRefresh(){
               info: res.result.checkResult,
               dropDownFlag: false,
               searchFlag:false,
-              searchKeyFlag:false,
-              theFlag:false,
+              searchKeyFlag:false
           })
           let array = this.data.list;
           var that = this;
@@ -527,7 +525,10 @@ onReady: function () {
           res.result.checkResult.forEach(item => {
             item.str = item.str.slice(0, -1)
           })
-
+            that.setData({
+                info: res.result.checkResult,
+                loadingFlag: false
+            })
               that.setData({
                 info: res.result.checkResult
               })
