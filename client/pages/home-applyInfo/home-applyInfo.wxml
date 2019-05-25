@@ -11,7 +11,8 @@
 <view class="cu-modal show" wx:if="{{showModalFlag}}">
       <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
-          <view class="content">发送成功</view>
+          <view class="content" wx:if="{{status!=1}}">发送成功</view>
+          <view class="content" wx:if="{{status==1}}">您已提交过报名申请</view>
           <view class="action" bindtap="hideModal">
             <text class="cuIcon-close text-red" bindtap='hideModal'></text>
           </view>

@@ -106,8 +106,8 @@ Page({
     onReady: async function () {
         console.log("进入onReady");
         let that =this;
-      // let result1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise'}});
-      //console.log("result1.result.checkResult[0].image:", result1.result.checkResult[0].image);
+      let result1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise'}});
+      // console.log("result1.result.checkResult[0].image:", result1.result.checkResult[0].image);
       //console.log("this.data.swiperList[0].url:", this.data.swiperList[0].url);
       // that.setData({
       //    'swiperList[0].url': result1.result.checkResult[0].image,

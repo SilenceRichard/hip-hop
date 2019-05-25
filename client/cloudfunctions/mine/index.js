@@ -18,6 +18,7 @@ const formatNumber = n => {
     n = n.toString()
     return n[1] ? n : '0' + n
 }
+const time0 = formatTime(new Date())//当前时间
 // getMineInfo = function(){
 //   return "hhh"
 // }
@@ -74,21 +75,30 @@ exports.main = async (event, context) => {
       const targetDB = db.collection('dance-info');
       var  Dance = [];
       var  sentDance = [];
-      let Apply = await targetDB.where()
-          .get()
+      var  sentOverDance = [];
+      var  overDance = [];
+      let Apply = await targetDB.where().get()
       Apply.data.forEach((item)=>{
-          if(item._openid == event.openid){
+          if(item._openid == event.openid && item.time>=time0){
               sentDance.push(item);
           }
+          if(item._openid == event.openid && item.time<time0){
+              sentOverDance.push(item);
+          }
           item.applicant.forEach((val)=> {
-              if (val._openid == event.openid&&val.state=='0'){
+              if (val._openid == event.openid&&val.state=='0'&&item.time>=time0){
                   Dance.push(item)
+              }
+              else if(val._openid == event.openid && val.state == '0'){
+                  overDance.push(item)
               }
           })
       })
       return {
-          sentDance:sentDance, //我发起的
-          Dance:Dance //我加入的
+          sentDance:sentDance, //我发起的未过期的
+          Dance:Dance, //我加入的未过期的
+          sentOverDance:sentOverDance,//我加入的过期的
+          overDance:overDance //我加入的未过期的
       }
   }
   if(event.method == 'exam'){
@@ -115,25 +125,24 @@ exports.main = async (event, context) => {
         var uncheckedApply = [];
         var checkedApply = [];
         var checkedApply2 = [];
-        var date0 = new Date()
-        var time0 = formatTime(date0)//当前时间
         let Apply = await targetDB.where()
             .get()
         Apply.data.forEach((item)=>{
             if(item.openid == event.openid) {
+                debugger
                     let t = 0;
                     item.applicant.forEach(val => {
-                        if (val.state == '0') t++
+                        if (val.state == '0') t++  //计算通过的人数
                     })
                     if (t == item.limit && time0<item.time) {
                         myTeamedDance.push(item);
                     }
+                    if (item.time <= time0 && t<= item.limit) {
+                        myUpTimeDance.push(item)
+                    }
                     item.applicant.forEach(val => {
-                        if (item.time <= time0 && t<= item.limit) {
-                            myUpTimeDance.push(item)
-                        }
                         if (val.state == '1'&&time0<=item.time) {
-                            uncheckedApply.push(val)
+                            uncheckedApply.push(val) //未审核
                         }
                     })
                 }

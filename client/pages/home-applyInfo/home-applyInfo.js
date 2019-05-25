@@ -7,6 +7,7 @@ Page({
     t_length: 0,
     info:{
       id:'',
+      status:''
     },
     // id:'',
     showModalFlag:false
@@ -19,7 +20,9 @@ Page({
   },
 
   sendApply(){
+    let that = this;//不能定义在回调里
     console.log("请求参数:",this.data.info);
+    console.log("app.data.openid",app.data.openid)
     wx.cloud.callFunction({
       name:"home",
       data:{
@@ -27,10 +30,12 @@ Page({
         info:this.data.info,
         openid: app.data.openid
       },
+
       success(res){
         console.log(res)
-        this.setData({
-          showModalFlag: true
+        that.setData({
+          showModalFlag: true,
+          status : res.result.status
         })
       },
       fail(err){

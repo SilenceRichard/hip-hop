@@ -1,0 +1,65 @@
+[
+  {
+    "name": "time测试",
+    "value": {
+      "method": "getInfo",
+      "type": "time"
+    }
+  },
+  {
+    "name": "location测试",
+    "value": {
+      "method": "getInfo",
+      "type": "location",
+      "userLocation": {
+        "latitude": "40.22077",
+        "longitude": "116.23128"
+      }
+    }
+  },
+  {
+    "name": "id",
+    "value": {
+      "method": "getAppointInfo",
+      "info": "ee3099285cdd6d0c133e9dba4d026457"
+    }
+  },
+  {
+    "name": "最热",
+    "value": {
+      "method": "getInfo",
+      "type": "getNewsInfo"
+    }
+  },
+  {
+    "name": "历史",
+    "value": {
+      "method": "getInfo",
+      "type": "history",
+      "openid": "olDym5FUcfnFiUTcpj4ula_Vb5Oo"
+    }
+  },
+  {
+    "name": "搜索",
+    "value": {
+      "method": "getInfo",
+      "type": "keyword",
+      "info": "ba'ge",
+      "openid": "olDym5FUcfnFiUTcpj4ula_Vb5Oo"
+    }
+  },
+  {
+    "name": "最热搜索",
+    "value": {
+      "method": "getInfo",
+      "type": "hot"
+    }
+  },
+  {
+    "name": "个人",
+    "value": {
+      "method": "getInfo",
+      "type": "individual"
+    }
+  }
+]

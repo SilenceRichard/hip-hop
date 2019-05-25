@@ -8,7 +8,7 @@
                 <view class="outerText" style='color:#ffffff'>{{info.title}}</view>
                 <view class="innerText1" style='color:#ffffff'>{{info.identify}}|{{info.dance_type}}|{{info.type}}</view>
                 <view class="innerText2" style='color:#ffffff'>发布时间：{{info.time}}</view>
-                <view class="innerText3" style='color:#ffffff'>人数限制：{{info.limit}}/{{info.limit_set}}</view>
+                <view class="innerText3" style='color:#ffffff'>人数限制：{{info.now}}/{{info.limit}}</view>
             </view>
         </view>
     </view>
@@ -36,14 +36,23 @@
     <view class="row picture" bindtap="showModal">
         <view class="col head" style='height:100%'>
             <view class="col-3 cu-avatar xl round margin-left"><image src="{{info_.avatarUrl}}"style="height: 170rpx;width: 170rpx;"></image></view>
-            <view class="col-9 name" style='color:#ffffff'>{{info_.name}}</view>
+            <view class="col-9 name" >
+                <view class="col" >
+                    <view class="col-3 style='color:#ffffff'"> {{info.authorName}}</view>
+                    <view class="col-9" style="position:relative">
+                    <view  wx:if="{{info.gender==2}}" class="cu-tag badge cuIcon-female bg-pink gender" ></view>
+                    <view  wx:elif="{{info.gender==1}}" class="cu-tag badge cuIcon-male bg-blue gender" ></view>
+                    <view  wx:else class="col-9 cu-tag badge cuIcon-female bg-pink gender" ></view>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
     <button style="width:80%" class="weui-btn" bindtap='toApplyInfo'>报名</button>
     <view class="cu-modal show" wx:if="{{showModalFlag}}">
       <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
-          <view class="content">发起人咨询</view>
+          <view class="content">发起人信息</view>
           <view class="action" bindtap="hideModal">
             <text class="cuIcon-close text-red" bindtap='hideModal'></text>
           </view>

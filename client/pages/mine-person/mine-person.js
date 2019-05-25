@@ -30,13 +30,20 @@ Page({
         showTopTips:false //错误提示标志
     },
     changeImage: function(){
-        util.chooseImage({count:1}).then(res =>{
-            console.log('程序进来啦-----',res)
-            let info = this.data.userInfo;
-            info.avatarUrl =res.tempFilePaths[0]
-            this.setData(
-               {userInfo:info}
-            )
+        let that = this;
+        wx.chooseImage({
+            count: 1,
+            success(chooseResult){
+                wx.cloud.uploadFile({
+                    cloudPath: util.uuid()+'my-person-photo.png',
+                    filePath: chooseResult.tempFilePaths[0],
+                    success: res => {
+                        that.setData({
+                            "userInfo.avatarUrl": res.fileID,//云存储图片路径
+                        });
+                    },
+                })
+            },
         })
     },
     changeSex: function (e) {

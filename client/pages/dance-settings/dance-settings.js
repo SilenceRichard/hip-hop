@@ -1,5 +1,6 @@
 // pages/dance-settings/dance-settings.js
 import util from '../../utils/util'
+import regeneratorRuntime from '../../utils/wxPromise.min.js'
 const app = getApp();
 Page({
   data: {
@@ -9,7 +10,7 @@ Page({
         name:'',
         address:'',
         latitude:'',
-        longtitude:'',
+        longitude:'',
         contact:'',
       },
       clicktime:0,
@@ -77,9 +78,9 @@ Page({
       x:'',
       y:''
     },
-  }
-  ,
-  setInfo(ev){//点击事件
+  },
+  async setInfo(ev){//点击事件
+    console.log("已点击");
     let obj = this.data.info;//信息中间量
     if (this.data.step == 0){//如果是第一步
       obj.identify = ev.target.dataset.identify; //身份
@@ -155,28 +156,28 @@ Page({
                topTip:true
            })
        }else{
+          let userInfo = await wx.cloud.callFunction({name: "mine",data:{method:'getUserInfo',openid:app.data.openid}})
+          let authorName =userInfo.result.res.nickName;
+          obj.authorName = authorName
            this.setData({
                info:obj,//由中间量导入数据到info
                step:this.data.step+1,//更新step
                basics:this.data.basics+1,
                topTip:false
            })
-           wx.cloud.callFunction({
+         console.log("传入云端数据：",this.data.info);
+           await wx.cloud.callFunction({
                name:"dance",
                data:{
                    method:'danceSettings',
                    info:this.data.info,
                    openid:app.data.openid
-               },
-               success(res) {
-                   console.log(res)
                }
            })
        }
     }//上传至云端
   },
   bindDateChange(ev){
-    console.log(ev);
     if (ev.currentTarget.dataset.type == 'date'){
       let timeobj= this.data.timestamp;
       timeobj.date = ev.detail.value;
@@ -193,26 +194,34 @@ Page({
   },//日期选择(这里的触发事件是bindchange)
   chooseImage() {//上传图片点击事件
       let that = this;
-      let obj = this.data.info;
       wx.chooseImage({
-        count:1,
-        success:function(res){
-          obj.cover = res.tempFilePaths[0] //保存图片路径
-          that.setData({
-             info:obj
+        count: 1,
+        success(chooseResult){
+          wx.cloud.uploadFile({
+            cloudPath: util.uuid()+'my-photo.png',
+            filePath: chooseResult.tempFilePaths[0],
+            success: res => {
+              that.setData({
+                "info.cover": res.fileID,//云存储图片路径
+              });
+            },
           })
-        }
+        },
       })
   },
   chooseImageQR(){
-    let obj = this.data.info;
     let that = this;
     wx.chooseImage({count:1,
-      success:function (res) {
-      obj.QR_code = res.tempFilePaths[0]
-        that.setData({
-          info:obj
-        })
+      success:function (chooseResult) {
+          wx.cloud.uploadFile({
+              cloudPath: util.uuid()+'my-photo.png',
+              filePath: chooseResult.tempFilePaths[0],
+              success: res => {
+                  that.setData({
+                      "info.QR_code": res.fileID,//云存储图片路径
+                  });
+              },
+          })
        }
     })
   },
@@ -225,8 +234,9 @@ Page({
             name:res.name,
             address:res.address,
             latitude:res.latitude,
-            longtitude:res.longtitude
+            longitude:res.longitude,
           }
+        console.log("res", res);
           that.setData({
             info:obj
           })
@@ -234,11 +244,8 @@ Page({
     })
   },
   checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
-
-    var checkboxItems = this.data.checkboxItems,
+      var checkboxItems = this.data.checkboxItems,
         values = e.detail.value;
-       console.log(values)
     for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
       checkboxItems[i].checked = false;
 
@@ -249,7 +256,6 @@ Page({
         }
       }
     }
-
     this.setData({
       checkboxItems: checkboxItems
     });
@@ -326,7 +332,6 @@ Page({
      })
     },
   touchStart(e) {
-    // console.log(e)
     this.setData({
       "touch.x": e.changedTouches[0].clientX,
       "touch.y": e.changedTouches[0].clientY
@@ -363,7 +368,6 @@ Page({
             break;
           case 2: let tipFlag = false;
                  this.data.checkboxItems.forEach((item)=>{
-                   console.log(item)
                    if(item.checked){
 
                       tipFlag = true
