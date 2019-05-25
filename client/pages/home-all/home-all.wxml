@@ -88,7 +88,7 @@
                         <text class="title" >{{item.title}}</text>
                         <view class="col class1"  >
                             <view class='col-10' >{{item.str}}·{{item.type}}</view>
-                            <view class='col-2' >{{item.limit}}</view>
+                            <view class='col-2' >{{item.now}}/{{item.limit}}</view>
                         </view>
                         <view class="innerText" style="color:#808080">{{item.time}}</view>
                         <view class="innerText" style="color:#808080">{{item.location.name}}</view>
@@ -132,10 +132,11 @@
     </view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadingFlag}}">
-  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
-  <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>
-  <view class='gray-text'>加载中...</view>
+    <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+    <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>
+    <view class='gray-text'>加载中...</view>
 </view>
+
 
 
 

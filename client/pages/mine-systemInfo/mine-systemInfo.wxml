@@ -1,5 +1,4 @@
-<view wx:if="{{true}}" class="cu-load bg-orange loading-view"></view>
-<scroll-view scroll-y="true" class="page 'show'">
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
     <scroll-view scroll-x class="bg-grey nav text-center">
         <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
             {{item.name}}
@@ -28,19 +27,7 @@
     <block wx:for="{{hdList}}">
 <!--        互动消息-->
         <view wx:if="{{flag==false}}" class="cu-list menu-avatar">
-            <view class="cu-item item" wx:if="{{uncheckedFlag}}" bindtap="showModal" data-item="{{item}}">
-                <view class="cu-avatar  " style="background-image:url(../../static/icon/notice.png);"></view>
-                <view class="content">
-                    <view class="text-grey">{{item.titleShow}}</view>
-                    <view class="text-gray text-sm flex">
-                        <text class="text-cut">{{item.content}}</text>
-                    </view>
-                    <view class="text-grey text-xs">{{item.time}}</view>
-                </view>
-                <view class="action">
-                </view>
-            </view>
-            <view class="cu-item item" wx:else data-item="{{item}}">
+            <view class="cu-item" bindtap="showModal" data-item="{{item}}">
                 <view class="cu-avatar  " style="background-image:url(../../static/icon/notice.png);"></view>
                 <view class="content">
                     <view class="text-grey">{{item.titleShow}}</view>

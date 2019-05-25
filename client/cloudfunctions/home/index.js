@@ -133,7 +133,7 @@ exports.main = async (event, context) => {
             checkResult: result.data
           }
         }//获取广告
-        if (event.type == 'getNewsInfo') {
+        if (event.type == 'getNewsInfo'){
           const targetDB = db.collection('dance-info');
           let result = await targetDB.where({time:_.gte(now)}).orderBy('clicktime', 'desc').get();//获取
           console.log("查询结果：",result.data);
@@ -143,7 +143,7 @@ exports.main = async (event, context) => {
             checkResult: result.data
           }
         }//查找到的最热的五条约舞
-        if (event.type == 'keyword') {
+        if (event.type == 'keyword'){
 
           //存储用户的搜索历史
           let result_ = await db.collection('user').where({_openid:event.openid}).get();
@@ -160,7 +160,7 @@ exports.main = async (event, context) => {
           })
 
           let searchInfo = event.info.toLowerCase();
-          let result = await db.collection('dance-info').where({}).get();//获取
+          let result = await db.collection('dance-info').where({time:_.gte(now)}).get();//获取
           let a =result.data.map(item=>{
               item.dance_type_search = [];
               item.dance_type.forEach(val =>{

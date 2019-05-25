@@ -1,6 +1,3 @@
 .action{
     width: 200rpx!important;
 }
-.cu-list.menu-avatar>.cu-item{
-    height: 200rpx;
-}

@@ -1,9 +1,7 @@
 import  util from '../../utils/util'
-import regeneratorRuntime from '../../utils/wxPromise.min.js' //引入async await语法糖
 const app = getApp();
 Page({
   data: {
-    isLoading:false,
     TabCur:0,
     tabList:[{name:"系统消息",type:"xt"},{name:"互动消息",type:"hd"}],
     // 下面是系统通知页列表
@@ -195,109 +193,6 @@ Page({
         console.log("走不走？",err)
     }
     })
-  },
-  onPullDownRefresh() {
-    // 下拉刷新
-    let that = this;
-    that.setData({
-      isLoading:true
-    })
-    wx.cloud.callFunction({
-      name : "mine",
-      data:{
-        method:'getSystemInfo',
-        openid : app.data.openid
-      },
-      success(res){
-        that.setData({
-          isLoading:false
-        })
-        console.log("返回来的是-------------",res.result)
-        wx.stopPullDownRefresh();
-        res.result.myTeamedDance.forEach(item =>{
-          item.teamedFlag = true
-        })
-        res.result.myUpTimeDance.forEach(item =>{
-          item.overtimeFlag = true
-        })
-        that.setData({
-          systemList:[],
-          hdList:[]
-        })
-        let a=that.data.systemList.concat(res.result.myTeamedDance)
-            .concat(res.result.myUpTimeDance)
-        a.map(item=>{
-          if (item.teamedFlag){
-            item.titleShow = `您的${item.title}约局已成功组队`
-            return item
-          }
-          if (item.overtimeFlag){
-            item.titleShow = `您的${item.title}约局已过期`
-            return item
-          }
-        })
-        that.setData({
-          systemList:a
-        })
-        console.log("系统消息",that.data.systemList)
-        res.result.uncheckedApply.forEach(item =>{
-          item.uncheckedFlag = true
-        })
-        res.result.checkedApply.forEach(item =>{
-          item.passFlag = true
-        })
-        res.result.checkedApply2.forEach(item =>{
-          item.unpassFlag = true
-        })
-        let b=that.data.hdList.concat(res.result.uncheckedApply)
-            .concat(res.result.checkedApply)
-            .concat(res.result.checkedApply2)
-        b.map(item=>{
-          let obj = item;
-          if (obj.uncheckedFlag){
-            obj.titleShow=`你收到一个加入请求！`
-            return obj
-          }
-          if (obj.passFlag){
-            obj.titleShow=`你已成功加入${item.title}的约局`
-          }
-          if (obj.unpassFlag){
-            obj.titleShow=`你的${item.title}约局申请已被拒绝`
-          }
-          return obj
-        })
-        that.setData({
-          hdList:b
-        })
-        console.log("互动消息：",that.data.hdList)
-        // res.result中返回了三个数组，分别遍历三个数组，给数组里每一个对象增加一个标志
-        // res.result.myApply.forEach((item)=>{
-        //    item.applyFlag = true;
-        // })
-        // res.result.checkedApply.forEach((item)=>{
-        //   item.resultFlag = true;
-        // })
-        // res.result.checkedApply2.forEach((item)=>{
-        //   item.resultFlag = true;
-        // })
-        // let arr = res.result.myApply.concat(res.result.checkedApply).concat(res.result.checkedApply2);//拼接数组
-        // arr.forEach((item)=>{                    //遍历该大数组，给本地info.title赋值
-        //   if(applyFlag == true)
-        //   {
-        //     this.setData({
-        //       'infoList.title': '你收到一个报名申请'
-        //     })
-        //     if(resultFlag == true){
-        //       this.setData({
-        //         'infoList.title' : '报名结果通知'
-        //       })
-        //     }
-        //   }
-        // })
-      },
-      fail(err){
-        console.log("走不走？",err)
-      }
-    })
-  },
+  }
+
 })
