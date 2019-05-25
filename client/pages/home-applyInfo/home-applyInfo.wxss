@@ -11,9 +11,16 @@
 }
 .tip1{
     margin-top: 28rpx;
+    margin-left: 10rpx;
 }
 .suggest_box{
   background-color:#ffffff;
+}
+textarea{
+  margin-left:15rpx;
+}
+text{
+  margin-left:15rpx;
 }
 image{
     width:50rpx;

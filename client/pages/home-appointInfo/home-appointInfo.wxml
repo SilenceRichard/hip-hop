@@ -1,7 +1,7 @@
 <!--pages/appointInfo/appointInfo.wxml-->
 <view class="out">
     <view  class='row outer'>
-        <view class='col' style='height:100%'>
+        <view class='col header' style='height:100%'>
             <view class='col-5'><image class="front" src="{{info.cover}}"></image></view>
             <view class='col-7'>
                 <text class="title">{{title}}</text>
@@ -15,22 +15,22 @@
 
     <view class="activeInfo" style='color:#a6a6a6'>{{info.content}}</view>
     <view class="col join">
-        <view class="col-1"><image src="../../static/促销.png"></image></view>
+        <view class="col-1"><image src="../../static/demand.png"></image></view>
         <view class="col-11" style='color:#ffffff'>加入要求</view>
     </view>
     <view class="joinInfo" style='color:#a6a6a6'>{{info.condition}}</view>
     <view class="col time">
-        <view class="col-1"><image src="../../static/闹钟.png"></image></view>
+        <view class="col-1"><image src="../../static/time.png"></image></view>
         <view class="col-4" style='color:#ffffff'>活动时间</view>
         <view class="col-7" style='color:#a6a6a6'>{{info.time}}</view>
     </view>
     <view class="col location">
-        <view class="col-1"><image src="../../static/地址.png"></image></view>
+        <view class="col-1"><image src="../../static/address.png"></image></view>
         <view class="col-4" style='color:#ffffff'>活动地点</view>
         <view class="col-7" style='color:#a6a6a6'>{{info.activeLocation}}</view>
     </view>
     <view class="col indivdual">
-        <view class="col-1"  ><image src="../../static/点赞.png"  data-target="Modal" ></image></view>
+        <view class="col-1"  ><image src="../../static/user.png"  data-target="Modal" ></image></view>
         <view class="col-11" style='color:#ffffff'>发起人信息</view>
     </view>
     <view class="row picture" bindtap="showModal">
@@ -60,13 +60,13 @@
             <text class="cuIcon-close text-red" bindtap='hideModal'></text>
           </view>
         </view>
-        <view class="padding-xl">
-           <view>昵称：{{info_.nickName}}</view>
-           <view>性别：{{info_.sex}}</view>
-           <view>地区：{{info_.location}}</view>
-           <view>舞种：{{info_.danceType}}</view>
-           <view>舞龄：{{info_.danceAge}}</view>
-           <view>签名：{{info_.sigh}}</view> 
+        <view class="founderInfo">
+           <view>昵称：{{info_.nickName?info_.nickName:'怎么会有人没有昵称呢'}}</view>
+           <view>性别：{{info_.sex?info_.sex:'保密'}}</view>
+           <view>地区：{{info_.location?info_.location:'活动范围神秘'}}</view>
+           <view>舞种：{{info_.danceType?info_.danceType:'舞种未知'}}</view>
+           <view>舞龄：{{info_.danceAge?info_.danceAge:'你不知道他跳了几年舞哦'}}</view>
+           <view>签名：{{info_.sigh?info_.sigh:'该用户什么都没有写'}}</view> 
         </view>
   </view>
 </view>
