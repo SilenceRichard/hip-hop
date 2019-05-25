@@ -10,7 +10,8 @@ Page({
             title:'标题',
             dance_type:'popping',
             type:'cypher',
-            limit:'4/10',
+            limit:'',
+            now:'',
             time:'2019-5-11 00:00:00',
             location:'昌平',
             str:'',
@@ -106,19 +107,36 @@ Page({
     onReady: async function () {
         console.log("进入onReady");
         let that =this;
-      let result1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise'}});
-      // console.log("result1.result.checkResult[0].image:", result1.result.checkResult[0].image);
-      //console.log("this.data.swiperList[0].url:", this.data.swiperList[0].url);
-      // that.setData({
-      //    'swiperList[0].url': result1.result.checkResult[0].image,
-      //    'swiperList[1].url': result1.result.checkResult[1].image,
-      //    'swiperList[2].url': result1.result.checkResult[2].image,
-      //    'swiperList[3].url': result1.result.checkResult[3].image,
-      //    'swiperList[4].url': result1.result.checkResult[4].image,
-      // });
+      let res1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise'}});
+      console.log("res1------",res1)
 
-      let result2 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type:'getNewsInfo'}});
-      console.log("result2:----", result2);
-      this.setData({info : result2.result.checkResult});
+
+
+      let res2 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type:'getNewsInfo'}});
+            console.log("res2-----",res2)
+            //处理人数限制
+            res2.result.checkResult= res2.result.checkResult.map((item)=>{
+                let arr = item.applicant.filter((val)=>{
+                    if(val.state==0)
+                        return val
+                })
+                item.now = arr.length
+                return item
+            })
+            //处理舞种信息
+            res2.result.checkResult.forEach(item => {
+                item.str = ''
+                item.dance_type.forEach(val => {
+                    if (val.checked == true) {
+                        item.str = item.str + val.name + ',';
+                    }
+                })
+            })
+            res2.result.checkResult.forEach(item => {
+                item.str = item.str.slice(0, -1)
+            })
+            that.setData({
+                info: res2.result.checkResult
+            })
     }
 })

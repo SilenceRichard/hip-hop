@@ -108,12 +108,17 @@ Page({
                    }
                  });
                  res.result.checkResult[0].dance_type = dance_type_;
+                 //处理限制人数
+                 let arr = res.result.checkResult[0].applicant.filter((item)=>{
+                     if(item.state==0)
+                         return item
+                 })
                 // console.log("处理舞种信息得到--------", res) //已解决
               // console.log("res.result.checkResult[0].applicant.length---",res.result.checkResult[0].applicant.length)
-
+                 console.log("arr是的---------",arr)
                that.setData({
                      info: res.result.checkResult[0] ,
-                   "info.now" :res.result.checkResult[0].applicant.length
+                     "info.now" :arr.length
                  })
                  console.log("本地的openid",that.data.info._openid)
 

@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "全部约局"
+  "navigationBarTitleText": "全部约局",
+  "enablePullDownRefresh": true
 }
