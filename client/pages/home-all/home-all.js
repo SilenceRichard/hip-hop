@@ -379,7 +379,7 @@ goToDetail(ev){
  * 生命周期函数--监听页面加载
  */
 onLoad: function (options) {
-
+  
 },
 
 /**
@@ -440,9 +440,40 @@ onUnload: function () {
 /**
  * 页面相关事件处理函数--监听用户下拉动作
  */
-onPullDownRefresh: function () {
-
-},
+  onPullDownRefresh() {
+    var that = this;
+    console.log("下拉刷新----")
+    wx.cloud.callFunction({
+      name: 'home',
+      data: {
+        method: 'getInfo',//获取全部约局资讯
+        type: 'All'
+      },
+      success: function (res) {
+        console.log("下拉刷新成功了", res)
+        res.result.checkResult.forEach(item => {
+          item.str = ''
+          item.dance_type.forEach(val => {
+            if (val.checked == true) {
+              item.str = item.str + val.name + ',';
+            }
+          })
+        })
+        res.result.checkResult.forEach(item => {
+          item.str = item.str.slice(0, -1)
+        }),
+          that.setData({
+            info: res.result.checkResult,
+            dropDownFlag: false,
+            searchFlag: false,
+            searchKeyFlag: false,
+            theFlag: false,
+            "list.item.flag": false
+          }),
+          wx.stopPullDownRefresh()
+      }
+    })
+  },
 
 /**
  * 页面上拉触底事件的处理函数
