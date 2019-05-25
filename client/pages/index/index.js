@@ -27,7 +27,7 @@ Page({
                 str:'',
             },
             {
-               cover:'../../static/home.png',
+                cover:'../../static/home.png',
                 title:'标题',
                 dance_type:'popping',
                 type:'cypher',
@@ -67,7 +67,7 @@ Page({
         showWelcome:true, //欢迎动画标志
         flag:true, //淡入淡出动画加载标志
     },
-
+    loadingFlag: false,
 
 
     DotStyle(e) {
@@ -88,9 +88,9 @@ Page({
         })
         await setTimeout(()=>{
             wx.pro.showTabBar().then(
-                this.setData({
-                    showWelcome:false
-                }))
+              this.setData({
+                  showWelcome:false
+              }))
         },1*1000);
     }, //点击进入小程序首页
     goToAll(){
@@ -100,25 +100,51 @@ Page({
     },
     goToDetail(ev){
         console.log("我是index里的ev-----------",ev)
-      wx.navigateTo({ url: '../home-appointInfo/home-appointInfo?id='+ev.currentTarget.dataset.item._id })
+        wx.navigateTo({ url: '../home-appointInfo/home-appointInfo?id='+ev.currentTarget.dataset.item._id })
     },
 
     onReady: async function () {
         console.log("进入onReady");
         let that =this;
-      let result1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise'}});
-      // console.log("result1.result.checkResult[0].image:", result1.result.checkResult[0].image);
-      //console.log("this.data.swiperList[0].url:", this.data.swiperList[0].url);
-      // that.setData({
-      //    'swiperList[0].url': result1.result.checkResult[0].image,
-      //    'swiperList[1].url': result1.result.checkResult[1].image,
-      //    'swiperList[2].url': result1.result.checkResult[2].image,
-      //    'swiperList[3].url': result1.result.checkResult[3].image,
-      //    'swiperList[4].url': result1.result.checkResult[4].image,
-      // });
 
-      let result2 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type:'getNewsInfo'}});
-      console.log("result2:----", result2);
-      this.setData({info : result2.result.checkResult});
-    }
+        // console.log("result1.result.checkResult[0].image:", result1.result.checkResult[0].image);
+        //console.log("this.data.swiperList[0].url:", this.data.swiperList[0].url);
+        // that.setData({
+        //    'swiperList[0].url': result1.result.checkResult[0].image,
+        //    'swiperList[1].url': result1.result.checkResult[1].image,
+        //    'swiperList[2].url': result1.result.checkResult[2].image,
+        //    'swiperList[3].url': result1.result.checkResult[3].image,
+        //    'swiperList[4].url': result1.result.checkResult[4].image,
+        // });
+
+
+        
+        this.setData({
+            loadingFlag: true
+        })
+        let result1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise' } });
+        let result2 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getNewsInfo' } });
+        console.log("result2:----", result2);
+
+        success:  {
+            this.setData({ info: result2.result.checkResult })
+            this.setData({ loadingFlag:false})
+        }
+    },
+  onPullDownRefresh: async function() {
+    var that = this;
+    console.log("下拉刷新----")
+    let result1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise' } });
+    let result2 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getNewsInfo' } });
+      success: {
+        console.log("下拉刷新成功了", )
+        this.setData({ 
+          info: result1.result.checkResult,
+          info: result2.result.checkResult 
+          })
+          wx.stopPullDownRefresh()
+      }
+
+  }
+
 })
