@@ -3,7 +3,7 @@ import util from '../../utils/util'
 import regeneratorRuntime from '../../utils/wxPromise.min.js'
 const app = getApp();
 Page({
-
+    loadingFlag: false,
   /**
    * 页面的初始数据
    */
@@ -495,6 +495,9 @@ onPullDownRefresh(){
 onReady: function () {
   // console.log("页面进来啦-------") 没问题
   var that = this;
+    this.setData({
+        loadingFlag: true
+    })
   wx.cloud.callFunction(
       {
         name: 'home',
