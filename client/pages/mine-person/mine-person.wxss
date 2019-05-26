@@ -28,13 +28,15 @@ page{
   font-size: 27rpx;
 }
 button{
-  background:#ffc300;
+  background:#706e68;
 }
 input{
-  border-bottom:1px solid #ccc;
   width:80%;
 }
 textarea{
   border:1px solid #ccc;
 }
 /*对于该页面所有input标签*/
+.cu-form-group picker .picker{
+  text-align: left;
+}
