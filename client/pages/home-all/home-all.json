@@ -2,5 +2,6 @@
   "usingComponents": {},
   "navigationBarTitleText": "全部约局",
   "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
+  "backgroundTextStyle": "dark",
+  "backgroundColor":"#333333"
 }

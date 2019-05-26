@@ -1,11 +1,10 @@
 <!--pages/home-all/home-all.wxml-->
-
+<image src="{{bgImage}}" class="backgroundImage"></image>
 <!--pages/home-searchInfo/home-searchInfo.wxml-->
 <view class="out">
 <!--    搜索页-->
     <view  wx:if="{{searchFlag==true && searchKeyFlag==false}}">
         <view class="box">
-
             <view class="cu-bar search" style="background:black">
                 <text class="cuIcon-back lg text-gray" bindtap="Back"></text>
                 <view class="search-form round">
@@ -17,20 +16,14 @@
                 </view>
             </view>
         </view>
-
         <view class="action">
             <text class="cuIcon-title text-blue"></text>热门搜索
         </view>
-
-
         <view class="padding solid-bottom"  bindtap="clickTag">
             <block wx:for="{{hotList}}">
                 <view class="cu-tag radius bg-yellow"   bindtap="clickTag" data-item="{{item}}">{{item}}</view>
             </block>
         </view>
-
-
-
         <view class="action">
             <text class="cuIcon-title text-blue"></text>历史搜索
         </view>
@@ -63,17 +56,19 @@
         </view>
 
 
-        <view class="row header">
+        <view class="row header bg-black">
             <view class='col'>
                 <block wx:for='{{list}}' wx:key="item.name">
                     <view class="{{item.flag?'col-4 list list-active':'col-4 list'}}" bindtap="activeList" data-item="{{item}}">
                         {{item.name}}
-                        <image wx:if="{{item.name=='综合'}}" class="{{dropDownFlag?'activeArrow':'arrow'}}"  src="../../static/icon/arrow-right.svg"></image>
+                        <text wx:if="{{item.name=='综合'}}" class="{{dropDownFlag?'cuIcon-fold':'cuIcon-unfold'}} lg text-gray"></text>
+                        <!--todo 这是大可写的-->
+                        <!--<image wx:if="{{item.name=='综合'}}" class="{{dropDownFlag?'activeArrow':'arrow'}}"  src="../../static/icon/arrow-right.svg"></image>-->
                     </view>
                 </block>
             </view>
             <!--        层级不够，要把dropdown层级置于page上面-->
-            <view class="header down"  wx:if="{{dropDownFlag}}"style="z-index:9999" >
+            <view class="header down bg-gradual-black"  wx:if="{{dropDownFlag}}"style="z-index:9999" >
                 <view class="downList" bindtap="activeDropDown1"><text class="cuIcon-time lg text-gray"></text>    按时间 ↑</view>
                 <view class="downList" bindtap="activeDropDown2"><text class="cuIcon-location lg text-gray"></text>    按距离 ↑</view>
             </view>

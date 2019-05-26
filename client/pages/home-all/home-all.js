@@ -46,7 +46,8 @@ Page({
     keyword:'',
     dropDownFlag: false,
     searchFlag:false,
-    searchKeyFlag:false
+    searchKeyFlag:false,
+    bgImage:app.globalData.bgSrc
   },
 
   Back() {
