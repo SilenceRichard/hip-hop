@@ -27,7 +27,7 @@
     <view class="col location">
         <view class="col-1"><image src="../../static/address.png"></image></view>
         <view class="col-4" style='color:#ffffff'>活动地点</view>
-        <view class="col-7" style='color:#a6a6a6'>{{info.activeLocation}}</view>
+        <view class="col-7" style='color:#a6a6a6'>{{info.location.name}}</view>
     </view>
     <view class="col indivdual">
         <view class="col-1"  ><image src="../../static/user.png"  data-target="Modal" ></image></view>
@@ -71,6 +71,11 @@
   </view>
 </view>
 
+</view>
+<view class='cu-load load-modal' wx:if="{{loadingFlag}}">
+    <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+    <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>
+    <view class='gray-text'>加载中...</view>
 </view>
 
 
