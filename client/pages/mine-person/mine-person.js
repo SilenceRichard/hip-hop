@@ -106,6 +106,9 @@ Page({
         this.setData({
             userInfo:info
         })
+        this.setData({
+        bordersize: e.detail.value
+      })
     }, //选择舞龄
     changeInputVal:function(e){
         let info = this.data.userInfo;

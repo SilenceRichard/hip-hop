@@ -108,5 +108,9 @@
 .inputer{
     background: #ffffff;
     width: 90%;
+    height: 85rpx;
     margin:0 0 0 5%;
+    color: #000000;
+    font-size: 50rpx;
+    text-align: center;
 }

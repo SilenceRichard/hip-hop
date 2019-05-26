@@ -80,7 +80,7 @@
         <view class="col">
             <view class="col-3 label">舞龄：</view>
             <view class="col-9 formItem">
-                <radio-group class="radio-group" bindchange="chooseDanceAge">
+                <radio-group  bindchange="chooseDanceAge">
                     <radio class="radio" wx:for-items="{{danceAge}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
                         <text>{{item.value}}</text>
                     </radio>
