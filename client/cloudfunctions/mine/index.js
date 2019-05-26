@@ -102,6 +102,7 @@ exports.main = async (event, context) => {
       }
   }
   if(event.method == 'exam'){
+
       console.log("参数",event)
       const targetDB = db.collection('dance-info');
       let  allMy = await  targetDB.doc(event.id).get();
@@ -118,6 +119,29 @@ exports.main = async (event, context) => {
                status:a
       }
   }
+    if(event.method =='deleteMessage' ){
+        const targetDB = db.collection('dance-info');
+        var isRead =1;
+        let read = await targetDB.doc(event._id).get();
+        console.log("查到的信息:",read.data);
+        if (event.openid === read.data._openid){
+            read.data.applicant.forEach(item=>{
+                if (item._openid === event._openid) item.isReadByOpen =`1` //发起人已读这条消息
+            })
+            delete read.data._id;
+            targetDB.doc(event._id).update({data:read.data})
+        }else {
+            read.data.applicant.forEach(item=>{
+                if (item._openid === event._openid) item.isReadByApplicant =`1` //发起人已读这条消息
+            })
+            delete read.data._id;
+            targetDB.doc(event._id).update({data:read.data})
+        }
+
+        // return {
+        //     read
+        // }
+    }
   if(event.method == 'getSystemInfo'){
         const targetDB = db.collection('dance-info');
         var myTeamedDance = [];
@@ -141,17 +165,17 @@ exports.main = async (event, context) => {
                         myUpTimeDance.push(item)
                     }
                     item.applicant.forEach(val => {
-                        if (val.state == '1'&&time0<=item.time) {
-                            uncheckedApply.push(val) //未审核
+                        if (val.state == '1'&&(val.isReadByOpen =='0'||val.isReadByOpen ==undefined) &&time0<=item.time) {
+                            uncheckedApply.push(val) //未审核且未读
                         }
                     })
                 }
                 item.applicant.forEach((val) => {
                     if (val._openid == event.openid){
-                        if (val.state == "0") {
+                        if (val.state == "0"&&(val.isReadByApplicant =='0'||val.isReadByApplicant ==undefined)) {
                             checkedApply.push(item)
                         }
-                        if (val.state == "2") {
+                        if (val.state == "2"&&(val.isReadByApplicant =='0'||val.isReadByApplicant ==undefined)){
                             checkedApply2.push(item)
                         }
                     }
@@ -160,11 +184,12 @@ exports.main = async (event, context) => {
         })
         return {
             myTeamedDance:myTeamedDance,//我发起的组队成功的约舞 xt
-            myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
-            uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
-            checkedApply:checkedApply,//我参加已通过的 hd
-            checkedApply2:checkedApply2//未通过的 hd
-        }
+          myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
+          uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
+          checkedApply:checkedApply,//我参加已通过的 hd
+          checkedApply2:checkedApply2//未通过的 hd
+                                // 我参加的未审核的
+  }
     }
   }
 

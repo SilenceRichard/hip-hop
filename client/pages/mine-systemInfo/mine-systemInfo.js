@@ -101,6 +101,28 @@ Page({
       ListTouchDirection: null
     })
   },
+  delete(ev){
+    let that = this;
+    console.log("删除！", ev)
+    wx.cloud.callFunction({
+      name: 'mine',
+      data: {
+        method: 'deleteMessage',
+        _id:ev.currentTarget.dataset.item.dance_id,
+        openid: app.data.openid,
+        _openid:ev.currentTarget.dataset.item._openid
+      },
+      success(res) {
+        console.log(res)
+        that.setData({
+          userList: res.result.res
+        })
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+  },
   onReady(){
     console.log("嘻嘻嘻嘻嘻嘻进来了",app.data.openid)
     let that = this
