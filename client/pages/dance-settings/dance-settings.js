@@ -271,7 +271,7 @@ Page({
       basics:0,
       info:{obj}
     })
-    wx.navigateTo({url:"../home-all/home-all"});
+    wx.navigateTo({url:"../index/index"});
 
   },
   bindDateChange(ev){

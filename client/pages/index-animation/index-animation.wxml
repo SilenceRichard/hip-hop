@@ -1,0 +1,4 @@
+<!--pages/index-animation/index-animation.wxml-->
+
+<view class="box dh"></view>
+<view class="page" bindtap='toIndex'> </view>

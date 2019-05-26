@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="987ad018-8740-49a9-95e1-962fcde5a470" name="Default Changelist" comment="资讯详情">
-      <change afterPath="$PROJECT_DIR$/static/促销.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/地址.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/点赞.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/闹钟.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/home-all/home-all.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/home-all/home-all.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloudfunctions/home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/cloudfunctions/home/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/mine-person/mine-person.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/mine-person/mine-person.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/mine-person/mine-person.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/mine-person/mine-person.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/mine-person/mine-person.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/mine-person/mine-person.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -26,91 +20,86 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.wxml">
+        <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1102">
-              <caret line="58" column="9" selection-start-line="42" selection-start-column="4" selection-end-line="58" selection-end-column="9" />
+            <state relative-caret-position="306">
+              <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.wxml">
+        <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="29" column="1" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="7" />
+            <state relative-caret-position="209">
+              <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.json">
+        <entry file="file://$PROJECT_DIR$/pages/index-animation/index-animation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+            <state relative-caret-position="38">
+              <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/mine/mine.wxml">
+        <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxss">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="53" />
+            <state relative-caret-position="76">
+              <caret line="4" column="28" lean-forward="true" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml">
+        <entry file="file://$PROJECT_DIR$/pages/index-animation/index-animation.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="16" selection-end-column="7" />
+            <state relative-caret-position="19">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.js">
+        <entry file="file://$PROJECT_DIR$/style/animate.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3914">
-              <caret line="207" column="22" selection-start-line="207" selection-start-column="22" selection-end-line="207" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1026">
-              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/dance-settings/dance-settings.wxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+            <state relative-caret-position="285">
+              <caret line="43" column="17" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cloudfunctions/home/index.js">
+        <entry file="file://$PROJECT_DIR$/pages/index-animation/index-animation.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="199" column="20" selection-start-line="199" selection-start-column="20" selection-end-line="199" selection-end-column="20" />
+            <state relative-caret-position="171">
+              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+              <folding>
+                <element signature="e#208#51294#2" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.js">
+        <entry file="file://$PROJECT_DIR$/pages/index/index.wxss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+            <state relative-caret-position="128">
+              <caret line="28" column="31" lean-forward="true" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -148,7 +137,6 @@
         <option value="$PROJECT_DIR$/components/navebar/navbar.wxml" />
         <option value="$PROJECT_DIR$/pages/index/tsconfig.json" />
         <option value="$PROJECT_DIR$/components/navbar/navbar.json" />
-        <option value="$PROJECT_DIR$/pages/index/index.js" />
         <option value="$PROJECT_DIR$/components/navigator-v1/navigator-v1.json" />
         <option value="$PROJECT_DIR$/components/navbar/navbar.js" />
         <option value="$PROJECT_DIR$/components/icon/tsconfig.json" />
@@ -171,18 +159,23 @@
         <option value="$PROJECT_DIR$/pages/applyInfo/applyInfo.js" />
         <option value="$PROJECT_DIR$/pages/home-applyInfo/applyInfo.wxml" />
         <option value="$PROJECT_DIR$/pages/home-applyInfo/applyInfo.wxss" />
-        <option value="$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxss" />
-        <option value="$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.js" />
         <option value="$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.wxml" />
         <option value="$PROJECT_DIR$/app.json" />
         <option value="$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.wxml" />
         <option value="$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.js" />
+        <option value="$PROJECT_DIR$/pages/index/index.js" />
+        <option value="$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.js" />
+        <option value="$PROJECT_DIR$/pages/dance-settings/dance-settings.js" />
+        <option value="$PROJECT_DIR$/pages/index-animation/index-animation.wxml" />
+        <option value="$PROJECT_DIR$/pages/index-animation/index-animation.js" />
+        <option value="$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxss" />
+        <option value="$PROJECT_DIR$/pages/index-animation/index-animation.wxss" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-29" />
-    <option name="y" value="6" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="y" value="29" />
     <option name="width" value="1366" />
     <option name="height" value="706" />
   </component>
@@ -226,6 +219,12 @@
               <item name="client" type="b2602c69:ProjectViewProjectNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="home-all" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="home-applyInfo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -238,12 +237,29 @@
               <item name="client" type="b2602c69:ProjectViewProjectNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="index" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="index-animation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="mine-systemInfo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="client" type="b2602c69:ProjectViewProjectNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="style" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -329,6 +345,14 @@
       <workItem from="1558187615467" duration="2870000" />
       <workItem from="1558239693624" duration="3935000" />
       <workItem from="1558255938556" duration="895000" />
+      <workItem from="1558758973421" duration="1275000" />
+      <workItem from="1558764610623" duration="2814000" />
+      <workItem from="1558772426459" duration="1884000" />
+      <workItem from="1558778531235" duration="1672000" />
+      <workItem from="1558784860850" duration="1436000" />
+      <workItem from="1558850121613" duration="542000" />
+      <workItem from="1558856508139" duration="3372000" />
+      <workItem from="1558863204888" duration="2507000" />
     </task>
     <task id="LOCAL-00001" summary="修改了时间与副标题的颜色">
       <created>1555810386461</created>
@@ -442,11 +466,60 @@
       <option name="project" value="LOCAL" />
       <updated>1558239941463</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="资讯详情">
+      <created>1558765018283</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1558765018283</updated>
+    </task>
+    <task id="LOCAL-00018" summary="资讯详情">
+      <created>1558766166917</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1558766166917</updated>
+    </task>
+    <task id="LOCAL-00019" summary="详情头像">
+      <created>1558772520130</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1558772520130</updated>
+    </task>
+    <task id="LOCAL-00020" summary="UI改动">
+      <created>1558778700401</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1558778700401</updated>
+    </task>
+    <task id="LOCAL-00021" summary="资讯详情">
+      <created>1558784995079</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1558784995080</updated>
+    </task>
+    <task id="LOCAL-00022" summary="资讯详情">
+      <created>1558856590911</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1558856590912</updated>
+    </task>
+    <task id="LOCAL-00023" summary="约局成功">
+      <created>1558863315205</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1558863315205</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95439000" />
+    <option name="totallyTimeSpent" value="110941000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -458,10 +531,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-29" y="6" width="1366" height="706" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18975903" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1875" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -473,7 +545,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3295082" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4985119" weight="0.18324608" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4985119" visible="true" weight="0.04918033" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5014881" side_tool="true" weight="0.18360655" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32242227" />
       <window_info anchor="bottom" id="Thumbnails" order="11" visible="true" weight="0.32888147" />
@@ -550,48 +622,13 @@
     <MESSAGE value="修改了时间与副标题的颜色" />
     <MESSAGE value="提交了Mine" />
     <MESSAGE value="functions" />
+    <MESSAGE value="详情头像" />
+    <MESSAGE value="UI改动" />
     <MESSAGE value="资讯详情" />
-    <option name="LAST_COMMIT_MESSAGE" value="资讯详情" />
+    <MESSAGE value="约局成功" />
+    <option name="LAST_COMMIT_MESSAGE" value="约局成功" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Downloads/message.png" />
-    <entry file="file://$PROJECT_DIR$/components/images/icon_message.png" />
-    <entry file="file://$PROJECT_DIR$/components/images/message.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/images/person.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/images/inform.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/mine/mine.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/mine/mine.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/mine-person/mine-person.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/list/list.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="96" selection-start-line="16" selection-start-column="96" selection-end-line="16" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/dance-settings/dance-settings.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/icon/blackpathen.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -607,35 +644,8 @@
     <entry file="file://$PROJECT_DIR$/static/icon/strange.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="44" column="48" selection-start-line="44" selection-start-column="48" selection-end-line="44" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.js" />
     <entry file="file://$PROJECT_DIR$/pages/applyInfo/applyInfo.js" />
-    <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6707">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/dance-settings/dance-settings.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.json" />
     <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxml" />
     <entry file="file://$PROJECT_DIR$/pages/appointInfo/appointInfo.wxss" />
@@ -649,40 +659,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/applyInfo.wxss" />
-    <entry file="file://$PROJECT_DIR$/pages/index/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
-          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/applyInfo.wxml" />
-    <entry file="file://$PROJECT_DIR$/pages/dance-applyInfo/applyInfo.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/dance-applyInfo/applyInfo.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/dance-applyInfo/applyInfo.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/dance-applyInfo/applyInfo.js" />
+    <entry file="file://$PROJECT_DIR$/pages/dance-applyInfo/applyInfo.json" />
+    <entry file="file://$PROJECT_DIR$/pages/dance-applyInfo/applyInfo.wxml" />
     <entry file="file://$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.wxss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -700,9 +683,7 @@
     <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/dance-applyInfo/applyInfo.wxss">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/dance-applyInfo/applyInfo.wxss" />
     <entry file="file://$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -719,13 +700,6 @@
     <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.wxss">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.wxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1102">
-          <caret line="58" column="9" selection-start-line="42" selection-start-column="4" selection-end-line="58" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.wxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
@@ -736,42 +710,34 @@
     <entry file="file://$PROJECT_DIR$/app.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="798">
-          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
+          <caret line="42" column="7" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/mine/mine.wxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
-          <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="53" />
+          <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret selection-end-line="16" selection-end-column="7" />
+          <caret selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3914">
-          <caret line="207" column="22" selection-start-line="207" selection-start-column="22" selection-end-line="207" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/static/促销.png" />
+    <entry file="file://$PROJECT_DIR$/static/地址.png" />
+    <entry file="file://$PROJECT_DIR$/static/点赞.png" />
     <entry file="file://$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+        <state relative-caret-position="209">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -783,9 +749,112 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cloudfunctions/home/index.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="199" column="20" selection-start-line="199" selection-start-column="20" selection-end-line="199" selection-end-column="20" />
+        <state relative-caret-position="133">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#20#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/home-appointInfo/home-appointInfo.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="779">
+          <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/home-applyInfo/home-applyInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="44" column="3" selection-start-line="44" selection-start-column="3" selection-end-line="44" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/dance-settings/dance-settings.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="255" column="10" selection-start-line="255" selection-start-column="10" selection-end-line="255" selection-end-column="10" />
+          <folding>
+            <element signature="e#42#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="291" column="42" selection-start-line="291" selection-start-column="42" selection-end-line="291" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/animate.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="43" column="17" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index/index.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="28" column="31" lean-forward="true" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/home-all/home-all.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index-animation/index-animation.wxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="28" lean-forward="true" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index-animation/index-animation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/mine-systemInfo/mine-systemInfo.wxss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/index-animation/index-animation.wxss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="e#208#51294#2" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
