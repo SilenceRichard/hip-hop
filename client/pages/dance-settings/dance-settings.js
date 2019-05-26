@@ -25,6 +25,7 @@ Page({
       QR_code:'',
       phone:''
     },//存入数据库的约局信息对象
+    showModalFlag: false,
     checkboxItems: [
       {name: 'Hiphop', value: 'Hiphop', checked: false},
       {name: 'Popping', value: 'Popping',checked: false},
@@ -79,8 +80,10 @@ Page({
       y:''
     },
   },
+
   async setInfo(ev){//点击事件
     console.log("已点击");
+    let that = this;
     let obj = this.data.info;//信息中间量
     if (this.data.step == 0){//如果是第一步
       obj.identify = ev.target.dataset.identify; //身份
@@ -89,6 +92,7 @@ Page({
         step:this.data.step+1,//更新step
         basics:this.data.basics+1,
         topTip:false
+
       })
     }
     else if (this.data.step == 1) {//如果是第二步
@@ -161,21 +165,114 @@ Page({
           obj.authorName = authorName
            this.setData({
                info:obj,//由中间量导入数据到info
-               step:this.data.step+1,//更新step
+               step:this.data.step,//更新step
                basics:this.data.basics+1,
                topTip:false
-           })
+             })
          console.log("传入云端数据：",this.data.info);
            await wx.cloud.callFunction({
                name:"dance",
-               data:{
-                   method:'danceSettings',
-                   info:this.data.info,
-                   openid:app.data.openid
-               }
+               data: {
+                 method: 'danceSettings',
+                 info: this.data.info,
+                 openid: app.data.openid
+               },
+               success(){
+               that.setData({
+                 showModalFlag: true
+               })
+             }
            })
+
        }
     }//上传至云端
+  },
+  hideModal(e) {
+    let obj= {
+    step:0, //记录填报表单的步骤数
+    info:{
+      location:{
+        name:'',
+        address:'',
+        latitude:'',
+        longitude:'',
+        contact:'',
+      },
+      clicktime:0,
+      identify:'',
+      type:'',
+      cover:'',
+      title:'',
+      content:'',
+      limit:1,
+      condition:'',
+      contact:'',
+      QR_code:'',
+      phone:''
+    },//存入数据库的约局信息对象
+    showModalFlag: false,
+    checkboxItems: [
+      {name: 'Hiphop', value: 'Hiphop', checked: false},
+      {name: 'Popping', value: 'Popping',checked: false},
+      {name: 'Locking', value: 'Locking',checked: false},
+      {name: 'Breaking', value: 'Breaking',checked: false},
+      {name: 'Waacking', value: 'Waacking',checked: false},
+      {name: 'House', value: 'House',checked: false},
+      {name: 'Jazz', value: 'Jazz',checked: false},
+      {name: 'Urban', value: 'Urban',checked: false},
+      {name: 'Krumping', value: 'Krumping',checked: false},
+      {name: 'Reggae', value: 'Reggae',checked: false},
+      {name: '不限', value: '不限',checked: false},
+    ],//记录舞种信息
+    contactItems:[{name:'手机号',flag:false},{name:'微信',flag:false},{name:'微信群聊',flag:false}], //联系方式
+    timestamp:{
+      date:util.formatDate(new Date()),
+      time:"00:00"
+    },//时间戳
+    contactName:'', //当前选择联系方式项
+    basicsList: [
+        {
+          icon: 'emoji',
+          name: '活动类型'
+        },
+        {
+          icon: 'emoji',
+          name: '活动形式'
+        },
+        {
+        icon: 'emoji',
+        name: '舞种'
+        },
+        {
+        icon: 'emoji',
+        name: '详情'
+        },
+        {
+        icon: 'emoji',
+        name: '联系方式'
+        }],
+    basics: 0, //步骤数
+    topTip:false,
+    tips:[
+      {step:0,tips:"(#`O′)你还没选活动形式！"},
+      {step:1,tips:"(#`O′)你还没选活动形式！"},
+      {step:2,tips:"(#`O′)至少选择一个舞种哟！"},
+      {step:3,tips:"(#`O′)这个表单都是必填项哟！请选择地图上有名字的约局地点"},
+      {step:4,tips:"(#`O′)请选择一种联络方式并留下信息~~"}
+    ],
+    touch:{
+      x:'',
+      y:''
+    }
+  };
+    this.setData({
+      showModalFlag: false,
+      step:0,
+      basics:0,
+      info:{obj}
+    })
+    wx.navigateTo({url:"../index/index"});
+
   },
   bindDateChange(ev){
     if (ev.currentTarget.dataset.type == 'date'){

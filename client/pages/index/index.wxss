@@ -1,4 +1,4 @@
-@import "../../style/animate.wxss";
+ @import "../../style/animate.wxss";
 @import '../home-all/home-all.wxss';
 page{
     overflow: hidden!important;

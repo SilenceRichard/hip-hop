@@ -3,7 +3,7 @@ import util from '../../utils/util'
 import regeneratorRuntime from '../../utils/wxPromise.min.js'
 const app = getApp();
 Page({
-    loadingFlag: false,
+  loadingFlag: false,
   /**
    * 页面的初始数据
    */
@@ -46,7 +46,8 @@ Page({
     keyword:'',
     dropDownFlag: false,
     searchFlag:false,
-    searchKeyFlag:false
+    searchKeyFlag:false,
+    bgImage:app.globalData.bgSrc
   },
 
   Back() {

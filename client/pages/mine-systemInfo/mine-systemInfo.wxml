@@ -24,10 +24,12 @@
     </view>
     </view>
   </block>
-    <block wx:for="{{hdList}}">
+   
 <!--        互动消息-->
         <view wx:if="{{flag==false}}" class="cu-list menu-avatar">
-            <view class="cu-item" bindtap="showModal" data-item="{{item}}">
+             <block wx:for="{{hdList}}">
+            <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtap="showModal" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}">
+
                 <view class="cu-avatar  " style="background-image:url(../../static/icon/notice.png);"></view>
                 <view class="content">
                     <view class="text-grey">{{item.titleShow}}</view>
@@ -38,7 +40,11 @@
                 </view>
                 <view class="action">
                 </view>
+                <view class="move">
+                  <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
+                </view>
             </view>
+             </block>
         </view>
         <view class="cu-modal show" wx:if="{{showModalFlag}}">
             <view class="cu-dialog">
@@ -74,11 +80,5 @@
 
                 </view>
             </view>
-
-
-
-        </view>
-    </block>
-
-
+      </view>
 </scroll-view>

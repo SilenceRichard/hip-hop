@@ -186,5 +186,17 @@
     </view>
     <button class="nextStep" bindtap="setInfo">发起约舞</button>
 </view>
-<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==5}}">约舞成功！</view>
 
+<view class="cu-modal show" wx:if="{{showModalFlag}}">
+      <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+          <view class="content" >约舞成功</view>
+          <view class="action" bindtap="hideModal">
+            <text class="cuIcon-close text-red" bindtap='hideModal'></text>
+          </view>
+        </view>
+        <view class="padding-xl">
+          <icon type="success" size="80"></icon>
+        </view>
+  </view>
+  </view>
