@@ -1,3 +1,12 @@
 .action{
     width: 200rpx!important;
 }
+.cu-list>.cu-item .move{
+    width: 130rpx;
+}
+.cu-list>.cu-item.move-cur {
+    transform:translateX(-130rpx);
+}
+.cu-list.menu-avatar>.cu-item{
+    background-color: var(--black);
+}

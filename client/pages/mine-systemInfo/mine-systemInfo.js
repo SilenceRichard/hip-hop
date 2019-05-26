@@ -10,6 +10,7 @@ Page({
     flag:true, //系统消息或互动消息的标志
     showModalFlag : false,
     userList:{},
+    bgImage:app.globalData.bgSrc
   },
   goTo(ev){
     console.log(ev)
@@ -28,11 +29,11 @@ Page({
   },
   showModal(ev) {
     let that = this;
-    console.log("对getMineInfo发起了调用,请求参数",ev.currentTarget.dataset.item._openid)
+    console.log("对getUserInfo发起了调用,请求参数",ev.currentTarget.dataset.item._openid)
     wx.cloud.callFunction({
       name:'mine',
       data:{
-        method:'getMineInfo',
+        method:'getUserInfo',
         openid:ev.currentTarget.dataset.item._openid
       },
       success(res) {
@@ -123,7 +124,7 @@ Page({
       }
     })
   },
-  onReady(){
+  onShow(){
     console.log("嘻嘻嘻嘻嘻嘻进来了",app.data.openid)
     let that = this
     wx.cloud.callFunction({

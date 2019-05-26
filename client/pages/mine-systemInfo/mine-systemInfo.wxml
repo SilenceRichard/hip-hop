@@ -1,12 +1,13 @@
+<image src="{{bgImage}}" class="backgroundImage"></image>
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
-    <scroll-view scroll-x class="bg-grey nav text-center">
+    <scroll-view scroll-x class="bg-gradual-blue nav text-center">
         <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
             {{item.name}}
         </view>
     </scroll-view>
   <block wx:for="{{systemList}}">
     <!--      系统消息-->
-      <view wx:if="{{flag==true}}" class="cu-list menu-avatar">
+      <view wx:if="{{flag==true}}" class="cu-list menu-avatar">-
       <view class="cu-item" data-item="{{item}}">
           <view class="cu-avatar bg-transparent">
               <text class="cuIcon-noticefill lg text-orange"></text>
@@ -24,13 +25,13 @@
     </view>
     </view>
   </block>
-   
+
 <!--        互动消息-->
         <view wx:if="{{flag==false}}" class="cu-list menu-avatar">
              <block wx:for="{{hdList}}">
-            <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtap="showModal" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}">
+            <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtap="showModal" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:if="{{item.uncheckedFlag}}">
 
-                <view class="cu-avatar  " style="background-image:url(../../static/icon/notice.png);"></view>
+                <view class="cu-avatar bg-black"><text class="cuIcon-form text-orange"></text></view>
                 <view class="content">
                     <view class="text-grey">{{item.titleShow}}</view>
                     <view class="text-gray text-sm flex">
@@ -44,12 +45,31 @@
                   <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
                 </view>
             </view>
+                 <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:else>
+
+                     <view class="cu-avatar bg-black">
+                         <text wx:if="{{item.passFlag}}" class="cuIcon-emoji text-green"></text>
+                         <text wx:if="{{item.unpassFlag}}" class="cuIcon-roundclose lg text-red"></text>
+                     </view>
+                     <view class="content">
+                         <view class="text-grey">{{item.titleShow}}</view>
+                         <view class="text-gray text-sm flex">
+                             <text class="text-cut">{{item.content}}</text>
+                         </view>
+                         <view class="text-grey text-xs">{{item.time}}</view>
+                     </view>
+                     <view class="action">
+                     </view>
+                     <view class="move">
+                         <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
+                     </view>
+                 </view>
              </block>
         </view>
         <view class="cu-modal show" wx:if="{{showModalFlag}}">
             <view class="cu-dialog">
-                <view class="cu-bar bg-white justify-end">
-                    <view class="content">{{item.infoTitle}}</view>
+                <view class="cu-bar bg-gradual-black justify-end">
+                    <view class="content">申请信息</view>
                     <view class="action" bindtap="hideModal">
                         <text class="cuIcon-close text-red" bindtap='hideModal'></text>
                     </view>
@@ -57,26 +77,24 @@
 
                 <view class="padding-xl">
                     <view >                   <!--如果是发起者收到的报名申请 -->
-                        <view style="text-align: left">报名信息</view>
-                        <view style="width:80%;margin: 0 0 0 10%;height:200rpx;background: #b7b7b7">
-                            {{item.info.apply}}
-                        </view>
-                        <view style="text-align: left">用户信息</view>
-                        <view><text>姓名：{{userList.name}}</text></view>
-                        <view><text>城市：{{userList.city}}</text></view>
-                        <view style="text-align: left">约局详情</view>
+                        <text>来自<text class="text-orange" wx:if="{{userList.city!=''}}">{{userList.city}}</text>
+                                  <text wx:else></text>
+                            的<text class="text-orange">{{userList.nickName}}</text>想要报名
+                            TA想说：
+                            <text class="text-blue" wx:if="{{item.info.apply!=''}}">{{item.info.apply}}</text>
+                            <text class="text-blue" wx:if="{{item.info.apply==''||item.info.apply==undefined}}" >
+                                TA好像没填申请信息
+                            </text>
+                        </text>
                     </view>
-
-                    <view class="row">
-                        <view class="col">
-                            <view class="col-6">
-                                <button class="button1" bindtap="sendInfo" data-item="{{item}}" data-state="0">同意</button>
-                            </view>
-                            <view class='col-6'>
-                                <button class="button1" bindtap="sendInfo" data-item="{{item}}" data-state="2">拒绝</button>
-                            </view>
-                        </view>
+                    <view>
+                        <button class="cu-btn bg-red" bindtap="hideModal">拒绝</button>
+                        <button class="cu-btn bg-green margin-left" bindtap="hideModal">同意</button>
                     </view>
+                    <!--<view class="row">-->
+                        <!--<button class="button1" bindtap="sendInfo" data-item="{{item}}" data-state="0">同意</button>-->
+                        <!--<button class="button1" bindtap="sendInfo" data-item="{{item}}" data-state="2">拒绝</button>-->
+                    <!--</view>-->
 
                 </view>
             </view>
