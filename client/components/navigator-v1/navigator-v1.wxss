@@ -1,5 +1,4 @@
 .wrapper{
-    border-bottom: 1rpx solid #cdcdcd;
     width: 100%;
 }
 .wrapper:active{
@@ -17,7 +16,7 @@
     color: #4a4a4a;
 }
 .wrapper:active .right{
-    color: #b9b9b9;
+    color: #4a4a4a;
 }
 .right{
     color: #a7a7a7;

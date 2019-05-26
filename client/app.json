@@ -39,10 +39,6 @@
         "text": "我的",
         "iconPath": "static/mine.png",
         "selectedIconPath": "static/mine_active.png"
-      },
-      {
-        "pagePath": "pages/component-demo/component-demo",
-        "text": "组件示例"
       }
     ]
   },

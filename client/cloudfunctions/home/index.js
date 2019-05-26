@@ -55,24 +55,36 @@ exports.main = async (event, context) => {
 
     if(event.method=="getInfo") {
         if (event.type == 'All'){
-            let result = await db.collection('dance-info').where({time:_.gte(now)}).orderBy('clicktime','desc').get();
-            console.log("---查到的结果- - ",result)
-            result.data.splice(5);
-            return{
-                checkResult:result.data
+          if(event.page==undefined){
+            let result = await db.collection('dance-info').limit(5).skip(0).where({ time: _.gte(now) }).orderBy('clicktime', 'desc').get();
+            console.log("---查到的结果- - ", result)
+            return {
+              checkResult: result.data
             }
+          }
+          else{
+            let result = await db.collection('dance-info').limit(5).skip((event.page - 1) * 5).where({ time: _.gte(now) }).orderBy('clicktime', 'desc').get();
+            console.log("---查到的结果- - ", result)
+            return {
+              checkResult: result.data
+            }
+          }
         }//全部约局
         if (event.type == 'time') {
           const targetDB = db.collection('dance-info');
-          let result = await targetDB.where({time:_.gte(now)}).orderBy('time', 'asc').get();//获取
-          // for (var i = 0; i < result.data.length-1; i++) {//去掉过时的
-          //   if(result.data[i].time<now){
-          //     result.data.splice(i,1);
-          //   }
-          // }
-          console.log(result);
-          return {
-            checkResult: result.data
+          if (event.page == undefined) {
+            let result = await targetDB.limit(5).skip(0).where({ time: _.gte(now) }).orderBy('time', 'asc').get();//获取
+            console.log(result);
+            return {
+              checkResult: result.data
+            }
+          }
+          else {
+            let result = await targetDB.limit(5).skip((event.page - 1) * 5).where({ time: _.gte(now) }).orderBy('time', 'asc').get();//获取
+            console.log(result);
+            return {
+              checkResult: result.data
+            }
           }
         }
         if (event.type == 'location'){
@@ -107,25 +119,43 @@ exports.main = async (event, context) => {
           //     }
           //   }
           // }
-
+          result.data.splice(5, result.data.length-5);//取前五个
           console.log("按距离查询结果：", result.data);
           return {
             checkResult: result.data
           }
         }//按距离查询
         if (event.type == 'getByIndividual'){
-            let result = await db.collection('dance-info').where({identify:_.eq('person'),time:_.gte(now)}).get();
-            console.log(result)
-            return{
-                checkResult:result.data
+          if (event.page == undefined) {
+            let result = await db.collection('dance-info').limit(5).skip(0).where({ identify: _.eq('person'), time: _.gte(now) }).get();
+            console.log("---查到的结果- - ", result)
+            return {
+              checkResult: result.data
             }
+          }
+          else {
+            let result = await db.collection('dance-info').limit(5).skip((event.page - 1) * 5).where({ identify: _.eq('person'), time: _.gte(now) }).get();
+            console.log("---查到的结果- - ", result)
+            return {
+              checkResult: result.data
+            }
+          }
         }
         if (event.type == 'getByOfficial'){
-            let result = await db.collection('dance-info').where({identify:_.eq('official'),time:_.gte(now)}).get();
-            console.log(result)
-            return{
-                checkResult:result.data
+          if (event.page == undefined) {
+            let result = await db.collection('dance-info').limit(5).skip(0).where({ identify: _.eq('official'), time: _.gte(now) }).get();
+            console.log("---查到的结果- - ", result)
+            return {
+              checkResult: result.data
             }
+          }
+          else {
+            let result = await db.collection('dance-info').limit(5).skip((event.page - 1) * 5).where({ identify: _.eq('official'), time: _.gte(now) }).get();
+            console.log("---查到的结果- - ", result)
+            return {
+              checkResult: result.data
+            }
+          }
         }
         if (event.type =='getAdvertise'){
           let result = await runDB.main('get', { db: 'advertise', condition: {} });
@@ -135,12 +165,21 @@ exports.main = async (event, context) => {
         }//获取广告
         if (event.type == 'getNewsInfo'){
           const targetDB = db.collection('dance-info');
-          let result = await targetDB.where({time:_.gte(now)}).orderBy('clicktime', 'desc').get();//获取
-          console.log("查询结果：",result.data);
-          //console.log("result.data.checkResult", result.data.checkResult);
-          result.data.splice(5);
-          return {
-            checkResult: result.data
+          if (event.page == undefined) {
+            let result = await targetDB.where({ time: _.gte(now) }).limit(5).skip(0).orderBy('clicktime', 'desc').get();//获取
+            console.log("---查到的结果- - ", result)
+            result.data.splice(5, result.data.length - 5);//取前五个
+            return {
+              checkResult: result.data
+            }
+          }
+          else {
+            let result = await targetDB.where({ time: _.gte(now) }).limit(5).skip((event.page - 1) * 5).orderBy('clicktime', 'desc').get();//获取
+            console.log("---查到的结果- - ", result)
+            result.data.splice(5, result.data.length - 5);//取前五个
+            return {
+              checkResult: result.data
+            }
           }
         }//查找到的最热的五条约舞
         if (event.type == 'keyword'){

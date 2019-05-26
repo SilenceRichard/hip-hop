@@ -268,7 +268,7 @@ activeSearch:async function(){
   // console.log("发送的参数：",app.data.openid)
   let res2 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"history",openid:app.data.openid}});
   // console.log("返回历史搜索-------------", res2);
-  this.setData({historyList : res2.result.checkResult});
+  this.setData({historyList : res2.result.checkResult.reverse()});
 },
 
 activeDropDown1() {
@@ -390,10 +390,52 @@ activeList(ev) {
       )
     }
   }
-  if (ev.currentTarget.dataset.item.name == "综合") {
+  if (ev.currentTarget.dataset.item.name == "综合" ) {
+      if(that.data.dropDownFlag == false)
     that.setData({
       dropDownFlag: true
     })
+      else{
+          wx.cloud.callFunction({
+              name: "home",
+              data: {
+                  method: 'getInfo',
+                  type: 'All',
+              },
+              success: function (res) {
+                  that.setData({
+                      dropDownFlag : false
+                  })
+                  //处理人数限制
+                  res.result.checkResult= res.result.checkResult.map((item)=>{
+                      let arr = item.applicant.filter((val)=>{
+                          if(val.state==0)
+                              return val
+                      })
+                      item.now = arr.length
+                      return item
+                  })
+                  //处理舞种信息
+                  res.result.checkResult.forEach(item => {
+                      item.str = ''
+                      item.dance_type.forEach(val => {
+                          if (val.checked == true) {
+                              item.str = item.str + val.name + ',';
+                          }
+                      })
+                  })
+                  res.result.checkResult.forEach(item => {
+                      item.str = item.str.slice(0, -1)
+                  })
+
+                  that.setData({
+                      info: res.result.checkResult
+                  })
+                  console.log("这是返回的全部约局资讯------",res)
+                  console.log("info",that.data.info)
+              }
+          })
+      }
   }
   else if (ev.currentTarget.dataset.item.name == "个人") {
     that.setData({
@@ -538,7 +580,7 @@ onPullDownRefresh(){
 
 
 onReady: function () {
-  // console.log("页面进来啦-------") 没问题
+  console.log("页面进来啦-------")//没问题
   var that = this;
     this.setData({
         loadingFlag: true
@@ -581,8 +623,10 @@ onReady: function () {
               })
           console.log("这是返回的全部约局资讯------",res)
             console.log("info",that.data.info)
+        },
+        fail: function (err) {
+            console.log("???",err)
         }
-
       })
 },
 

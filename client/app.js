@@ -6,7 +6,8 @@ App({
   globalData: {
     appId: 'wx9e8ef0042efc3a09',  //全局数据，存储appId和appSecret
     appSecret: '89ec0dddb75a4e9d347b0a94408b9efb',
-    env: 'suki-749826' //云环境ID
+    env: 'suki-749826', //云环境ID
+    bgSrc: 'cloud://suki-749826.7375-suki/bg1.jpg' //背景图云路径
   },
   data:{
     openid:'' ,//当前用户的openid

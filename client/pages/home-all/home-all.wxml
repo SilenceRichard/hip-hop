@@ -6,14 +6,14 @@
     <view  wx:if="{{searchFlag==true && searchKeyFlag==false}}">
         <view class="box">
 
-            <view class="cu-bar search bg-gradualblack">
+            <view class="cu-bar search" style="background:black">
                 <text class="cuIcon-back lg text-gray" bindtap="Back"></text>
                 <view class="search-form round">
                     <text class="cuIcon-search"></text>
                     <input type="text" placeholder="搜索标题、舞种、地点、发起人" bindinput="inputKeyword" value="{{keyword}}"></input>
                 </view>
                 <view class="action">
-                    <button class="cu-btn bg-yellow shadow-blur round" bindtap="search">搜索</button>
+                    <text class="word" bindtap="search" >搜索</text>
                 </view>
             </view>
         </view>
@@ -50,7 +50,7 @@
 <!--home-all-->
     <view  wx:if="{{searchFlag == false && searchKeyFlag==false}}">
         <view class="box" >
-            <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">
+            <view class="cu-bar search bg-white" style="background: black">
                 <view class="search-form round">
                     <text class="cuIcon-search"></text>
                     <input type="text" placeholder="搜索关键字" bindtap="activeSearch"></input>
@@ -64,26 +64,26 @@
 
 
         <view class="row header">
-            <view class='col'  style="position: relative">
-                <image class="{{dropDownFlag?'activeArrow':'arrow'}}"  src="../../static/icon/arrow-right.svg"></image>
+            <view class='col'>
                 <block wx:for='{{list}}' wx:key="item.name">
                     <view class="{{item.flag?'col-4 list list-active':'col-4 list'}}" bindtap="activeList" data-item="{{item}}">
                         {{item.name}}
+                        <image wx:if="{{item.name=='综合'}}" class="{{dropDownFlag?'activeArrow':'arrow'}}"  src="../../static/icon/arrow-right.svg"></image>
                     </view>
                 </block>
             </view>
             <!--        层级不够，要把dropdown层级置于page上面-->
-            <view class="dropDown"  wx:if="{{dropDownFlag}}"style="z-index:9999" >
-                <view class="title" bindtap="activeDropDown1">按时间 ↑</view>
-                <view class="title" bindtap="activeDropDown2">按距离 ↑</view>
+            <view class="header down"  wx:if="{{dropDownFlag}}"style="z-index:9999" >
+                <view class="downList" bindtap="activeDropDown1"><text class="cuIcon-time lg text-gray"></text>    按时间 ↑</view>
+                <view class="downList" bindtap="activeDropDown2"><text class="cuIcon-location lg text-gray"></text>    按距离 ↑</view>
             </view>
         </view>
 
 
         <block wx:for="{{info}}">
-            <view class='row outer' bindtap="goToDetail" data-item="{{item}}" >
+            <view class='row out2' bindtap="goToDetail" data-item="{{item}}" >
                 <view class='col' style='height:100%'>
-                    <view class='col-4'><image class="listImage" src="{{item.cover}}"></image></view>
+                    <view class='col-4 imgCol'><image class="listImage" src="{{item.cover}}"></image></view>
                     <view class='col-8'>
                         <text class="title" >{{item.title}}</text>
                         <view class="col class1"  >
@@ -101,7 +101,7 @@
 <!--    点击“搜索”展示的界面-->
     <view  wx:if="{{searchKeyFlag==true && searchFlag==false}}">
         <view class="box" >
-            <view class="cu-bar search bg-white" style="background: var(--gradualBlack)">
+            <view class="cu-bar search bg-white" style="background: black">
                 <view class="search-form round">
                     <text class="cuIcon-search"></text>
                     <input type="text" placeholder="{{keyword}}" bindconfirm="search" bindinput="inputKeyword" value="{{keyword}}"></input>
@@ -131,6 +131,7 @@
         </block>
     </view>
 </view>
+
 <view class='cu-load load-modal' wx:if="{{loadingFlag}}">
     <!-- <view class='cuIcon-emojifill text-orange'></view> -->
     <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>
