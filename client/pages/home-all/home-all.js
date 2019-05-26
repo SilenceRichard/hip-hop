@@ -3,7 +3,7 @@ import util from '../../utils/util'
 import regeneratorRuntime from '../../utils/wxPromise.min.js'
 const app = getApp();
 Page({
-    loadingFlag: false,
+  loadingFlag: false,
   /**
    * 页面的初始数据
    */
