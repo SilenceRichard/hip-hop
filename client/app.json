@@ -9,7 +9,8 @@
     "pages/home-all/home-all",
     "pages/home-appointInfo/home-appointInfo",
     "pages/home-applyInfo/home-applyInfo",
-    "pages/dance-settings/dance-settings"
+    "pages/dance-settings/dance-settings",
+    "pages/index-animation/index-animation"
   ],
   "window": {
     "backgroundTextStyle": "light",
