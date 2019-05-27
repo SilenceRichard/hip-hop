@@ -1,4 +1,6 @@
-<view>
+<view >
+<image class="backgroundImage" src="cloud://suki-749826.7375-suki/bg1.jpg"></image>
+<scroll-view class="out" scroll-y="true" style="height: 100vh">
     <scroll-view scroll-x class="bg-grey nav text-center">
         <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
             {{item.name}}
@@ -6,10 +8,11 @@
     </scroll-view>
     <block wx:if="{{flag=='jr'}}" wx:for="{{myJoined}}">
     <view  class="cu-card article ">
-        <view class="cu-item shadow">
+        <view class="cu-item shadow bg-blue-shadow">
             <view class="title">
-                <view class="text-cut">{{item.title}}</view>
-                <view wx:if="{{item.overFlag}}" class="cu-tag line-yellow">
+                <view class="text-cut line-white" >{{item.title}}</view>
+                <view class="cu-tag line-blue">{{item.time}}</view>
+                <view wx:if="{{item.overFlag}}" class="cu-tag line-red">
                     过期
                 </view>
             </view>
@@ -31,11 +34,10 @@
         <view class="cu-card article ">
             <view class="cu-item shadow">
                 <view class="title">
-                    <view class="text-cut">{{item.title}}
-                        <view wx:if="{{item.overFlag}}" class="cu-tag line-yellow">
-                            过期
+                    <view class="text-cut line-white">{{item.title}}</view>
+                        <view class="cu-tag line-blue">{{item.time}}</view>
+                        <view wx:if="{{item.overFlag}}" class="cu-tag line-red">过期
                         </view>
-                    </view>
                 </view>
                 <view class="content">
                     <image src="{{item.cover}}" mode="aspectFill"></image>
@@ -51,4 +53,5 @@
             </view>
         </view>
     </block>
+  </scroll-view>
 </view>

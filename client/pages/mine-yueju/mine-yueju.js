@@ -1,3 +1,4 @@
+
 import regeneratorRuntime from '../../utils/wxPromise.min.js' //引入async await语法糖
 var app = getApp();
 Page({

@@ -2232,7 +2232,6 @@ button.icon.lg {
 
 .cu-card>.cu-item {
 	display: block;
-	background-color: var(--white);
 	overflow: hidden;
 	border-radius: 10rpx;
 	margin: 30rpx;
@@ -2318,10 +2317,10 @@ button.icon.lg {
 }
 
 .cu-card.article>.cu-item .title {
-	font-size: 30rpx;
+	font-size: 32rpx;
 	font-weight: 900;
 	color: var(--black);
-	line-height: 100rpx;
+	line-height: 70rpx;
 	padding: 0 30rpx;
 }
 
