@@ -1,187 +1,89 @@
-  <view class="row bg-gradual-black">
+<view class="row bg-gradual-black">
     <view class="col head" style="background-image: var(--gradualBlack)">
-        <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/user status.png'}}"></image>
-        <text wx:if="{{edit==true}}" bindtap="changeImage" class="weui-cell_link">选择图片</text>
+        <image bindtap="changeImage" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/user status.png'}}"></image>
     </view>
 </view>
 
-
-<view wx:if="{{edit==true}}">
+<view>
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
-
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">昵称：</view>
-            <view class="col-9 formItem">
-                <input value="{{userInfo.nickName}}" bindinput="changeInputVal" data-type="nickName">
-                </input>
-            </view>
-        </view>
-    </view> -->
 
     <view class="cu-form-group">
       <view class="title">昵称</view>
       <input value="{{userInfo.nickName}}" bindinput="changeInputVal" data-type="nickName" type="text"></input>
-      <!-- 去下划线 -->
 	  </view>
-
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">性别：</view>
-            <view class="col-9 formItem" bindtap="changeSex">
-                <view wx:if="{{userInfo.gender == '1'}}">
-                      <text  class="weui-cell_link">男生</text>
-                </view>
-                <view wx:elif="{{userInfo.gender == '2'}}" >
-                     <text  class="weui-cell_link">女生</text>
-                </view>
-                <view wx:else >
-                      <text  class="weui-cell_link">保密</text>
-                </view>
-            </view>
-        </view>
-    </view> -->
 
     <view class="cu-form-group">
       <view class="title">性别</view>
       <picker mode="selector" value="{{userInfo.gender}}" range="{{genterarray}}" bindchange="changeSex">
-        <view class="picker textleft">
+        <view class="picker">
           {{genterarray[userInfo.gender]}}
         </view>
       </picker>
 	  </view>
 
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">生日：</view>
-            <view class="col-9 formItem">
-                <picker mode="date"  value="{{userInfo.birthday}}" start="1970-01-01" bindchange="bindDateChange" bindtap="bindDateChange">
-                    <view class="weui-input" wx:if="{{userInfo.birthday}}">
-                        <text  class="weui-cell_link">{{userInfo.birthday}}</text>
-                    </view>
-                    <view class="weui-input" wx:else>
-                        <text  class="weui-cell_link">请选择您的生日</text>
-                    </view>
-                </picker>
-            </view>
-        </view>
-    </view> -->
-
     <view class="cu-form-group">
       <view class="title">生日</view>
       <picker mode="date" value="{{userInfo.birthday}}" bindchange="bindDateChange">
-        <view class="picker textleft">
+        <view class="picker">
           {{userInfo.birthday}}
         </view>
       </picker>
 	  </view>
 
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">地区：</view>
-            <view class="col-9 formItem">
-                <input placeholder="请输入地区" value="{{userInfo.city}}" bindinput="changeInputVal" data-type="city">
-                </input>
-            </view>
-        </view>
-    </view> -->
-
     <view class="cu-form-group">
 		<view class="title">地址</view>
-		<picker mode="region" bindchange="regionChange" value="{{region}}" custom-item="{{customItem}}">
+		<picker mode="region" bindchange="regionChange" value="{{userInfo.region}}" custom-item="{{customItem}}">
 			<view class="picker">
-				{{region[0]}}，{{region[1]}}，{{region[2]}}
+				{{userInfo.region[0]}}，{{userInfo.region[1]}}，{{userInfo.region[2]}}
 			</view>
 		</picker>
 	</view>
 
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">身份：</view>
-            <view class="col-9 formItem">
-                <input  placeholder="请定义您的身份" value="{{userInfo.role}}"bindinput="changeInputVal" data-type="role" >
-                </input>
-            </view>
-        </view>
-    </view> -->
+  <view class="cu-form-group">
+    <view class="title">身份</view>
+    <picker mode="selector" value="{{userInfo.role}}" range="{{identyarray}}" bindchange="changeRole">
+      <view class="picker">
+        {{userInfo.role}}
+      </view>
+    </picker>
+	</view>
 
-      <view class="cu-form-group">
-        <view class="title">身份</view>
-        <picker mode="selector" value="{{userInfo.role}}" range="{{identyarray}}" bindchange="changeRole">
-          <view class="picker textleft">
-            {{identyarray[userInfo.role]}}
-          </view>
-        </picker>
-	  </view>
+  <view class="cu-form-group" bindtap="showModal">
+    <view class="title">舞种</view>
+    <view text-align="left">
+      <view class="picker" wx:for="{{userInfo.danceType}}" wx:key="{{item.value}}" wx:if="{{item.checked==true}}" display="inline">
+        {{item.value}}
+      </view>
+    </view>
+	</view>
 
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">性别：</view>
-            <view class="col-9 formItem" bindtap="changeSex">
-                <view wx:if="{{userInfo.gender == '1'}}">
-                      <text  class="weui-cell_link">男生</text>
-                </view>
-                <view wx:elif="{{userInfo.gender == '2'}}" >
-                     <text  class="weui-cell_link">女生</text>
-                </view>
-                <view wx:else >
-                      <text  class="weui-cell_link">保密</text>
-                </view>
-            </view>
-        </view>
-    </view> -->
-
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">舞种：</view>
-            <view class="col-8 formItem">
-                <checkbox-group bindchange="chooseDanceType">
-                    <label class="checkbox" wx:for="{{danceType}}" wx:key="*this">
-                        <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.name}}
-                    </label>
-                </checkbox-group>
-            </view>
-        </view>
-    </view> -->
-
-  <view class="title row form" bindtap="showModal">舞种</view>
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">舞龄：</view>
-            <view class="col-9 formItem">
-                <radio-group  bindchange="chooseDanceAge">
-                    <radio class="radio" wx:for-items="{{danceAge}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
-                        <text>{{item.value}}</text>
-                    </radio>
-                </radio-group>
-            </view>
-        </view>
-    </view> -->
-
-    <view class="cu-form-group">
-      <view class="title">舞龄</view>
-      <picker mode="selector" value="{{userInfo.danceAge}}" range="{{agearray}}" bindchange="chooseDanceAge" bindtap="chooseDanceAge">
-        <view class="picker textleft">
-          {{agearray[userInfo.danceAge]}}
-        </view>
-      </picker>
-	  </view>
+  <view class="cu-form-group" bindtap="chooseDanceAge">
+    <view class="title">舞龄</view>
+    <picker mode="selector" value="{{userInfo.danceAge}}" range="{{agearray}}">
+      <view class="picker">
+        {{userInfo.danceAge}}
+      </view>
+    </picker>
+	</view>
 
     <view class="row form">
         <view class="col">
-            <view class="col-3 label">个人介绍：</view>
+            <view class="col-3 label">个人介绍</view>
             <view class="col-8 formItem">
-                <textarea placeholder="介绍一下你自己吧~" bindinput="changeInputVal" value="{{userInfo.introduction}}" data-type="introduction">
+                <textarea placeholder="介绍一下你自己吧~" bindinput="changeIntroduction" value="{{userInfo.introduction}}" data-type="introduction">
                 </textarea>
             </view>
         </view>
     </view>
+
     <view class="row form">
         <button style="width:80%" class="weui-btn" bindtap="saveUserInfo">确定</button>
     </view>
 
 </view>
-  <view wx:if="{{edit==false}}">
+
+
+  <!-- <view wx:if="{{edit==false}}">
     <view class="cu-list bg-gradual-black menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
         <view class="cu-item bg-gradual-black">
             <view class="content">
@@ -252,20 +154,23 @@
             编辑
         </button>
     </view>
-</view>
+</view> -->
+
+
 <view class="cu-modal show" wx:if="{{showModalFlag}}">
       <view class="cu-dialog">
+
           <view class="cu-bar bg-black justify-end">
               <view class="content">选择舞种</view>
               <view class="action" bindtap="hideModal">
                   <text class="cuIcon-close text-red"></text>
               </view>
           </view>
+
           <view class="padding-xl bg-black">
               <checkbox-group bindchange="chooseDanceType">
-                  <label class="weui-cell weui-check__label" wx:for="{{danceType}}" wx:key="{{item.value}}">
+                  <label class="weui-cell weui-check__label" wx:for="{{userInfo.danceType}}" wx:key="{{item.value}}">
                       <checkbox class="weui-check" value="{{item.name}}" checked="{{item.checked}}"/>
-
                       <view class="weui-cell__hd weui-check__hd_in-checkbox">
                           <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
                           <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
@@ -274,10 +179,33 @@
                   </label>
               </checkbox-group>
           </view>
+
           <view class="cu-bar bg-black justify-end">
               <view class="action">
                   <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
               </view>
           </view>
+
       </view>
+</view>
+
+<view class="cu-modal {{'show'}}" wx:if="{{showLimitFlag}}">
+  <view class="cu-dialog">
+
+    <!-- <view class="bg-img" style="background-image: url('cloud://suki-749826.7375-suki-749826-1258890521/7473f023-f923-4eaa-ac45-bbaf8376fffemy-person-photo.png');height:200px;">
+      <view class="cu-bar justify-end text-white">
+        <view class="action" bindtap="hideLimit">
+          <text class="cuIcon-close "></text>
+        </view>
+      </view>
+    </view> -->
+
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub  solid-left" >最多只能选三个舞种</view>
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub  solid-left" bindtap="hideLimit">我知道了</view>
+    </view>
+
+  </view>
 </view>

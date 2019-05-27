@@ -2,24 +2,39 @@ import ajax from '../../utils/ajax'
 import util from '../../utils/util'
 import regeneratorRuntime from '../../utils/wxPromise.min.js' //引入async await语法糖
 const app = getApp();
+
 Page({
     data:{
-      userInfo:{}, //用户信息
-      edit:false, //编辑标志
-      open: false, //舞种选择框
-      // gender:[
-      //     {name: '保密', value: '0'},
-      //     {name: '男生', value: '1'},
-      //     {name: '女生', value: '2'}
-      // ],
+      userInfo:{
+        avatarUrl:"cloud://suki-749826.7375-suki-749826-1258890521/7473f023-f923-4eaa-ac45-bbaf8376fffemy-person-photo.png",
+        nickName:"hui",
+        gender:1,
+        birthday:"1999-01-26",
+        region: ['广东省', '广州市', '海珠区'],
+        role:"学生",
+        danceType: [
+          { name: 'Hiphop', value: 'Hiphop', checked: false },
+          { name: 'Popping', value: 'Popping', checked: true },
+          { name: 'Locking', value: 'Locking', checked: true },
+          { name: 'Breaking', value: 'Breaking', checked: false },
+          { name: 'Waacking', value: 'Waacking', checked: false },
+          { name: 'House', value: 'House', checked: false },
+          { name: 'Jazz', value: 'Jazz', checked: false },
+          { name: 'Urban', value: 'Urban', checked: false },
+          { name: 'Krumping', value: 'Krumping', checked: false },
+          { name: 'Reggae', value: 'Reggae', checked: false },
+          { name: '不限', value: '不限', checked: false },
+        ],
+        danceAge:"一年以下",
+        introduction:"我爱爱爱爱爱爱爱爱爱爱爱学习！",
+      }, //用户信息（假数据）
       genterarray:["保密","男生","女生"],
-      region: ['广东省', '广州市', '海珠区'],
       identyarray:["学生", "其他社会人员"],
       agearray: ["一年以下", "一到三年", "三年以上"],
-        danceType: [
+      danceType: [
             {name: 'Hiphop', value: 'Hiphop', checked: false},
-            {name: 'Popping', value: 'Popping',checked: false},
-            {name: 'Locking', value: 'Locking',checked: false},
+            {name: 'Popping', value: 'Popping',checked: true},
+            {name: 'Locking', value: 'Locking', checked: true},
             {name: 'Breaking', value: 'Breaking',checked: false},
             {name: 'Waacking', value: 'Waacking',checked: false},
             {name: 'House', value: 'House',checked: false},
@@ -29,25 +44,12 @@ Page({
             {name: 'Reggae', value: 'Reggae',checked: false},
             {name: '不限', value: '不限',checked: false},
         ],//记录舞种信息
-        // danceType:[
-        //     {name:'Hiphop',checked: false,class:'cu-tag round bg-orange light'},
-        //     {name:'Breaking',checked: false,class:'cu-tag round bg-olive light'},
-        //     {name:'Popping',checked: false,class:'cu-tag round bg-blue light'},
-        //     {name:'Locking',checked: false,class:'cu-tag round bg-white light'},
-        //     {name:'Jazz',checked: false,class:'cu-tag round  bg-yellow light'},
-        //     {name:'Weacking',checked: false,class:'cu-tag round bg-green light'},
-        //     {name:'Urban',checked: false,class:'cu-tag round bg-cyan light'},
-        //     {name:'其他',checked: false,class:'cu-tag round bg-purple light'}
-        //     ], //舞种
-        danceAge:[
-            {name:"lessOne",value:"一年以下",checked:false},
-            {name:"oneToThree",value:"一到三年",checked:false},
-            {name:"moreThree",value:"三年以上",checked:false},
-        ],//舞龄
         openid:'',//操作用户的openid
         showTopTips:false, //错误提示标志
         showModalFlag:false,
+        showLimitFlag: false,
     },
+
     changeImage: function(){
         let that = this;
         wx.chooseImage({
@@ -64,62 +66,37 @@ Page({
                 })
             },
         })
-    },
+    },//头像
+    changeInputVal: function (e) {
+      this.setData({
+        "userInfo.nickName": e.detail.value
+      })
+      console.log("昵称变为", this.data.userInfo.nickName);
+    }, //昵称
     changeSex: function (e) {
       this.setData({
         "userInfo.gender": e.detail.value
       })
-      console.log("性别变为", e.detail.value);
-      //  util.showActionSheet({itemList:['保密','男生','女生']}).then(res =>{
-      //     if (res.tapIndex == 0){
-      //         let info = this.data.userInfo;
-      //         info.gender = '0';
-      //         this.setData({
-      //             userInfo:info
-      //         })
-      //     }
-      //     else if(res.tapIndex == 1){
-      //         let info = this.data.userInfo;
-      //         info.gender = '1';
-      //         this.setData({
-      //             userInfo:info
-      //         })
-      //     }
-      //     else {
-      //         let info = this.data.userInfo;
-      //         info.gender = '2';
-      //         this.setData({
-      //             userInfo:info
-      //         })
-      //     }
-      //  })
-    }, //性别单选项改变事件
-    openchooseDanceType: function (e) {
-      this.setData({
-        "userInfo.open": 1
-      })
-      console.log("open设为", this.data.userInfo.open)
-    },//打开选择框
-    closechooseDanceType: function (e) {
-      this.setData({
-        "userInfo.open": 0
-      })
-    },//关闭选择框
+      console.log("性别变为", this.data.userInfo.gender);
+    }, //性别
     bindDateChange: function (e) {
-        let  info = this.data.userInfo;
-        info.birthday = e.detail.value;
-        this.setData({
-            userInfo:info
-        })
-    }, //日期改变时的相关处理
+      this.setData({
+        "userInfo.birthday": e.detail.value
+      })
+      console.log("生日变为", this.data.userInfo.birthday);
+    }, //生日
     regionChange: function (e) {
-      // let info = this.data.userInfo;
-      // info.birthday = e.detail.value;
       this.setData({
         "userInfo.region": e.detail.value
       })
-      console.log("地址改变为", e.detail.value)
-    }, //地址改变时的相关处理
+      console.log("地址变为", this.data.userInfo.region)
+    }, //地址
+    changeRole: function (e) {
+      this.setData({
+        "userInfo.role": this.data.identyarray[e.detail.value]
+      })
+      console.log("身份变为", this.data.userInfo.role);
+    },//身份
     chooseDanceType:function (e) {
         console.log(e.detail.value)
         let arr =  e.detail.value; //勾选事件传递的数组
@@ -136,49 +113,58 @@ Page({
         })
         let info = this.data.userInfo;
         info.danceType = type;
-        console.log(type)
+        //console.log(type)
         this.setData({
             userInfo:info,
             danceType:type
         })
-    }, //选择舞种类型
+    }, //舞种类型
     chooseDanceAge:function(e){
         this.setData({
-          "userInfo.danceAge": e.detail.value
+          "userInfo.danceAge": this.data.agearray[e.detail.value]
         })
-      console.log("舞龄变为", e.detail.value);
-    }, //选择舞龄
-    changeInputVal:function(e){
-      console.log("进入changeInputVal,e",e);
-        let info = this.data.userInfo;
-        info[e.target.dataset.type] = e.detail.value; //将info对应的属性值改变
-        this.setData({
-                userInfo:info
-        })
-    }, //根据输入框的值改变userInfo
-    changeRole: function (e) {
+      console.log("舞龄变为", this.data.userInfo.danceAge);
+    }, //舞龄
+    changeIntroduction: function (e) {
       this.setData({
-        "userInfo.role": e.detail.value
+        "userInfo.introduction": e.detail.value
       })
-      console.log("身份", e.detail.value);
-    },//改变身份
-    showModal: function (e) {
+      console.log("个人介绍变为", this.data.userInfo.introduction);
+    }, //个人介绍
+
+    showModal: function () {
       this.setData({
           showModalFlag:true
       })
-      console.log("舞种变为", e.detail.value);
-    },//改变舞种
+    },//打开改变舞种的框
     hideModal: function(){
+      let num=0;
+      this.data.userInfo.danceType.forEach((item)=>{
+        if (item.checked == 1) num++;
+      })
+      if (num>3){
         this.setData({
-            showModalFlag:false
+          showLimitFlag: true
         })
-    },
+      }else{
+        this.setData({
+          showModalFlag: false
+        })
+      }
+      console.log("showLimitFlag变为", this.data.showLimitFlag);
+    },//关闭改变舞种的框
+    hideLimit: function () {
+      this.setData({
+        showLimitFlag: false
+      })
+    },//关闭提示框
+
     saveUserInfo:async function(){
         var that = this;
-        console.log(this.data.userInfo)
+        //console.log(this.data.userInfo)
         this.data.userInfo.openid = app.data.openid
         console.log('更新信息-----',this.data.userInfo)
-       let result = await wx.cloud.callFunction({
+        let result = await wx.cloud.callFunction({//调用云函数更新
             name:'mine',
             data:{
                 method:'updateMineInfo',
@@ -186,13 +172,13 @@ Page({
                 openid:app.data.openid
             }
         })
-        console.log('更新返回值---',result)
+        console.log('更新成功，返回值---',result)
         await   wx.showToast({
-                                title: '用户信息已更新!',
-                                icon: 'success',
-                                duration: 3000
-                            })
-        this.setData({edit:false});
+          title: '用户信息已更新!',
+          icon: 'success',
+          duration: 3000
+        })//显示框
+                        
         // ajax.find_page({"_openid":that.data.openid},1,10,'user')
         //     .then(res =>{
         //         let id = res[0]._id;
@@ -224,18 +210,12 @@ Page({
         //     });
         // }, 3000);
     }, //保存用户信息
-    editUserInfo: function(){
-      this.setData(
-          {
-              edit:true
-          }
-      )
-    }, //启用编辑
+    
     onLoad:async function (info) {
         //在页面加载时，根据传过来的id，查询数据库中的用户信息
         //小程序的路由传参 和get请求一样 ?后拼接参数进行传递
         //接受参数的形式为一对象
-        console.log("参数传过来啦-----",info.openid)
+        console.log("openid传过来啦-----",info.openid)
         var that = this;
         that.setData({
             openid:info.openid
@@ -248,28 +228,13 @@ Page({
                 openid:app.data.openid,
             },
         })
+        console.log("传回用户信息-----", result.result.res)
+
         if ( typeof result.result.res !='undefined'){
           this.setData({
             userInfo: result.result.res
           })
+          console.log("用户信息不为空，已载入前台")
         }
-        //如果该用户之前填写过默认舞种 ，则做处理，默认勾选
-        if ( typeof this.data.userInfo.danceType!= 'undefined'){
-            this.setData({
-                danceType:this.data.userInfo.danceType
-            })//如果该用户之前填写过默认舞种 ，则做处理，默认勾选
-        }
-        //如果该用户之前填写过默认舞龄 ，则做处理，默认勾选
-        if ( typeof this.data.userInfo.danceAge != 'undefined'){
-            let arr = this.data.danceAge;
-            arr.forEach(item =>{
-                if (item.name == this.data.userInfo.danceAge){
-                    item.checked = true
-                }
-            })//如果该用户之前填写过默认舞龄 ，则做处理，默认勾选
-            that.setData({
-                danceAge:arr
-            })
-        }
-    },
+    },//加载用户已有信息
 })
