@@ -35,7 +35,8 @@ Page({
     },
     //info_,
     loadingFlag:false,
-    showModalFlag:false
+    showModalFlag:false,
+    bgImage: app.globalData.bgSrc
   },
 
   onLoad(info){

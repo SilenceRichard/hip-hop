@@ -10,7 +10,8 @@ Page({
       status:''
     },
     // id:'',
-    showModalFlag:false
+    showModalFlag:false,
+    bgImage: app.globalData.bgSrc
   },
   onLoad(info){
       console.log("传过来-----",info)
