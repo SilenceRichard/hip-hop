@@ -102,7 +102,6 @@ exports.main = async (event, context) => {
       }
   }
   if(event.method == 'exam'){
-
       console.log("参数",event)
       const targetDB = db.collection('dance-info');
       let  allMy = await  targetDB.doc(event.id).get();
@@ -123,19 +122,19 @@ exports.main = async (event, context) => {
         const targetDB = db.collection('dance-info');
         var isRead =1;
         let read = await targetDB.doc(event._id).get();
-        console.log("查到的信息:",read.data);
-        if (event.openid === read.data._openid){
+        console.log(event)
+        if (event.openid === read.data.openid){
             read.data.applicant.forEach(item=>{
-                if (item._openid === event._openid) item.isReadByOpen =`1` //发起人已读这条消息
+                if (item._openid === event.apply_openid) item.isReadByOpen =`1` //发起人已读这条消息
             })
             delete read.data._id;
-            targetDB.doc(event._id).update({data:read.data})
+            await targetDB.doc(event._id).update({data:read.data})
         }else {
             read.data.applicant.forEach(item=>{
-                if (item._openid === event._openid) item.isReadByApplicant =`1` //发起人已读这条消息
+                if (item._openid === event.apply_openid) item.isReadByApplicant =`1` //发起人已读这条消息
             })
             delete read.data._id;
-            targetDB.doc(event._id).update({data:read.data})
+            await targetDB.doc(event._id).update({data:read.data})
         }
 
         // return {
@@ -149,11 +148,11 @@ exports.main = async (event, context) => {
         var uncheckedApply = [];
         var checkedApply = [];
         var checkedApply2 = [];
+        var checkingApply = [];
         let Apply = await targetDB.where()
             .get()
         Apply.data.forEach((item)=>{
             if(item.openid == event.openid) {
-                debugger
                     let t = 0;
                     item.applicant.forEach(val => {
                         if (val.state == '0') t++  //计算通过的人数
@@ -178,17 +177,20 @@ exports.main = async (event, context) => {
                         if (val.state == "2"&&(val.isReadByApplicant =='0'||val.isReadByApplicant ==undefined)){
                             checkedApply2.push(item)
                         }
+                        if (val.state == "1"&&(val.isReadByApplicant =='0'||val.isReadByApplicant ==undefined)){
+                            checkingApply.push(item)
+                        }
                     }
                 })
 
         })
         return {
             myTeamedDance:myTeamedDance,//我发起的组队成功的约舞 xt
-          myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
-          uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
-          checkedApply:checkedApply,//我参加已通过的 hd
-          checkedApply2:checkedApply2//未通过的 hd
-                                // 我参加的未审核的
+            myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
+            uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
+            checkedApply:checkedApply,//我参加已通过的 hd
+            checkedApply2:checkedApply2,//未通过的 hd
+            checkingApply:checkingApply// 我参加的未审核的
   }
     }
   }
