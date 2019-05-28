@@ -23,18 +23,19 @@
 
     <view class="cu-form-group">
       <view class="title">生日</view>
-      <picker mode="date" value="{{userInfo.birthday}}" bindchange="bindDateChange">
+      <picker mode="date" value="{{userInfo.birthday}}" bindtap="bindDateChange" bindchange="bindDateChange">
         <view class="picker">
-          {{userInfo.birthday}}
+          {{userInfo.birthday||'请选择出生日期'}}
         </view>
       </picker>
 	  </view>
 
     <view class="cu-form-group">
 		<view class="title">地址</view>
-		<picker mode="region" bindchange="regionChange" value="{{userInfo.region}}" custom-item="{{customItem}}">
+		<picker mode="region" bindchange="regionChange"  custom-item="{{customItem}}">
 			<view class="picker">
-				{{userInfo.region[0]}}，{{userInfo.region[1]}}，{{userInfo.region[2]}}
+                {{userInfo.region||'选择省市'}}
+				<!--{{userInfo.region[0]||'选择省市'}}，{{userInfo.region[1]}}，{{userInfo.region[2]}}-->
 			</view>
 		</picker>
 	</view>
@@ -43,25 +44,26 @@
     <view class="title">身份</view>
     <picker mode="selector" value="{{userInfo.role}}" range="{{identyarray}}" bindchange="changeRole">
       <view class="picker">
-        {{userInfo.role}}
+        {{userInfo.role||'请选择身份'}}
       </view>
     </picker>
 	</view>
 
   <view class="cu-form-group" bindtap="showModal">
     <view class="title">舞种</view>
-    <view text-align="left">
-      <view class="picker wuzhong" wx:for="{{userInfo.danceType}}" wx:key="{{item.value}}" wx:if="{{item.checked==true}}" style="font-size:35rpx">
-        {{item.value}}
-      </view>
+    <view>
+       <block wx:for="{{danceTypeFormat}}">
+           <view class="cu-tag bg-orange"role=""aria-label="">{{item}}</view>
+       </block>
+
     </view>
 	</view>
 
-  <view class="cu-form-group" bindtap="chooseDanceAge">
+  <view class="cu-form-group">
     <view class="title">舞龄</view>
-    <picker mode="selector" value="{{userInfo.danceAge}}" range="{{agearray}}">
+    <picker mode="selector"  bindtap="chooseDanceAge" bindchange="chooseDanceAge" value="{{userInfo.danceAge}}" range="{{agearray}}">
       <view class="picker">
-        {{userInfo.danceAge}}
+        {{userInfo.danceAge||'请选择舞龄'}}
       </view>
     </picker>
 	</view>
@@ -70,106 +72,17 @@
     <view class="intro">--------------------------个人介绍--------------------------</view>
     <textarea placeholder="介绍一下你自己吧~" bindinput="changeIntroduction" value="{{userInfo.introduction}}"></textarea>
   </view>
-
-    <!-- <view class="row form">
-        <view class="col">
-            <view class="col-3 label">个人介绍</view>
-            <view class="col-8 formItem">
-                <textarea placeholder="介绍一下你自己吧~" bindinput="changeIntroduction" value="{{userInfo.introduction}}" data-type="introduction">
-                </textarea>
-            </view>
-        </view>
-    </view> -->
-
     <view class="row form">
         <button style="width:94%" class="weui-btn queding" bindtap="saveUserInfo">确定</button>
     </view>
 
 </view>
 
-
-  <!-- <view wx:if="{{edit==false}}">
-    <view class="cu-list bg-gradual-black menu {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
-        <view class="cu-item bg-gradual-black">
-            <view class="content">
-                <text class=" cuIcon-friend lg text-blue"></text>
-                <text class="text-grey">昵称：</text>
-                <text>{{userInfo.nickName}}</text>
-            </view>
-        </view>
-        <view class="cu-item bg-gradual-black">
-            <view class="content">
-                <text class=" cuIcon-friend lg text-blue"></text>
-                <text class="text-grey">身份：</text>
-                <text>{{userInfo.role}}</text>
-            </view>
-        </view>
-        <view class="cu-item bg-gradual-black">
-            <view class="content">
-                <text class=" cuIcon-friend text-pink"></text>
-                <text class="text-grey">性别：</text>
-                <text wx:if="{{userInfo.gender=='1'}}">男生</text>
-                <text wx:elif="{{userInfo.gender=='2'}}">女生</text>
-                <text wx:else>保密</text>
-            </view>
-        </view>
-        <view class="cu-item bg-gradual-black">
-            <view class="content">
-                <text class=" cuIcon-circlefill text-grey"></text>
-                <text class="text-grey">地区：</text>
-                <text>{{userInfo.city}}</text>
-            </view>
-        </view>
-        <view style="opacity: 1" class="cu-item bg-gradual-black">
-            <view class="content">
-                <text class="cuIcon-tagfill text-green"></text>
-                <text class="text-grey">舞种：</text>
-                <block wx:for="{{userInfo.danceType}}">
-                    <view wx:if="{{item.checked==true}}" class="{{item.class}}"role=""aria-label="">
-                        {{item.name}}
-                    </view>
-                </block>
-            </view>
-        </view>
-        <view style="opacity: 1" class="cu-item bg-gradual-black">
-            <view class="content">
-                <text class="cuIcon-rank text-red"></text>
-                <text class="text-grey">舞龄：</text>
-                <view wx:if="{{userInfo.danceAge=='lessOne'}}" class="cu-tag round bg-green light"role=""aria-label="">
-                    少于一年
-                </view>
-                <view wx:elif="{{userInfo.danceAge=='oneToThree'}}" class="cu-tag round bg-green light"role=""aria-label="">
-                    一至三年
-                </view>
-                <view wx:else class="cu-tag round bg-green light"role=""aria-label="">
-                    三年以上
-                </view>
-            </view>
-        </view>
-        <view class="cu-item bg-gradual-black">
-            <view class="content">
-                <text class=" cuIcon-circlefill text-grey"></text>
-                <text class="text-grey">签名：</text>
-                <text>{{userInfo.introduction}}</text>
-            </view>
-        </view>
-    </view>
-    <view class="row form">
-        <button  bindtap="editUserInfo" style="width:80%;margin: 0 0 0 10%" class="cu-btn block bg-yellow margin-tb-sm lg button-hover"role="button"aria-label=""aria-disabled="false">
-            编辑
-        </button>
-    </view>
-</view> -->
-
-
 <view class="cu-modal show" wx:if="{{showModalFlag}}">
       <view class="cu-dialog">
 
           <view class="cu-bar bg-black justify-end">
               <view class="content">选择舞种</view>
-              <view class="action" bindtap="hideModal">
-                  <text class="cuIcon-close text-red"></text>
-              </view>
           </view>
 
           <view class="padding-xl bg-black">
@@ -196,14 +109,6 @@
 
 <view class="cu-modal {{'show'}}" wx:if="{{showLimitFlag}}">
   <view class="cu-dialog">
-
-    <!-- <view class="bg-img" style="background-image: url('cloud://suki-749826.7375-suki-749826-1258890521/7473f023-f923-4eaa-ac45-bbaf8376fffemy-person-photo.png');height:200px;">
-      <view class="cu-bar justify-end text-white">
-        <view class="action" bindtap="hideLimit">
-          <text class="cuIcon-close "></text>
-        </view>
-      </view>
-    </view> -->
 
     <view class="cu-bar bg-white">
       <view class="action margin-0 flex-sub  solid-left" >最多只能选三个舞种</view>
