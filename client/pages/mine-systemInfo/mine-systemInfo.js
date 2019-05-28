@@ -10,6 +10,12 @@ Page({
     flag:true, //系统消息或互动消息的标志
     showModalFlag : false,
     userList:{},
+    apply:'', //申请信息
+    sendInfoObj:{
+      checkedId:'',
+      state:'',
+      id:''
+    },
     bgImage:app.globalData.bgSrc
   },
   goTo(ev){
@@ -29,7 +35,15 @@ Page({
   },
   showModal(ev) {
     let that = this;
-    console.log("对getUserInfo发起了调用,请求参数",ev.currentTarget.dataset.item._openid)
+    let obj = {
+      checkedId:ev.currentTarget.dataset.item._openid,
+      state:ev.currentTarget.dataset.item.state,
+      id:ev.currentTarget.dataset.item.dance_id
+    }
+    this.setData({
+      sendInfoObj:obj
+    })
+    console.log(obj)
     wx.cloud.callFunction({
       name:'mine',
       data:{
@@ -39,7 +53,8 @@ Page({
       success(res) {
        console.log(res)
         that.setData({
-          userList:res.result.res
+          userList:res.result.res,
+          apply:ev.currentTarget.dataset.apply||''
         })
       },
       fail(err){
@@ -61,14 +76,18 @@ Page({
       name:'mine',
       data:{
         method:'exam',
-        checkedId:ev.currentTarget.dataset.item._openid,
+        checkedId:that.data.sendInfoObj.checkedId,
         state:ev.currentTarget.dataset.state,
-        id:ev.currentTarget.dataset.item.dance_id
+        id:that.data.sendInfoObj.id
       },
       success(){
+        that.getSystemInfo();
         that.setData({
           showModalFlag:false
         })
+      },
+      fail(err){
+        console.log(`err调用失败!${err}`)
       }
     })
   },
@@ -111,22 +130,23 @@ Page({
         method: 'deleteMessage',
         _id:ev.currentTarget.dataset.item.dance_id,
         openid: app.data.openid,
-        _openid:ev.currentTarget.dataset.item._openid
+        apply_openid:ev.currentTarget.dataset.item._openid
       },
       success(res) {
-        console.log(res)
-        that.setData({
-          userList: res.result.res
-        })
+        that.getSystemInfo()
       },
       fail(err) {
         console.log(err)
       }
     })
   },
-  onShow(){
+  getSystemInfo(){
     console.log("嘻嘻嘻嘻嘻嘻进来了",app.data.openid)
     let that = this
+    this.setData({
+      hdList:[],
+      systemList:[]
+    })
     wx.cloud.callFunction({
       name : "mine",
       data:{
@@ -141,8 +161,11 @@ Page({
         res.result.myUpTimeDance.forEach(item =>{
           item.overtimeFlag = true
         })
+        res.result.checkingApply.forEach(item=>{
+          item.checkingFlag = true
+        })
         let a=that.data.systemList.concat(res.result.myTeamedDance)
-                                  .concat(res.result.myUpTimeDance)
+            .concat(res.result.myUpTimeDance).concat(res.result.checkingApply)
         a.map(item=>{
           if (item.teamedFlag){
             item.titleShow = `您的${item.title}约局已成功组队`
@@ -150,6 +173,10 @@ Page({
           }
           if (item.overtimeFlag){
             item.titleShow = `您的${item.title}约局已过期`
+            return item
+          }
+          if (item.checkingFlag){
+            item.titleShow = `您申请的${item.title}约局正在审核中`
             return item
           }
         })
@@ -167,21 +194,21 @@ Page({
           item.unpassFlag = true
         })
         let b=that.data.hdList.concat(res.result.uncheckedApply)
-                        .concat(res.result.checkedApply)
-                        .concat(res.result.checkedApply2)
+            .concat(res.result.checkedApply)
+            .concat(res.result.checkedApply2)
         b.map(item=>{
-            let obj = item;
-            if (obj.uncheckedFlag){
-              obj.titleShow=`你收到一个加入请求！`
-              return obj
-            }
-            if (obj.passFlag){
-              obj.titleShow=`你已成功加入${item.title}的约局`
-            }
-            if (obj.unpassFlag){
-              obj.titleShow=`你的${item.title}约局申请已被拒绝`
-            }
+          let obj = item;
+          if (obj.uncheckedFlag){
+            obj.titleShow=`你收到一个加入请求！`
             return obj
+          }
+          if (obj.passFlag){
+            obj.titleShow=`你已成功加入${item.title}的约局`
+          }
+          if (obj.unpassFlag){
+            obj.titleShow=`你的${item.title}约局申请已被拒绝`
+          }
+          return obj
         })
         that.setData({
           hdList:b
@@ -214,8 +241,10 @@ Page({
       },
       fail(err){
         console.log("走不走？",err)
-    }
+      }
     })
+  },
+  onShow(){
+     this.getSystemInfo();
   }
-
 })
