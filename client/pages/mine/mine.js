@@ -12,6 +12,7 @@ Page({
         sign:'暂无签名TAT',
         loadingFlag:false,
         showModalFlag:false,
+        bgImage:app.globalData.bgSrc
       // openid:'',//该用户字段在数据库中存储对应的openid
     },
     getUSER(){
