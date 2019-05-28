@@ -4,6 +4,7 @@ const app = getApp();
 
 Page({
   data: {
+    bgImage: app.globalData.bg2,
     info: {
       cover: '',
       title: '',
@@ -35,7 +36,8 @@ Page({
     },
     //info_,
     loadingFlag:false,
-    showModalFlag:false
+    showModalFlag:false,
+   
   },
 
   onLoad(info){

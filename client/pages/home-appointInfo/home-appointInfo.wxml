@@ -1,57 +1,61 @@
-<!--pages/appointInfo/appointInfo.wxml-->
-<view class="out">
+<image src="{{bgImage}}" class="backgroundImage"></image>
+<scroll-view  scroll-y="true" style="height: 100vh" class="out">
     <view  class='row outer'>
         <view class='col header' style='height:100%'>
-            <view class='col-5'><image class="front" src="{{info.cover}}"></image></view>
-            <view class='col-7'>
+            <view class='image'><image class="front" src="{{info.cover}}"></image></view>
+            <view class='headInfo'>
+                <view class="fisInfo bg-black padding-sm radius margin-top-sm  text-sm"  >
+                <view class="info">
                 <text class="title">{{title}}</text>
                 <view class="outerText" style='color:#ffffff'>{{info.title}}</view>
                 <view class="innerText1" style='color:#ffffff'>{{info.identify}}|{{info.dance_type}}|{{info.type}}</view>
                 <view class="innerText2" style='color:#ffffff'>发布时间：{{info.time}}</view>
                 <view class="innerText3" style='color:#ffffff'>人数限制：{{info.now}}/{{info.limit}}</view>
+            </view>  
+             <view class="activeInfo" style='color:#ffffff'>{{info.content}}</view>
             </view>
+            </view>
+       
         </view>
     </view>
 
-    <view class="activeInfo" style='color:#a6a6a6'>{{info.content}}</view>
+   <view class="secInfo  bg-black padding-sm radius margin-top-sm  text-sm" >
     <view class="col join">
-        <view class="col-1"><image src="../../static/demand.png"></image></view>
+        <view class="col-1"><image src="../../static/demand.png" style="width:70rpx height:70rpx"></image></view>
         <view class="col-11" style='color:#ffffff'>加入要求</view>
     </view>
-    <view class="joinInfo" style='color:#a6a6a6'>{{info.condition}}</view>
+    <view class="joinInfo" style='color:#ffffff'>{{info.condition}}</view>
     <view class="col time">
         <view class="col-1"><image src="../../static/time.png"></image></view>
         <view class="col-4" style='color:#ffffff'>活动时间</view>
-        <view class="col-7" style='color:#a6a6a6'>{{info.time}}</view>
+        <view class="col-7" style='color:#ffffff'>{{info.time}}</view>
     </view>
     <view class="col location">
-        <view class="col-1"><image src="../../static/address.png"></image></view>
-        <view class="col-4" style='color:#ffffff'>活动地点</view>
-        <view class="col-7" style='color:#a6a6a6'>{{info.location.name}}</view>
+        <view class="col-1"><image class="pic3" src="../../static/address.png"></image></view>
+        <view class="col-4" style='color:#ffffff'style="width:70rpx height:70rpx">活动地点</view>
+        <view class="col-7" style='color:#ffffff'>{{info.location.name}}</view>
     </view>
     <view class="col indivdual">
         <view class="col-1"  ><image src="../../static/user.png"  data-target="Modal" ></image></view>
-        <view class="col-11" style='color:#ffffff'>发起人信息</view>
+        <view class="founder col-11" style='color:#ffffff '>发起人信息</view>
     </view>
     <view class="row picture" bindtap="showModal">
         <view class="col head" style='height:100%'>
            <view class="col-3  margin-left" style="position: relative;overflow: visible">
            <image src="{{info_.avatarUrl}}"style="height: 130rpx;width: 130rpx;border-radius: 50%"></image>
            <view  style="position: absolute;top: 0;left: 0" class="cu-tag badge {{info.gender%2==0?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
-
             </view>
+      
             <view class="col-9 name" >
                 <view class="col" >
                     <view class="col-9 style='color:#ffffff'"> {{info.authorName}}</view>
-                    <view class="col-3" style="position:relative">
-                    
-                    
-                    </view>
                 </view>
             </view>
+          </view>
         </view>
     </view>
     <button style="width:80%" class="weui-btn" bindtap='toApplyInfo'>报名</button>
+    </scroll-view>
     <view class="cu-modal show" wx:if="{{showModalFlag}}">
       <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
@@ -69,9 +73,9 @@
            <view>签名：{{info_.sigh?info_.sigh:'该用户什么都没有写'}}</view> 
         </view>
   </view>
-</view>
+ </view>
 
-</view>
+
 <view class='cu-load load-modal' wx:if="{{loadingFlag}}">
     <!-- <view class='cuIcon-emojifill text-orange'></view> -->
     <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>

@@ -3,18 +3,19 @@
     height:100%;
 }
 .tip{
-    font-size: 25rpx;
+    font-size: 30rpx;
     background-color: #f1ecbc;
     height: 85rpx;
     border-bottom: 10rpx solid #d6d6d6;
     
 }
 .tip1{
-    margin-top: 28rpx;
+    margin-top: 20rpx;
     margin-left: 10rpx;
 }
 .suggest_box{
-  background-color:#ffffff;
+  background-color:rgba(255,255,255,1);
+ 
 }
 textarea{
   margin-left:15rpx;
@@ -23,9 +24,9 @@ text{
   margin-left:15rpx;
 }
 image{
-    width:50rpx;
-    height:50rpx;
-    margin-top:5rpx;
+    width:37rpx;
+    height:37rpx;
+    margin-top:17rpx;
 }
 .activeInfo{
     height:202rpx;

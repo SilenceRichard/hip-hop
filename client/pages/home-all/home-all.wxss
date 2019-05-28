@@ -17,7 +17,7 @@
   position: relative;
 }
 .down{
-  positon:absolute;
+  position:absolute;
   top:0;
   left:0;
   z-index:100;
