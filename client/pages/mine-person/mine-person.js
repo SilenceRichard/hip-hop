@@ -10,12 +10,13 @@ Page({
         nickName:"hui",
         gender:1,
         birthday:"1999-01-26",
-        region: ['广东省', '广州市', '海珠区'],
+        // region: ['广东省', '广州市', '海珠区'],
+        region:'',
         role:"学生",
         danceType: [
           { name: 'Hiphop', value: 'Hiphop', checked: false },
-          { name: 'Popping', value: 'Popping', checked: true },
-          { name: 'Locking', value: 'Locking', checked: true },
+          { name: 'Popping', value: 'Popping', checked: false },
+          { name: 'Locking', value: 'Locking', checked: false },
           { name: 'Breaking', value: 'Breaking', checked: false },
           { name: 'Waacking', value: 'Waacking', checked: false },
           { name: 'House', value: 'House', checked: false },
@@ -25,16 +26,18 @@ Page({
           { name: 'Reggae', value: 'Reggae', checked: false },
           { name: '不限', value: '不限', checked: false },
         ],
+        danceTypeFormat:[],
         danceAge:"一年以下",
         introduction:"我爱爱爱爱爱爱爱爱爱爱爱学习！",
       }, //用户信息（假数据）
       genterarray:["保密","男生","女生"],
       identyarray:["学生", "其他社会人员"],
       agearray: ["一年以下", "一到三年", "三年以上"],
+        region: ['广东省', '广州市', '海珠区'],
       danceType: [
             {name: 'Hiphop', value: 'Hiphop', checked: false},
-            {name: 'Popping', value: 'Popping',checked: true},
-            {name: 'Locking', value: 'Locking', checked: true},
+            {name: 'Popping', value: 'Popping',checked: false},
+            {name: 'Locking', value: 'Locking', checked: false},
             {name: 'Breaking', value: 'Breaking',checked: false},
             {name: 'Waacking', value: 'Waacking',checked: false},
             {name: 'House', value: 'House',checked: false},
@@ -86,6 +89,8 @@ Page({
       console.log("生日变为", this.data.userInfo.birthday);
     }, //生日
     regionChange: function (e) {
+        console.log(e)
+        console.log(typeof  e.detail.value)
       this.setData({
         "userInfo.region": e.detail.value
       })
@@ -120,6 +125,7 @@ Page({
         })
     }, //舞种类型
     chooseDanceAge:function(e){
+        console.log(e)
         this.setData({
           "userInfo.danceAge": this.data.agearray[e.detail.value]
         })
@@ -131,7 +137,18 @@ Page({
       })
       console.log("个人介绍变为", this.data.userInfo.introduction);
     }, //个人介绍
-
+    forMatterDanceType: function(){
+        console.log(this.data.userInfo.danceType)
+        let arr = this.data.userInfo.danceType.map(item=>{
+            if (item.checked) return item.name
+        })
+        arr = arr.filter(item=>{
+            if (item!=null) return item
+        })
+        this.setData({
+            danceTypeFormat:arr
+        })
+    },
     showModal: function () {
       this.setData({
           showModalFlag:true
@@ -147,6 +164,7 @@ Page({
           showLimitFlag: true
         })
       }else{
+        this.forMatterDanceType();
         this.setData({
           showModalFlag: false
         })
@@ -178,7 +196,7 @@ Page({
           icon: 'success',
           duration: 3000
         })//显示框
-                        
+
         // ajax.find_page({"_openid":that.data.openid},1,10,'user')
         //     .then(res =>{
         //         let id = res[0]._id;
@@ -210,7 +228,7 @@ Page({
         //     });
         // }, 3000);
     }, //保存用户信息
-    
+
     onLoad:async function (info) {
         //在页面加载时，根据传过来的id，查询数据库中的用户信息
         //小程序的路由传参 和get请求一样 ?后拼接参数进行传递
