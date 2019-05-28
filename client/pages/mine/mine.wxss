@@ -8,8 +8,13 @@
 
 }
 #head{
-  width: 190rpx;
-  height: 174rpx;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius:50%
+}
+.tag{
+  top: 10rpx!important;
+  right:30rpx!important;
 }
 #nickName{
   font-size: 30rpx;
@@ -20,7 +25,7 @@
   width: 30rpx;
   height: 30rpx;
   opacity: .7;
-  
+
 }
 #sex{
   display: flex;

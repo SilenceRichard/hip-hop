@@ -1,28 +1,16 @@
+<image src="{{bgImage}}" class="backgroundImage"></image>
 <view id="out">
   <view class="header row">
     <view class="col" style="height: 100%">
-      <view class="col-3">
-        <!--<view class="cu-avatar round lg margin-left" bindtap="toMineInfo" wx:key style="background-image:url({{userInfo.avatarUrl}}">-->
-          <!--<view wx:if="{{userInfo.gender==2}}" class="cu-tag badge cuIcon-female bg-pink"></view>-->
-          <!--<view wx:if="{{userInfo.gender==1}}" class="cu-tag badge cuIcon-male bg-blue"></view>-->
-        <!--</view>-->
-        <image style="position:relative" style="border-radius:50%" id="head" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/user status.png'}}" bindtap="toMineInfo">
-          <view  wx:if="{{userInfo.gender==2}}"class="cu-tag badge cuIcon-female bg-pink" style="top: 0;right: 0"></view>
-          <view  wx:elif="{{userInfo.gender==1}}"class="cu-tag badge cuIcon-male bg-blue" style="top: 0;right: 0"></view>
-          <view  wx:else class="cu-tag badge cuIcon-questionfill bg-orange" style="top: 0;right: 0"></view>
+      <view class="col-3" style="position:relative">
+        <image id="head" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/user status.png'}}" bindtap="toMineInfo">
         </image>
-
+        <view  wx:if="{{userInfo.gender==2}}"class="cu-tag badge cuIcon-female bg-pink tag"></view>
+        <view  wx:elif="{{userInfo.gender==1}}"class="cu-tag badge cuIcon-male bg-blue tag"></view>
+        <view  wx:else class="cu-tag badge cuIcon-questionfill bg-orange tag"></view>
       </view>
       <view class="col-8">
          <view id="nickName" class="text-gray">{{userInfo.nickName?userInfo.nickName:'暂无昵称'}}</view>
-         <!--<view id="sex">-->
-           <!--<image wx:if="{{userInfo.gender == 0}}" src="../../static/icon/girl2.png"></image>-->
-           <!--<text wx:if="{{userInfo.gender == 0}}">保密</text>-->
-           <!--<image wx:if="{{userInfo.gender == 1}}" src="../../static/icon/boy2.png"></image>-->
-           <!--<text wx:if="{{userInfo.gender == 1}}">男生</text>-->
-           <!--<image wx:if="{{userInfo.gender == 2}}" src="../../static/icon/girl2.png"></image>-->
-           <!--<text wx:if="{{userInfo.gender == 2}}">女生</text>-->
-         <!--</view>-->
          <view id="sign" class="text-gray">{{userInfo.introduction?userInfo.introduction:'还未设定签名'}}</view>
       </view>
     </view>
