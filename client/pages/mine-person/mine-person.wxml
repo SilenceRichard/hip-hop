@@ -51,7 +51,7 @@
   <view class="cu-form-group" bindtap="showModal">
     <view class="title">舞种</view>
     <view text-align="left">
-      <view class="picker" wx:for="{{userInfo.danceType}}" wx:key="{{item.value}}" wx:if="{{item.checked==true}}" display="inline">
+      <view class="picker wuzhong" wx:for="{{userInfo.danceType}}" wx:key="{{item.value}}" wx:if="{{item.checked==true}}" style="font-size:35rpx">
         {{item.value}}
       </view>
     </view>
@@ -66,7 +66,12 @@
     </picker>
 	</view>
 
-    <view class="row form">
+  <view class="row form">
+    <view class="intro">--------------------------个人介绍--------------------------</view>
+    <textarea placeholder="介绍一下你自己吧~" bindinput="changeIntroduction" value="{{userInfo.introduction}}"></textarea>
+  </view>
+
+    <!-- <view class="row form">
         <view class="col">
             <view class="col-3 label">个人介绍</view>
             <view class="col-8 formItem">
@@ -74,10 +79,10 @@
                 </textarea>
             </view>
         </view>
-    </view>
+    </view> -->
 
     <view class="row form">
-        <button style="width:80%" class="weui-btn" bindtap="saveUserInfo">确定</button>
+        <button style="width:94%" class="weui-btn queding" bindtap="saveUserInfo">确定</button>
     </view>
 
 </view>
