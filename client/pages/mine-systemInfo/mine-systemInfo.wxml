@@ -1,13 +1,13 @@
 <image src="{{bgImage}}" class="backgroundImage"></image>
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
-    <scroll-view scroll-x class="bg-gradual-blue nav text-center">
-        <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
+    <scroll-view scroll-x class="bg-gradual-black nav text-center">
+        <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
             {{item.name}}
         </view>
     </scroll-view>
   <block wx:for="{{systemList}}">
     <!--      系统消息-->
-      <view wx:if="{{flag==true}}" class="cu-list menu-avatar">-
+      <view wx:if="{{flag==true}}" class="cu-list menu-avatar">
       <view class="cu-item" data-item="{{item}}">
           <view class="cu-avatar bg-transparent">
               <text class="cuIcon-noticefill lg text-orange"></text>

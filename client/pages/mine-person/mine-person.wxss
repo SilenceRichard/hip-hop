@@ -28,10 +28,11 @@ page{
   font-size: 27rpx;
 }
 button{
-  background:#706e68;
+  background:#ffbf00;
 }
 input{
-  width:80%;
+  width:80%; 
+  color:rgb(255, 255, 255) !important;
 }
 textarea{
   border:1px solid #ccc;
@@ -39,4 +40,7 @@ textarea{
 /*对于该页面所有input标签*/
 .cu-form-group picker .picker{
   text-align: left;
+}
+.cu-form-group{
+  justify-content:flex-start;
 }
