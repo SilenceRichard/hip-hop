@@ -32,7 +32,7 @@
     </block>
     <block wx:if="{{flag=='fq'}}" wx:for="{{mySetted}}">
         <view class="cu-card article ">
-            <view class="cu-item shadow">
+            <view class="cu-item shadow bg-blue-shadow">
                 <view class="title">
                     <view class="text-cut line-white">{{item.title}}</view>
                         <view class="cu-tag line-blue">{{item.time}}</view>

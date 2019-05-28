@@ -108,7 +108,8 @@ exports.main = async (event, context) => {
       let  allMy = await  targetDB.doc(event.id).get();
           let a=allMy.data.applicant.map(item =>{
                if (item._openid === event.checkedId){
-                   item.state = event.state
+                   item.state = event.state,
+                       item.isReadByOpen = 1
                }
                return item
            })
@@ -121,7 +122,6 @@ exports.main = async (event, context) => {
   }
     if(event.method =='deleteMessage' ){
         const targetDB = db.collection('dance-info');
-        var isRead =1;
         let read = await targetDB.doc(event._id).get();
         console.log("查到的信息:",read.data);
         if (event.openid === read.data._openid){
@@ -138,9 +138,9 @@ exports.main = async (event, context) => {
             targetDB.doc(event._id).update({data:read.data})
         }
 
-        // return {
-        //     read
-        // }
+        return {
+            read
+        }
     }
   if(event.method == 'getSystemInfo'){
         const targetDB = db.collection('dance-info');
@@ -184,10 +184,10 @@ exports.main = async (event, context) => {
         })
         return {
             myTeamedDance:myTeamedDance,//我发起的组队成功的约舞 xt
-          myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
-          uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
-          checkedApply:checkedApply,//我参加已通过的 hd
-          checkedApply2:checkedApply2//未通过的 hd
+            myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
+            uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
+            checkedApply:checkedApply,//我参加已通过的 hd
+            checkedApply2:checkedApply2//未通过的 hd
                                 // 我参加的未审核的
   }
     }
