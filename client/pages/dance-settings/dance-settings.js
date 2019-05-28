@@ -19,12 +19,16 @@ Page({
       cover:'',
       title:'',
       content:'',
-      limit:1,
+      limit:'',//展示的限制人数
       condition:'',
       contact:'',
       QR_code:'',
       phone:''
     },//存入数据库的约局信息对象
+    cover_num:0,
+    QR_num :0,
+    num:0,//numLimit数组中第num个元素
+    numLimit:[],
     showModalFlag: false,
     checkboxItems: [
       {name: 'Hiphop', value: 'Hiphop', checked: false},
@@ -80,7 +84,13 @@ Page({
       y:''
     },
   },
-
+  lastInfo(e){
+      this.setData({
+          step:this.data.step-1,
+          basics:this.data.basics-1,
+          topTip:false
+      })
+  },
   async setInfo(ev){//点击事件
     console.log("已点击");
     let that = this;
@@ -123,7 +133,7 @@ Page({
           })
         }
     }//舞种
-    else if (this.data.step == 3) {//如果是第四步
+   else if (this.data.step == 3) {//如果是第四步
       let formFlag = true
 
       for (let i in  this.data.info)
@@ -154,7 +164,7 @@ Page({
         })
       }
     }
-    else if (this.data.step == 4){//如果是第五步
+   else if (this.data.step == 4){//如果是第五步
        if(this.data.info.contact ===''&&this.data.info.QR_code===''&&this.data.info.phone===''){
            this.setData({
                topTip:true
@@ -289,39 +299,119 @@ Page({
       })
     }
   },//日期选择(这里的触发事件是bindchange)
-  chooseImage() {//上传图片点击事件
-      let that = this;
-      wx.chooseImage({
-        count: 1,
-        success(chooseResult){
-          wx.cloud.uploadFile({
-            cloudPath: util.uuid()+'my-photo.png',
-            filePath: chooseResult.tempFilePaths[0],
-            success: res => {
-              that.setData({
-                "info.cover": res.fileID,//云存储图片路径
-              });
-            },
-          })
-        },
+  bindNumChange(e){
+      console.log("触发了picker----------",e)
+      this.setData({
+           num:e.detail.value,
+          "info.limit":Number(e.detail.value)+1
       })
-  },
-  chooseImageQR(){
-    let that = this;
-    wx.chooseImage({count:1,
-      success:function (chooseResult) {
-          wx.cloud.uploadFile({
-              cloudPath: util.uuid()+'my-photo.png',
-              filePath: chooseResult.tempFilePaths[0],
-              success: res => {
-                  that.setData({
-                      "info.QR_code": res.fileID,//云存储图片路径
-                  });
-              },
-          })
-       }
-    })
-  },
+       console.log("limit------",this.data.info.limit)
+  },//限制人数选择
+
+
+  ChooseImage() {
+      var that = this;
+        wx.chooseImage({
+            count: 1, //默认9
+            sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album'], //从相册选择
+            success: (chooseResult) => {
+                if (this.data.info.cover == '') {
+                    console.log("chooseResult----",chooseResult)
+                    wx.cloud.uploadFile({
+                        cloudPath: util.uuid()+'my-photo.png',
+                        filePath: chooseResult.tempFilePaths[0],
+                        success: res => {
+                            that.setData({
+                                "info.cover":res.fileID,//云存储图片路径
+                                cover_num:that.data.cover_num+1
+                            });
+                            console.log("this.data.info.cover",that.data.info.cover)
+                        },
+                    })
+                }
+            }
+        });
+    },
+  chooseImageQR() {
+        var that = this;
+        wx.chooseImage({
+            count: 1, //默认9
+            sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album'], //从相册选择
+            success: (chooseResult) => {
+                if (this.data.info.QR_num == 0) {
+                    console.log("chooseResult----",chooseResult)
+                    wx.cloud.uploadFile({
+                        cloudPath: util.uuid()+'my-photo.png',
+                        filePath: chooseResult.tempFilePaths[0],
+                        success: res => {
+                            that.setData({
+                                "info.QR_code":res.fileID,//云存储图片路径
+                                QR_num:that.data.QR_num+1
+                            });
+                        },
+                    })
+                }
+            }
+        });
+    },
+  ViewImage(e) {
+        wx.previewImage({
+            urls: this.data.info.cover,
+            current: e.currentTarget.dataset.url
+        });
+    },//预览封面图
+  ViewQRImage(e) {
+        wx.previewImage({
+            urls: this.data.info.QR_code,
+            current: e.currentTarget.dataset.url
+        });
+    },//预览二维码
+  DelImg(e) {
+        wx.showModal({
+            title: '删除图片',
+            content: '确定要删除这张图片？',
+            cancelText: '否',
+            confirmText: '是',
+            success: res => {
+                if(res.confirm){
+                    this.setData({
+                        "info.cover":'',
+                        cover_num:this.data.cover_num-1
+                    })
+                }
+                // if (res.confirm) {
+                //     this.data.info.cover.splice(e.currentTarget.dataset.index, 1);
+                //     this.setData({
+                //         cover: this.data.cover
+                //     })
+                // }
+            }
+        })
+    },//删除所选封面图
+  DelQRImg(e) {
+        wx.showModal({
+            title: '删除图片',
+            content: '确定要删除这张图片？',
+            cancelText: '否',
+            confirmText: '是',
+            success: res => {
+                if(res.confirm){
+                    this.setData({
+                        "info.QR_code":'',
+                        cover_num:this.data.QR_num-1
+                    })
+                }
+                // if (res.confirm) {
+                //     this.data.info.cover.splice(e.currentTarget.dataset.index, 1);
+                //     this.setData({
+                //         cover: this.data.cover
+                //     })
+                // }
+            }
+        })
+    },//删除所选二维码
   chooseLocation() {
     let that = this;
     let obj = this.data.info;
@@ -357,29 +447,29 @@ Page({
       checkboxItems: checkboxItems
     });
   },//记录舞种信息
-  addNumber(){
-    let obj = this.data.info;
-    if (obj.limit == '无限制'){
-      obj.limit = 1;
-    } else {
-      obj.limit++;
-    }
-    this.setData({
-      info:obj
-    })
-  },//加人数
-  minusNumber(){
-    let obj = this.data.info;
-    if (obj.limit -1 == '0'){
-      obj.limit = '无限制'
-    }
-    else {
-      obj.limit--;
-    }
-    this.setData({
-      info:obj
-    })
-  },//减人数
+  // addNumber(){
+  //   let obj = this.data.info;
+  //   if (obj.limit == '无限制'){
+  //     obj.limit = 1;
+  //   } else {
+  //     obj.limit++;
+  //   }
+  //   this.setData({
+  //     info:obj
+  //   })
+  // },//加人数
+  // minusNumber(){
+  //   let obj = this.data.info;
+  //   if (obj.limit -1 == '0'){
+  //     obj.limit = '无限制'
+  //   }
+  //   else {
+  //     obj.limit--;
+  //   }
+  //   this.setData({
+  //     info:obj
+  //   })
+  // },//减人数
   changeTitle(e){
     let obj = this.data.info;
     obj.title = e.detail.value;
@@ -428,101 +518,112 @@ Page({
        info:obj
      })
     },
-  touchStart(e) {
-    this.setData({
-      "touch.x": e.changedTouches[0].clientX,
-      "touch.y": e.changedTouches[0].clientY
-    });
-  },
-  touchEnd(e) {
-    let x = e.changedTouches[0].clientX;
-    let y = e.changedTouches[0].clientY;
-    let option = util.getTouchData(x,y,this.data.touch.x,this.data.touch.y);
-    if (option === 'left'){
-      if (this.data.step+1<6){
-        switch (this.data.step) {
-          case 0:if (this.data.info.identify === ''){
-                  this.setData({
-                    topTip:true
-                  })
-                }
-                else { this.setData({
-                    step:this.data.step+1,
-                    basics:this.data.basics+1
-                  })
-                }
-                break;
-          case 1:if (this.data.info.type === ''){
-                  this.setData({
-                    topTip:true
-                  })
-                }
-                else { this.setData({
-                  step:this.data.step+1,
-                  basics:this.data.basics+1
-                 })
-                }
-            break;
-          case 2: let tipFlag = false;
-                 this.data.checkboxItems.forEach((item)=>{
-                   if(item.checked){
-
-                      tipFlag = true
-                   }
-                 })
-                 if (tipFlag){
-                   this.setData({
-                     step:this.data.step+1,
-                     basics:this.data.basics+1,
-                     topTip:false
-                   })
-                 }
-                 else{
-                   this.setData({
-                     topTip:true
-                   })
-                 }
-                 break;
-          case 3: let formFlag = true
-            for (let i in  this.data.info)
-              {
-                if (i==='location'){
-                  if (this.data.info[i].name === '') {
-                    this.setData({
-                      topTip:true
-                    })
-                    formFlag = false
-                  }
-                }else if (i!='contact'&&i!='QR_code'&&i!='phone') {
-                  if (this.data.info[i]=== '') {
-                    this.setData({
-                      topTip:true
-                    })
-                    formFlag = false
-                  }
-                }
-              }
-              if (formFlag){
-                obj.time = `${this.data.timestamp.date} ${this.data.timestamp.time}`//一系列信息
-                this.setData({
-                  info:obj,//由中间量导入数据到info
-                  step:this.data.step+1,//更新step
-                  basics:this.data.basics+1,
-                  topTip:false
-                })
-              }
-              break;
+  // touchStart(e) {
+  //   this.setData({
+  //     "touch.x": e.changedTouches[0].clientX,
+  //     "touch.y": e.changedTouches[0].clientY
+  //   });
+  // },
+  // touchEnd(e) {
+  //   let x = e.changedTouches[0].clientX;
+  //   let y = e.changedTouches[0].clientY;
+  //   let option = util.getTouchData(x,y,this.data.touch.x,this.data.touch.y);
+  //   if (option === 'left'){
+  //     if (this.data.step+1<6){
+  //       switch (this.data.step) {
+  //         case 0:if (this.data.info.identify === ''){
+  //                 this.setData({
+  //                   topTip:true
+  //                 })
+  //               }
+  //               else { this.setData({
+  //                   step:this.data.step+1,
+  //                   basics:this.data.basics+1
+  //                 })
+  //               }
+  //               break;
+  //         case 1:if (this.data.info.type === ''){
+  //                 this.setData({
+  //                   topTip:true
+  //                 })
+  //               }
+  //               else { this.setData({
+  //                 step:this.data.step+1,
+  //                 basics:this.data.basics+1
+  //                })
+  //               }
+  //           break;
+  //         case 2: let tipFlag = false;
+  //                this.data.checkboxItems.forEach((item)=>{
+  //                  if(item.checked){
+  //
+  //                     tipFlag = true
+  //                  }
+  //                })
+  //                if (tipFlag){
+  //                  this.setData({
+  //                    step:this.data.step+1,
+  //                    basics:this.data.basics+1,
+  //                    topTip:false
+  //                  })
+  //                }
+  //                else{
+  //                  this.setData({
+  //                    topTip:true
+  //                  })
+  //                }
+  //                break;
+  //         case 3: let formFlag = true
+  //           for (let i in  this.data.info)
+  //             {
+  //               if (i==='location'){
+  //                 if (this.data.info[i].name === '') {
+  //                   this.setData({
+  //                     topTip:true
+  //                   })
+  //                   formFlag = false
+  //                 }
+  //               }else if (i!='contact'&&i!='QR_code'&&i!='phone') {
+  //                 if (this.data.info[i]=== '') {
+  //                   this.setData({
+  //                     topTip:true
+  //                   })
+  //                   formFlag = false
+  //                 }
+  //               }
+  //             }
+  //             if (formFlag){
+  //               obj.time = `${this.data.timestamp.date} ${this.data.timestamp.time}`//一系列信息
+  //               this.setData({
+  //                 info:obj,//由中间量导入数据到info
+  //                 step:this.data.step+1,//更新step
+  //                 basics:this.data.basics+1,
+  //                 topTip:false
+  //               })
+  //             }
+  //             break;
+  //       }
+  //     }
+  //   }
+  //   if (option === 'right'){
+  //     if (this.data.step -1>=0&&this.data.step!=5){
+  //       this.setData({
+  //         step:this.data.step-1,
+  //         basics:this.data.basics-1,
+  //         topTip:false
+  //       })
+  //     }
+  //   }
+  // }
+    onReady(){
+        var arr1 = new Array(100);
+        for(var i=0;i<arr1.length;i++){
+            arr1[i] = i+1;
         }
-      }
-    }
-    if (option === 'right'){
-      if (this.data.step -1>=0&&this.data.step!=5){
         this.setData({
-          step:this.data.step-1,
-          basics:this.data.basics-1,
-          topTip:false
+           "numLimit" : arr1,
+            cover_num : 0,
+            QR_num: 0
         })
-      }
     }
-  }
 })

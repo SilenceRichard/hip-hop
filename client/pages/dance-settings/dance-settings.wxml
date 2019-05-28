@@ -8,7 +8,8 @@
         </view>
     </view>
 </view>
-<view bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==0}}">
+
+<view  class="out" wx:if="{{step==0}}">
     <view class="out-2">
         <view class="{{info.identify=='person'?'publish choose':'publish'}}" catchtap="setInfo" style="margin-right: 70rpx" data-identify="person">
             个人发布
@@ -18,7 +19,9 @@
         </view>
     </view>
 </view>
-<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==1}}">
+
+
+    <view  class="out" wx:if="{{step==1}}">
         <view class="inner_1">
             <view class="{{info.type=='cypher'?'publish choose':'publish'}}" catchtap="setInfo" data-type="cypher">cypher</view>
             <view class="{{info.type=='练习'?'publish choose':'publish'}}" catchtap="setInfo" data-type="练习" style="margin-left:60rpx;">练习</view>
@@ -26,8 +29,14 @@
         <view  class="inner_2">
             <view class="{{info.type=='自由'?'publish choose':'publish'}}" catchtap="setInfo" data-type="自由">自由</view>
         </view>
-</view>
-<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==2}}">
+            <view class="stepButton" style="height:1688rpx;width:730rpx;left:10rpx">
+                <button class="nextStep" bindtap="lastInfo">上一步</button>
+            </view>
+    </view>
+
+
+
+<view  class="out" wx:if="{{step==2}}">
     <checkbox-group bindchange="checkboxChange" style="color:#ffffff">
         <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
             <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
@@ -39,28 +48,36 @@
             <view class="weui-cell__bd">{{item.name}}</view>
         </label>
     </checkbox-group>
-    <button class="nextStep" bindtap="setInfo">下一步</button>
-</view>
-<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==3}}" style="padding: 38rpx 0;">
-    <view class="upload-head">
-       <view class="uploadTips">上传约局照片</view>
-       <view class="row" style="margin: 46rpx 0 0 0">
-           <view class="col">
-               <view class="col-6 uploadbox">
-                   <view class="uploadImg" bindtap="chooseImage">
-                       <view> <image class="upload" src="../../static/icon/plus.png"></image></view>
-                       <view>上传照片</view>
-                   </view>
-               </view>
-               <view class="col-6 uploadbox">
-                   <view class="uploadImg">
-                       <image id="forUpload" src="{{info.cover}}"></image>
-                   </view>
-               </view>
-           </view>
-       </view>
-       <view class="uploadTips_2">只支持jpg格式</view>
+    <view class="row">
+        <view class="col" style="margin:10rpx 0 20rpx 0;height:76rpx">
+            <view class="col-6 stepButton"><button class="nextStep" bindtap="lastInfo">上一步</button></view>
+            <view class="col-6 stepButton"><button class="nextStep" bindtap="setInfo">下一步</button></view>
+        </view>
     </view>
+</view>
+
+<view  class="out" wx:if="{{step==3}}" style="padding: 38rpx 0;">
+
+    <view class="upload-head">
+        <view class="uploadTips cu-bar form-title">
+            <view class="form-title">图片上传</view>
+            <view class="action form-title">{{cover_num}}/1</view>
+        </view>
+        <view class="cu-form-group" style="background:0">
+            <view class="grid col-4 grid-square flex-sub uploadbox">
+                <view class="bg-img" style="width:200rpx;height:200rpx"  bindtap="ViewImage" wx:if="{{cover_num!=0}}">
+                    <image src='{{info.cover}}' mode='aspectFill'></image>
+                    <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                        <text class="cuIcon-close"></text>
+                    </view>
+                </view>
+                <view class="solids" bindtap="ChooseImage" style="width:200rpx;height:200rpx" wx:if="{{cover_num==0}}">
+                    <text class="cuIcon-cameraadd"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+
     <view class="row" style="margin: 90rpx 0 0 0">
         <view class="col">
             <view class="col-3 form-title">活动标题</view>
@@ -76,8 +93,8 @@
     </view>
     <view class="row">
         <view class="col">
-            <view class="col-12">
-                <textarea value="{{info.content}}" bindinput="changeContent" class="form-textarea"></textarea>
+            <view class="col-12" >
+                <textarea value="{{info.content}}" bindinput="changeContent" class="form-textarea" ></textarea>
             </view>
         </view>
     </view>
@@ -129,15 +146,11 @@
             <view class="col-3 form-title">人数限制</view>
                 <view class="col-9">
                     <view class="form-input row">
-                        <view class="col" style="height:66rpx;line-height:66rpx;">
-                            <view class="col-1">
-                                <image bindtap="addNumber" class="plus" src="../../static/icon/plus.png"></image>
-                            </view>
-                            <view class="col-3">
-                                <input style="text-align: center" type="number" value='{{info.limit}}'></input>
-                            </view>
-                            <view class="col-1">
-                                <image bindtap="minusNumber" class="plus" src="../../static/icon/minus.png"></image>
+                        <view class="col inner" style="height:66rpx;line-height:66rpx;">
+                            <view class="col-5">
+                                <picker mode="selector" range="{{numLimit}}" value="{{num}}" bindchange="bindNumChange">
+                                    <text>{{numLimit[num]}}</text>
+                                </picker>
                             </view>
                             <view class="col-1">
                                 人
@@ -160,9 +173,14 @@
         </view>
     </view>
     <!-- 加入要求 -->
-    <button class="nextStep" bindtap="setInfo">下一步</button>
-</view>
-<view  bindtouchstart='touchStart' catchtouchend="touchEnd"  class="out" wx:if="{{step==4}}">
+    <view class="row">
+        <view class="col" style="margin-top:40rpx;height:76rpx">
+            <view class="col-6 stepButton"><button class="nextStep" bindtap="lastInfo">上一步</button></view>
+            <view class="col-6 stepButton"><button class="nextStep" bindtap="setInfo">下一步</button></view>
+        </view>
+    </view>
+</view>s
+<view   class="out" wx:if="{{step==4}}">
     <view class="uploadTips" style="padding: 38rpx 0;">
         希望给报名者的联系方式
     </view>
@@ -176,15 +194,27 @@
         </view>
     </view>
     <view style="display:flex;justify-content:center;">
-        <view style="margin: 70rpx 0 0 0 " class="uploadImg" bindtap="chooseImageQR" wx:if="{{contactName=='微信'||contactName=='微信群聊'}}">
-            <view> <image class="upload" src="../../static/icon/plus.png"></image></view>
+        <view style="margin: 70rpx 0 0 0 " class="uploadImg"  wx:if="{{contactName=='微信'||contactName=='微信群聊'}}">
+            <view class="cu-form-group" style="background:0">
+                <view class="grid col-4 grid-square flex-sub uploadbox">
+                    <view class="bg-img" style="width:200rpx;height:200rpx"  bindtap="ViewQRImage" wx:if="{{QR_num!=0}}">
+                        <image src='{{info.QR_code}}' mode='aspectFill'></image>
+                        <view class="cu-tag bg-red" catchtap="DelQRImg" data-index="{{index}}">
+                            <text class="cuIcon-close"></text>
+                        </view>
+                    </view>
+                    <view class="solids" bindtap="chooseImageQR" style="width:200rpx;height:200rpx" wx:if="{{QR_num==0}}">
+                        <text class="cuIcon-cameraadd"></text>
+                    </view>
+                </view>
+            </view>
             <view>上传二维码</view>
         </view>
         <view  wx:if="{{contactName == '手机号'}}" style="width:100%;margin: 70rpx 0 0 0 ">
             <input class="inputer" value="{{info.phone}}" bindinput="changePhoneNumber"></input>
         </view>
     </view>
-    <button class="nextStep" bindtap="setInfo">发起约舞</button>
+    <button class="nextStep" bindtap="setInfo" style="position:relative;margin-top: 165rpx">发起约舞</button>
 </view>
 
 <view class="cu-modal show" wx:if="{{showModalFlag}}">
