@@ -1,4 +1,4 @@
-<!--pages/appointInfo/appointInfo.wxml-->
+<image src="{{bgImage}}" class="backgroundImage"></image>
 <scroll-view  scroll-y="true" style="height: 100vh" class="out">
     <view  class='row outer'>
         <view class='col header' style='height:100%'>
@@ -31,7 +31,7 @@
         <view class="col-7" style='color:#ffffff'>{{info.time}}</view>
     </view>
     <view class="col location">
-        <view class="col-1"><image src="../../static/address.png"></image></view>
+        <view class="col-1"><image class="pic3" src="../../static/address.png"></image></view>
         <view class="col-4" style='color:#ffffff'style="width:70rpx height:70rpx">活动地点</view>
         <view class="col-7" style='color:#ffffff'>{{info.location.name}}</view>
     </view>
