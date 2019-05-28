@@ -13,9 +13,9 @@ page{
   height: 200rpx;
   border-radius: 20rpx;
 }
-.form{
+/* .form{
   margin: 11rpx 0 0 0;
-}
+} */
 .label{
   display:flex;
   align-items:center;
@@ -29,6 +29,8 @@ page{
 }
 button{
   background:#ffbf00;
+  width:94%;
+  margin-bottom:10px;
 }
 input{
   width:80%; 
@@ -36,6 +38,8 @@ input{
 }
 textarea{
   border:1px solid #ccc;
+  margin-left:10px;
+  margin-bottom:10px;
 }
 /*对于该页面所有input标签*/
 .cu-form-group picker .picker{
@@ -43,4 +47,16 @@ textarea{
 }
 .cu-form-group{
   justify-content:flex-start;
+  /* display:inline; */
 }
+.wuzhong{
+  display: inline;
+}
+.intro{
+  /* margin-left:10px; */
+  font-size:35rpx;
+  text-align:center;
+}
+/* .queding{
+  margin-top:90px;
+} */
