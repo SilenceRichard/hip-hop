@@ -3,15 +3,15 @@
   <view class="header row">
     <view class="col" style="height: 100%">
       <view class="col-3" style="position:relative">
-        <image id="head" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/user status.png'}}" bindtap="toMineInfo">
+        <image id="head" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/icon/spiderMan.png'}}" bindtap="toMineInfo">
         </image>
         <view  wx:if="{{userInfo.gender==2}}"class="cu-tag badge cuIcon-female bg-pink tag"></view>
         <view  wx:elif="{{userInfo.gender==1}}"class="cu-tag badge cuIcon-male bg-blue tag"></view>
         <view  wx:else class="cu-tag badge cuIcon-questionfill bg-orange tag"></view>
       </view>
       <view class="col-8">
-         <view id="nickName" class="text-gray">{{userInfo.nickName?userInfo.nickName:'暂无昵称'}}</view>
-         <view id="sign" class="text-gray">{{userInfo.introduction?userInfo.introduction:'还未设定签名'}}</view>
+         <view id="nickName" class="text-orange">{{userInfo.nickName?userInfo.nickName:'暂无昵称'}}</view>
+         <view id="sign" class="text-yellow">{{userInfo.introduction?userInfo.introduction:'还未设定签名'}}</view>
       </view>
     </view>
   </view>

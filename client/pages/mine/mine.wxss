@@ -40,7 +40,7 @@
   color: #ffffff;
 }
 #sign{
-  font-size: 20rpx;
+  font-size: 23rpx;
   margin: 20rpx  10rpx 15rpx;
 }
 /*头部信息*/
