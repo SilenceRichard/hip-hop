@@ -33,7 +33,7 @@ button{
   margin-bottom:10px;
 }
 input{
-  width:80%; 
+  width:80%;
   color:rgb(255, 255, 255) !important;
 }
 textarea{
@@ -56,6 +56,9 @@ textarea{
   /* margin-left:10px; */
   font-size:35rpx;
   text-align:center;
+}
+.cu-form-group{
+  background-color: transparent;
 }
 /* .queding{
   margin-top:90px;

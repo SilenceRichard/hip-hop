@@ -102,6 +102,7 @@ exports.main = async (event, context) => {
       }
   }
   if(event.method == 'exam'){
+
       console.log("参数",event)
       const targetDB = db.collection('dance-info');
       let  allMy = await  targetDB.doc(event.id).get();
@@ -122,16 +123,16 @@ exports.main = async (event, context) => {
         const targetDB = db.collection('dance-info');
         var isRead =1;
         let read = await targetDB.doc(event._id).get();
-        console.log(event)
-        if (event.openid === read.data.openid){
+        console.log("查到的信息:",read.data);
+        if (event.openid === read.data._openid){
             read.data.applicant.forEach(item=>{
-                if (item._openid === event.apply_openid) item.isReadByOpen =`1` //发起人已读这条消息
+                if (item._openid === event._openid) item.isReadByOpen =`1` //发起人已读这条消息
             })
             delete read.data._id;
             await targetDB.doc(event._id).update({data:read.data})
         }else {
             read.data.applicant.forEach(item=>{
-                if (item._openid === event.apply_openid) item.isReadByApplicant =`1` //发起人已读这条消息
+                if (item._openid === event._openid) item.isReadByApplicant =`1` //发起人已读这条消息
             })
             delete read.data._id;
             await targetDB.doc(event._id).update({data:read.data})
@@ -176,9 +177,6 @@ exports.main = async (event, context) => {
                         }
                         if (val.state == "2"&&(val.isReadByApplicant =='0'||val.isReadByApplicant ==undefined)){
                             checkedApply2.push(item)
-                        }
-                        if (val.state == "1"&&(val.isReadByApplicant =='0'||val.isReadByApplicant ==undefined)){
-                            checkingApply.push(item)
                         }
                     }
                 })
