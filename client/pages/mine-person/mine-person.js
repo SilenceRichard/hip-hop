@@ -5,14 +5,14 @@ const app = getApp();
 Page({
     data: {
         userInfo: {
-            avatarUrl: "cloud://suki-749826.7375-suki-749826-1258890521/7473f023-f923-4eaa-ac45-bbaf8376fffemy-person-photo.png",
-            nickName: "hui",
+            avatarUrl: "",
+            nickName: "",
             gender: 1,
-            birthday: "1999-01-26",
+            birthday: "",
             // region: ['广东省', '广州市', '海珠区'],
             city:'',
             region: [],
-            role: "学生",
+            role: "",
             danceType: [
                 {name: 'Hiphop', value: 'Hiphop', checked: false},
                 {name: 'Popping', value: 'Popping', checked: false},
@@ -27,8 +27,8 @@ Page({
                 {name: '不限', value: '不限', checked: false},
             ],
             danceTypeFormat: [],
-            danceAge: "一年以下",
-            introduction: "我爱爱爱爱爱爱爱爱爱爱爱学习！",
+            danceAge: "",
+            introduction: "",
         }, //用户信息（假数据）
         bgImage:app.globalData.bgSrc,
         genterarray: ["保密", "男生", "女生"],
@@ -53,7 +53,6 @@ Page({
         showModalFlag: false,
         showLimitFlag: false,
     },
-
     changeImage: function () {
         let that = this;
         wx.chooseImage({
@@ -142,15 +141,29 @@ Page({
     }, //个人介绍
     forMatterDanceType: function () {
         console.log(this.data.userInfo.danceType)
-        let arr = this.data.userInfo.danceType.map(item => {
-            if (item.checked) return item.name
-        })
-        arr = arr.filter(item => {
-            if (item != null) return item
-        })
-        this.setData({
-            danceTypeFormat: arr
-        })
+        if (this.data.userInfo.danceType!=undefined){
+            let arr = this.data.userInfo.danceType.map(item => {
+                if (item.checked) return item.name
+            })
+            arr = arr.filter(item => {
+                if (item != null) return item
+            })
+            if(arr.length>0){
+                this.setData({
+                    danceTypeFormat: arr
+                })
+            }
+            else {
+                this.setData({
+                    danceTypeFormat: ['请选择']
+                })
+            }
+        }
+        else {
+            this.setData({
+                danceTypeFormat: ['请选择']
+            })
+        }
     },
     showModal: function () {
         this.setData({
