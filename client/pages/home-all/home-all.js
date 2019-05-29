@@ -47,7 +47,8 @@ Page({
     dropDownFlag: false,
     searchFlag:false,
     searchKeyFlag:false,
-    bgImage:app.globalData.bgSrc
+    bgImage:app.globalData.bgSrc,
+    refreshNumber:1,
   },
 
   Back() {
@@ -274,7 +275,7 @@ activeSearch:async function(){
 
 activeDropDown1() {
   var that = this;
-  // console.log("程序进来啦-----")
+  console.log("程序进来了，按时间排序");
   that.setData({
     dropDownFlag: false
   }),
@@ -286,6 +287,7 @@ activeDropDown1() {
               type: "time"
             },
               success: function (res) {
+                console.log("返回时间查询结果：", res.result.checkResult);
                   //处理人数限制
                   res.result.checkResult= res.result.checkResult.map((item)=>{
                       let arr = item.applicant.filter((val)=>{
@@ -529,13 +531,16 @@ goToDetail(ev){
 },
 
 onPullDownRefresh(){
+  this.setData({
+    refreshNumber:1
+  })
+  console.log("下拉刷新,refreshNumber变为", this.data.refreshNumber);
   let that = this;
-  console.log("下拉刷新----")
   wx.cloud.callFunction({
       name: 'home',
       data: {
           method: 'getInfo',//获取全部约局资讯
-          type: 'All'
+          type: 'All',
       },
       success: function (res) {
           console.log("下拉刷新成功了",res)
@@ -576,9 +581,13 @@ onPullDownRefresh(){
           wx.stopPullDownRefresh()
       }
   })
+},//下拉刷新
+
+
+
+onShow: function () {
+
 },
-
-
 
 onReady: function () {
   console.log("页面进来啦-------")//没问题
@@ -632,10 +641,6 @@ onReady: function () {
 },
 
 
-onShow: function () {
-
-},
-
 
 onHide: function () {
 
@@ -655,7 +660,50 @@ onUnload: function () {
  * 页面上拉触底事件的处理函数
  */
 onReachBottom: function () {
-
+  this.data.refreshNumber++;
+  console.log("触发底部,refreshNumber变为", this.data.refreshNumber);
+  var that = this;
+  wx.cloud.callFunction(
+  {
+    name: 'home',
+    data: {
+      method: 'getInfo',//获取全部约局资讯
+      type: 'All',
+      page: this.data.refreshNumber,
+    },
+    success: function (res) {
+      //处理人数限制
+      res.result.checkResult = res.result.checkResult.map((item) => {
+        let arr = item.applicant.filter((val) => {
+          if (val.state == 0)
+            return val
+        })
+        item.now = arr.length
+        return item
+      })
+      //处理舞种信息
+      res.result.checkResult.forEach(item => {
+        item.str = ''
+        item.dance_type.forEach(val => {
+          if (val.checked == true) {
+            item.str = item.str + val.name + ',';
+          }
+        })
+      })
+      res.result.checkResult.forEach(item => {
+        item.str = item.str.slice(0, -1)
+      })
+      let newA = that.data.info.concat(res.result.checkResult);
+      that.setData({
+        info: newA
+      })
+      console.log("这是刷新返回的资讯------", res.result.checkResult)
+      console.log("这是拼接后的资讯------", newA)
+    },
+    fail: function (err) {
+      console.log("刷新失败", err)
+    }
+  })
 },
 
 /**
