@@ -175,7 +175,7 @@
             <view class="col-6 stepButton"><button class="nextStep" bindtap="setInfo">下一步</button></view>
         </view>
     </view>
-</view>s
+</view>
 <view   class="out" wx:if="{{step==4}}">
     <view class="uploadTips" style="padding: 38rpx 0;">
         希望给报名者的联系方式
