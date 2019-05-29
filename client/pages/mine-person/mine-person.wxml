@@ -19,7 +19,7 @@
         <view class="picker">
             <view wx:if="{{userInfo.gender==1}}" class="cu-tag bg-blue"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
             <view wx:if="{{userInfo.gender==2}}" class="cu-tag bg-pink"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
-            <view wx:else class="cu-tag bg-orange"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
+            <view wx:if="{{userInfo.gender==0}}" class="cu-tag bg-orange"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
         </view>
       </picker>
 	  </view>

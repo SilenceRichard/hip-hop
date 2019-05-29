@@ -584,7 +584,7 @@ onReady: function () {
   console.log("页面进来啦-------")//没问题
   var that = this;
     this.setData({
-        loadingFlag: true
+        loadingFlag: false
     })
   wx.cloud.callFunction(
       {

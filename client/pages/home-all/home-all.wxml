@@ -49,7 +49,7 @@
                     <input type="text" placeholder="搜索关键字" bindtap="activeSearch"></input>
                 </view>
                 <view class="action">
-                    <text>广州</text>
+                    <text>北京</text>
                     <text class="cuIcon-triangledownfill"></text>
                 </view>
             </view>

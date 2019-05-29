@@ -32,7 +32,7 @@
       </navigator>
     </view>
     <view class="cu-item bg-gradual-black arrow">
-      <navigator class="content" hover-class="none" url="../feedback/feedback">
+      <navigator class="content" hover-class="none" url="../mine-feedback/mine-feedback">
         <text class="cuIcon-favorfill lg text-yellow"></text>
         <text class="text-grey">意见反馈</text>
       </navigator>
