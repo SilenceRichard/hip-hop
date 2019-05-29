@@ -7,7 +7,7 @@
                 <view class="fisInfo bg-black padding-sm radius margin-top-sm  text-sm"  >
                 <view class="info">
                 <text class="title">{{title}}</text>
-                <view class="outerText" style='color:#ffffff'>{{info.title}}</view>
+                <view  style='color:#ffffff'><text class="outerText" style='font-size:50rpx'>{{info.title}}</text></view>
                 <view class="innerText1" style='color:#ffffff'>{{info.identify}}|{{info.dance_type}}|{{info.type}}</view>
                 <view class="innerText2" style='color:#ffffff'>发布时间：{{info.time}}</view>
                 <view class="innerText3" style='color:#ffffff'>人数限制：{{info.now}}/{{info.limit}}</view>
@@ -42,8 +42,8 @@
     <view class="row picture" bindtap="showModal">
         <view class="col head" style='height:100%'>
            <view class="col-3  margin-left" style="position: relative;overflow: visible">
-           <image src="{{info_.avatarUrl}}"style="height: 130rpx;width: 130rpx;border-radius: 50%"></image>
-           <view  style="position: absolute;top: 0;left: 0" class="cu-tag badge {{info.gender%2==0?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
+           <image src="{{info_.avatarUrl?info_.avatarUrl:'../../static/icon/ironman.png'}}"style="height: 130rpx;width: 130rpx;border-radius: 50%"></image>
+           <view  wx:if="{{info_.gender!=''}}" style="position: absolute;top: 0;left: 0" class="cu-tag badge {{info_.gender==2?'cuIcon-female bg-pink':'cuIcon-male bg-blue'}}"></view>
             </view>
       
             <view class="col-9 name" >

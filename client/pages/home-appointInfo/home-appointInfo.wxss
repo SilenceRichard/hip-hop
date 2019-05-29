@@ -5,11 +5,11 @@
     height:100%;
 }
 
-.outerText{
+outerText{
     font-size: 50rpx;
     margin: 25rpx 0 20rpx 0;
 }
-.innerText1{
+innerText1{
     font-size: 26rpx;
 }
 .innerText2{
@@ -54,7 +54,7 @@ image{
     font-size: 30rpx;
     
     margin-top:35rpx;
-    border-top: 5rpx solid #a6a6a6;
+    border-top: 3rpx solid #a6a6a6;
     
 }
 .secInfo{

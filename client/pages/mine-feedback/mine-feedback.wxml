@@ -1,0 +1,5 @@
+<!--pages/mine-feedback/mine-feedback.wxml-->
+<view>
+<image src="{{bgImage}}" class="backgroundImage"></image>
+<text>联系电话：13120327299</text>
+</view>

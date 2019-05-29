@@ -6,35 +6,35 @@ const app = getApp()
 Page({
     data: {
         info: [{
-            cover: '../../static/home.png',
-            title: '标题',
-            dance_type: 'popping',
-            type: 'cypher',
+            cover: '',
+            title: '',
+            dance_type: '',
+            type: '',
             limit: '',
             now: '',
-            time: '2019-5-11 00:00:00',
-            location: '昌平',
+            time: '',
+            location: '',
             str: '',
-            _id: '123'
+            _id: ''
         },
             {
-                cover: '../../static/home.png',
-                title: '标题',
-                dance_type: 'popping',
-                type: 'cypher',
-                limit: '4/10',
-                time: '2019-5-11 00:00:00',
-                location: '昌平',
+                cover: '',
+                title: '',
+                dance_type: '',
+                type: '',
+                limit: '',
+                time: '',
+                location: '',
                 str: '',
             },
             {
-                cover: '../../static/home.png',
-                title: '标题',
-                dance_type: 'popping',
-                type: 'cypher',
-                limit: '4/10',
-                time: '2019-5-11 00:00:00',
-                location: '昌平',
+                cover: '',
+                title: '',
+                dance_type: '',
+                type: '',
+                limit: '',
+                time: '',
+                location: '',
                 str: '',
             },
         ],
@@ -172,6 +172,38 @@ Page({
     //             console.log(`没有更多了！`)
     //         }
     // },//滚动盒子下拉加载！ //todo 真机调试时一直触发该事件 换种下拉的方式了。。
+  onShow: async function () {
+    let that = this;
+    this.setData({ bgImage: app.globalData.bgSrc })
+    let res1 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getAdvertise' } });
+    // console.log("res1------", res1)
+    let res2 = await wx.cloud.callFunction({ name: 'home', data: { method: 'getInfo', type: 'getNewsInfo' } });
+    // console.log("res2-----", res2)
+    //处理人数限制
+    res2.result.checkResult = res2.result.checkResult.map((item) => {
+      let arr = item.applicant.filter((val) => {
+        if (val.state == 0)
+          return val
+      })
+      item.now = arr.length
+      return item
+    })
+    //处理舞种信息
+    res2.result.checkResult.forEach(item => {
+      item.str = ''
+      item.dance_type.forEach(val => {
+        if (val.checked == true) {
+          item.str = item.str + val.name + ',';
+        }
+      })
+    })
+    res2.result.checkResult.forEach(item => {
+      item.str = item.str.slice(0, -1)
+    })
+    that.setData({
+      info: res2.result.checkResult
+    })
+  },
     onReady: async function () {
         let that = this;
         this.setData({bgImage:app.globalData.bgSrc})
