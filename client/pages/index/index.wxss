@@ -16,10 +16,6 @@ page{
 }
 /*微信小程序通过 background-image 设置背景：只支持线上图片和 base64 图片，不支持本地图片。*/
 
-.out1{
-    color:#000000;
-    margin-bottom:60rpx;
-}
 /*.loadMore{*/
 /*    position: absolute;*/
 /*    top: 0;*/
