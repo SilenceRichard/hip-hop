@@ -76,17 +76,17 @@
 
 
         <block wx:for="{{info}}">
-            <view class='row out2' bindtap="goToDetail" data-item="{{item}}" >
+            <view class='row out1' bindtap="goToDetail" data-item="{{item}}" >
                 <view class='col' style='height:100%'>
                     <view class='col-4 imgCol'><image class="listImage" src="{{item.cover}}"></image></view>
                     <view class='col-8'>
-                        <text class="title" >{{item.title}}</text>
+                        <text class="title text-white" >{{item.title}}</text>
                         <view class="col class1"  >
-                            <view class='col-10' >{{item.str}}·{{item.type}}</view>
-                            <view class='col-2' >{{item.now}}/{{item.limit}}</view>
+                            <view class='col-10 text-yellow' >{{item.str}}·{{item.type}}</view>
+                            <view class='col-2 text-cyan' >{{item.now}}/{{item.limit}}</view>
                         </view>
-                        <view class="innerText" style="color:#808080">{{item.time}}</view>
-                        <view class="innerText" style="color:#808080">{{item.location.name}}</view>
+                        <view class="innerText" style="color:var(--orange)">{{item.time}}</view>
+                        <view class="innerText" style="color: var(--blueLight)">{{item.location.name}}</view>
                     </view>
                 </view>
             </view>
