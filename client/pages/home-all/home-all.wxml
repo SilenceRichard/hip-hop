@@ -56,7 +56,7 @@
         </view>
 
 
-        <view class="row header bg-black">
+        <view class="row header bg-black" >
             <view class='col'>
                 <block wx:for='{{list}}' wx:key="item.name">
                     <view class="{{item.flag?'col-4 list list-active':'col-4 list'}}" bindtap="activeList" data-item="{{item}}">

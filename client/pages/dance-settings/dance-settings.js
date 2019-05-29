@@ -281,17 +281,18 @@ Page({
     touch:{
       x:'',
       y:''
+    },
     }
-  };
-    this.setData({
-      showModalFlag: false,
-      step:0,
-      basics:0,
-      info:{obj}
-    })
-    wx.navigateTo({url:"../index/index"});
-
+      this.setData({
+        showModalFlag: false,
+        step: 0,
+        basics: 0,
+        info: { obj }
+      }),
+      wx.navigateTo({ url: "../index/index" })
   },
+  
+    
   bindDateChange(ev){
     if (ev.currentTarget.dataset.type == 'date'){
       let timeobj= this.data.timestamp;
