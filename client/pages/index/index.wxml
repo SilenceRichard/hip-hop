@@ -1,5 +1,5 @@
 <image src="{{bgImage}}" class="backgroundImage"></image>
-<view class="outer" wx:if="{{!showWelcome}}">
+<view class="outer">
     <swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
         <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
             <view class="swiper-item">
@@ -32,9 +32,8 @@
     </block>
     </scroll-view>
 </view>
-<view class="{{flag?'outer welcome dh':'outer welcome dh-out'}}" wx:if="{{showWelcome}}" bindtap="enterMiniProgram"></view>
 <view class='cu-load load-modal' wx:if="{{loadingFlag}}">
-  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
-  <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>
-  <view class='gray-text'>加载中...</view>
+    <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+    <image src='../../static/icon/MJ.gif' class='png' mode='aspectFit'></image>
+    <view class='gray-text'>加载中...</view>
 </view>

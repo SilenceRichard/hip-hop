@@ -1,4 +1,6 @@
 <!--pages/index-animation/index-animation.wxml-->
-
-<view class="box dh"></view>
-<view class="page" bindtap='toIndex'> </view>
+<!--<image src="{{bgImage}}" class="backgroundImage"></image>-->
+    <view class="outer welcome " bindtap="toIndex" >
+        <image class="img1" src="cloud://suki-749826.7375-suki/形状 29 拷贝 2.png"></image>
+        <image class="img2"  src="cloud://suki-749826.7375-suki/形状 1.png" bindtap="toIndex"></image>
+    </view>

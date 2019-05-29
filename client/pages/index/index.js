@@ -65,8 +65,8 @@ Page({
         autoplay: true,
         interval: 5000,
         duration: 1000,
-        showWelcome: true, //欢迎动画标志
-        flag: true, //淡入淡出动画加载标志
+        // showWelcome: true, //欢迎动画标志
+        // flag: true, //淡入淡出动画加载标志
         page: 1, //当前页码
         timer:null, //防抖定时器
         bgImage:'' //背景图片路径
@@ -83,17 +83,17 @@ Page({
             cardCur: e.detail.current
         })
     },
-    enterMiniProgram: async function () {
-        this.setData({
-            flag: false
-        })
-        await setTimeout(() => {
-            wx.pro.showTabBar().then(
-                this.setData({
-                    showWelcome: false
-                }))
-        }, 1 * 1000);
-    }, //点击进入小程序首页
+    // enterMiniProgram: async function () {
+    //     this.setData({
+    //         flag: false
+    //     })
+    //     await setTimeout(() => {
+    //         wx.pro.showTabBar().then(
+    //             this.setData({
+    //                 showWelcome: false
+    //             }))
+    //     }, 1 * 1000);
+    // }, //点击进入小程序首页
     goToAll() {
         wx.navigateTo({
             url: '../home-all/home-all',
@@ -109,12 +109,14 @@ Page({
                 page:this.data.page-1
             })
             let res2 = await wx.cloud.callFunction({name: 'home', data: {method: 'getInfo', type: 'getNewsInfo',page:this.data.page}});
+           console.log("res2----", res2)
             //处理人数限制
             res2.result.checkResult = res2.result.checkResult.map((item) => {
                 let arr = item.applicant.filter((val) => {
                     if (val.state == 0)
                         return val
                 })
+                console.log("res2----",res2)
                 item.now = arr.length
                 return item
             })
@@ -164,7 +166,7 @@ Page({
     //             res2.result.checkResult.forEach(item => {
     //                 item.str = item.str.slice(0, -1)
     //             })
-    //             that.setData({
+    //             that.setData({        <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
     //                 info: res2.result.checkResult,
     //                 page: that.data.page+1
     //             })

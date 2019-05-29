@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index-animation/index-animation",
     "pages/index/index",
     "pages/mine/mine",
     "pages/mine-systemInfo/mine-systemInfo",
@@ -9,8 +10,7 @@
     "pages/home-all/home-all",
     "pages/home-appointInfo/home-appointInfo",
     "pages/home-applyInfo/home-applyInfo",
-    "pages/dance-settings/dance-settings",
-    "pages/index-animation/index-animation"
+    "pages/dance-settings/dance-settings"
   ],
   "window": {
     "backgroundTextStyle": "light",
