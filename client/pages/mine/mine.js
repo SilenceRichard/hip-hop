@@ -44,9 +44,9 @@ Page({
             })
         }
     },
-    onReady:async function () {
-      //关于数据库的操作，使用云函数
-      //   let info =  await util.getUserInfo({});//获取用户数据
+    async getMineInfo(){
+        //关于数据库的操作，使用云函数
+        //   let info =  await util.getUserInfo({});//获取用户数据
         this.setData({
             loadingFlag:true
         })
@@ -68,11 +68,18 @@ Page({
             })
         }
         else {
+            this.formatInfo(result.result.res)
             this.setData({
                 userInfo:result.result.res
             })
         }
 
+    },
+    formatInfo(info){
+      console.log(info)
+    },//判断首次登录或信息未完善，不完善显示提示框
+    onReady:async function () {
+        this.getMineInfo();
         // await wx.showLoading({title:'加载中'})
         //这段JS代码是为了获取用户存储在数据库中的信息并展示，
         //对于前端来说，合理的设计模式是只关心发起请求和拿到数据的行为，不要暴露太多业务逻辑的操作！所以之前的写法是存在问题的
@@ -97,6 +104,7 @@ Page({
 
     }, //页面加载完成时触发
     onShow: async function () {
+        this.getMineInfo();
         //页面出现时不断地更新数据,因为onShow周期会在onReady周期前执行一次，所以加一层判断
         // let result = await wx.cloud.callFunction({
         //     name:"mine",

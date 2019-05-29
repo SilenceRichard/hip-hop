@@ -1,17 +1,17 @@
 <view >
 <image class="backgroundImage" src="cloud://suki-749826.7375-suki/bg1.jpg"></image>
 <scroll-view class="out" scroll-y="true" style="height: 100vh">
-    <scroll-view scroll-x class="bg-grey nav text-center">
-        <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
+    <scroll-view scroll-x class="bg-black nav text-center">
+        <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
             {{item.name}}
         </view>
     </scroll-view>
     <block wx:if="{{flag=='jr'}}" wx:for="{{myJoined}}">
     <view  class="cu-card article ">
-        <view class="cu-item shadow bg-blue-shadow">
+        <view class="cu-item shadow bg-black">
             <view class="title">
                 <view class="text-cut line-white" >{{item.title}}</view>
-                <view class="cu-tag line-blue">{{item.time}}</view>
+                <text class="text-yellow" style="font-size: 22rpx">{{item.time}}</text>
                 <view wx:if="{{item.overFlag}}" class="cu-tag line-red">
                     过期
                 </view>
@@ -32,10 +32,10 @@
     </block>
     <block wx:if="{{flag=='fq'}}" wx:for="{{mySetted}}">
         <view class="cu-card article ">
-            <view class="cu-item shadow bg-blue-shadow">
+            <view class="cu-item shadow bg-black">
                 <view class="title">
                     <view class="text-cut line-white">{{item.title}}</view>
-                        <view class="cu-tag line-blue">{{item.time}}</view>
+                        <text class="text-yellow" style="font-size: 22rpx">{{item.time}}</text>
                         <view wx:if="{{item.overFlag}}" class="cu-tag line-red">过期
                         </view>
                 </view>
