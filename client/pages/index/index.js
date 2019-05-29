@@ -215,12 +215,15 @@ Page({
         // console.log("res2-----", res2)
         //处理人数限制
         res2.result.checkResult = res2.result.checkResult.map((item) => {
-            let arr = item.applicant.filter((val) => {
-                if (val.state == 0)
-                    return val
-            })
-            item.now = arr.length
-            return item
+            console.log(item.applicant)
+            if (item.applicant!=undefined){
+                let arr = item.applicant.filter((val) => {
+                    if (val.state == 0)
+                        return val
+                })
+                item.now = arr.length
+                return item
+            }
         })
         //处理舞种信息
         res2.result.checkResult.forEach(item => {
