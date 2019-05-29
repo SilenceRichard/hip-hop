@@ -16,7 +16,7 @@
                     过期
                 </view>
             </view>
-            <view class="content">
+            <view class="content" bindtap='goToDetail' data-item='{{item}}'>
                 <image src="{{item.cover}}"></image>
                 <view class="desc">
                     <view class="text-content">{{item.condition}}</view>
@@ -39,7 +39,7 @@
                         <view wx:if="{{item.overFlag}}" class="cu-tag line-red">过期
                         </view>
                 </view>
-                <view class="content">
+                <view class="content" bindtap='goToDetail' data-item='{{item}}'>
                     <image src="{{item.cover}}" mode="aspectFill"></image>
                     <view class="desc">
                         <view class="text-content">{{item.condition}}</view>

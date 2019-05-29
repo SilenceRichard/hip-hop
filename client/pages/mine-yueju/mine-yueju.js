@@ -24,6 +24,10 @@ Page({
             })
         }
     },
+    goToDetail(ev) {
+      console.log("这是ev---------", ev)
+      wx.navigateTo({ url: "../home-appointInfo/home-appointInfo?id=" +   ev.currentTarget.dataset.item._id })
+  },
     onReady:async function () {
         console.log("请求参数:",{
             method:"getMyAppoint",
