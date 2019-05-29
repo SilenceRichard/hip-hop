@@ -83,6 +83,7 @@ Page({
       x:'',
       y:''
     },
+    bgImage:app.globalData.bgSrc
   },
   lastInfo(e){
       this.setData({

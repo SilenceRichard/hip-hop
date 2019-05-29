@@ -60,6 +60,7 @@ textarea{
 .cu-form-group{
   background-color: transparent;
 }
+
 /* .queding{
   margin-top:90px;
 } */

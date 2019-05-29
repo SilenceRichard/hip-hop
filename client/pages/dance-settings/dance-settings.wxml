@@ -1,145 +1,145 @@
-<block wx:key wx:for="{{tips}}">
-    <view class="weui-toptips weui-toptips_warn" wx:if="{{topTip&&item.step==step}}">{{item.tips}}</view>
-</block>
-<view class="bg-gradulblack">
-    <view class="cu-steps">
-        <view class="cu-item {{index>basics?'':'text-orange'}}" wx:for="{{basicsList}}" wx:key>
-            <text class="cuIcon-{{index>basics?'infofill':item.icon}}"></text> {{item.name}}
+    <image src="{{bgImage}}" class="backgroundImage"></image>
+    <block wx:key wx:for="{{tips}}">
+        <view class="weui-toptips weui-toptips_warn" style="font-size: 30rpx" wx:if="{{topTip&&item.step==step}}">{{item.tips}}</view>
+    </block>
+    <view class="bg-gradulblack">
+        <view class="cu-steps">
+            <view class="cu-item {{index>basics?'':'text-orange'}}" wx:for="{{basicsList}}" wx:key>
+                <text class="cuIcon-{{index>basics?'infofill':item.icon}}"></text> {{item.name}}
+            </view>
         </view>
     </view>
-</view>
-
-<view  class="out" wx:if="{{step==0}}">
-    <view class="out-2">
-        <view class="{{info.identify=='person'?'publish choose':'publish'}}" catchtap="setInfo" style="margin-right: 70rpx" data-identify="person">
-            个人发布
+    <scroll-view  scroll-y="true"  class="out" wx:if="{{step==0}}">
+        <view class="out-2">
+            <view class="{{info.identify=='person'?'publish choose':'publish'}}" catchtap="setInfo" style="margin-right: 70rpx" data-identify="person">
+                个人发布
+            </view>
+            <view class="{{info.identify=='official'?'publish choose':'publish'}}" catchtap="setInfo"  data-identify="official">
+                官方发布
+            </view>
         </view>
-        <view class="{{info.identify=='official'?'publish choose':'publish'}}" catchtap="setInfo"  data-identify="official">
-            官方发布
+    </scroll-view>
+    <scroll-view  scroll-y="true"  class="out" wx:if="{{step==1}}">
+        <view style="margin: 50rpx 0 " class="row">
+            <view class="col">
+                <view class="col-6 inner_1">
+                    <view class="{{info.type=='cypher'?'publish choose':'publish'}}" catchtap="setInfo" data-type="cypher">cypher</view>
+                </view>
+                <view class="col-6 inner_1">
+                    <view class="{{info.type=='练习'?'publish choose':'publish'}}" catchtap="setInfo" data-type="练习">练习</view>
+                </view>
+            </view>
         </view>
-    </view>
-</view>
-
-
-    <view  class="out" wx:if="{{step==1}}">
-        <view class="inner_1">
-            <view class="{{info.type=='cypher'?'publish choose':'publish'}}" catchtap="setInfo" data-type="cypher">cypher</view>
-            <view class="{{info.type=='练习'?'publish choose':'publish'}}" catchtap="setInfo" data-type="练习" style="margin-left:60rpx;">练习</view>
-        </view>
-        <view  class="inner_2">
+        <view style="margin: 50rpx 0 " class="inner_1">
             <view class="{{info.type=='自由'?'publish choose':'publish'}}" catchtap="setInfo" data-type="自由">自由</view>
         </view>
-            <view class="stepButton" style="height:1688rpx;width:730rpx;left:10rpx">
-                <button class="nextStep" bindtap="lastInfo">上一步</button>
-            </view>
-    </view>
-
-
-
-<view  class="out" wx:if="{{step==2}}">
-    <checkbox-group bindchange="checkboxChange" style="color:#ffffff">
-        <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
-            <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
-
-            <view class="weui-cell__hd weui-check__hd_in-checkbox">
-                <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
-                <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
-            </view>
-            <view class="weui-cell__bd">{{item.name}}</view>
-        </label>
-    </checkbox-group>
-    <view class="row">
-        <view class="col" style="margin:10rpx 0 20rpx 0;height:76rpx">
-            <view class="col-6 stepButton"><button class="nextStep" bindtap="lastInfo">上一步</button></view>
-            <view class="col-6 stepButton"><button class="nextStep" bindtap="setInfo">下一步</button></view>
+        <view style="margin: 50rpx 0 " class="row">
+            <button class="nextStep" bindtap="lastInfo">上一步</button>
         </view>
-    </view>
-</view>
+    </scroll-view>
+    <scroll-view  scroll-y="true"  class="out" wx:if="{{step==2}}">
+        <checkbox-group bindchange="checkboxChange" style="color:#ffffff">
+            <label class="weui-cell weui-check__label" wx:for="{{checkboxItems}}" wx:key="value">
+                <checkbox class="weui-check" value="{{item.value}}" checked="{{item.checked}}"/>
 
-<view  class="out" wx:if="{{step==3}}" style="padding: 38rpx 0;">
-
-    <view class="upload-head">
-        <view class="uploadTips cu-bar form-title">
-            <view class="form-title">图片上传</view>
-            <view class="action form-title">{{cover_num}}/1</view>
+                <view class="weui-cell__hd weui-check__hd_in-checkbox">
+                    <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!item.checked}}"></icon>
+                    <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{item.checked}}"></icon>
+                </view>
+                <view class="weui-cell__bd">{{item.name}}</view>
+            </label>
+        </checkbox-group>
+        <view class="row">
+            <view class="col" style="margin:10rpx 0 20rpx 0;height:76rpx">
+                <view class="col-6 stepButton"><button class="nextStep" bindtap="lastInfo">上一步</button></view>
+                <view class="col-6 stepButton"><button class="nextStep" bindtap="setInfo">下一步</button></view>
+            </view>
         </view>
-        <view class="cu-form-group" style="background:0">
-            <view class="grid col-4 grid-square flex-sub uploadbox">
-                <view class="bg-img" style="width:200rpx;height:200rpx"  bindtap="ViewImage" wx:if="{{cover_num!=0}}">
-                    <image src='{{info.cover}}' mode='aspectFill'></image>
-                    <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
-                        <text class="cuIcon-close"></text>
+    </scroll-view>
+    <scroll-view  scroll-y="true"  class="out" wx:if="{{step==3}}" style="padding: 38rpx 0;">
+
+        <view class="upload-head">
+            <view class="uploadTips cu-bar form-title">
+                <view class="form-title">图片上传</view>
+                <view class="action form-title">{{cover_num}}/1</view>
+            </view>
+            <view class="cu-form-group" style="background:0">
+                <view class="grid col-4 grid-square flex-sub uploadbox">
+                    <view class="bg-img" style="width:200rpx;height:200rpx"  bindtap="ViewImage" wx:if="{{cover_num!=0}}">
+                        <image src='{{info.cover}}' mode='aspectFill'></image>
+                        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                            <text class="cuIcon-close"></text>
+                        </view>
+                    </view>
+                    <view class="solids" bindtap="ChooseImage" style="width:200rpx;height:200rpx" wx:if="{{cover_num==0}}">
+                        <text class="cuIcon-cameraadd"></text>
                     </view>
                 </view>
-                <view class="solids" bindtap="ChooseImage" style="width:200rpx;height:200rpx" wx:if="{{cover_num==0}}">
-                    <text class="cuIcon-cameraadd"></text>
+            </view>
+        </view>
+
+        <view class="row" style="margin: 90rpx 0 0 0">
+            <view class="col">
+                <view class="col-3 form-title">活动标题</view>
+                <view class="col-9">
+                    <input class="form-input" value="{{info.title}}" bindinput="changeTitle" placeholder="请填写活动标题"></input>
                 </view>
             </view>
         </view>
-    </view>
-
-    <view class="row" style="margin: 90rpx 0 0 0">
-        <view class="col">
-            <view class="col-3 form-title">活动标题</view>
-            <view class="col-9">
-                <input class="form-input" value="{{info.title}}" bindinput="changeTitle" placeholder="请填写活动标题"></input>
+        <view class="row">
+            <view class="col">
+                <view class="col-3 form-title">活动内容</view>
             </view>
         </view>
-    </view>
-    <view class="row">
-        <view class="col">
-            <view class="col-3 form-title">活动内容</view>
-        </view>
-    </view>
 
-                <textarea  value="{{info.content}}" bindinput="changeContent" class="form-textarea" ></textarea>
+        <textarea  value="{{info.content}}" bindinput="changeContent" class="form-textarea" ></textarea>
 
-    <view class="row">
-        <view class="col">
-            <view class="col-3 form-title">活动时间</view>
-            <view class="col-9">
-                <view class="form-input">
-                    <view class="row" style="height: 66rpx;line-height: 66rpx">
-                        <view class="col">
-                            <view class="col-4">
-                                <picker mode="date" data-type="date" value="{{timestamp.date}}" bindchange="bindDateChange">
-                                    <text>{{timestamp.date}}</text>
-                                </picker>
-                            </view>
-                            <view class="col-6">
-                                <picker mode="time" data-type="time" value="{{timestamp.time}}" bindchange="bindDateChange">
-                                    <text>{{timestamp.time}}</text>
-                                </picker>
+        <view class="row">
+            <view class="col">
+                <view class="col-3 form-title">活动时间</view>
+                <view class="col-9">
+                    <view class="form-input">
+                        <view class="row" style="height: 66rpx;line-height: 66rpx">
+                            <view class="col">
+                                <view class="col-4">
+                                    <picker mode="date" data-type="date" value="{{timestamp.date}}" bindchange="bindDateChange">
+                                        <text>{{timestamp.date}}</text>
+                                    </picker>
+                                </view>
+                                <view class="col-6">
+                                    <picker mode="time" data-type="time" value="{{timestamp.time}}" bindchange="bindDateChange">
+                                        <text>{{timestamp.time}}</text>
+                                    </picker>
+                                </view>
                             </view>
                         </view>
                     </view>
                 </view>
             </view>
         </view>
-    </view>
-    <view class="row">
-        <view class="col">
-            <view class="col-3 form-title">活动地点</view>
-            <view class="col-9">
-                <view class="form-input">
-                    <view class="row" style="height:100%;padding-top:10rpx">
-                        <view class="col">
-                            <view class="col-1">
-                                <image bindtap="chooseLocation" class="location-icon" src="../../static/icon/icon-location.png"></image>
-                            </view>
-                            <view class="col-8">
-                                <text bindtap="chooseLocation" wx:if="{{info.location.name==''}}">选择位置</text>
-                                <text bindtap="chooseLocation" wx:else>{{info.location.name}}</text>
+        <view class="row">
+            <view class="col">
+                <view class="col-3 form-title">活动地点</view>
+                <view class="col-9">
+                    <view class="form-input">
+                        <view class="row" style="height:100%;padding-top:10rpx">
+                            <view class="col">
+                                <view class="col-1">
+                                    <image bindtap="chooseLocation" class="location-icon" src="../../static/icon/icon-location.png"></image>
+                                </view>
+                                <view class="col-8">
+                                    <text bindtap="chooseLocation" wx:if="{{info.location.name==''}}">选择位置</text>
+                                    <text bindtap="chooseLocation" wx:else>{{info.location.name}}</text>
+                                </view>
                             </view>
                         </view>
                     </view>
                 </view>
             </view>
         </view>
-    </view>
-    <view class="row">
-        <view class="col">
-            <view class="col-3 form-title">人数限制</view>
+        <view class="row">
+            <view class="col">
+                <view class="col-3 form-title">人数限制</view>
                 <view class="col-9">
                     <view class="form-input row">
                         <view class="col inner" style="height:66rpx;line-height:66rpx;">
@@ -154,75 +154,75 @@
                         </view>
                     </view>
                 </view>
-        </view>
-    </view>
-    <view class="row">
-        <view class="col">
-            <view class="col-3 form-title">加入要求</view>
-        </view>
-    </view>
-    <view class="row">
-        <view class="col">
-            <view class="col-12">
-                <textarea  value="{{info.condition}}" bindinput="changeCondition" class="form-textarea"></textarea>
             </view>
         </view>
-    </view>
-    <!-- 加入要求 -->
-    <view class="row">
-        <view class="col" style="margin-top:40rpx;height:76rpx">
-            <view class="col-6 stepButton"><button class="nextStep" bindtap="lastInfo">上一步</button></view>
-            <view class="col-6 stepButton"><button class="nextStep" bindtap="setInfo">下一步</button></view>
+        <view class="row">
+            <view class="col">
+                <view class="col-3 form-title">加入要求</view>
+            </view>
         </view>
-    </view>
-</view>
-<view   class="out" wx:if="{{step==4}}">
-    <view class="uploadTips" style="padding: 38rpx 0;">
-        希望给报名者的联系方式
-    </view>
-    <view class="row">
-        <view class="col">
-            <block wx:for="{{contactItems}}" wx:key="*this">
-                <view class="{{item.flag?'col-4 itemList itemActive':'col-4 itemList'}}" style="text-align: center;">
-                    <text data-name="{{item.name}}" bindtap="changeContact" >{{item.name}}</text>
+        <view class="row">
+            <view class="col">
+                <view class="col-12">
+                    <textarea  value="{{info.condition}}" bindinput="changeCondition" class="form-textarea"></textarea>
                 </view>
-            </block>
+            </view>
         </view>
-    </view>
-    <view style="display:flex;justify-content:center;">
-        <view style="margin: 70rpx 0 0 0 " class="uploadImg"  wx:if="{{contactName=='微信'||contactName=='微信群聊'}}">
-            <view class="cu-form-group" style="background:0">
-                <view class="grid col-4 grid-square flex-sub uploadbox">
-                    <view class="bg-img" style="width:200rpx;height:200rpx"  bindtap="ViewQRImage" wx:if="{{QR_num!=0}}">
-                        <image src='{{info.QR_code}}' mode='aspectFill'></image>
-                        <view class="cu-tag bg-red" catchtap="DelQRImg" data-index="{{index}}">
-                            <text class="cuIcon-close"></text>
+        <!-- 加入要求 -->
+        <view class="row">
+            <view class="col" style="margin-top:40rpx;height:76rpx">
+                <view class="col-6 stepButton"><button class="nextStep" bindtap="lastInfo">上一步</button></view>
+                <view class="col-6 stepButton"><button class="nextStep" bindtap="setInfo">下一步</button></view>
+            </view>
+        </view>
+    </scroll-view>
+    <scroll-view  scroll-y="true" class="out" wx:if="{{step==4}}">
+        <view class="uploadTips" style="padding: 38rpx 0;">
+            希望给报名者的联系方式
+        </view>
+        <view class="row">
+            <view class="col">
+                <block wx:for="{{contactItems}}" wx:key="*this">
+                    <view class="{{item.flag?'col-4 itemList itemActive':'col-4 itemList'}}" style="text-align: center;">
+                        <text data-name="{{item.name}}" bindtap="changeContact" >{{item.name}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view style="display:flex;justify-content:center;">
+            <view style="margin: 70rpx 0 0 0 " class="uploadImg"  wx:if="{{contactName=='微信'||contactName=='微信群聊'}}">
+                <view class="cu-form-group" style="background:0">
+                    <view class="grid col-4 grid-square flex-sub uploadbox">
+                        <view class="bg-img" style="width:200rpx;height:200rpx"  bindtap="ViewQRImage" wx:if="{{QR_num!=0}}">
+                            <image src='{{info.QR_code}}' mode='aspectFill'></image>
+                            <view class="cu-tag bg-red" catchtap="DelQRImg" data-index="{{index}}">
+                                <text class="cuIcon-close"></text>
+                            </view>
+                        </view>
+                        <view class="solids" bindtap="chooseImageQR" style="width:200rpx;height:200rpx" wx:if="{{QR_num==0}}">
+                            <text class="cuIcon-cameraadd"></text>
                         </view>
                     </view>
-                    <view class="solids" bindtap="chooseImageQR" style="width:200rpx;height:200rpx" wx:if="{{QR_num==0}}">
-                        <text class="cuIcon-cameraadd"></text>
-                    </view>
+                </view>
+                <view>上传二维码</view>
+            </view>
+            <view  wx:if="{{contactName == '手机号'}}" style="width:100%;margin: 70rpx 0 0 0 ">
+                <input class="inputer" value="{{info.phone}}" bindinput="changePhoneNumber"></input>
+            </view>
+        </view>
+        <button class="nextStep" bindtap="setInfo" style="position:relative;margin-top: 165rpx">发起约舞</button>
+    </scroll-view>
+    <view class="cu-modal show" wx:if="{{showModalFlag}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+                <view class="content" >约舞成功</view>
+                <view class="action" bindtap="hideModal">
+                    <text class="cuIcon-close text-red" bindtap='hideModal'></text>
                 </view>
             </view>
-            <view>上传二维码</view>
-        </view>
-        <view  wx:if="{{contactName == '手机号'}}" style="width:100%;margin: 70rpx 0 0 0 ">
-            <input class="inputer" value="{{info.phone}}" bindinput="changePhoneNumber"></input>
+            <view class="padding-xl">
+                <icon type="success" size="80"></icon>
+            </view>
         </view>
     </view>
-    <button class="nextStep" bindtap="setInfo" style="position:relative;margin-top: 165rpx">发起约舞</button>
-</view>
 
-<view class="cu-modal show" wx:if="{{showModalFlag}}">
-      <view class="cu-dialog">
-        <view class="cu-bar bg-white justify-end">
-          <view class="content" >约舞成功</view>
-          <view class="action" bindtap="hideModal">
-            <text class="cuIcon-close text-red" bindtap='hideModal'></text>
-          </view>
-        </view>
-        <view class="padding-xl">
-          <icon type="success" size="80"></icon>
-        </view>
-  </view>
-  </view>

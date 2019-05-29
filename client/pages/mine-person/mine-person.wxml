@@ -1,9 +1,10 @@
+<scroll-view scroll-y="true" stylle="height:100vhs">
+    <image src="{{bgImage}}" class="backgroundImage"></image>
 <view class="row bg-gradual-black">
     <view class="col head" style="background-image: var(--gradualBlack)">
         <image bindtap="changeImage" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/user status.png'}}"></image>
     </view>
 </view>
-
 <view>
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
 
@@ -16,7 +17,9 @@
       <view class="title">性别</view>
       <picker mode="selector" value="{{userInfo.gender}}" range="{{genterarray}}" bindchange="changeSex">
         <view class="picker">
-          {{genterarray[userInfo.gender]}}
+            <view wx:if="{{userInfo.gender==1}}" class="cu-tag bg-blue"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
+            <view wx:if="{{userInfo.gender==2}}" class="cu-tag bg-pink"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
+            <view wx:else class="cu-tag bg-orange"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
         </view>
       </picker>
 	  </view>
@@ -25,16 +28,16 @@
       <view class="title">生日</view>
       <picker mode="date" value="{{userInfo.birthday}}" bindtap="bindDateChange" bindchange="bindDateChange">
         <view class="picker">
-          {{userInfo.birthday||'请选择出生日期'}}
+            <view class="cu-tag bg-green"role=""aria-label="">{{userInfo.birthday||'未知'}}</view>
         </view>
       </picker>
 	  </view>
 
     <view class="cu-form-group">
-		<view class="title">地址</view>
+		<view class="title">地区</view>
 		<picker mode="region" bindchange="regionChange"  custom-item="{{customItem}}">
 			<view class="picker">
-                {{userInfo.region||'选择省市'}}
+                <view class="cu-tag bg-yellow"role=""aria-label=""> {{userInfo.city||'选择省市'}}</view>
 				<!--{{userInfo.region[0]||'选择省市'}}，{{userInfo.region[1]}}，{{userInfo.region[2]}}-->
 			</view>
 		</picker>
@@ -44,7 +47,7 @@
     <view class="title">身份</view>
     <picker mode="selector" value="{{userInfo.role}}" range="{{identyarray}}" bindchange="changeRole">
       <view class="picker">
-        {{userInfo.role||'请选择身份'}}
+          <view class="cu-tag bg-blue"role=""aria-label=""> {{userInfo.role||'请选择'}}</view>
       </view>
     </picker>
 	</view>
@@ -55,7 +58,7 @@
        <block wx:for="{{danceTypeFormat}}">
            <view class="cu-tag bg-orange"role=""aria-label="">{{item}}</view>
        </block>
-
+        <view wx:if="{{danceTypeFormat==[]}}" class="cu-tag bg-orange"role=""aria-label="">请选择</view>
     </view>
 	</view>
 
@@ -63,21 +66,21 @@
     <view class="title">舞龄</view>
     <picker mode="selector"  bindtap="chooseDanceAge" bindchange="chooseDanceAge" value="{{userInfo.danceAge}}" range="{{agearray}}">
       <view class="picker">
-        {{userInfo.danceAge||'请选择舞龄'}}
+          <view class="cu-tag bg-cyan"role=""aria-label="">
+              {{userInfo.danceAge||'请选择舞龄'}}
+          </view>
       </view>
     </picker>
 	</view>
 
-  <view class="row form">
-    <view class="intro">--------------------------个人介绍--------------------------</view>
-    <textarea placeholder="介绍一下你自己吧~" bindinput="changeIntroduction" value="{{userInfo.introduction}}"></textarea>
+  <view class="row form" style="display: flex;align-items: center;justify-content: center">
+    <textarea style="border-radius: 10rpx" placeholder="介绍一下你自己吧~" bindinput="changeIntroduction" value="{{userInfo.introduction}}"></textarea>
   </view>
     <view class="row form">
         <button style="width:94%" class="weui-btn queding" bindtap="saveUserInfo">确定</button>
     </view>
 
 </view>
-
 <view class="cu-modal show" wx:if="{{showModalFlag}}">
       <view class="cu-dialog">
 
@@ -106,7 +109,6 @@
 
       </view>
 </view>
-
 <view class="cu-modal {{'show'}}" wx:if="{{showLimitFlag}}">
   <view class="cu-dialog">
 
@@ -119,3 +121,4 @@
 
   </view>
 </view>
+</scroll-view>
