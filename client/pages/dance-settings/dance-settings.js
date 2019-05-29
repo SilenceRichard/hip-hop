@@ -281,17 +281,42 @@ Page({
     touch:{
       x:'',
       y:''
+    },
     }
-  };
-    this.setData({
-      showModalFlag: false,
-      step:0,
-      basics:0,
-      info:{obj}
-    })
-    wx.navigateTo({url:"../index/index"});
-
+      this.setData({
+        showModalFlag: false,
+        step: 0,
+        basics: 0,
+        info: { obj },
+        cover_num :0,
+        QR_num: 0,
+        num: 0,//numLimit数组中第num个元素
+        numLimit: [],
+        showModalFlag: false,
+        checkboxItems: [
+          { name: 'Hiphop', value: 'Hiphop', checked: false },
+          { name: 'Popping', value: 'Popping', checked: false },
+          { name: 'Locking', value: 'Locking', checked: false },
+          { name: 'Breaking', value: 'Breaking', checked: false },
+          { name: 'Waacking', value: 'Waacking', checked: false },
+          { name: 'House', value: 'House', checked: false },
+          { name: 'Jazz', value: 'Jazz', checked: false },
+          { name: 'Urban', value: 'Urban', checked: false },
+          { name: 'Krumping', value: 'Krumping', checked: false },
+          { name: 'Reggae', value: 'Reggae', checked: false },
+          { name: '不限', value: '不限', checked: false },
+        ],//记录舞种信息
+        contactItems: [{ name: '手机号', flag: false }, { name: '微信', flag: false }, { name: '微信群聊', flag: false }], //联系方式
+        timestamp: {
+          date: util.formatDate(new Date()),
+          time: "00:00"
+        },//时间戳
+        contactName: '', //当前选择联系方式项
+      }),
+      wx.navigateTo({ url: "../index/index" })
   },
+  
+    
   bindDateChange(ev){
     if (ev.currentTarget.dataset.type == 'date'){
       let timeobj= this.data.timestamp;

@@ -9,7 +9,8 @@
 }
 .cu-list.menu-avatar>.cu-item{
     background-color: var(--black);
-    border-bottom: .5rpx solid #a8a8a8;
+    border-radius: 10rpx;
+    margin: 30rpx;
 }
 .cu-list.menu-avatar>.cu-item{
     height: 200rpx!important;

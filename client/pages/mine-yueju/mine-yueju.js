@@ -24,19 +24,23 @@ Page({
             })
         }
     },
-    async getMyAppoint(){
+    goToDetail(ev) {
+      console.log("这是ev---------", ev)
+      wx.navigateTo({ url: "../home-appointInfo/home-appointInfo?id=" +   ev.currentTarget.dataset.item._id })
+  },
+    onReady:async function () {
         console.log("请求参数:",{
             method:"getMyAppoint",
             openid:app.data.openid
         })
-        let res =await wx.cloud.callFunction({
-            name:"mine",
-            data:{
-                method:"getMyAppoint",
-                openid:app.data.openid
-            }
-        })
-        console.log("RES:",res)
+      let res =await wx.cloud.callFunction({
+          name:"mine",
+          data:{
+              method:"getMyAppoint",
+              openid:app.data.openid
+          }
+      })
+      console.log("RES:",res)
         res.result.overDance.map(item=>{
             item.overFlag = true; //过期标志
             return item
@@ -67,15 +71,57 @@ Page({
             item.dance_type_show = a;
             return item
         })
-        this.setData({
-            myJoined:danceArr,
-            mySetted:sentArr
-        })
+      this.setData({
+          myJoined:danceArr,
+          mySetted:sentArr
+      })
     },
-    onReady:async function () {
-        this.getMyAppoint();
-    },
-    onShow:function () {
-        this.getMyAppoint();
-    }
+  onShow: async function () {
+    console.log("请求参数:", {
+      method: "getMyAppoint",
+      openid: app.data.openid
+    })
+    let res = await wx.cloud.callFunction({
+      name: "mine",
+      data: {
+        method: "getMyAppoint",
+        openid: app.data.openid
+      }
+    })
+    console.log("RES:", res)
+    res.result.overDance.map(item => {
+      item.overFlag = true; //过期标志
+      return item
+    })
+    res.result.sentOverDance.map(item => {
+      item.overFlag = true;
+      return item;
+    })
+    let danceArr = res.result.Dance.concat(res.result.overDance);
+    let sentArr = res.result.sentDance.concat(res.result.sentOverDance);
+    danceArr.map(item => {
+      let a = []; //处理舞种
+      item.dance_type.map(val => {
+        if (val.checked) {
+          a.push(val.name)
+        }
+      })
+      item.dance_type_show = a;
+      return item
+    })
+    sentArr.map(item => {
+      let a = []; //处理舞种
+      item.dance_type.map(val => {
+        if (val.checked) {
+          a.push(val.name)
+        }
+      })
+      item.dance_type_show = a;
+      return item
+    })
+    this.setData({
+      myJoined: danceArr,
+      mySetted: sentArr
+    })
+  }
 })

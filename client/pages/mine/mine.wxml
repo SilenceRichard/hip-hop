@@ -32,7 +32,7 @@
       </navigator>
     </view>
     <view class="cu-item bg-gradual-black arrow">
-      <navigator class="content" hover-class="none" url="../feedback/feedback">
+      <navigator class="content" hover-class="none" url="../mine-feedback/mine-feedback">
         <text class="cuIcon-favorfill lg text-yellow"></text>
         <text class="text-grey">意见反馈</text>
       </navigator>
@@ -48,7 +48,7 @@
       </view>
     </view>
     <view class="padding-xl bg-grey">
-        您首次登录，发起与报名约舞需要完善个人信息，是否现在完善？
+        您的个人信息未完善，发起与报名约舞需要完善个人信息，是否现在完善？
     </view>
     <view class="cu-bar bg-grey justify-end">
       <view class="action">

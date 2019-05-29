@@ -194,7 +194,7 @@
                 <view class="cu-form-group" style="background:0">
                     <view class="grid col-4 grid-square flex-sub uploadbox">
                         <view class="bg-img" style="width:200rpx;height:200rpx"  bindtap="ViewQRImage" wx:if="{{QR_num!=0}}">
-                            <image src='{{info.QR_code}}' mode='aspectFill'></image>
+                            <image src='{{info.QR_code}}' mode='aspectFill' style='position: relative '></image>
                             <view class="cu-tag bg-red" catchtap="DelQRImg" data-index="{{index}}">
                                 <text class="cuIcon-close"></text>
                             </view>
