@@ -102,13 +102,12 @@ Page({
         step:this.data.step+1,//更新step
         basics:this.data.basics+1,
         topTip:false
-
       })
     }
     else if (this.data.step == 1) {//如果是第二步
       obj.type = ev.target.dataset.type; //活动形式
       this.setData({
-        info:obj,//由中间量导入数据到info
+        info:obj,//由中间数据到info量导入
         step:this.data.step+1,//更新step
         basics:this.data.basics+1,
         topTip:false
@@ -116,8 +115,16 @@ Page({
     }
    else if (this.data.step == 2){//如果是第三步
         var chooseFlag = false;
+        let t=0
         this.data.checkboxItems.forEach(item =>{
-          if (item.checked) chooseFlag = true;
+          if (item.checked) {
+              chooseFlag = true;
+              t++
+          }
+          if(t>3)
+          {
+
+          }
         })
         obj.dance_type = this.data.checkboxItems;
         if (chooseFlag){
@@ -340,7 +347,7 @@ Page({
             sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album'], //从相册选择
             success: (chooseResult) => {
-                if (this.data.info.QR_num == 0) {
+                if (this.data.QR_num == 0) {
                     console.log("chooseResult----",chooseResult)
                     wx.cloud.uploadFile({
                         cloudPath: util.uuid()+'my-photo.png',
@@ -350,6 +357,7 @@ Page({
                                 "info.QR_code":res.fileID,//云存储图片路径
                                 QR_num:that.data.QR_num+1
                             });
+                            console.log("info.QR_code:",this.data.info.QR_code)
                         },
                     })
                 }
@@ -400,7 +408,7 @@ Page({
                 if(res.confirm){
                     this.setData({
                         "info.QR_code":'',
-                        cover_num:this.data.QR_num-1
+                        QR_num:this.data.QR_num - 1
                     })
                 }
                 // if (res.confirm) {

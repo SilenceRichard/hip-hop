@@ -91,13 +91,9 @@
             <view class="col-3 form-title">活动内容</view>
         </view>
     </view>
-    <view class="row">
-        <view class="col">
-            <view class="col-12" >
-                <textarea value="{{info.content}}" bindinput="changeContent" class="form-textarea" ></textarea>
-            </view>
-        </view>
-    </view>
+
+                <textarea  value="{{info.content}}" bindinput="changeContent" class="form-textarea" ></textarea>
+
     <view class="row">
         <view class="col">
             <view class="col-3 form-title">活动时间</view>
