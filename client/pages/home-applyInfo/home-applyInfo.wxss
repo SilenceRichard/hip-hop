@@ -2,6 +2,9 @@
     width:100%;
     height:100%;
 }
+button[disabled] {
+    content: "\e7f1"!important;
+}
 .tip{
     font-size: 30rpx;
     background-color: #f1ecbc;

@@ -25,6 +25,7 @@ Page({
       QR_code:'',
       phone:''
     },//存入数据库的约局信息对象
+    disabled:false,
     cover_num:0,
     QR_num :0,
     num:0,//numLimit数组中第num个元素
@@ -173,6 +174,9 @@ Page({
       }
     }
    else if (this.data.step == 4){//如果是第五步
+        this.setData({
+            disabled:true
+        })
        if(this.data.info.contact ===''&&this.data.info.QR_code===''&&this.data.info.phone===''){
            this.setData({
                topTip:true
@@ -284,6 +288,7 @@ Page({
     },
     }
       this.setData({
+        disabled:false,
         showModalFlag: false,
         step: 0,
         basics: 0,
@@ -292,7 +297,6 @@ Page({
         QR_num: 0,
         num: 0,//numLimit数组中第num个元素
         numLimit: [],
-        showModalFlag: false,
         checkboxItems: [
           { name: 'Hiphop', value: 'Hiphop', checked: false },
           { name: 'Popping', value: 'Popping', checked: false },
