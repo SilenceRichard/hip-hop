@@ -2,6 +2,9 @@
 page {
     overflow: hidden;
 }
+button[disabled] {
+    content: "\e7f1"!important;
+}
 .out{
     width: 100%;
     height: 90vh;

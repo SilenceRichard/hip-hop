@@ -4,6 +4,7 @@ Page({
     wx.navigateTo({ url: '../mine-person/mine-person' })
   },
   data: {
+    disabled:false,
     t_length: 0,
     info:{
       id:'',
@@ -22,6 +23,9 @@ Page({
 
   sendApply(){
     let that = this;//不能定义在回调里
+    that.setData({
+      disabled:true
+    })
     console.log("请求参数:",this.data.info);
     console.log("app.data.openid",app.data.openid)
     wx.cloud.callFunction({
@@ -31,7 +35,6 @@ Page({
         info:this.data.info,
         openid: app.data.openid
       },
-
       success(res){
         console.log(res)
         that.setData({
@@ -47,7 +50,8 @@ Page({
   },
   hideModal(e) {
     this.setData({
-      showModalFlag: false
+      showModalFlag: false,
+      disabled: false
     })
     wx.navigateBack();
       

@@ -210,7 +210,7 @@
                 <input class="inputer" value="{{info.phone}}" bindinput="changePhoneNumber"></input>
             </view>
         </view>
-        <button class="nextStep" bindtap="setInfo" style="position:relative;margin-top: 165rpx">发起约舞</button>
+        <button disabled="{{disabled}}" class="nextStep" bindtap="setInfo" style="position:relative;margin-top: 165rpx">发起约舞</button>
     </scroll-view>
     <view class="cu-modal show" wx:if="{{showModalFlag}}">
         <view class="cu-dialog">

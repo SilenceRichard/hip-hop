@@ -1,7 +1,7 @@
 <image src="{{bgImage}}" class="backgroundImage"></image>
 <view >
 <scroll-view class="out" scroll-y="true" style="height: 100vh">
-    <scroll-view scroll-x class="bg-black nav text-center">
+    <scroll-view scroll-x class="bg-black nav text-center" style=" background-color:rgba(1,1,1,0.5);">
         <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
             {{item.name}}
         </view>
