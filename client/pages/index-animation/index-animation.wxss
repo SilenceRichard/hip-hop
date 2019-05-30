@@ -10,7 +10,7 @@
 .img1{
     position:absolute;
     top:250rpx;
-    animation:bounce 3s;
+    animation:bounce 3s infinite;
     animate-iteration-count: 3;
 }
 .img2{
@@ -18,6 +18,6 @@
     left:220rpx;
     width:350rpx;
     height:500rpx;
-    animation:pulse 2s;
+    animation:pulse 2s infinite;
     animate-iteration-count: 3;
 }

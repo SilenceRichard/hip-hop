@@ -12,7 +12,10 @@
       <view class="title">昵称</view>
       <input value="{{userInfo.nickName}}" placeholder="请输入昵称" bindinput="changeInputVal" data-type="nickName" type="text"></input>
 	  </view>
-
+    <view class="cu-form-group">
+        <view class="title">签名</view>
+        <input placeholder="有个性，无签名~" bindinput="changeIntroduction" value="{{userInfo.introduction}}"></input>
+    </view>
     <view class="cu-form-group">
       <view class="title">性别</view>
       <picker mode="selector" value="{{userInfo.gender}}" range="{{genterarray}}" bindchange="changeSex">
@@ -73,9 +76,9 @@
     </picker>
 	</view>
 
-  <view class="row form" style="display: flex;align-items: center;justify-content: center">
-    <textarea style="border-radius: 10rpx" placeholder="介绍一下你自己吧~" bindinput="changeIntroduction" value="{{userInfo.introduction}}"></textarea>
-  </view>
+  <!--<view class="row form" style="display: flex;align-items: center;justify-content: center">-->
+    <!--<textarea style="border-radius: 10rpx" placeholder="介绍一下你自己吧~" bindinput="changeIntroduction" value="{{userInfo.introduction}}"></textarea>-->
+  <!--</view>-->
     <view class="row form">
         <button style="width:94%" class="weui-btn queding" bindtap="saveUserInfo">确定</button>
     </view>
