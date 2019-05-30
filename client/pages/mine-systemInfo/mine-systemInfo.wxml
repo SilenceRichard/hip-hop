@@ -1,102 +1,215 @@
 <image src="{{bgImage}}" class="backgroundImage"></image>
 <scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
-    <scroll-view scroll-x class="bg-gradual-black nav text-center">
-        <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
-            {{item.name}}
-        </view>
-    </scroll-view>
-  <block wx:for="{{systemList}}">
-    <!--      系统消息-->
-      <view wx:if="{{flag==true}}" class="cu-list menu-avatar">
-      <view class="cu-item" data-item="{{item}}">
-          <view class="cu-avatar bg-transparent">
-              <text class="cuIcon-noticefill lg text-orange"></text>
-          </view>
-          <view class="content">
-              <view class="text-grey">{{item.titleShow}}</view>
-              <view class="text-gray text-sm flex">
-                <text class="text-cut">{{item.content}}</text>
+        <scroll-view scroll-x class="bg-gradual-black nav text-center">
+            <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">
+                {{item.name}}
+            </view>
+        </scroll-view>
+        <block wx:for="{{systemList}}">
+        <!--      系统消息-->
+          <view wx:if="{{flag==true}}" class="cu-list menu-avatar">
+              <view class="cu-item" wx:if="{{item.teamedFlag}}" bindtap="showNotice" data-item="{{item}}">
+              <view class="cu-avatar bg-transparent">
+                  <text class="cuIcon-noticefill lg text-orange"></text>
               </view>
-              <view class="text-grey text-xs">{{item.time}}</view>
-          </view>
-          <view class="action">
+              <view class="content">
+                  <view class="text-grey">{{item.titleShow}}</view>
+                  <view class="text-gray text-sm flex">
+                    <text class="text-cut">{{item.content}}</text>
+                  </view>
+                  <view class="text-grey text-xs">{{item.time}}</view>
+              </view>
+              <view class="action">
 
-          </view>
-    </view>
-    </view>
-  </block>
-
-<!--        互动消息-->
-        <view wx:if="{{flag==false}}" class="cu-list menu-avatar">
-             <block wx:for="{{hdList}}">
-            <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtap="showModal" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:if="{{item.uncheckedFlag}}" data-apply="{{item.info.apply||''}}">
-
-                <view class="cu-avatar bg-black"><text class="cuIcon-form text-orange"></text></view>
-                <view class="content">
-                    <view class="text-grey">{{item.titleShow}}</view>
-                    <view class="text-gray text-sm flex">
-                        <text class="text-cut">{{item.content}}</text>
-                    </view>
-                    <view class="text-grey text-xs">{{item.time}}</view>
-                </view>
-                <view class="action">
-                </view>
-                <view class="move">
-                  <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
-                </view>
-            </view>
-                 <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:else>
-
-                     <view class="cu-avatar bg-black">
-                         <text wx:if="{{item.passFlag}}" class="cuIcon-emoji text-green"></text>
-                         <text wx:if="{{item.unpassFlag}}" class="cuIcon-roundclose lg text-red"></text>
-                     </view>
-                     <view class="content">
-                         <view class="text-grey">{{item.titleShow}}</view>
-                         <view class="text-gray text-sm flex">
-                             <text class="text-cut">{{item.content}}</text>
-                         </view>
-                         <view class="text-grey text-xs">{{item.time}}</view>
-                     </view>
-                     <view class="action">
-                     </view>
-                     <view class="move">
-                         <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
-                     </view>
-                 </view>
-             </block>
+              </view>
         </view>
-        <view class="cu-modal show" wx:if="{{showModalFlag}}">
-            <view class="cu-dialog">
-                <view class="cu-bar bg-gradual-black justify-end">
-                    <view class="content">申请信息</view>
-                    <view class="action" bindtap="hideModal">
-                        <text class="cuIcon-close text-red" bindtap='hideModal'></text>
-                    </view>
+              <view class="cu-item" wx:else bindtap="showNotice" data-item="{{item}}">
+                  <view class="cu-avatar bg-transparent">
+                      <text class="cuIcon-noticefill lg text-orange"></text>
+                  </view>
+                  <view class="content">
+                      <view class="text-grey">{{item.titleShow}}</view>
+                      <view class="text-gray text-sm flex">
+                          <text class="text-cut">{{item.content}}</text>
+                      </view>
+                      <view class="text-grey text-xs">{{item.time}}</view>
+                  </view>
+                  <view class="action">
+
+                  </view>
+              </view>
+        </view>
+      </block>
+       <view class="forNotice" wx:if="{{flag==true&&systemList.length==0}}">
+           <view>
+              <view style="display: flex;align-items: center;justify-content: center">
+              <image src="../../static/panda_xt.jpg"></image>
+              </view>
+               <view style="text-align: center">
+                   <text class="text-cyan">啊哈，没有收到通知肿么办，不要着急</text>
+                   <view class="notice-form text-yellow">你可以先</view>
+                   <view class="notice-form">
+                       <view bindtap="goToPage" data-url="mine-person" class="cu-tag bg-gradual-green">完善个人资料</view>
+                       <text class="cuIcon-back_android lg text-red">立刻完善</text>
+                   </view>
+                   <view class="notice-form">
+                       <view bindtap="goToPage" data-url="dance-settings" class="cu-tag bg-gradual-blue">发起一个约局</view>
+                       <text class="cuIcon-back_android lg text-red">立刻发起</text>
+                   </view>
+                   <view class="notice-form text-pink">
+                       <view bindtap="goToPage" data-url="home-all" class="cu-tag bg-gradual-orange">加入一个小伙伴的约局 </view>
+                       <text class="cuIcon-back_android lg text-red">立刻组队</text></view>
+               </view>
+           </view>
+       </view>
+<!--        互动消息-->
+<view wx:if="{{flag==false}}" class="cu-list menu-avatar">
+    <block wx:for="{{hdList}}">
+        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtap="showModal" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:if="{{item.uncheckedFlag}}" data-apply="{{item.info.apply||''}}">
+
+            <view class="cu-avatar bg-black"><text class="cuIcon-form text-orange"></text></view>
+            <view class="content">
+                <view class="text-grey">{{item.titleShow}}</view>
+                <view class="text-gray text-sm flex">
+                    <text class="text-cut">{{item.content}}</text>
                 </view>
+                <view class="text-grey text-xs">{{item.time}}</view>
+            </view>
+            <view class="action">
+            </view>
+            <view class="move">
+                <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
+            </view>
+        </view>
+        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:elif="{{item.passFlag}}" bindtap="checkSetterInfo">
 
-                <view class="padding-xl">
-                    <view >                   <!--如果是发起者收到的报名申请 -->
-                        <text>来自<text class="text-orange" wx:if="{{userList.city!=''}}">{{userList.city}}</text>
-                                  <text wx:else></text>
-                            的<text class="text-orange">{{userList.nickName}}</text>想要报名
-                            TA想说：
-                            <text class="text-blue" wx:if="{{apply!=''}}">{{apply}}</text>
-                            <text class="text-blue" wx:else >
-                                TA好像没填申请信息
-                            </text>
-                        </text>
-                    </view>
-                    <view>
-                        <button class="cu-btn bg-red" data-state="2" bindtap="sendInfo">拒绝</button>
-                        <button class="cu-btn bg-green margin-left" data-state="0" bindtap="sendInfo">同意</button>
-                    </view>
-                    <!--<view class="row">-->
-                        <!--<button class="button1" bindtap="sendInfo" data-item="{{item}}" data-state="0">同意</button>-->
-                        <!--<button class="button1" bindtap="sendInfo" data-item="{{item}}" data-state="2">拒绝</button>-->
-                    <!--</view>-->
+            <view class="cu-avatar bg-black">
+                <text wx:if="{{item.passFlag}}" class="cuIcon-emoji text-green"></text>
+                <text wx:if="{{item.unpassFlag}}" class="cuIcon-roundclose lg text-red"></text>
+            </view>
+            <view class="content">
+                <view class="text-grey">{{item.titleShow}}</view>
+                <view class="text-gray text-sm flex">
+                    <text class="text-cut">{{item.content}}</text>
+                </view>
+                <view class="text-grey text-xs">{{item.time}}</view>
+            </view>
+            <view class="action">
+            </view>
+            <view class="move">
+                <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
+            </view>
+        </view>
+        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:else>
 
+            <view class="cu-avatar bg-black">
+                <text wx:if="{{item.passFlag}}" class="cuIcon-emoji text-green"></text>
+                <text wx:if="{{item.unpassFlag}}" class="cuIcon-roundclose lg text-red"></text>
+            </view>
+            <view class="content">
+                <view class="text-grey">{{item.titleShow}}</view>
+                <view class="text-gray text-sm flex">
+                    <text class="text-cut">{{item.content}}</text>
+                </view>
+                <view class="text-grey text-xs">{{item.time}}</view>
+            </view>
+            <view class="action">
+            </view>
+            <view class="move">
+                <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
+            </view>
+        </view>
+    </block>
+</view>
+<view class="forNotice" wx:if="{{flag==false&&hdList.length==0}}">
+    <view>
+        <view style="display: flex;align-items: center;justify-content: center">
+            <image src="../../static/panda_hd.jpg"></image>
+        </view>
+        <view style="text-align: center">
+            <text class="text-cyan">啊哈，没有收到通知肿么办，不要着急</text>
+            <view class="notice-form text-yellow">你可以先</view>
+            <view class="notice-form">
+                <view bindtap="goToPage" data-url="mine-person" class="cu-tag bg-gradual-green">完善个人资料</view>
+                <text class="cuIcon-back_android lg text-red">立刻完善</text>
+            </view>
+            <view class="notice-form">
+                <view bindtap="goToPage" data-url="dance-settings" class="cu-tag bg-gradual-blue">发起一个约局</view>
+                <text class="cuIcon-back_android lg text-red">立刻发起</text>
+            </view>
+            <view class="notice-form text-pink">
+                <view bindtap="goToPage" data-url="home-all" class="cu-tag bg-gradual-orange">加入一个小伙伴的约局 </view>
+                <text class="cuIcon-back_android lg text-red">立刻组队</text></view>
+        </view>
+    </view>
+</view>
+    <view class="cu-modal show" wx:if="{{showModalFlag}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-gradual-black justify-end">
+            <view class="content">申请信息</view>
+            <view class="action" bindtap="hideModal">
+                <text class="cuIcon-close text-red" bindtap='hideModal'></text>
+            </view>
+        </view>
+
+        <view class="padding-xl">
+            <view >                   <!--如果是发起者收到的报名申请 -->
+                <text>来自<text class="text-orange" wx:if="{{userList.city!=''}}">{{userList.city}}</text>
+                    <text wx:else></text>
+                    的<text class="text-orange">{{userList.nickName}}</text>想要报名
+                    TA想说：
+                    <text class="text-blue" wx:if="{{apply!=''}}">{{apply}}</text>
+                    <text class="text-blue" wx:else >
+                        TA好像没填申请信息
+                    </text>
+                </text>
+            </view>
+            <view>
+                <button class="cu-btn bg-red" data-state="2" bindtap="sendInfo">拒绝</button>
+                <button class="cu-btn bg-green margin-left" data-state="0" bindtap="sendInfo">同意</button>
+            </view>
+            <!--<view class="row">-->
+            <!--<button class="button1" bindtap="sendInfo" data-item="{{item}}" data-state="0">同意</button>-->
+            <!--<button class="button1" bindtap="sendInfo" data-item="{{item}}" data-state="2">拒绝</button>-->
+            <!--</view>-->
+        </view>
+    </view>
+</view>
+    <view class="cu-modal show" wx:if="{{showApplicant}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-gradual-black justify-end">
+                <view class="content">约局信息</view>
+                <view class="action" bindtap="hideApplicant">
+                    <text class="cuIcon-close text-red" bindtap='hideApplicant'></text>
                 </view>
             </view>
-      </view>
+            <view class="padding-xl">
+               <block wx:for="{{applicantArr}}">
+                   <view class="cu-tag bg-blue">{{item}}</view>
+               </block>
+               <text class="text-red">成功加入了你的约局</text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-modal show" wx:if="{{showSetter}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-gradual-black justify-end">
+                <view class="content">发起人联系方式</view>
+                <view class="action" bindtap="hideSetter">
+                    <text class="cuIcon-close text-red" bindtap='hideSetter'></text>
+                </view>
+            </view>
+            <view class="padding-xl">
+                <view wx:if="{{setterInfo.contact=='phone'}}">
+                    <text class="text-black">约局发起者的手机是</text>
+                    <text class="text-red">{{setterInfo.phone}}</text>
+                    <view class="text-black">请及时联系</view>
+                </view>
+                <view wx:else>
+                    <view class="text-black">微信/微信群</view>
+                    <image bindtap="preview" data-src="{{setterInfo.QR_code}}" src="{{setterInfo.QR_code}}" class="QR_code"></image>
+                </view>
+            </view>
+        </view>
+    </view>
 </scroll-view>

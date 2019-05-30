@@ -16,6 +16,10 @@ Page({
       state:'',
       id:''
     },
+    applicantArr:[],//展示参与者信息
+    showApplicant:false,
+    setterInfo:{},//展示发起人信息
+    showSetter:false, //展示发起人信息标志
     bgImage:app.globalData.bgSrc
   },
   goTo(ev){
@@ -31,6 +35,14 @@ Page({
         TabCur:ev.currentTarget.dataset.id,
         flag:false
       })
+    }
+  },
+  goToPage(ev){
+    console.log(ev.currentTarget.dataset.url)
+    switch (ev.currentTarget.dataset.url) {
+      case 'mine-person':wx.navigateTo({url:'../mine-person/mine-person'})
+      case 'dance-settings':wx.switchTab({url:'../dance-settings/dance-settings'})
+      case 'home-all':wx.navigateTo({url:'../home-all/home-all'})
     }
   },
   showModal(ev) {
@@ -91,7 +103,80 @@ Page({
       }
     })
   },
-
+  showNotice(ev){
+    let that = this;
+    console.log(ev.currentTarget.dataset.item.applicant)
+    let applicant = ev.currentTarget.dataset.item.applicant.map(item=>{
+      if (item.state=='0'){
+        return item._openid
+      }
+    })
+    console.log(applicant)
+    //获取参与者的信息
+    wx.cloud.callFunction({
+      name:'mine',
+      data:{
+        method:'getApplicantInfo',
+        applicant:applicant
+      },
+      success(res){
+        that.setData(
+            {
+              showApplicant:true,
+              applicantArr:res.result.nameStr
+            }
+        )
+        console.log(that.data.applicantArr)
+      }
+    })
+  }, //展示成功发起的约局信息
+  checkSetterInfo(ev){
+    console.log(ev.currentTarget.dataset.item.contact)
+    this.setData({
+      setterInfo:{}
+    })
+    switch(ev.currentTarget.dataset.item.contact){
+      case'手机号': this.setData({
+        setterInfo:{
+          contact:'phone',
+          phone:ev.currentTarget.dataset.item.phone,
+        },
+        showSetter:true
+      });break;
+      case '微信':this.setData({
+        setterInfo:{
+          contact:'wx',
+          QR_code:ev.currentTarget.dataset.item.QR_code,
+        },
+        showSetter:true
+      });break;
+      case '微信群聊':this.setData({
+        setterInfo:{
+          contact:'wxq',
+          QR_code:ev.currentTarget.dataset.item.QR_code,
+        },
+        showSetter:true
+      });break;
+    }
+    console.log(this.data.setterInfo)
+  }, //查看发起人联系方式
+  hideApplicant(){
+    this.setData({
+      showApplicant:false
+    })
+  },
+  hideSetter(){
+    this.setData({
+      showSetter:false
+    })
+  },
+  preview(ev){
+    console.log(ev.currentTarget.dataset.src);
+    wx.previewImage({
+      current: '', // 当前显示图片的http链接
+      urls: [ev.currentTarget.dataset.src] // 需要预览的图片http链接列表
+    })
+  }, //图片预览
   // ListTouch触摸开始√
   ListTouchStart(e) {
     this.setData({
