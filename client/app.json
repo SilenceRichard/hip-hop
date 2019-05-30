@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index-animation/index-animation",
     "pages/index/index",
+    "pages/index-animation/index-animation",
     "pages/mine/mine",
     "pages/mine-systemInfo/mine-systemInfo",
     "pages/mine-yueju/mine-yueju",

@@ -35,6 +35,7 @@ Page({
       
     },
     //info_,
+    bgImage: app.globalData.bgSrc,
     loadingFlag:false,
     showModalFlag:false,
    

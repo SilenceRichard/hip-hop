@@ -1,6 +1,6 @@
-<!--pages/index-animation/index-animation.wxml-->
-<image src="cloud://suki-749826.7375-suki/bg.jpg" class="backgroundImage"></image>
-    <view class="outer " bindtap="toIndex" >
-        <image class="img1" src="cloud://suki-749826.7375-suki/形状 29 拷贝 2.png"></image>
-        <image class="img2"  src="cloud://suki-749826.7375-suki/形状 1.png" bindtap="toIndex"></image>
-    </view>
+<!--&lt;!&ndash;pages/index-animation/index-animation.wxml&ndash;&gt;-->
+<!--<image src="cloud://suki-749826.7375-suki/bg.jpg" class="backgroundImage"></image>-->
+<!--    <view class="outer " bindtap="toIndex" >-->
+<!--        <image class="img1" src="cloud://suki-749826.7375-suki/形状 29 拷贝 2.png"></image>-->
+<!--        <image class="img2"  src="cloud://suki-749826.7375-suki/形状 1.png" bindtap="toIndex"></image>-->
+<!--    </view>-->
