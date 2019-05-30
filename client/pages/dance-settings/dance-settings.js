@@ -12,6 +12,7 @@ Page({
         latitude:'',
         longitude:'',
         contact:'',
+        publishDate:''
       },
       clicktime:0,
       identify:'',
@@ -31,6 +32,7 @@ Page({
     num:0,//numLimit数组中第num个元素
     numLimit:[],
     showModalFlag: false,
+    publishTime:'',
     checkboxItems: [
       {name: 'Hiphop', value: 'Hiphop', checked: false},
       {name: 'Popping', value: 'Popping',checked: false},
@@ -174,14 +176,16 @@ Page({
       }
     }
    else if (this.data.step == 4){//如果是第五步
-        this.setData({
-            disabled:true
-        })
        if(this.data.info.contact ===''&&this.data.info.QR_code===''&&this.data.info.phone===''){
            this.setData({
                topTip:true
            })
        }else{
+           this.setData({
+               disabled:true,
+               "info.publishDate":util.formatDate(new Date())
+           })//限制不能再次触发button
+           console.log("publishDate-------",this.data.info.publishDate)
           let userInfo = await wx.cloud.callFunction({name: "mine",data:{method:'getUserInfo',openid:app.data.openid}})
           let authorName =userInfo.result.res.nickName;
           obj.authorName = authorName
@@ -212,6 +216,7 @@ Page({
   hideModal(e) {
     let obj= {
     step:0, //记录填报表单的步骤数
+    publishTime:'',
     info:{
       location:{
         name:'',

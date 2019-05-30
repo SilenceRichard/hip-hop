@@ -4,7 +4,6 @@ const app = getApp();
 
 Page({
   data: {
-    bgImage: app.globalData.bg2,
     info: {
       cover: '',
       title: '',
@@ -29,7 +28,8 @@ Page({
       danceType: '',
       danceAge: '',
       introduction: '',
-      _openid:''
+      _openid:'',
+      publishDate:''
     },
     info_:{
       
@@ -113,6 +113,7 @@ Page({
       success: function (res) {
         console.log("第一次调用成功res:", res)
         console.log("下面查询openid：", res.result.checkResult[0]._openid)//发现_openid和openid查询结果一样
+        //处理舞种
         var dance_type_ =[];
         res.result.checkResult[0].dance_type.forEach(function (element) {
           if (element.checked == true){
@@ -133,9 +134,22 @@ Page({
           "info.now" :arr.length,
            loadingFlag: false
         })
-        console.log("本地的openid",that.data.info._openid)
-
-        console.log("下面查询openid：", res.result.checkResult[0].openid)
+        //处理个人官方
+        if(res.result.checkResult[0].identify=='person')
+        {
+          that.setData({
+            "info.identify" : '个人'
+          })
+        }
+        else{
+          that.setData({
+            "info.identify" : '官方'
+          })
+        }
+        // console.log("本地的identify---------",that.data.info.identify)
+        // console.log("本地的openid",that.data.info._openid)
+        //
+        // console.log("下面查询openid：", res.result.checkResult[0].openid)
         //再次调用云函数
         wx.cloud.callFunction({
           name: 'mine',

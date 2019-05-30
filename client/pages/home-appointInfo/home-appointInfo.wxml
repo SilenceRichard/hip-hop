@@ -9,7 +9,7 @@
                 <text class="title">{{title}}</text>
                 <view  style='color:#ffffff'><text class="outerText" style='font-size:50rpx'>{{info.title}}</text></view>
                 <view class="innerText1" style='color:#ffffff'>{{info.identify}}|{{info.dance_type}}|{{info.type}}</view>
-                <view class="innerText2" style='color:#ffffff'>发布时间：{{info.time}}</view>
+                <view class="innerText2" style='color:#ffffff'>发布时间：{{info.publishDate}}</view>
                 <view class="innerText3" style='color:#ffffff'>人数限制：{{info.now}}/{{info.limit}}</view>
             </view>  
              <view class="activeInfo" style='color:#ffffff'>{{info.content}}</view>
