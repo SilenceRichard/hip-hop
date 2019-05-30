@@ -5,38 +5,7 @@ import regeneratorRuntime from '../../utils/wxPromise.min.js' //引入async awai
 const app = getApp()
 Page({
     data: {
-        info: [{
-            cover: '',
-            title: '',
-            dance_type: '',
-            type: '',
-            limit: '',
-            now: '',
-            time: '',
-            location: '',
-            str: '',
-            _id: ''
-        },
-            {
-                cover: '',
-                title: '',
-                dance_type: '',
-                type: '',
-                limit: '',
-                time: '',
-                location: '',
-                str: '',
-            },
-            {
-                cover: '',
-                title: '',
-                dance_type: '',
-                type: '',
-                limit: '',
-                time: '',
-                location: '',
-                str: '',
-            },
+        info: [
         ],
 
         swiperList: [{

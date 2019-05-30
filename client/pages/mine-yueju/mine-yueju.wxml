@@ -8,7 +8,7 @@
     </scroll-view>
     <block wx:if="{{flag=='jr'}}" wx:for="{{myJoined}}">
     <view  class="cu-card article ">
-        <view class="cu-item shadow bg-black">
+        <view class="cardInfo cu-item shadow card bg-black">
             <view class="title">
                 <view class="text-cut line-white" >{{item.title}}</view>
                 <text class="text-yellow" style="font-size: 22rpx">{{item.time}}</text>

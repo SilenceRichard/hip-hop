@@ -9,37 +9,7 @@ Page({
    */
   data: {
     list: [{ name: '综合', flag: false }, { name: '个人', flag: false }, { name: '官方', flag: false }],
-    info: [{
-      cover: '',
-      title: '',
-      dance_type: '',
-      type: '',
-      limit: '',
-      time: '',
-      location:'',
-      str: '',
-      now:''
-    },
-      {
-        cover: '',
-        title: '',
-        dance_type: '',
-        type: '',
-        limit: '',
-        time: '',
-        location: '',
-        str: ''
-      },
-      {
-        cover: '',
-        title: '',
-        dance_type: '',
-        type: '',
-        limit: '',
-        time: '',
-        location: '',
-        str: ''
-      },
+    info: [
     ],
     hotList:[],
     historyList:[],

@@ -7,6 +7,7 @@ page{
   justify-content:center;
   background:#eeefee;
   height: 300rpx;
+  background-color: rgba(0,0,0,0)
 }
 .head image{
   width: 200rpx;
@@ -45,6 +46,7 @@ textarea{
 .cu-form-group picker .picker{
   text-align: left;
 }
+
 .cu-form-group{
   justify-content:flex-start;
   /* display:inline; */
