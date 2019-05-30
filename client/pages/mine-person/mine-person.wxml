@@ -18,7 +18,7 @@
       <picker mode="selector" value="{{userInfo.gender}}" range="{{genterarray}}" bindchange="changeSex">
         <view class="picker">
             <view wx:if="{{userInfo.gender==1}}" class="cu-tag bg-blue"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
-            <view wx:if="{{userInfo.gender==2}}" class="cu-tag bg-pink"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
+            <view wx:elif="{{userInfo.gender==2}}" class="cu-tag bg-pink"role=""aria-label="">{{genterarray[userInfo.gender]}}</view>
             <view wx:else class="cu-tag bg-orange"role=""aria-label="">{{userInfo.gender?genterarray[userInfo.gender]:'请选择'}}</view>
         </view>
       </picker>

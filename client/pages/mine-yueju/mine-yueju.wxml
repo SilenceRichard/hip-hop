@@ -1,5 +1,5 @@
+<image src="{{bgImage}}" class="backgroundImage"></image>
 <view >
-<image class="backgroundImage" src="cloud://suki-749826.7375-suki/bg1.jpg"></image>
 <scroll-view class="out" scroll-y="true" style="height: 100vh">
     <scroll-view scroll-x class="bg-black nav text-center">
         <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{tabList}}" data-type="{{item.type}}" wx:key bindtap="goTo" data-id="{{index}}">

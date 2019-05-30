@@ -42,7 +42,7 @@ Page({
         swiperList: [{
             id: 0,
             type: 'image',
-            url: 'cloud://suki-749826.7375-suki/xw.jpg',
+          url: 'cloud://suki-749826.7375-suki/ssss.png',
         }, {
             id: 1,
             type: 'image',

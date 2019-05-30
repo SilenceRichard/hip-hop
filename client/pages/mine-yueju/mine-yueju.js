@@ -1,6 +1,5 @@
-
 import regeneratorRuntime from '../../utils/wxPromise.min.js' //引入async await语法糖
-var app = getApp();
+const app = getApp();
 Page({
     data:{
         myJoined:[],
@@ -8,6 +7,7 @@ Page({
         flag:'fq',  //导航标志，我发起的/我加入的
         tabList:[{name:'我发起的',type:'fq'},{name:'我加入的',type:'jr'}],
         TabCur:0,
+        bgImage:'' //背景图片路径
     },
     goTo(ev){
         console.log(ev)
@@ -29,6 +29,7 @@ Page({
       wx.navigateTo({ url: "../home-appointInfo/home-appointInfo?id=" +   ev.currentTarget.dataset.item._id })
   },
     onReady:async function () {
+        this.setData({ bgImage: app.globalData.bgSrc })
         console.log("请求参数:",{
             method:"getMyAppoint",
             openid:app.data.openid
@@ -77,6 +78,7 @@ Page({
       })
     },
   onShow: async function () {
+    this.setData({ bgImage: app.globalData.bgSrc })
     console.log("请求参数:", {
       method: "getMyAppoint",
       openid: app.data.openid

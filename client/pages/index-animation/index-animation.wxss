@@ -1,23 +1,23 @@
-/*!* pages/index-animation/index-animation.wxss *!*/
-/*@import "../../style/animate.wxss";*/
-/*.outer{*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    overflow: hidden;*/
-/*    !*overflow: auto;!* overflow hidden 超出部分默认隐藏  overflow:auto  盒子自动加滚动条*!*!*/
-/*}*/
+/* pages/index-animation/index-animation.wxss */
+@import "../../style/animate.wxss";
+.outer{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /*overflow: auto;!* overflow hidden 超出部分默认隐藏  overflow:auto  盒子自动加滚动条*!*/
+}
 
-/*.img1{*/
-/*    position:absolute;*/
-/*    top:250rpx;*/
-/*    animation:bounce 3s;*/
-/*    animate-iteration-count: 3;*/
-/*}*/
-/*.img2{*/
-/*    top:220rpx;*/
-/*    left:220rpx;*/
-/*    width:350rpx;*/
-/*    height:500rpx;*/
-/*    animation:pulse 2s;*/
-/*    animate-iteration-count: 3;*/
-/*}*/
+.img1{
+    position:absolute;
+    top:250rpx;
+    animation:bounce 3s;
+    animate-iteration-count: 3;
+}
+.img2{
+    top:220rpx;
+    left:220rpx;
+    width:350rpx;
+    height:500rpx;
+    animation:pulse 2s;
+    animate-iteration-count: 3;
+}
