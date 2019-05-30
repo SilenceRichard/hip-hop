@@ -119,10 +119,10 @@
         </view>
         <view class="row">
             <view class="col">
-                <view class="col-3 form-title">活动地点</view>
+                <view class="col-3 form-title" bindtap="chooseLocation" >活动地点</view>
                 <view class="col-9">
                     <view class="form-input">
-                        <view class="row" style="height:100%;padding-top:10rpx">
+                        <view class="row"  bindtap="chooseLocation" style="height:100%;padding-top:10rpx">
                             <view class="col">
                                 <view class="col-1">
                                     <image bindtap="chooseLocation" class="location-icon" src="../../static/icon/icon-location.png"></image>

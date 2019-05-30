@@ -1,7 +1,7 @@
 <scroll-view scroll-y="true" stylle="height:100vhs">
     <image src="{{bgImage}}" class="backgroundImage"></image>
-<view class="row bg-gradual-black">
-    <view class="col head" style="background-image: var(--gradualBlack)">
+<view class="row" >
+    <view class="col head" >
         <image bindtap="changeImage" src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../static/user status.png'}}"></image>
     </view>
 </view>

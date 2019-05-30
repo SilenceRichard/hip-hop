@@ -86,8 +86,10 @@
   margin: 0 0 50rpx 0;
 }
 .out1{
-  margin-bottom:30rpx;
   position: relative;
+  width:90vw;
+  margin:30rpx 5vw 0 5vw;
+  border-radius:10rpx;
 }
 .out1:before{
   content: "";

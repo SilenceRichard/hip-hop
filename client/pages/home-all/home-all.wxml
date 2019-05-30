@@ -74,8 +74,8 @@
         </view>
 
         <block wx:for="{{info}}">
-            <view class='row out1' bindtap="goToDetail" data-item="{{item}}" >
-                <view class='col' style='height:100%'>
+            <view class='row out1' bindtap="goToDetail" data-item="{{item}}" style:=" margin-top: 30rpx" >
+                <view class='col' style='height:100%;'>
                     <view class='col-4 imgCol'><image class="listImage" src="{{item.cover}}"></image></view>
                     <view class='col-8'>
                         <text class="title text-white" >{{item.title}}</text>
