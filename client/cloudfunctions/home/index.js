@@ -19,47 +19,42 @@ const minute = date.getMinutes();
 const second = date.getSeconds();
 const now = [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');//获取时间
 
-
 exports.main = async (event, context) => {
-  if (event.method == "sendInfo") {
-      {
+  if (event.method == "sendInfo"){
           var targetDB = db.collection('dance-info');
           var visit = 0;
           let obj = {
               _openid: event.openid,
               info: event.info,
               dance_id: event.info.id,
-              state: '1', //‘0’通过 ‘1’审核中 ，‘2’未通过
+              state: '1', //‘0’通过 ‘1’审核中 ‘2’未通过
               isReadByApplicant: '0',
-              isReadByOpen: '0'
+              isReadByOpen: '0',
           };
           let temp = await targetDB.doc(event.info.id).get();
           // console.log("查询结果：",temp.data)
           // console.log('applicant',temp.data.applicant)
           temp.data.applicant.forEach((item) => {
-                  if (item._openid == event.openid) visit = 1;
-              }
+            if (item._openid == event.openid) visit = 1;
+          }
           );
           if (visit == 0) {
-              let res = await targetDB.update(
-                  {data: {applicant: _.push(obj)}})
-              return {
-                  status: res
-              }
+            let res = await targetDB.update(
+              {data: {applicant: _.push(obj)}})
+            return {
+              status: res
+            }
           } else {
-              return {
-                  status: '1',
-                  msg: '已报名，无需更新'
-              }
+            return {
+              status: '1',
+              msg: '已报名，无需更新'
+            }
           }
-      }
-
-
   }
   if (event.method == "getInfo") {
       if (event.type == 'All') {
           if (event.page == undefined) {
-              let result = await db.collection('dance-info').limit(5).skip(0).where({time: _.gte(now)}).orderBy('clicktime', 'desc').get();
+              let result = await db.collection('dance-info').where({time: _.gte(now)}).orderBy('clicktime', 'desc').get();
               console.log("---查到的结果- - ", result)
               return {
                   checkResult: result.data
@@ -75,7 +70,7 @@ exports.main = async (event, context) => {
       if (event.type == 'time') {
           const targetDB = db.collection('dance-info');
           if (event.page == undefined) {
-              let result = await targetDB.limit(5).skip(0).where({time: _.gte(now)}).orderBy('time', 'asc').get();//获取
+              let result = await targetDB.where({time: _.gte(now)}).orderBy('time', 'asc').get();//获取
               console.log(result);
               return {
                   checkResult: result.data
@@ -129,7 +124,7 @@ exports.main = async (event, context) => {
       }//按距离查询
       if (event.type == 'getByIndividual') {
           if (event.page == undefined) {
-              let result = await db.collection('dance-info').limit(5).skip(0).where({
+              let result = await db.collection('dance-info').where({
                   identify: _.eq('person'),
                   time: _.gte(now)
               }).get();
@@ -150,7 +145,7 @@ exports.main = async (event, context) => {
       }
       if (event.type == 'getByOfficial') {
           if (event.page == undefined) {
-              let result = await db.collection('dance-info').limit(5).skip(0).where({
+              let result = await db.collection('dance-info').where({
                   identify: _.eq('official'),
                   time: _.gte(now)
               }).get();
@@ -178,7 +173,7 @@ exports.main = async (event, context) => {
       if (event.type == 'getNewsInfo') {
           const targetDB = db.collection('dance-info');
           if (event.page == undefined) {
-              let result = await targetDB.where({time: _.gte(now)}).limit(5).skip(0).orderBy('clicktime', 'desc').get();//获取
+              let result = await targetDB.where({time: _.gte(now)}).orderBy('clicktime', 'desc').get();//获取
               console.log("---查到的结果- - ", result)
               result.data.splice(5, result.data.length - 5);//取前五个
               return {

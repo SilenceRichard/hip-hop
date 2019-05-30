@@ -731,66 +731,63 @@ Page({
   // },
 
 
-  // reachBottom(e){
-  //   console.log("触发reachBottom!!!!!!!!!!!!!!", e);
+  // touchStart(e) {
+  //   //console.log("触发touchStart", e.changedTouches[0]);
+  //   this.setData({
+  //     "touch.x": e.changedTouches[0].clientX,
+  //     "touch.y": e.changedTouches[0].clientY
+  //   });
   // },
-  touchStart(e) {
-    //console.log("触发touchStart", e.changedTouches[0]);
-    this.setData({
-      "touch.x": e.changedTouches[0].clientX,
-      "touch.y": e.changedTouches[0].clientY
-    });
-  },
-  touchEnd(e) {
-    //console.log("触发touchEnd", e.changedTouches[0]);
-    let x = e.changedTouches[0].clientX;
-    let y = e.changedTouches[0].clientY;
-    let option = util.getTouchData(x,y,this.data.touch.x,this.data.touch.y);
-    if (option === 'pushup'){
-      this.data.refreshNumber++;
-      console.log("触发上拉加载,refreshNumber变为", this.data.refreshNumber);
-      var that = this;
-      wx.cloud.callFunction({
-        name: 'home',
-        data: {
-          method: 'getInfo',//获取全部约局资讯
-          type: 'All',
-          page: this.data.refreshNumber,
-        },
-        success: function (res) {
-          //处理人数限制
-          res.result.checkResult = res.result.checkResult.map((item) => {
-            let arr = item.applicant.filter((val) => {
-              if (val.state == 0)
-                return val
-            })
-            item.now = arr.length
-            return item
-          })
-          //处理舞种信息
-          res.result.checkResult.forEach(item => {
-            item.str = ''
-            item.dance_type.forEach(val => {
-              if (val.checked == true) {
-                item.str = item.str + val.name + ',';
-              }
-            })
-          })
-          res.result.checkResult.forEach(item => {
-            item.str = item.str.slice(0, -1)
-          })
-          let newA = that.data.info.concat(res.result.checkResult);
-          that.setData({
-            info: newA
-          })
-          console.log("这是返回的资讯------", res.result.checkResult)
-          console.log("这是拼接后的资讯------", newA)
-        },
-        fail: function (err) {
-          console.log("刷新失败", err)
-        }
-      })
-    }
-  },
+  // touchEnd(e) {
+  //   //console.log("触发touchEnd", e.changedTouches[0]);
+  //   let x = e.changedTouches[0].clientX;
+  //   let y = e.changedTouches[0].clientY;
+  //   let option = util.getTouchData(x,y,this.data.touch.x,this.data.touch.y);
+  //   if (option === 'pushup'){
+  //     this.data.refreshNumber++;
+  //     console.log("触发上拉加载,refreshNumber变为", this.data.refreshNumber);
+  //     var that = this;
+  //     wx.cloud.callFunction({
+  //       name: 'home',
+  //       data: {
+  //         method: 'getInfo',//获取全部约局资讯
+  //         type: 'All',
+  //         page: this.data.refreshNumber,
+  //       },
+  //       success: function (res) {
+  //         //处理人数限制
+  //         res.result.checkResult = res.result.checkResult.map((item) => {
+  //           let arr = item.applicant.filter((val) => {
+  //             if (val.state == 0)
+  //               return val
+  //           })
+  //           item.now = arr.length
+  //           return item
+  //         })
+  //         //处理舞种信息
+  //         res.result.checkResult.forEach(item => {
+  //           item.str = ''
+  //           item.dance_type.forEach(val => {
+  //             if (val.checked == true) {
+  //               item.str = item.str + val.name + ',';
+  //             }
+  //           })
+  //         })
+  //         res.result.checkResult.forEach(item => {
+  //           item.str = item.str.slice(0, -1)
+  //         })
+  //         let newA = that.data.info.concat(res.result.checkResult);
+  //         that.setData({
+  //           info: newA
+  //         })
+  //         console.log("这是返回的资讯------", res.result.checkResult)
+  //         console.log("这是拼接后的资讯------", newA)
+  //       },
+  //       fail: function (err) {
+  //         console.log("刷新失败", err)
+  //       }
+  //     })
+  //   }
+  // },
 })
 
