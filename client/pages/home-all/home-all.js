@@ -41,8 +41,8 @@ Page({
         str: ''
       },
     ],
-    hotList:['111','222','333','111111','111111'],
-    historyList:['111','222','333','111111','111111'],
+    hotList:[],
+    historyList:[],
     keyword:'',
     dropDownFlag: false,
     searchFlag:false,
@@ -260,17 +260,19 @@ Page({
   },
 
   activeSearch:async function(){
-    this.setData({
-      searchFlag : true
+    wx.nextTick(async ()=>{
+      this.setData({
+        searchFlag : true
+      })
+      let res1 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"hot",openid:app.data.openid}});
+      console.log("返回热门搜索-------------", res1);
+      this.setData({hotList : res1.result.checkResult});
+      // console.log("hotList :", this.data.hotList);
+      // console.log("发送的参数：",app.data.openid)
+      let res2 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"history",openid:app.data.openid}});
+      // console.log("返回历史搜索-------------", res2);
+      this.setData({historyList : res2.result.checkResult.reverse()});
     })
-    let res1 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"hot",openid:app.data.openid}});
-    console.log("返回热门搜索-------------", res1);
-    this.setData({hotList : res1.result.checkResult});
-    // console.log("hotList :", this.data.hotList);
-    // console.log("发送的参数：",app.data.openid)
-    let res2 = await wx.cloud.callFunction({ name: "home", data: { method:"getInfo", type:"history",openid:app.data.openid}});
-    // console.log("返回历史搜索-------------", res2);
-    this.setData({historyList : res2.result.checkResult.reverse()});
   },
 
   activeDropDown1() {
@@ -638,53 +640,58 @@ Page({
 
   onReady: function () {
     console.log("页面进来啦-------")//没问题
-    var that = this;
-    this.setData({
-      loadingFlag: false
-    })
-    wx.cloud.callFunction(
-      {
-        name: 'home',
-        data: {
-          method: 'getInfo',//获取全部约局资讯
-          type: 'All'
-        },
-        success: function (res) {
-          //处理人数限制
-          res.result.checkResult = res.result.checkResult.map((item) => {
-            let arr = item.applicant.filter((val) => {
-              if (val.state == 0)
-                return val
-            })
-            item.now = arr.length
-            return item
-          })
-          //处理舞种信息
-          res.result.checkResult.forEach(item => {
-            item.str = ''
-            item.dance_type.forEach(val => {
-              if (val.checked == true) {
-                item.str = item.str + val.name + ',';
-              }
-            })
-          })
-          res.result.checkResult.forEach(item => {
-            item.str = item.str.slice(0, -1)
-          })
-          that.setData({
-            info: res.result.checkResult,
-            loadingFlag: false
-          })
-          that.setData({
-            info: res.result.checkResult
-          })
-          console.log("这是返回的全部约局资讯------", res)
-          console.log("info", that.data.info)
-        },
-        fail: function (err) {
-          console.log("???", err)
-        }
+    wx.nextTick(()=>{
+      var that = this;
+      this.setData({
+        loadingFlag: true
       })
+      wx.cloud.callFunction(
+          {
+            name: 'home',
+            data: {
+              method: 'getInfo',//获取全部约局资讯
+              type: 'All'
+            },
+            success: function (res) {
+              //处理人数限制
+              res.result.checkResult = res.result.checkResult.map((item) => {
+                let arr = item.applicant.filter((val) => {
+                  if (val.state == 0)
+                    return val
+                })
+                item.now = arr.length
+                return item
+              })
+              //处理舞种信息
+              res.result.checkResult.forEach(item => {
+                item.str = ''
+                item.dance_type.forEach(val => {
+                  if (val.checked == true) {
+                    item.str = item.str + val.name + ',';
+                  }
+                })
+              })
+              res.result.checkResult.forEach(item => {
+                item.str = item.str.slice(0, -1)
+              })
+              that.setData({
+                info: res.result.checkResult,
+                loadingFlag: false
+              })
+              wx.nextTick(()=>{
+                that.setData({
+                  info: res.result.checkResult
+                })
+              })
+
+              console.log("这是返回的全部约局资讯------", res)
+              console.log("info", that.data.info)
+            },
+            fail: function (err) {
+              console.log("???", err)
+            }
+          })
+    })
   },
 
 

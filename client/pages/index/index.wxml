@@ -34,6 +34,6 @@
 </view>
 <view class='cu-load load-modal' wx:if="{{loadingFlag}}">
     <!-- <view class='cuIcon-emojifill text-orange'></view> -->
-    <image src='../../static/icon/MJ.gif' class='png' mode='aspectFit'></image>
+    <image src='../../static/icon/spiderMan.png' class='png' mode='aspectFit'></image>
     <view class='gray-text'>加载中...</view>
 </view>

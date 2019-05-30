@@ -46,7 +46,7 @@
             <view class="cu-bar search bg-white" style="background: black">
                 <view class="search-form round">
                     <text class="cuIcon-search"></text>
-                    <input type="text" placeholder="搜索关键字" bindtap="activeSearch"></input>
+                    <input type="text" placeholder="搜索关键字" catchtap="activeSearch"></input>
                 </view>
                 <view class="action">
                     <text>北京</text>

@@ -243,7 +243,7 @@ exports.main = async (event, context) => {
           let result = await db.collection('user').get();//获取全部
           let worddata = [];
           result.data.forEach((item) => {
-              if (item.history != undefined) {
+              if (item.history != undefined && item.history!='') {
                   worddata = worddata.concat(item.history)
               } //合并热搜数组 ['词汇1'，'词汇2'...]
           });
@@ -261,7 +261,7 @@ exports.main = async (event, context) => {
           let resultArr2 = [];
           resultArr.forEach((item, idx) => {
               //如果当前数组的第i项在当前数组中第一次出现的位置是i，才存入数组；否则代表是重复的
-              if (worddata.indexOf(item.name) == idx) {
+              if ((item.name!='')&&(worddata.indexOf(item.name) == idx)) {
                   resultArr2.push(item);
               }
           })

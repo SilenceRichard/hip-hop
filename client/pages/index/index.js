@@ -208,7 +208,13 @@ Page({
   },
     onReady: async function () {
         let that = this;
-        this.setData({bgImage:app.globalData.bgSrc})
+        wx.nextTick(()=>{
+            this.setData({
+                bgImage:app.globalData.bgSrc,
+                loadingFlag:true
+            })
+        })
+
         let res1 = await wx.cloud.callFunction({name: 'home', data: {method: 'getInfo', type: 'getAdvertise'}});
         // console.log("res1------", res1)
         let res2 = await wx.cloud.callFunction({name: 'home', data: {method: 'getInfo', type: 'getNewsInfo'}});
@@ -237,8 +243,11 @@ Page({
         res2.result.checkResult.forEach(item => {
             item.str = item.str.slice(0, -1)
         })
-        that.setData({
-            info: res2.result.checkResult
+        wx.nextTick(()=>{
+            that.setData({
+                loadingFlag:false,
+                info: res2.result.checkResult
+            })
         })
     },
     // onReachBottom:async function() {

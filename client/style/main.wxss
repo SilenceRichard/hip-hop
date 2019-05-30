@@ -1122,7 +1122,7 @@ button.icon.lg {
 	margin: auto;
 	width: 260rpx;
 	height: 260rpx;
-	background-color: var(--white);
+	background-color: var(--black);
 	border-radius: 10rpx;
 	box-shadow: 0 0 0rpx 2000rpx rgba(0, 0, 0, 0.5);
 	display: flex;
@@ -1146,7 +1146,7 @@ button.icon.lg {
 .cu-load.load-modal::after {
 	content: "";
 	position: absolute;
-	background-color: var(--white);
+	background-color: var(--black);
 	border-radius: 50%;
 	width: 200rpx;
 	height: 200rpx;
