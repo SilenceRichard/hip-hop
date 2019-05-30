@@ -119,7 +119,7 @@ exports.main = async (event, context) => {
                status:a
       }
   }
-    if(event.method =='deleteMessage' ){
+  if(event.method =='deleteMessage' ){
         const targetDB = db.collection('dance-info');
         var isRead =1;
         let read = await targetDB.doc(event._id).get();
@@ -191,6 +191,15 @@ exports.main = async (event, context) => {
             checkingApply:checkingApply// 我参加的未审核的
   }
     }
+  if(event.method == 'getApplicantInfo'){
+      let result =  await db.collection('user').where({"_openid":_.in( event.applicant)}).get()
+      console.log(result)
+      let nameStr = result.data.map(item=>{
+          return item.nickName
+      });
+      console.log(nameStr)
+      return{
+        nameStr:nameStr
+      }
+    }
   }
-
-
