@@ -12,7 +12,7 @@
     <!--<view class="contentMore bg-gradual-black" bindtap="scrollBottomRefresh">-->
         <!--<text class="text-grey">加载更多<text class="cuIcon-more lg text-grey"></text></text>-->
     <!--</view>-->
-    <scroll-view scroll-y="true" style="height:80%;" bindscrolltoupper="scrollTopRefresh" lower-threshold="0" upper-threshold="0">
+    <scroll-view scroll-y="true" style="height:50%" bindscrolltoupper="scrollTopRefresh" lower-threshold="0" upper-threshold="0">
         <!--给竖直滚动的盒子一个高度-->
     <block wx:for="{{info}}">
         <view class='row out1' bindtap="goToDetail" data-item="{{item}}" >
