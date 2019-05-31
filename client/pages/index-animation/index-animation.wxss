@@ -6,7 +6,9 @@
     overflow: hidden;
     /*overflow: auto;!* overflow hidden 超出部分默认隐藏  overflow:auto  盒子自动加滚动条*!*/
 }
-
+.dh{
+    animation: zoomOut 2s;
+}
 .img1{
     position:absolute;
     top:300rpx;
