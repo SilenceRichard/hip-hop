@@ -208,14 +208,20 @@ Page({
   },
   delete(ev){
     let that = this;
-    console.log("删除！", ev)
+    console.log(ev)
+    console.log("删除！", {
+      method: 'deleteMessage',
+      delete_id:ev.currentTarget.dataset.item._id,
+      openid: app.data.openid,
+      apply_openid:ev.currentTarget.dataset.item._openid
+    })
     wx.cloud.callFunction({
       name: 'mine',
       data: {
         method: 'deleteMessage',
-        _id:ev.currentTarget.dataset.item.dance_id,
-        openid: app.data.openid,
-        apply_openid:ev.currentTarget.dataset.item._openid
+        delete_id:ev.currentTarget.dataset.item._id,
+        openid: app.data.openid,  //阅读者（发起人）的openid
+        apply_openid:app.data.openid // 阅读者（参与人） 这部分的请求存在问题
       },
       success(res) {
         that.getSystemInfo()
