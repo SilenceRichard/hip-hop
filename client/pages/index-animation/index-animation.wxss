@@ -9,7 +9,8 @@
 
 .img1{
     position:absolute;
-    top:250rpx;
+    top:300rpx;
+    left:70rpx;
     animation:bounce 3s infinite;
     animate-iteration-count: 3;
 }
