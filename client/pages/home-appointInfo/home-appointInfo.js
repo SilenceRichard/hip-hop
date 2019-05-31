@@ -146,6 +146,7 @@ Page({
             "info.identify" : '官方'
           })
         }
+        info.dance_type
         // console.log("本地的identify---------",that.data.info.identify)
         // console.log("本地的openid",that.data.info._openid)
         //
