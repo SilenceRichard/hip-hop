@@ -561,11 +561,16 @@ Page({
       })
     },
   checkboxChange: function (e) {
-      var checkboxItems = this.data.checkboxItems,
-        values = e.detail.value;
+    var checkboxItems = this.data.checkboxItems,
+    values = e.detail.value;
+    for (var i = 0; i < values.length; ++i){
+      if (values[i] == "不限") {
+        values = ["Hiphop", "Popping", "Locking", "Breaking", "Waacking", "House", "Jazz", "Urban", "Krumping", "Reggae", "不限"];
+      }
+    }
+    console.log("values",values);
     for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
       checkboxItems[i].checked = false;
-
       for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
         if(checkboxItems[i].value == values[j]){
           checkboxItems[i].checked = true;
