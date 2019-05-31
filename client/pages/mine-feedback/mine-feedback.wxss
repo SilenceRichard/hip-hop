@@ -1,1 +1,9 @@
-/* pages/mine-feedback/mine-feedback.wxss */
+.textWords{
+  margin-left: 30rpx;
+  font-size: 40rpx;
+  /* margin-top: 50rpx; */
+}
+.queding{
+  background:#ffbf00;
+  /* margin-top: 300rpx; */
+}
