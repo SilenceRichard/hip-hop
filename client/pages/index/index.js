@@ -15,19 +15,19 @@ Page({
         }, {
             id: 1,
             type: 'image',
-            url: 'cloud://suki-749826.7375-suki/xt.jpg',
+            url: 'cloud://suki-749826.7375-suki/advertise/p4.jpg',
         }, {
             id: 2,
             type: 'image',
-            url: 'cloud://suki-749826.7375-suki/xh.jpg'
+            url: 'cloud://suki-749826.7375-suki/advertise/p3.jpg'
         }, {
             id: 3,
             type: 'image',
-            url: 'cloud://suki-749826.7375-suki/dake.jpg'
+            url: 'cloud://suki-749826.7375-suki/advertise/p2.gif'
         }, {
             id: 4,
             type: 'image',
-            url: 'cloud://suki-749826.7375-suki/bage.jpg'
+            url: 'cloud://suki-749826.7375-suki/advertise/p1.jpg'
         }
         ],
         indicatorDots: true,
