@@ -6,13 +6,13 @@ cloud.init();
 const db = cloud.database();
 const _ = db.command;
 const formatTime = date => {
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    const hour = date.getHours()
-    const minute = date.getMinutes()
-    const second = date.getSeconds()
-    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 const formatNumber = n => {
     n = n.toString()
@@ -26,7 +26,7 @@ const time0 = formatTime(new Date())//当前时间
 const wxContext = cloud.getWXContext();
 // 云函数入口函数
 exports.main = async (event, context) => {
-    const targetDB = db.collection('user');
+  const targetDB = db.collection('user');
   if (event.method  == 'getMineInfo'){
     console.log("请求参数：",event)
     let checkResult= await targetDB.where({_openid:_.eq(event.openid)}).get();
@@ -55,8 +55,7 @@ exports.main = async (event, context) => {
         res
       }
     }
-  }
-  //更新数据库
+  }//更新数据库
   if (event.method == 'updateMineInfo'){
        const targetDB = db.collection('user');
        console.log(`请求参数${event}`)
@@ -141,7 +140,7 @@ exports.main = async (event, context) => {
         // return {
         //     read
         // }
-    }
+  }
   if(event.method == 'getSystemInfo'){
         const targetDB = db.collection('dance-info');
         var myTeamedDance = [];
@@ -183,14 +182,14 @@ exports.main = async (event, context) => {
 
         })
         return {
-            myTeamedDance:myTeamedDance,//我发起的组队成功的约舞 xt
-            myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
-            uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
-            checkedApply:checkedApply,//我参加已通过的 hd
-            checkedApply2:checkedApply2,//未通过的 hd
-            checkingApply:checkingApply// 我参加的未审核的
+          myTeamedDance:myTeamedDance,//我发起的组队成功的约舞 xt
+          myUpTimeDance:myUpTimeDance,//我发起的时间已到且未组队成功的约舞 xt
+          uncheckedApply:uncheckedApply,//我发起的约舞未审核的applicant信息 hd
+          checkedApply:checkedApply,//我参加已通过的 hd
+          checkedApply2:checkedApply2,//未通过的 hd
+          checkingApply:checkingApply// 我参加的未审核的
+        }
   }
-    }
   if(event.method == 'getApplicantInfo'){
       let result =  await db.collection('user').where({"_openid":_.in( event.applicant)}).get()
       console.log(result)
@@ -201,5 +200,11 @@ exports.main = async (event, context) => {
       return{
         nameStr:nameStr
       }
-    }
   }
+  if (event.method == 'sendAdvice'){
+    await db.collection('advice').add({ data: {
+      _openid: event.openid,
+      adviceContent: event.info,
+    }})
+  }
+}

@@ -1,11 +1,17 @@
-<!--pages/mine-feedback/mine-feedback.wxml-->
 <view>
-<image src="{{bgImage}}" class="backgroundImage"></image>
-<view class="textWords">
-  <view>欢迎联系我们，</view>
-  <view>向我们提出宝贵的建议！</view>
-</view>
-<view class="row form">
-  <button style="width:94%" class="weui-btn queding" bindtap="call">联系开发者团队</button>
-</view>
+  <image src="{{bgImage}}" class="backgroundImage"></image>
+  <view class="textWords">
+    <view>Easy Dance</view>
+    <view>欢迎您向我们提出宝贵的建议！</view>
+  </view>
+
+  <textarea  value="{{content}}" bindinput="putonAdvice" class="form-textarea" ></textarea>
+
+  <view class="row form">
+    <button style="width:94%" class="weui-btn queding" bindtap="submit">提交</button>
+  </view>
+
+  <view class="row form">
+    <button style="width:94%" class="weui-btn queding" bindtap="call">联系开发者团队</button>
+  </view>
 </view>

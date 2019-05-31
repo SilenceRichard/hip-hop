@@ -1,9 +1,21 @@
 .textWords{
   margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
   font-size: 40rpx;
-  /* margin-top: 50rpx; */
+  background-color:rgb(253, 93, 0);
+  color:aliceblue;
+  text-align:center;
+}
+.form{
+  margin-top: 50rpx;
 }
 .queding{
-  background:#ffbf00;
-  /* margin-top: 300rpx; */
+  background-color:#ffbf00;
+}
+.form-textarea{
+    border:2rpx solid #a6a6a6;
+    width: 696rpx;
+    height: 214rpx;
+    margin-left: 32rpx;
 }
