@@ -121,20 +121,22 @@ exports.main = async (event, context) => {
   if(event.method =='deleteMessage' ){
         const targetDB = db.collection('dance-info');
         var isRead =1;
-        let read = await targetDB.doc(event._id).get();
+        console.log('请求参数---',event)
+        let read = await targetDB.doc(event.delete_id).get();
         console.log("查到的信息:",read.data);
+        debugger
         if (event.openid === read.data._openid){
             read.data.applicant.forEach(item=>{
-                if (item._openid === event._openid) item.isReadByOpen =`1` //发起人已读这条消息
+                if (item._openid === event.apply_openid) item.isReadByOpen =`1` //发起人已读这条消息
             })
             delete read.data._id;
-            await targetDB.doc(event._id).update({data:read.data})
+            await targetDB.doc(event.delete_id).update({data:read.data})
         }else {
             read.data.applicant.forEach(item=>{
-                if (item._openid === event._openid) item.isReadByApplicant =`1` //发起人已读这条消息
+                if (item._openid === event.apply_openid) item.isReadByApplicant =`1` //发起人已读这条消息
             })
             delete read.data._id;
-            await targetDB.doc(event._id).update({data:read.data})
+            await targetDB.doc(event.delete_id).update({data:read.data})
         }
 
         // return {
