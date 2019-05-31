@@ -67,10 +67,10 @@
         <view class="founderInfo">
            <view>昵称：{{info_.nickName?info_.nickName:'怎么会有人没有昵称呢'}}</view>
            <view>性别：{{info_.sex?info_.sex:'保密'}}</view>
-           <view>地区：{{info_.location?info_.location:'活动范围神秘'}}</view>
+           <view>地区：{{info_.region?info_.region:'活动范围神秘'}}</view>
            <view>舞种：{{info_.danceType?info_.danceType:'舞种未知'}}</view>
            <view>舞龄：{{info_.danceAge?info_.danceAge:'你不知道他跳了几年舞哦'}}</view>
-           <view>签名：{{info_.sigh?info_.sigh:'该用户什么都没有写'}}</view> 
+           <view>签名：{{info_.introduction?info_.introduction:'该用户什么都没有写'}}</view> 
         </view>
   </view>
  </view>
