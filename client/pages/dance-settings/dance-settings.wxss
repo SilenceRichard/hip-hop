@@ -2,6 +2,9 @@
 page {
     overflow: hidden;
 }
+.cu-dialog{
+    width: 500rpx;
+}
 button[disabled] {
     content: "\e7f1"!important;
 }

@@ -225,4 +225,21 @@
             </view>
         </view>
     </view>
+    <view class="cu-modal show" wx:if="{{authFlag}}">
+        <view class="cu-dialog">
+            <view class="cu-bar bg-white justify-end">
+                <view class="content">位置授权</view>
+                <view class="action" bindtap="hideAuth">
+                    <text class="cuIcon-close text-red"></text>
+                </view>
+            </view>
+            <view class="padding-xl">
+                没有授权不能选择位置
+            </view>
+            <view style="margin: 20rpx 0">
+                <button class="cu-btn bg-red" data-state="2" bindtap="hideAuth">拒绝</button>
+                <button class="cu-btn bg-green margin-left" data-state="0" bindtap="openAuth">同意</button>
+            </view>
+        </view>
+    </view>
 

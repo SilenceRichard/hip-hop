@@ -24,7 +24,8 @@ Page({
       condition:'',
       contact:'',
       QR_code:'',
-      phone:''
+      phone:'',
+      authFlag:false  //认证 模态框
     },//存入数据库的约局信息对象
     disabled:false,
     cover_num:0,
@@ -324,8 +325,8 @@ Page({
       }),
       wx.navigateTo({ url: "../index/index" })
   },
-  
-    
+
+
   bindDateChange(ev){
     if (ev.currentTarget.dataset.type == 'date'){
       let timeobj= this.data.timestamp;
@@ -458,21 +459,107 @@ Page({
   chooseLocation() {
     let that = this;
     let obj = this.data.info;
-    wx.chooseLocation({
-      success(res){
-          obj.location = {
-            name:res.name,
-            address:res.address,
-            latitude:res.latitude,
-            longitude:res.longitude,
-          }
-        console.log("res", res);
-          that.setData({
-            info:obj
-          })
-      }
-    })
+    console.log('chooseLocation')
+              wx.getSetting({
+                  success(res){
+                      console.log("getSetting success!!",res.authSetting['scope.userLocation'])
+                      if (res.authSetting['scope.userLocation']==false) {
+                          that.setData({
+                              authFlag:true
+                          })
+                          // wx.showModal({
+                          //     title: '您还没有授权位置信息',
+                          //     content: '没有授权不能选择位置',
+                          //     confirmText:'同意',
+                          //     cancelText:'拒绝',
+                          //     success (res) {
+                          //         if (res.confirm) {
+                          //             wx.openSetting({
+                          //                 success(res) {
+                          //                     console.log(res.authSetting)
+                          //                 },
+                          //                 fail(err) {
+                          //                     console.log('openSetting fail',err)
+                          //                 }
+                          //             })
+                          //         } else if (res.cancel) {
+                          //             console.log('用户点击取消')
+                          //             wx.showToast({
+                          //                 title:'授权失败'
+                          //             })
+                          //         }
+                          //     }
+                          // })
+                          // wx.authorize({
+                          //     scope: 'scope.userLocation',
+                          //     success(res){
+                          //         console.log('authorize success!!!',res)
+                          //         wx.chooseLocation({
+                          //             success(res){
+                          //                 console.log('!!!!')
+                          //                 obj.location = {
+                          //                     name:res.name,
+                          //                     address:res.address,
+                          //                     latitude:res.latitude,
+                          //                     longitude:res.longitude,
+                          //                 }
+                          //                 console.log("res", res);
+                          //                 that.setData({
+                          //                     info:obj
+                          //                 })
+                          //             },
+                          //             fail(err) {
+                          //                 console.log('chooseLocation fail',err)
+                          //             }
+                          //         })
+                          //     },
+                          //     fail(err) {
+                          //         console.log('authorize fail',err);
+                          //     }
+                          // })
+                      }
+                      else {
+                          wx.chooseLocation({
+                              success(res){
+                                  obj.location = {
+                                      name:res.name,
+                                      address:res.address,
+                                      latitude:res.latitude,
+                                      longitude:res.longitude,
+                                  }
+                                  console.log("res", res);
+                                  that.setData({
+                                      info:obj
+                                  })
+                              }
+                          })
+                      }
+                  },
+                  fail(err) {
+                      console.log("getSetting fail!!",err)
+                  }
+              })
+
+      // })
   },
+    openAuth(){
+      wx.openSetting({
+          success(res) {
+              console.log(res.authSetting)
+          },
+          fail(err) {
+              console.log('openSetting fail',err)
+          }
+      })
+     this.setData({
+         authFlag:false
+     })
+    },
+    hideAuth(){
+      this.setData({
+          authFlag:false
+      })
+    },
   checkboxChange: function (e) {
       var checkboxItems = this.data.checkboxItems,
         values = e.detail.value;
