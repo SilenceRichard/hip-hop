@@ -212,4 +212,24 @@
             </view>
         </view>
     </view>
+    <!--<view class="cu-modal show" wx:if="{{showDelFlag}}">-->
+        <!--<view class="cu-dialog">-->
+            <!--<view class="cu-bar bg-gradual-black justify-end">-->
+                <!--<view class="content">删除信息</view>-->
+                <!--<view class="action" bindtap="hideModal">-->
+                    <!--<text class="cuIcon-close text-red" bindtap='hideModal'></text>-->
+                <!--</view>-->
+            <!--</view>-->
+
+            <!--<view class="padding-xl">-->
+                <!--<view >                   &lt;!&ndash;如果是发起者收到的报名申请 &ndash;&gt;-->
+                    <!--确定删除这条消息吗？-->
+                <!--</view>-->
+                <!--<view>-->
+                    <!--<button class="cu-btn bg-red" data-state="2" bindtap="sendInfo">取消</button>-->
+                    <!--<button class="cu-btn bg-green margin-left" data-state="0" bindtap="sendInfo">确认</button>-->
+                <!--</view>-->
+            <!--</view>-->
+        <!--</view>-->
+    <!--</view>-->
 </scroll-view>

@@ -20,7 +20,8 @@ Page({
     showApplicant:false,
     setterInfo:{},//展示发起人信息
     showSetter:false, //展示发起人信息标志
-    bgImage:app.globalData.bgSrc
+    bgImage:app.globalData.bgSrc,
+    showDelFlag:false
   },
   goTo(ev){
     console.log(ev)
@@ -40,9 +41,9 @@ Page({
   goToPage(ev){
     console.log(ev.currentTarget.dataset.url)
     switch (ev.currentTarget.dataset.url) {
-      case 'mine-person':wx.navigateTo({url:'../mine-person/mine-person'})
-      case 'dance-settings':wx.switchTab({url:'../dance-settings/dance-settings'})
-      case 'home-all':wx.navigateTo({url:'../home-all/home-all'})
+      case 'mine-person':wx.navigateTo({url:'../mine-person/mine-person'});break;
+      case 'dance-settings':wx.switchTab({url:'../dance-settings/dance-settings'});break;
+      case 'home-all':wx.navigateTo({url:'../home-all/home-all'});break;
     }
   },
   showModal(ev) {
@@ -93,6 +94,10 @@ Page({
         id:that.data.sendInfoObj.id
       },
       success(){
+        wx.showToast({
+          type:'success',
+          title:'操作成功！'
+        })
         that.getSystemInfo();
         that.setData({
           showModalFlag:false
@@ -208,29 +213,38 @@ Page({
   },
   delete(ev){
     let that = this;
-    console.log(ev)
-    console.log("删除！", {
-      method: 'deleteMessage',
-      delete_id:ev.currentTarget.dataset.item._id,
-      openid: app.data.openid,
-      apply_openid:ev.currentTarget.dataset.item._openid
-    })
-    wx.cloud.callFunction({
-      name: 'mine',
-      data: {
-        method: 'deleteMessage',
-        delete_id:ev.currentTarget.dataset.item._id,
-        openid: app.data.openid,  //阅读者（发起人）的openid
-        apply_openid:app.data.openid // 阅读者（参与人） 这部分的请求存在问题
-      },
-      success(res) {
-        that.getSystemInfo()
-      },
-      fail(err) {
-        console.log(err)
+    wx.showModal({
+      title: '删除信息',
+      content: '确认删除这条消息吗？',
+      success (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          wx.cloud.callFunction({
+            name: 'mine',
+            data: {
+              method: 'deleteMessage',
+              delete_id:ev.currentTarget.dataset.item._id,
+              openid: app.data.openid,  //阅读者（发起人）的openid
+              apply_openid:app.data.openid // 阅读者（参与人） 这部分的请求存在问题
+            },
+            success(res) {
+              wx.showToast({
+                type:'success',
+                title:'删除成功！'
+              })
+              that.getSystemInfo()
+            },
+            fail(err) {
+              console.log(err)
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
   },
+
   getSystemInfo(){
     console.log("嘻嘻嘻嘻嘻嘻进来了",app.data.openid)
     let that = this
@@ -272,7 +286,7 @@ Page({
           }
         })
         that.setData({
-          systemList:a
+          systemList:a.reverse()
         })
         console.log("系统消息",that.data.systemList)
         res.result.uncheckedApply.forEach(item =>{
@@ -302,7 +316,7 @@ Page({
           return obj
         })
         that.setData({
-          hdList:b
+          hdList:b.reverse()
         })
         console.log("互动消息：",that.data.hdList)
         // res.result中返回了三个数组，分别遍历三个数组，给数组里每一个对象增加一个标志
