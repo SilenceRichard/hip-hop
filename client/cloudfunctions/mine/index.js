@@ -124,7 +124,6 @@ exports.main = async (event, context) => {
         console.log('请求参数---',event)
         let read = await targetDB.doc(event.delete_id).get();
         console.log("查到的信息:",read.data);
-        debugger
         if (event.openid === read.data._openid){
             read.data.applicant.forEach(item=>{
                 if (item._openid === event.apply_openid) item.isReadByOpen =`1` //发起人已读这条消息
@@ -167,6 +166,8 @@ exports.main = async (event, context) => {
                     }
                     item.applicant.forEach(val => {
                         if (val.state == '1'&&(val.isReadByOpen =='0'||val.isReadByOpen ==undefined) &&time0<=item.time) {
+                            console.log(item)
+                            console.log(val)
                             uncheckedApply.push(val) //未审核且未读
                         }
                     })

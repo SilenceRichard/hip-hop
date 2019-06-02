@@ -65,7 +65,7 @@
 <!--        互动消息-->
 <view wx:if="{{flag==false}}" class="cu-list menu-avatar">
     <block wx:for="{{hdList}}">
-        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" bindtap="showModal" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:if="{{item.uncheckedFlag}}" data-apply="{{item.info.apply||''}}">
+        <view class="cu-item" bindtap="showModal" wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:if="{{item.uncheckedFlag}}" data-apply="{{item.info.apply||''}}">
 
             <view class="cu-avatar bg-black"><text class="cuIcon-form text-orange"></text></view>
             <view class="content">
@@ -77,9 +77,9 @@
             </view>
             <view class="action">
             </view>
-            <view class="move">
-                <view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>
-            </view>
+            <!--<view class="move">-->
+                <!--<view class="bg-red" catchtap='delete' data-item='{{item}}'>删除</view>-->
+            <!--</view>-->
         </view>
         <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  wx:key bindtouchstart="ListTouchStart" bindtouchmove="ListTouchMove" bindtouchend="ListTouchEnd" data-target="move-box-{{index}}" data-item="{{item}}" wx:elif="{{item.passFlag}}" bindtap="checkSetterInfo">
 

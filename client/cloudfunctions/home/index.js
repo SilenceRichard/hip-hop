@@ -39,7 +39,7 @@ exports.main = async (event, context) => {
           }
           );
           if (visit == 0) {
-            let res = await targetDB.update(
+            let res = await targetDB.doc(event.info.id).update(
               {data: {applicant: _.push(obj)}})
             return {
               status: res

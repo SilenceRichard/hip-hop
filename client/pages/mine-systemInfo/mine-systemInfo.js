@@ -213,6 +213,7 @@ Page({
   },
   delete(ev){
     let that = this;
+    console.log(ev)
     wx.showModal({
       title: '删除信息',
       content: '确认删除这条消息吗？',
